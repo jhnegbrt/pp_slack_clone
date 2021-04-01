@@ -7,12 +7,21 @@ class SessionForm extends React.Component {
       username: "",
       password: ""
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleSubmit(e){
     e.preventDefault();
     const user = Object.assign({}, this.state)
     this.props.processForm(user);
+  }
+
+  handleChange(e){
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   render(){
@@ -24,12 +33,12 @@ class SessionForm extends React.Component {
     }
     return(
       <div className="sign-form">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>Username
-            <input type="text" name="username" value={this.state.username}></input>
+            <input type="text" value={this.state.username} name="username" onChange={this.handleChange}></input>
           </label>
           <label>Password
-            <input type="password" name="password" value={this.state.password}></input>
+            <input type="password" value={this.state.password} name="password"  onChange={this.handleChange}></input>
           </label>
           <input type="submit" value={formType}></input>
         </form>
