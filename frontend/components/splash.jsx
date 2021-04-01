@@ -28,7 +28,7 @@ function Slack(){
 
 function SlackAndSleuth(){
   return(
-    <div>
+    <div className='slackandsleuth'>
       <Slack />
       <Sleuth />
     </div>
@@ -37,9 +37,9 @@ function SlackAndSleuth(){
 
 const Splash = () =>{
   return(
-    <div>
-      <Header />
-      <SlackAndSleuth />
+    <div className='fullpage'>
+        <Header />
+        <SlackAndSleuth />
     </div>
     
   )
