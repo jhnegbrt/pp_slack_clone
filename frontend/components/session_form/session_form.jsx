@@ -32,17 +32,17 @@ class SessionForm extends React.Component {
       formType = "Sign Up"
     }
     return(
-      <div className="sign-form">
-        <form onSubmit={this.handleSubmit}>
-          <label>Username
-            <input type="text" value={this.state.username} name="username" onChange={this.handleChange}></input>
+
+        <form className="sign-form"onSubmit={this.handleSubmit}>
+          <label>
+            <input type="text" placeholder="USERNAME" value={this.state.username} name="username" onChange={this.handleChange}></input>
           </label>
-          <label>Password
-            <input type="password" value={this.state.password} name="password"  onChange={this.handleChange}></input>
+          <label>
+            <input type="password" placeholder="PASSWORD" value={this.state.password} name="password"  onChange={this.handleChange}></input>
           </label>
           <input type="submit" value={formType}></input>
         </form>
-      </div>
+ 
 
     )
 

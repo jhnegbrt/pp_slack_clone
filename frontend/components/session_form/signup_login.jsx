@@ -9,9 +9,12 @@ class SignupLogin extends React.Component{
 
   render(){
     return(
-      <div className='SignupLogin'>
-        <SignupFormContainer></SignupFormContainer>
-        <LoginFormContainer></LoginFormContainer>
+      <div className='signup-login-container'>
+        <h1>We</h1>
+        <div className='signup-login'>
+          <SignupFormContainer></SignupFormContainer>
+          <LoginFormContainer></LoginFormContainer>
+        </div>
       </div>
     )
   }

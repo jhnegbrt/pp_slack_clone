@@ -1,0 +1,20 @@
+.signup-login{
+  display: flex;
+  justify-content: center;
+}
+
+.sign-form{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  background-color: aqua;
+  padding: 5%;
+  margin: 2%;
+  border-radius: 20px;
+}
+
+.sign-form input[type=text], input[type=password]{
+  margin: 5%;
+  padding: 1%;
+  width: 50%;
+}
