@@ -2,9 +2,12 @@ import React from 'react'
 
 function Header(){
   return(
-    <div className='header'>
-      <h1>Welcome to Sleuth!</h1>
-      <h3>A Chat-App with 'Sleuth Mode'</h3>
+    <div>
+      <div className="spacer"></div>
+      <div className='header'>
+        <h1>Welcome to Sleuth!</h1>
+        <h3>A Chat-App with 'Sleuth Mode'</h3>
+      </div>
     </div>
   )
 }
