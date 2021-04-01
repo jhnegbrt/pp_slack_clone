@@ -18,3 +18,14 @@ const receiveErrors = (errors) => ({
   errors
 })
 
+export const signup = formUser => dispatch => APIUtil.signup(formUser)
+  .then(user => dispatch(receiveCurrentUser(user)))
+  .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+
+export const login = formUser => dispatch => APIUtil.login(formUser)
+  .then(user => dispatch(receiveCurrentUser(user)))
+  .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+
+export const logout = () => dispatch => APIUtil.logout()
+  .then(()=> dispatch(logoutCurrentUser()))
+  .fail((errors) => dispatch(receiveErrors(errors.responseJSON)))
