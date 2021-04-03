@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400&display=swap');
 
+
+.html{
+  scroll-behavior: smooth;
+}
 .splash-header-list, .splash-footer-list{
   display: flex;
   align-items: center;
+  font-family: 'Comfortaa', cursive;
 }
 
 .splash-header-list{
+  
   height: 6vh
 }
 
@@ -35,7 +42,7 @@
 }
 
 .splash-footer-list{
-  position: fixed;
+  // position: fixed;
   left: 0;
   bottom: 0;
   width: 100vw;
@@ -93,4 +100,10 @@
   background-position-y: bottom;
   background-position-x: center;
   background-size:cover;
+}
+
+//introduction styling
+
+.introduction-container h1{
+  font-size: 40px;
 }
