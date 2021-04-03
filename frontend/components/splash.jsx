@@ -21,7 +21,9 @@ function MainContainer(){
   <div className="splash-main-container">
     <div className="splash-intro-left">
       <h1>Sleuth: A chat-app featuring anonymous 'Sleuth' mode</h1>
-      <h4>like Slack, except with Incognito Mode</h4>
+      <h2>Connect with your friends, family and co-workers through your personal
+        account, or as an anonymous <i>Sleuth</i>
+      </h2>
     </div>
     <div className="splash-intro-right">
       <div className="splash-spy"></div>
