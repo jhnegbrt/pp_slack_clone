@@ -32,7 +32,7 @@ class SessionForm extends React.Component {
       formType = "Sign Up"
     }
     return(
-
+      <div>
         <form className="sign-form"onSubmit={this.handleSubmit}>
           <label>
             <input type="text" placeholder="USERNAME" value={this.state.username} name="username" onChange={this.handleChange}></input>
@@ -42,8 +42,10 @@ class SessionForm extends React.Component {
           </label>
           <input type="submit" value={formType}></input>
         </form>
- 
+      </div>
 
+
+ 
     )
 
   }
