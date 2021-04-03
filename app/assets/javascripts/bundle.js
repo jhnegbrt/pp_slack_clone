@@ -501,9 +501,23 @@ var SignupLogin = /*#__PURE__*/function (_React$Component) {
 /*!****************************************!*\
   !*** ./frontend/components/splash.jsx ***!
   \****************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jhnegbrt/appacademy/slack_clone/frontend/components/splash.jsx: Unexpected token (6:2)\n\n\u001b[0m \u001b[90m 4 |\u001b[39m   \u001b[36mreturn\u001b[39m(\u001b[0m\n\u001b[0m \u001b[90m 5 |\u001b[39m     \u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m   )\u001b[0m\n\u001b[0m \u001b[90m   |\u001b[39m   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 7 |\u001b[39m }\u001b[0m\n    at Object._raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:775:17)\n    at Object.raiseWithData (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:768:17)\n    at Object.raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:736:17)\n    at Object.unexpected (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:9716:16)\n    at Object.parseParenAndDistinguishExpression (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11310:12)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11007:21)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:5173:20)\n    at Object.parseExprSubscripts (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10689:23)\n    at Object.parseUpdate (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10669:21)\n    at Object.parseMaybeUnary (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10647:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var Splash = function Splash() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "splash-page"
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Splash);
 
 /***/ }),
 
