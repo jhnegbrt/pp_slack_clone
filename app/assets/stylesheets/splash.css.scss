@@ -1,52 +1,36 @@
-.fullpage{
-  background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url('big_spy.jpg') no-repeat; 
-  background-size: 1500px;
-  background-position-y: bottom;
-  background-position-x: center;
-  height: 100vh;
-  overflow: hidden;
-}
+// .splash-page{
+//   display: flex
+// }
 
-.header{
-  margin: 5%;
-  width: 50%;
-  padding: 2%;
-  text-align: center;
-  background-color:rgba(169, 169, 169, 0.5);
-  margin-right: auto;
-  margin-left: auto;
-  border-radius: 20px;
-  height: 20vh;
-}
-
-.header h1{
-  font-size: 10vh;
-}
-
-.header h2, h3{
-  font-size: 6vh;
-}
-
-.slackandsleuth{
-  margin: 1%;
+.splash-header-list, .splash-footer-list{
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
-.slack, .sleuth{
-  border-radius: 20px;
-  height: 33vh;
-  width: 33vw;
-  text-align: center;
-  margin: 1%;
+.splash-header-list{
+  height: 6vh
 }
 
-
-.sleuth{
-  background-color:rgba(112, 128, 144, 0.479)
-
+.splash-header-list, .splash-main-container{
+  background-color: wheat;
 }
 
-.slack {
-  background-color: rgba(105, 90, 205, 0.425);
+.splash-header-list li:first-child{
+  padding-left: 5vw;
+}
+
+.splash-header-list li:nth-child(2){
+  margin-left: auto;
+  padding-right: 3vw
+}
+
+.splash-header-list li:last-child{
+  padding-right: 3vw
+}
+
+.splash-footer-list{
+  height: 8vh;
+  background-color: slateblue;
+  justify-content: space-around;
+  
 }

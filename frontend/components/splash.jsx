@@ -2,9 +2,12 @@ import React from 'react'
 
 function Header(){
   return(
-    <div className="splash-header">
-      <ul>
+    <div>
+      <ul className="splash-header-list">
         <li>Sleuth</li>
+        <li>Introduction</li>
+        <li>Features</li>
+        <li>Technologies</li>
         <li>Sign Up</li>
         <li>Sign In/Demo</li>
       </ul>
@@ -22,11 +25,12 @@ function MainContainer(){
 
 function Footer(){
   return(
-    <div className="splash-footer">
-    <ul>
+    <div>
+    <ul className="splash-footer-list">
       <li>portfolio website</li>
       <li>linked in</li>
       <li>resume</li>
+      <li>github</li>
     </ul>
   </div>
   )
