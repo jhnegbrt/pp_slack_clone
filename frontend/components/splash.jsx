@@ -9,8 +9,8 @@ function Header(){
         <li>Sleuth</li>
         
         <li><a href="#splash-intro">Introduction</a></li>
-        {/* <li><a href="#features">Features</a></li> */}
-        <li><Link 
+        <li><a href="#features">Features</a></li>
+        {/* <li><Link 
           href="#features" 
           to="features"
           smooth={true}
@@ -20,7 +20,7 @@ function Header(){
           >
             Features
             </Link>
-        </li>
+        </li> */}
         <li>Technologies</li>
         <li>Sign Up</li>
         <li>Sign In/Demo</li>
