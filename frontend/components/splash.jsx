@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-scroll'
+
 
 
 function Header(){
@@ -10,17 +10,6 @@ function Header(){
         
         <li><a href="#splash-intro">Introduction</a></li>
         <li><a href="#features">Features</a></li>
-        {/* <li><Link 
-          href="#features" 
-          to="features"
-          smooth={true}
-          duration={500}
-          spy={true}
-          offset={-200}
-          >
-            Features
-            </Link>
-        </li> */}
         <li>Technologies</li>
         <li>Sign Up</li>
         <li>Sign In/Demo</li>
