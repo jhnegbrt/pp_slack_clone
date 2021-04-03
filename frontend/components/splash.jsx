@@ -18,7 +18,8 @@ function Header(){
 function MainContainer(){
   return(
   <div className="splash-main-container">
-    <h1>Main Container</h1>
+    <div>Sleuth</div>
+    <div>IMG</div>
   </div>
   )
 }
