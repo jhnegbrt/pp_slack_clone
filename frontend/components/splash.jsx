@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 function Header(){
   return(
     <div>
@@ -18,8 +19,14 @@ function Header(){
 function MainContainer(){
   return(
   <div className="splash-main-container">
-    <div>Sleuth</div>
-    <div>IMG</div>
+    <div className="splash-intro-left">
+      <h1>Sleuth: A chat-app featuring anonymous 'Sleuth' mode</h1>
+      <h4>like Slack, except with Incognito Mode</h4>
+    </div>
+    <div className="splash-intro-right">
+      <div className="splash-spy"></div>
+     
+    </div>
   </div>
   )
 }
