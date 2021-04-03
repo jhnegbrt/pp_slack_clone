@@ -1,6 +1,4 @@
-// .splash-page{
-//   display: flex
-// }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
 .splash-header-list, .splash-footer-list{
   display: flex;
@@ -65,25 +63,24 @@
   height: 50vh
 }
 
+
 .splash-intro-left h1{
+  font-family: 'Playfair Display', serif;
   font-size: 6vh;
-}
-
-
-.splash-intro-left h1{
   margin-left: 6vw;
   margin-top: 12vh;
 }
 
 .splash-intro-left h2{
+  font-family: 'Playfair Display', serif;
+  font-size: 3vh;
   margin-left: 6vw;
   margin-top: 2vh;
   margin-right: 4vw;
 }
 
-.splash-intro-left h2{
-  font-size: 3vh;
-}
+
+
 
 .splash-spy{
   margin-right: 10vw;
