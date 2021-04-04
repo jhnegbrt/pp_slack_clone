@@ -15,20 +15,20 @@ const mDTP = (dispatch) => ({
   processForm: (user) => dispatch(signup(user))
 })
 
-class SignupForm extends React.Component{
-  render(){
-    return(
-      <div>
-        <SessionForm></SessionForm>
-        <p>Already have an account? Log-In</p><Link to="/login">Here</Link>
+// class SignupForm extends React.Component{
+//   render(){
+//     return(
+//       <div>
+//         <SessionForm></SessionForm>
+//         <p>Already have an account? Log-In</p><Link to="/login">Here</Link>
 
-      </div>
+//       </div>
 
-    )
-  }
-}
+//     )
+//   }
+// }
 
 export default connect(
   mSTP,
   mDTP
-)(SignupForm)
+)(SessionForm)

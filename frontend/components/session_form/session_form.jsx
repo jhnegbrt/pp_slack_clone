@@ -24,6 +24,18 @@ class SessionForm extends React.Component {
     })
   }
 
+  renderErrors(){
+    return(
+      <ul>
+        {this.props.errors.map((error, i) =>(
+          <li key={`error-${i}`}>
+            {error}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
   render(){
     let formType = ""
     if (this.props.formType === "signin"){
@@ -42,6 +54,7 @@ class SessionForm extends React.Component {
           </label>
           <input type="submit" value={formType}></input>
         </form>
+        {/* {this.renderErrors()} */}
       </div>
 
 
