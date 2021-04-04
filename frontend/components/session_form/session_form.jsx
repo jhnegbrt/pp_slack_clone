@@ -54,7 +54,7 @@ class SessionForm extends React.Component {
           </label>
           <input type="submit" value={formType}></input>
         </form>
-        {/* {this.renderErrors()} */}
+        {this.renderErrors()}
       </div>
 
 

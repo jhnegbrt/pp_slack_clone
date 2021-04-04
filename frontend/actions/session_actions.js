@@ -13,18 +13,31 @@ const logoutCurrentUser = () => ({
   type: LOGOUT_CURRENT_USER
 })
 
-const receiveErrors = (errors) => ({
-  type: RECEIVE_SESSION_ERRORS,
-  errors
-})
+const receiveErrors = (errors) => {
+  return({
+    type: RECEIVE_SESSION_ERRORS,
+    errors
+  })
 
-export const signup = formUser => dispatch => APIUtil.signup(formUser)
-  .then(user => dispatch(receiveCurrentUser(user)))
-  .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+}
 
-export const login = formUser => dispatch => APIUtil.login(formUser)
-  .then(user => dispatch(receiveCurrentUser(user)))
-  .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+export const signup = formUser => dispatch => {
+ return(
+  APIUtil.signup(formUser).then(user => (
+    dispatch(receiveCurrentUser(user))
+  ), errors => (
+    dispatch(receiveErrors(errors.responseJSON))
+  ))
+)
+};
+
+export const login = formUser => dispatch => (
+  APIUtil.login(formUser).then(user => (
+    dispatch(receiveCurrentUser(user))
+  ), errors => (
+    dispatch(receiveErrors(errors.responseJSON))
+  ))
+);
 
 export const logout = () => dispatch => APIUtil.logout()
   .then(()=> dispatch(logoutCurrentUser()))

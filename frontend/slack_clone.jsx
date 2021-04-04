@@ -9,6 +9,8 @@ import {signup} from './util/session_api_util'
 
 document.addEventListener('DOMContentLoaded',()=>{
 
+  window.signup = signup
+
   const store = configureStore();
   window.getState = store.getState;
   window.dispatch = store.dispatch;

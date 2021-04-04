@@ -149,7 +149,7 @@ var signup = function signup(formUser) {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.signup(formUser).then(function (user) {
       return dispatch(receiveCurrentUser(user));
-    }).fail(function (errors) {
+    }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
     });
   };
@@ -158,7 +158,7 @@ var login = function login(formUser) {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(formUser).then(function (user) {
       return dispatch(receiveCurrentUser(user));
-    }).fail(function (errors) {
+    }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
     });
   };
@@ -408,7 +408,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: formType
-      })));
+      })), this.renderErrors());
     }
   }]);
 
@@ -635,6 +635,7 @@ __webpack_require__.r(__webpack_exports__);
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SESSION_ERRORS:
+      // debugger
       return action.errors;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
@@ -37297,6 +37298,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', function () {
+  window.signup = _util_session_api_util__WEBPACK_IMPORTED_MODULE_4__.signup;
   var store = (0,_store_store__WEBPACK_IMPORTED_MODULE_2__.default)();
   window.getState = store.getState;
   window.dispatch = store.dispatch;
