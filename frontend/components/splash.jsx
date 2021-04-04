@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 
@@ -11,8 +12,8 @@ function Header(){
         <li><a href="#splash-intro">Introduction</a></li>
         <li><a href="#features">Features</a></li>
         <li>Technologies</li>
-        <li>Sign Up</li>
-        <li>Sign In/Demo</li>
+        <li><Link to='/signup'>Sign Up</Link></li>
+        <li><Link to='/login'>Sign In/Demo</Link></li>
       </ul>
   </div>
   )
