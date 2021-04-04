@@ -17,7 +17,7 @@
   height: 6vh
 }
 
-.splash-header-list, .splash-main-container{
+.splash-header-list, #splash-main-container{
   background-color: wheat;
 }
 
@@ -55,7 +55,7 @@
 
 //main container styling
 
-.splash-main-container{
+#splash-main-container{
   
   display: flex
   

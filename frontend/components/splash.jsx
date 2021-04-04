@@ -7,11 +7,10 @@ function Header(){
   return(
     <div>
       <ul className="splash-header-list">
-        <li>Sleuth</li>
-        
+        <li><a href="#splash-main-container">Sleuth</a></li>
         <li><a href="#splash-intro">Introduction</a></li>
         <li><a href="#features">Features</a></li>
-        <li>Technologies</li>
+        <li><a href="#technologies">Technologies</a></li>
         <li><Link to='/signup'>Sign Up</Link></li>
         <li><Link to='/login'>Sign In/Demo</Link></li>
       </ul>
@@ -21,7 +20,7 @@ function Header(){
 
 function MainContainer(){
   return(
-  <div className="splash-main-container">
+  <div id="splash-main-container">
     <div className="splash-intro-left">
       <h1>Sleuth: A chat-app featuring anonymous 'Sleuth' mode</h1>
       <h2>Connect with your friends, family and co-workers through your personal
