@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class SessionForm extends React.Component {
   constructor(props){
@@ -36,6 +37,18 @@ class SessionForm extends React.Component {
     )
   }
 
+  renderSwitchButton(){
+    if (this.props.formType === "signup"){
+      return(
+        <p>Already have an account? Sign-In<Link to='/login'> here</Link></p>
+      )
+    } else {
+      return(
+        <p>New to Sleuth? Sign-Up<Link to='/signup'> here</Link></p>
+      )
+    }
+  }
+
   render(){
     let formType = ""
     if (this.props.formType === "signin"){
@@ -43,9 +56,10 @@ class SessionForm extends React.Component {
     } else {
       formType = "Sign Up"
     }
+
     return(
-      <div>
-        <form className="sign-form"onSubmit={this.handleSubmit}>
+      <div className="sign-form">
+        <form onSubmit={this.handleSubmit}>
           <label>
             <input type="text" placeholder="USERNAME" value={this.state.username} name="username" onChange={this.handleChange}></input>
           </label>
@@ -54,11 +68,9 @@ class SessionForm extends React.Component {
           </label>
           <input type="submit" value={formType}></input>
         </form>
+        {this.renderSwitchButton()}
         {this.renderErrors()}
       </div>
-
-
- 
     )
 
   }
