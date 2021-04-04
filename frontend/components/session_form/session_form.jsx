@@ -37,6 +37,10 @@ class SessionForm extends React.Component {
     )
   }
 
+  componentDidMount(){
+    this.props.clearErrors();
+  }
+
   renderSwitchButton(){
     if (this.props.formType === "signup"){
       return(
