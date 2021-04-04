@@ -125,10 +125,10 @@ var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 
-var receiveCurrentUser = function receiveCurrentUser(user) {
+var receiveCurrentUser = function receiveCurrentUser(currentUser) {
   return {
     type: RECEIVE_CURRENT_USER,
-    user: user
+    currentUser: currentUser
   };
 };
 
@@ -167,11 +167,9 @@ var logout = function logout() {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.logout().then(function () {
       return dispatch(logoutCurrentUser());
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
     });
   };
-};
+}; // .fail((errors) => dispatch(receiveErrors(errors.responseJSON)))
 
 /***/ }),
 
@@ -627,7 +625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
@@ -657,6 +655,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+// import {RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER} from '../actions/session_actions'
+// const _nullUser = Object.freeze({
+//   id: null
+// })
+// const sessionReducer = (state = _nullUser, action) => {
+//   Object.freeze(state);
+//   switch(action.type){
+//     case RECEIVE_CURRENT_USER:
+//       return Object.assign({}, {id: action.user.id})
+//     case LOGOUT_CURRENT_USER:
+//       return _nullUser;
+//     default:
+//       return state;
+//   }
+// }
+// export default sessionReducer;
 
 
 var _nullUser = Object.freeze({
@@ -670,9 +684,9 @@ var sessionReducer = function sessionReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
-      return Object.assign({}, {
-        id: action.user.id
-      });
+      return {
+        id: action.currentUser.id
+      };
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.LOGOUT_CURRENT_USER:
       return _nullUser;
@@ -709,7 +723,7 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
-      return Object.assign({}, state, _defineProperty({}, action.user.id, action.user));
+      return Object.assign({}, state, _defineProperty({}, action.currentUser.id, action.currentUser));
 
     default:
       return state;
