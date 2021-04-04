@@ -77,18 +77,24 @@ function Footer(){
   )
 }
 
-const Splash = () =>{
-  return(
-    <div className="splash-page">
-      <Header></Header>
-      <MainContainer></MainContainer>
-      <IntroductionContainer></IntroductionContainer>
-      <FeaturesContainer></FeaturesContainer>
-      <IntroductionContainer></IntroductionContainer>
-      <IntroductionContainer></IntroductionContainer>
-      <Footer></Footer>
-    </div>
-  )
+class Splash extends React.Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return(
+      <div className="splash-page">
+        <Header></Header>
+        <MainContainer></MainContainer>
+        <IntroductionContainer></IntroductionContainer>
+        <FeaturesContainer></FeaturesContainer>
+        <IntroductionContainer></IntroductionContainer>
+        <IntroductionContainer></IntroductionContainer>
+        <Footer></Footer>
+      </div>
+    )
+  }
 }
 
 export default Splash
