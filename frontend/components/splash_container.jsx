@@ -1,17 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Splash from './splash'
+import { logout } from '../actions/session_actions'
 
 
-const mSTP = (state) => ({
-  errors: state.errors.session,
-  formType: "signup"
-
+const mSTP = ({entities: {users}, session}) => ({
+  currentUser: users[session.id]
 })
 
 const mDTP = (dispatch) => ({
-  processForm: (user) => dispatch(signup(user)),
-  clearErrors: () => dispatch(clearErrors())
+  logout: () => dispatch(logout())
 })
 
 export default connect(mSTP, mDTP)(Splash)

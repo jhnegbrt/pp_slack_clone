@@ -1,21 +1,51 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// class LoginOrLogout extends React.Compoent{
+//   constructor(props){
+//     super(props)
+//   }
 
 
-function Header(){
-  return(
-    <div>
-      <ul className="splash-header-list">
-        <li><a href="#splash-main-container">Sleuth</a></li>
-        <li><a href="#splash-intro">Introduction</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#technologies">Technologies</a></li>
-        <li><Link to='/signup'>Sign Up</Link></li>
-        <li><Link to='/login'>Sign In/Demo</Link></li>
-      </ul>
-  </div>
-  )
+//   render(){
+//     if(this.props.currentUser){
+//       return(
+//         <div>
+//           <li><Link to='/signup'>Sign Up</Link></li>
+//           <li><Link to='/login'>Sign In/Demo</Link></li>
+//         </div>
+//       )
+//     } else {
+//       return(
+//         <li><button onClick={this.props.logout}>Logout</button></li>
+//       )
+//     }
+//   }
+
+// }
+
+
+class Header extends React.Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return(
+      <div>
+        <ul className="splash-header-list">
+          <li><a href="#splash-main-container">Sleuth</a></li>
+          <li><a href="#splash-intro">Introduction</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#technologies">Technologies</a></li>
+          <li><Link to='/signup'>Sign Up</Link></li>
+          <li><Link to='/login'>Sign In/Demo</Link></li>
+          {/* <LoginOrLogout currentUser={this.props.currentUser}></LoginOrLogout> */}
+        </ul>
+    </div>
+    )
+
+  }
 }
 
 function MainContainer(){
@@ -85,7 +115,7 @@ class Splash extends React.Component{
   render(){
     return(
       <div className="splash-page">
-        <Header></Header>
+        <Header currentUser={this.props.currentUser}></Header>
         <MainContainer></MainContainer>
         <IntroductionContainer></IntroductionContainer>
         <FeaturesContainer></FeaturesContainer>

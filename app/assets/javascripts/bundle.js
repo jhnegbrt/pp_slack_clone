@@ -517,25 +517,60 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
+ // class LoginOrLogout extends React.Compoent{
+//   constructor(props){
+//     super(props)
+//   }
+//   render(){
+//     if(this.props.currentUser){
+//       return(
+//         <div>
+//           <li><Link to='/signup'>Sign Up</Link></li>
+//           <li><Link to='/login'>Sign In/Demo</Link></li>
+//         </div>
+//       )
+//     } else {
+//       return(
+//         <li><button onClick={this.props.logout}>Logout</button></li>
+//       )
+//     }
+//   }
+// }
 
+var Header = /*#__PURE__*/function (_React$Component) {
+  _inherits(Header, _React$Component);
 
-function Header() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: "splash-header-list"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#splash-main-container"
-  }, "Sleuth")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#splash-intro"
-  }, "Introduction")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#features"
-  }, "Features")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#technologies"
-  }, "Technologies")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "/signup"
-  }, "Sign Up")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "/login"
-  }, "Sign In/Demo"))));
-}
+  var _super = _createSuper(Header);
+
+  function Header(props) {
+    _classCallCheck(this, Header);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Header, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "splash-header-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#splash-main-container"
+      }, "Sleuth")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#splash-intro"
+      }, "Introduction")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#features"
+      }, "Features")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#technologies"
+      }, "Technologies")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/signup"
+      }, "Sign Up")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/login"
+      }, "Sign In/Demo"))));
+    }
+  }]);
+
+  return Header;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 function MainContainer() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -567,15 +602,15 @@ function Footer() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "portfolio website"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "linked in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "resume"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "github")));
 }
 
-var Splash = /*#__PURE__*/function (_React$Component) {
-  _inherits(Splash, _React$Component);
+var Splash = /*#__PURE__*/function (_React$Component2) {
+  _inherits(Splash, _React$Component2);
 
-  var _super = _createSuper(Splash);
+  var _super2 = _createSuper(Splash);
 
   function Splash(props) {
     _classCallCheck(this, Splash);
 
-    return _super.call(this, props);
+    return _super2.call(this, props);
   }
 
   _createClass(Splash, [{
@@ -583,7 +618,9 @@ var Splash = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "splash-page"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Header, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(FeaturesContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Footer, null));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Header, {
+        currentUser: this.props.currentUser
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(FeaturesContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Footer, null));
     }
   }]);
 
@@ -608,35 +645,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _splash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./splash */ "./frontend/components/splash.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 
 
 
-var mSTP = function mSTP(state) {
+
+var mSTP = function mSTP(_ref) {
+  var users = _ref.entities.users,
+      session = _ref.session;
   return {
-    errors: state.errors.session,
-    formType: "signup"
+    currentUser: users[session.id]
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
-    processForm: function processForm(user) {
-      return dispatch(signup(user));
-    },
-    clearErrors: function (_clearErrors) {
-      function clearErrors() {
-        return _clearErrors.apply(this, arguments);
-      }
-
-      clearErrors.toString = function () {
-        return _clearErrors.toString();
-      };
-
-      return clearErrors;
-    }(function () {
-      return dispatch(clearErrors());
-    })
+    logout: function logout() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.logout)());
+    }
   };
 };
 
