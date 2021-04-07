@@ -39,6 +39,16 @@
   padding-left: 2vw;
 }
 
+#spy-icon:hover + li > a{
+  color: firebrick
+}
+
+.splash-header-list li span:hover,
+.splash-header-list li a:hover{
+  color: firebrick;
+  text-decoration: underline;
+
+}
 
 .splash-header-list li:nth-child(3),
 .splash-header-list li:nth-child(4),
