@@ -75,7 +75,7 @@ class Splash extends React.Component{
       )
     } else {
       ourVar = (
-        <li><Link to='/signup'>Sign Up</Link></li>
+        <li className="blink-me"><Link to='/signup'>Sign Up</Link></li>
           
       )
     }

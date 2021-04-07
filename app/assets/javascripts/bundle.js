@@ -595,7 +595,9 @@ var Splash = /*#__PURE__*/function (_React$Component) {
           onClick: this.props.logout
         }, "Logout"));
       } else {
-        ourVar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        ourVar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          className: "blink-me"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
           to: "/signup"
         }, "Sign Up"));
       }

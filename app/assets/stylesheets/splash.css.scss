@@ -138,3 +138,13 @@
 .introduction-container h1{
   font-size: 40px;
 }
+
+//animations
+
+.blink-me {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
