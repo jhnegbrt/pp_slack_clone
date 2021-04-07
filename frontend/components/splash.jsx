@@ -89,7 +89,9 @@ class Splash extends React.Component{
       <div className="splash-page">
         <div>
           <ul className="splash-header-list">
-            <li><a href="#splash-main-container"><img src={Spy} id="spy-icon"></img>Sleuth</a></li>
+            <li><a href="#splash-main-container"><img src={Spy} id="spy-icon"></img></a></li>
+            <li>
+              <a href="#splash-main-container" id="sleuth-item">Sleuth</a></li>
             <li><a href="#splash-intro">Introduction</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#technologies">Technologies</a></li>
