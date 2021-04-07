@@ -80,7 +80,7 @@ class SessionForm extends React.Component {
     }
 
     return(
-      <div>
+      <div className = "sign-form-container">
       <div className="sign-form">
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -94,7 +94,9 @@ class SessionForm extends React.Component {
         {this.renderSwitchButton()}
         {this.renderErrors()}
       </div>
-        {sleuthDemo}
+        <div className="sleuth-form"> 
+          {sleuthDemo}
+        </div>
       </div>
 
     )
