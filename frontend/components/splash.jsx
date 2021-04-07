@@ -4,7 +4,7 @@ import Spy from '../../app/assets/images/spy_icon.svg'
 
 function MainContainer(){
   return(
-  <div id="splash-main-container">
+  <div id="main">
     <div className="splash-intro-left">
       <h1>Sleuth: A chat-app featuring anonymous 'Sleuth' mode</h1>
       <h2>Connect with your friends, family and co-workers through your personal
@@ -20,7 +20,7 @@ function MainContainer(){
 
 function IntroductionContainer(){
   return(
-    <div className="introduction-container">
+    <div id="introduction">
       <h1>take up space</h1>
       <h1>take up space</h1>
       <h1>take up space</h1>
@@ -40,10 +40,19 @@ function IntroductionContainer(){
   )
 }
 
+
 function FeaturesContainer(){
   return(
     <div id="features">
       <h1>Features</h1>
+    </div>
+  )
+}
+
+function TechnologiesContainer(){
+  return(
+    <div id="technologies">
+      <h1>Technologies</h1>
     </div>
   )
 }
@@ -64,6 +73,14 @@ function Footer(){
 class Splash extends React.Component{
   constructor(props){
     super(props)
+  }
+
+  handleScroll(){
+
+  }
+
+  componentDidMount(){
+    window.addEventListener('scroll', this.handleScroll)
   }
 
   render(){
@@ -89,9 +106,9 @@ class Splash extends React.Component{
       <div className="splash-page">
         <div>
           <ul className="splash-header-list">
-            <li id="spy-icon"><a href="#splash-main-container"><img src={Spy} ></img></a></li>
-            <li><a href="#splash-main-container" id="sleuth-item">Sleuth</a></li>
-            <li><a href="#splash-intro">Introduction</a></li>
+            <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
+            <li><a href="#main" id="sleuth-item">Sleuth</a></li>
+            <li><a href="#introduction">Introduction</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#technologies">Technologies</a></li>
             {ourVar}
@@ -103,6 +120,7 @@ class Splash extends React.Component{
         <IntroductionContainer></IntroductionContainer>
         <FeaturesContainer></FeaturesContainer>
         <IntroductionContainer></IntroductionContainer>
+        {/* <TechnologiesContainer></TechnologiesContainer> */}
         <IntroductionContainer></IntroductionContainer>
         <Footer></Footer>
       </div>
