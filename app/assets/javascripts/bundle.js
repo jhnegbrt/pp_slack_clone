@@ -611,7 +611,6 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_8__.NavHashLink, {
         id: "sleuth-item",
         activeClassName: "active-link",
-        inactiveClassName: "inactive-link",
         to: "#main"
       }, "Sleuth")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_8__.NavHashLink, {
         to: "#intro",
@@ -771,6 +770,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_hash_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-hash-link */ "./node_modules/react-router-hash-link/dist/react-router-hash-link.esm.js");
+
 
 
 function SplashMain() {
@@ -778,7 +779,9 @@ function SplashMain() {
     id: "main"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "splash-intro-left"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Sleuth: A chat-app featuring anonymous 'Sleuth' mode"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Connect with your friends, family and co-workers through your personal account, or as an anonymous ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), " (Learn More)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Sleuth: A chat-app featuring anonymous 'Sleuth' mode"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Connect with your friends, family and co-workers through your personal account, or as an anonymous ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_1__.NavHashLink, {
+    to: "#intro"
+  }, "(Learn More)"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "splash-intro-right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "splash-spy"
