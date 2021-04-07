@@ -14,9 +14,6 @@ import SplashTechnologies from './splash_technologies'
 class Splash extends React.Component{
   constructor(props){
     super(props)
-    this.state = ({
-      selected: 'main'
-    })
   }
 
   // handleScroll(){
@@ -53,10 +50,10 @@ class Splash extends React.Component{
         <div>
           <ul className="splash-header-list">
             <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
-            <li><a id="selected" href="#main" id="sleuth-item">Sleuth</a></li>
-            <li><NavLink to="#intro">Introduction</NavLink></li>
-            <li><NavLink to="#features">Features</NavLink></li>
-            <li><NavLink to="#technologies">Technologies</NavLink></li>
+            <li><NavLink id="sleuth-item" activeClassName="active-link" inactiveClassName="inactive-link" to="#main">Sleuth</NavLink></li>
+            <li><NavLink to="#intro" activeClassName="active-link" >Introduction</NavLink></li>
+            <li><NavLink to="#features" activeClassName="active-link" >Features</NavLink></li>
+            <li><NavLink to="#technologies" activeClassName="active-link" >Technologies</NavLink></li>
             {ourVar}
             {ourVariable}
           </ul>

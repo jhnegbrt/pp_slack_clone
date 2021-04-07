@@ -47,15 +47,16 @@
 }
 
 #spy-icon:hover + li > a{
-  color: firebrick
+  color: firebrick;
+  text-decoration: underline;
 }
 
-// .splash-header-list li a 
-
+.active-link,
 .splash-header-list li span:hover,
 .splash-header-list li a:hover{
   color: firebrick;
   text-decoration: underline;
+  font-weight: bold;
 
 }
 
