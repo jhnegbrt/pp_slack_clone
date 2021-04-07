@@ -522,55 +522,17 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 //     super(props)
 //   }
 //   render(){
-//     if(this.props.currentUser){
-//       return(
-//         <div>
-//           <li><Link to='/signup'>Sign Up</Link></li>
-//           <li><Link to='/login'>Sign In/Demo</Link></li>
-//         </div>
-//       )
-//     } else {
-//       return(
-//         <li><button onClick={this.props.logout}>Logout</button></li>
-//       )
-//     }
 //   }
 // }
-
-var Header = /*#__PURE__*/function (_React$Component) {
-  _inherits(Header, _React$Component);
-
-  var _super = _createSuper(Header);
-
-  function Header(props) {
-    _classCallCheck(this, Header);
-
-    return _super.call(this, props);
-  }
-
-  _createClass(Header, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "splash-header-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        href: "#splash-main-container"
-      }, "Sleuth")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        href: "#splash-intro"
-      }, "Introduction")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        href: "#features"
-      }, "Features")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        href: "#technologies"
-      }, "Technologies")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/signup"
-      }, "Sign Up")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/login"
-      }, "Sign In/Demo"))));
-    }
-  }]);
-
-  return Header;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+// class Header extends React.Component{
+//   constructor(props){
+//     super(props)
+//   }
+//   render(){
+//     return(
+//     )
+//   }
+// }
 
 function MainContainer() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -602,25 +564,52 @@ function Footer() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "portfolio website"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "linked in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "resume"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "github")));
 }
 
-var Splash = /*#__PURE__*/function (_React$Component2) {
-  _inherits(Splash, _React$Component2);
+var Splash = /*#__PURE__*/function (_React$Component) {
+  _inherits(Splash, _React$Component);
 
-  var _super2 = _createSuper(Splash);
+  var _super = _createSuper(Splash);
 
   function Splash(props) {
     _classCallCheck(this, Splash);
 
-    return _super2.call(this, props);
+    return _super.call(this, props);
   }
 
   _createClass(Splash, [{
     key: "render",
     value: function render() {
+      var ourVar;
+      var ourVariable;
+
+      if (this.props.currentUser) {
+        ourVar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          onClick: this.props.logout
+        }, "Logout"));
+      } else {
+        ourVar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+          to: "/signup"
+        }, "Sign Up"));
+      }
+
+      if (this.props.currentUser) {} else {
+        ourVariable = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+          to: "/login"
+        }, "Sign In/Demo"));
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "splash-page"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Header, {
-        currentUser: this.props.currentUser
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(FeaturesContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Footer, null));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "splash-header-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#splash-main-container"
+      }, "Sleuth")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#splash-intro"
+      }, "Introduction")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#features"
+      }, "Features")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#technologies"
+      }, "Technologies")), ourVar, ourVariable)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(FeaturesContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(IntroductionContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Footer, null));
     }
   }]);
 
