@@ -1,20 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
 
 
 *{
   scroll-behavior: smooth;
 }
+
 .splash-header-list, .splash-footer-list{
   display: flex;
   align-items: center;
   font-family: 'Comfortaa', cursive;
 }
 
+
+
 .splash-header-list{
   width: 100%;
   position: fixed;
-  height: 6vh
+  height: 10vh
+}
+
+.splash-header-list li a,
+.splash-header-list li span{
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .splash-header-list, #splash-main-container{
@@ -22,8 +31,13 @@
 }
 
 .splash-header-list li:first-child{
-  padding-left: 4vw;
+
+  padding-left: 6vw;
   padding-right: 2vw
+}
+
+#spy-icon{
+  padding:10px
 }
 
 .splash-header-list li:nth-child(2),

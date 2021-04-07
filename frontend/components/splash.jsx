@@ -1,31 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-// class LoginOrLogout extends React.Compoent{
-//   constructor(props){
-//     super(props)
-//   }
-
-
-//   render(){
-
-//   }
-
-// }
-
-
-// class Header extends React.Component{
-//   constructor(props){
-//     super(props)
-//   }
-
-//   render(){
-//     return(
-
-//     )
-
-//   }
-// }
+import Spy from '../../app/assets/images/spy_icon.svg'
 
 function MainContainer(){
   return(
@@ -113,19 +88,16 @@ class Splash extends React.Component{
     return(
       <div className="splash-page">
         <div>
-            <ul className="splash-header-list">
-            <li><a href="#splash-main-container">Sleuth</a></li>
+          <ul className="splash-header-list">
+            <li><a href="#splash-main-container"><img src={Spy} id="spy-icon"></img>Sleuth</a></li>
             <li><a href="#splash-intro">Introduction</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#technologies">Technologies</a></li>
             {ourVar}
             {ourVariable}
-            {/* <li><Link to='/signup'>Sign Up</Link></li>
-            <li><Link to='/login'>Sign In/Demo</Link></li>
-            <LoginOrLogout currentUser={this.props.currentUser}></LoginOrLogout> */}
           </ul>
         </div>
-        {/* <Header currentUser={this.props.currentUser}></Header> */}
+        
         <MainContainer></MainContainer>
         <IntroductionContainer></IntroductionContainer>
         <FeaturesContainer></FeaturesContainer>
