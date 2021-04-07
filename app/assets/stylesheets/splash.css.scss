@@ -49,6 +49,8 @@
 #spy-icon:hover + li > a{
   color: firebrick;
   text-decoration: underline;
+  font-weight: bold;
+
 }
 
 .active-link,
@@ -163,7 +165,33 @@
   font-family: 'Comfortaa', serif;
   color:whitesmoke;
   line-height: 8vh;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
 
+}
+
+//technologies
+#technologies{
+  
+  padding: 5vw
+}
+
+.technologies-container{
+  display: flex;
+}
+
+.technologies-left,
+.technologies-right{
+  border: 10px solid wheat;
+  width: 50vw;
+  height: 48vh;
+  border-radius: 20px;
+}
+
+.technologies-left li{
+  height: 6vh;
+  text-align: center;
+  margin-top: 6vh;
 }
 
 

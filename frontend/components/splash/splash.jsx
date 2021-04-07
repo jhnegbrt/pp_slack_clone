@@ -50,10 +50,10 @@ class Splash extends React.Component{
         <div>
           <ul className="splash-header-list">
             <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
-            <li><NavLink id="sleuth-item" activeClassName="active-link" to="#main">Sleuth</NavLink></li>
-            <li><NavLink to="#intro" activeClassName="active-link" >Introduction</NavLink></li>
-            <li><NavLink to="#features" activeClassName="active-link" >Features</NavLink></li>
-            <li><NavLink to="#technologies" activeClassName="active-link" >Technologies</NavLink></li>
+            <li><NavLink id="sleuth-item" activeClassName="active-link"  className={"link"} to="#main">Sleuth</NavLink></li>
+            <li><NavLink to="#intro" activeClassName="active-link" className={"link"} >Introduction</NavLink></li>
+            <li><NavLink to="#features" activeClassName="active-link" className={"link"} >Features</NavLink></li>
+            <li><NavLink to="#technologies" activeClassName="active-link" className={"link"} >Technologies</NavLink></li>
             {ourVar}
             {ourVariable}
           </ul>
