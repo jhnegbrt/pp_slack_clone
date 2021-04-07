@@ -1,18 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {NavHashLink as NavLink } from 'react-router-hash-link'
+
+
 import Spy from '../../../app/assets/images/spy_icon.svg'
 import SplashMain from './splash_main'
 import SplashIntro from './splash_intro'
 import SplashFooter from './splash_footer'
 import SplashFeatures from './splash_features'
 import SplashTechnologies from './splash_technologies'
-
-
-
-
-
-
-
 
 
 class Splash extends React.Component{
@@ -53,18 +49,20 @@ class Splash extends React.Component{
     }
     return(
       <div className="splash-page">
+
         <div>
           <ul className="splash-header-list">
             <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
-            {/* <li><a className={this.state.selected === 'main' ? 'selected' : ""} href="#main" id="sleuth-item">Sleuth</a></li> */}
             <li><a id="selected" href="#main" id="sleuth-item">Sleuth</a></li>
-            <li><a className={this.state.selected === 'intro' ? 'selected' : ""} href="#intro">Introduction</a></li>
-            <li><a className={this.state.features ==='features' ? 'selected' : ""} href="#features">Features</a></li>
-            <li><a className={this.state.main === 'technologies' ? 'selected' : ""} href="#technologies">Technologies</a></li>
+            <li><NavLink to="#intro">Introduction</NavLink></li>
+            <li><NavLink to="#features">Features</NavLink></li>
+            <li><NavLink to="#technologies">Technologies</NavLink></li>
             {ourVar}
             {ourVariable}
           </ul>
         </div>
+
+
         
         <SplashMain></SplashMain>
         <SplashIntro></SplashIntro>
@@ -79,3 +77,20 @@ class Splash extends React.Component{
 }
 
 export default Splash
+
+
+
+{/* <div>
+<ul className="splash-header-list">
+  <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
+  <li><a className={this.state.selected === 'main' ? 'selected' : ""} href="#main" id="sleuth-item">Sleuth</a></li>
+  <li><a id="selected" href="#main" id="sleuth-item">Sleuth</a></li>
+  <li><a className={this.state.selected === 'intro' ? 'selected' : ""} href="#intro">Introduction</a></li>
+  <li><a className={this.state.features ==='features' ? 'selected' : ""} href="#features">Features</a></li>
+  <li><a className={this.state.main === 'technologies' ? 'selected' : ""} href="#technologies">Technologies</a></li>
+  {ourVar}
+  {ourVariable}
+</ul>
+</div> */}
+
+

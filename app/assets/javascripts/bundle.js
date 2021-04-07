@@ -515,6 +515,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_hash_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-hash-link */ "./node_modules/react-router-hash-link/dist/react-router-hash-link.esm.js");
 /* harmony import */ var _app_assets_images_spy_icon_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/assets/images/spy_icon.svg */ "./app/assets/images/spy_icon.svg");
 /* harmony import */ var _app_assets_images_spy_icon_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_app_assets_images_spy_icon_svg__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _splash_main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./splash_main */ "./frontend/components/splash/splash_main.jsx");
@@ -545,6 +546,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -617,15 +619,12 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", _defineProperty({
         id: "selected",
         href: "#main"
-      }, "id", "sleuth-item"), "Sleuth")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        className: this.state.selected === 'intro' ? 'selected' : "",
-        href: "#intro"
-      }, "Introduction")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        className: this.state.features === 'features' ? 'selected' : "",
-        href: "#features"
-      }, "Features")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        className: this.state.main === 'technologies' ? 'selected' : "",
-        href: "#technologies"
+      }, "id", "sleuth-item"), "Sleuth")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_8__.NavHashLink, {
+        to: "#intro"
+      }, "Introduction")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_8__.NavHashLink, {
+        to: "#features"
+      }, "Features")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_hash_link__WEBPACK_IMPORTED_MODULE_8__.NavHashLink, {
+        to: "#technologies"
       }, "Technologies")), ourVar, ourVariable)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_main__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_intro__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_features__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_intro__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_technologies__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_intro__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_footer__WEBPACK_IMPORTED_MODULE_4__.default, null));
     }
   }]);
@@ -634,6 +633,20 @@ var Splash = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Splash);
+{
+  /* <div>
+  <ul className="splash-header-list">
+   <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
+   <li><a className={this.state.selected === 'main' ? 'selected' : ""} href="#main" id="sleuth-item">Sleuth</a></li>
+   <li><a id="selected" href="#main" id="sleuth-item">Sleuth</a></li>
+   <li><a className={this.state.selected === 'intro' ? 'selected' : ""} href="#intro">Introduction</a></li>
+   <li><a className={this.state.features ==='features' ? 'selected' : ""} href="#features">Features</a></li>
+   <li><a className={this.state.main === 'technologies' ? 'selected' : ""} href="#technologies">Technologies</a></li>
+   {ourVar}
+   {ourVariable}
+  </ul>
+  </div> */
+}
 
 /***/ }),
 
@@ -32219,6 +32232,202 @@ if (true) {
 
 
 //# sourceMappingURL=react-router-dom.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/react-router-hash-link/dist/react-router-hash-link.esm.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/react-router-hash-link/dist/react-router-hash-link.esm.js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "HashLink": () => (/* binding */ HashLink),
+/* harmony export */   "NavHashLink": () => (/* binding */ NavHashLink),
+/* harmony export */   "genericHashLink": () => (/* binding */ genericHashLink)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+var hashFragment = '';
+var observer = null;
+var asyncTimerId = null;
+var scrollFunction = null;
+function reset() {
+    hashFragment = '';
+    if (observer !== null)
+        observer.disconnect();
+    if (asyncTimerId !== null) {
+        window.clearTimeout(asyncTimerId);
+        asyncTimerId = null;
+    }
+}
+function isInteractiveElement(element) {
+    var formTags = ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'];
+    var linkTags = ['A', 'AREA'];
+    return ((formTags.includes(element.tagName) && !element.hasAttribute('disabled')) ||
+        (linkTags.includes(element.tagName) && element.hasAttribute('href')));
+}
+function getElAndScroll() {
+    var element = null;
+    if (hashFragment === '#') {
+        // use document.body instead of document.documentElement because of a bug in smoothscroll-polyfill in safari
+        // see https://github.com/iamdustan/smoothscroll/issues/138
+        // while smoothscroll-polyfill is not included, it is the recommended way to implement smoothscroll
+        // in browsers that don't natively support el.scrollIntoView({ behavior: 'smooth' })
+        element = document.body;
+    }
+    else {
+        // check for element with matching id before assume '#top' is the top of the document
+        // see https://html.spec.whatwg.org/multipage/browsing-the-web.html#target-element
+        var id = hashFragment.replace('#', '');
+        element = document.getElementById(id);
+        if (element === null && hashFragment === '#top') {
+            // see above comment for why document.body instead of document.documentElement
+            element = document.body;
+        }
+    }
+    if (element !== null) {
+        scrollFunction(element);
+        // update focus to where the page is scrolled to
+        // unfortunately this doesn't work in safari (desktop and iOS) when blur() is called
+        var originalTabIndex = element.getAttribute('tabindex');
+        if (originalTabIndex === null && !isInteractiveElement(element)) {
+            element.setAttribute('tabindex', -1);
+        }
+        element.focus({ preventScroll: true });
+        if (originalTabIndex === null && !isInteractiveElement(element)) {
+            // for some reason calling blur() in safari resets the focus region to where it was previously,
+            // if blur() is not called it works in safari, but then are stuck with default focus styles
+            // on an element that otherwise might never had focus styles applied, so not an option
+            element.blur();
+            element.removeAttribute('tabindex');
+        }
+        reset();
+        return true;
+    }
+    return false;
+}
+function hashLinkScroll(timeout) {
+    // Push onto callback queue so it runs after the DOM is updated
+    window.setTimeout(function () {
+        if (getElAndScroll() === false) {
+            if (observer === null) {
+                observer = new MutationObserver(getElAndScroll);
+            }
+            observer.observe(document, {
+                attributes: true,
+                childList: true,
+                subtree: true,
+            });
+            // if the element doesn't show up in specified timeout or 10 seconds, stop checking
+            asyncTimerId = window.setTimeout(function () {
+                reset();
+            }, timeout || 10000);
+        }
+    }, 0);
+}
+function genericHashLink(As) {
+    return react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function (props, ref) {
+        var linkHash = '';
+        if (typeof props.to === 'string' && props.to.includes('#')) {
+            linkHash = "#" + props.to.split('#').slice(1).join('#');
+        }
+        else if (typeof props.to === 'object' &&
+            typeof props.to.hash === 'string') {
+            linkHash = props.to.hash;
+        }
+        var passDownProps = {};
+        if (As === react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink) {
+            passDownProps.isActive = function (match, location) {
+                return match && match.isExact && location.hash === linkHash;
+            };
+        }
+        function handleClick(e) {
+            reset();
+            hashFragment = props.elementId ? "#" + props.elementId : linkHash;
+            if (props.onClick)
+                props.onClick(e);
+            if (hashFragment !== '') {
+                scrollFunction =
+                    props.scroll ||
+                        (function (el) {
+                            return props.smooth
+                                ? el.scrollIntoView({ behavior: 'smooth' })
+                                : el.scrollIntoView();
+                        });
+                hashLinkScroll(props.timeout);
+            }
+        }
+        var filteredProps = __rest(props, ["scroll", "smooth", "timeout", "elementId"]);
+        return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(As, __assign({}, passDownProps, filteredProps, { onClick: handleClick, ref: ref }), props.children));
+    });
+}
+var HashLink = genericHashLink(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link);
+var NavHashLink = genericHashLink(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink);
+if (true) {
+    HashLink.displayName = 'HashLink';
+    NavHashLink.displayName = 'NavHashLink';
+    var propTypes = {
+        onClick: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func),
+        children: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().node),
+        scroll: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().func),
+        timeout: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().number),
+        elementId: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string),
+        to: prop_types__WEBPACK_IMPORTED_MODULE_1___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_1___default().string), (prop_types__WEBPACK_IMPORTED_MODULE_1___default().object)]),
+    };
+    HashLink.propTypes = propTypes;
+    NavHashLink.propTypes = propTypes;
+}
+
+
+//# sourceMappingURL=react-router-hash-link.esm.js.map
 
 
 /***/ }),
