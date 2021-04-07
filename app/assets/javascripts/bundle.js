@@ -355,6 +355,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.enterSleuthMode = _this.enterSleuthMode.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -364,6 +365,15 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user);
+    }
+  }, {
+    key: "enterSleuthMode",
+    value: function enterSleuthMode(e) {
+      e.preventDefault();
+      this.props.processForm({
+        username: "sleuthaccount",
+        password: "123456"
+      });
     }
   }, {
     key: "handleChange",
@@ -400,7 +410,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var formType = "";
+      var formType;
+      var sleuthDemo;
 
       if (this.props.formType === "signin") {
         formType = "Sign In";
@@ -408,7 +419,13 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         formType = "Sign Up";
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      if (this.props.formType === "signin") {
+        sleuthDemo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Enter With Sleuth Mode!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Use Sleuth Mode to chat anonymously or demo this application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: this.enterSleuthMode
+        }, "Enter as Sleuth!"));
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "sign-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
@@ -427,7 +444,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: formType
-      })), this.renderSwitchButton(), this.renderErrors());
+      })), this.renderSwitchButton(), this.renderErrors()), sleuthDemo);
     }
   }]);
 

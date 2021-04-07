@@ -11,12 +11,18 @@ class SessionForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.enterSleuthMode = this.enterSleuthMode.bind(this)
   }
 
   handleSubmit(e){
     e.preventDefault();
     const user = Object.assign({}, this.state)
     this.props.processForm(user);
+  }
+
+  enterSleuthMode(e){
+    e.preventDefault()
+    this.props.processForm({username: "sleuthaccount", password: "123456"})
   }
 
   handleChange(e){
@@ -54,14 +60,27 @@ class SessionForm extends React.Component {
   }
 
   render(){
-    let formType = ""
+    let formType;
+    let sleuthDemo;
+
     if (this.props.formType === "signin"){
       formType = "Sign In"
     } else {
       formType = "Sign Up"
     }
 
+
+    if (this.props.formType === "signin"){
+      sleuthDemo = (
+        <div>Enter With Sleuth Mode!
+          <h1>Use Sleuth Mode to chat anonymously or demo this application</h1>
+          <button onClick={this.enterSleuthMode}>Enter as Sleuth!</button>
+        </div>
+      )
+    }
+
     return(
+      <div>
       <div className="sign-form">
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -75,6 +94,9 @@ class SessionForm extends React.Component {
         {this.renderSwitchButton()}
         {this.renderErrors()}
       </div>
+        {sleuthDemo}
+      </div>
+
     )
 
   }
