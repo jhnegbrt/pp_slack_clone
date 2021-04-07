@@ -102,18 +102,18 @@
   
 }
 
-.splash-intro-right,
-.splash-intro-left{
+.main-right,
+.main-left{
   width: 50vw;
 }
 
-.splash-intro-left{
+.main-left{
 
   height: 50vh
 }
 
 
-.splash-intro-left h1{
+.main-left h1{
   font-family: 'Playfair Display', serif;
   font-size: 6vh;
   margin-left: 6vw;
@@ -121,14 +121,14 @@
   margin-bottom: 8vh;
 }
 
-.splash-intro-left h2{
+.main-left h2{
   font-family: 'Playfair Display', serif;
   font-size: 3vh;
   margin-left: 6vw;
   margin-top: 2vh;
   margin-right: 6vw;
   line-height: 5vh;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 1vh;
   border-radius: 10px;
   color: slateblue
@@ -150,9 +150,22 @@
 
 //introduction styling
 
-#intro h1{
-  font-size: 40px;
+#intro{
+  background-color: firebrick;
+  padding: 8vh;
+  padding-right: 40vh;
+  padding-left: 40vh;
+  text-align: center;
 }
+
+#intro h2{
+  font-size: 5vh;
+  font-family: 'Comfortaa', serif;
+  color:whitesmoke;
+  line-height: 8vh;
+
+}
+
 
 //animations
 
