@@ -30,6 +30,7 @@
 .splash-header-list li span{
   cursor: pointer;
   text-decoration: none;
+
 }
 
 .splash-header-list, #main{
@@ -49,11 +50,18 @@
   color: firebrick
 }
 
+// .splash-header-list li a 
+
 .splash-header-list li span:hover,
 .splash-header-list li a:hover{
   color: firebrick;
   text-decoration: underline;
 
+}
+
+#selected{
+  color: firebrick;
+  text-decoration: underline
 }
 
 .splash-header-list li:nth-child(3),
@@ -125,13 +133,6 @@
 }
 
 
-#main,
-#introduction,
-#features,
-#tecnologies{
-  
-}
-
 .splash-spy{
   margin-right: 10vw;
   margin-top: 10vh;
@@ -147,7 +148,7 @@
 
 //introduction styling
 
-#introduction h1{
+#intro h1{
   font-size: 40px;
 }
 
