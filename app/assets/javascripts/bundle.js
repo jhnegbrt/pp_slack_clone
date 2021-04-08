@@ -1099,14 +1099,18 @@ var MessagesReducer = function MessagesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var nextState = Object.assign({}, state);
 
   switch (action.type) {
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
       return _defineProperty({}, action.message.id, action.message.id);
 
-    case RECEIVE_MESSAGE_ERRORS:
-      return;
+    case RECEIVE_ALL_POSTS:
+      return Object.assign({}, state, action.messages);
+
+    case REMOVE_POST:
+      var nextState = Object.assign({}, state);
+      delete nextState[action.messageId];
+      return nextState;
 
     default:
       return state;

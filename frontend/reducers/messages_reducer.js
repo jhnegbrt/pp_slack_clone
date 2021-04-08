@@ -5,12 +5,16 @@ import {
 
 const MessagesReducer = (state = {}, action) => {
   Object.freeze(state)
-  let nextState = Object.assign({}, state)
+  
   switch (action.type){
     case RECEIVE_MESSAGE:
       return {[action.message.id]: action.message.id}
-    case RECEIVE_MESSAGE_ERRORS:
-      return
+    case RECEIVE_ALL_POSTS:
+      return Object.assign({}, state, action.messages)
+    case REMOVE_POST:
+      let nextState = Object.assign({}, state)
+      delete nextState[action.messageId]
+      return nextState
     default:
       return state
   }
