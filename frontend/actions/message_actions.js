@@ -4,12 +4,19 @@ export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
 export const REMOVE_MESSAGE = "REMOVE_MESSAGE"
 export const RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS"
 export const RECEIVE_ALL_MESSAGES = "RECEIVE_ALL_MESSAGES"
+export const CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS"
 
 
 const receiveErrors = (errors) => {
   return({
     type: RECEIVE_MESSAGE_ERRORS,
     errors
+  })
+}
+
+export const clearMessageErrors = () => {
+  return({
+    type: CLEAR_MESSAGE_ERRORS
   })
 }
 

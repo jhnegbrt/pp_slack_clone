@@ -9,6 +9,8 @@ const MessagesReducer = (state = {}, action) => {
   switch (action.type){
     case RECEIVE_MESSAGE:
       return {[action.message.id]: action.message.id}
+    case RECEIVE_MESSAGE_ERRORS:
+      return
     default:
       return state
   }
