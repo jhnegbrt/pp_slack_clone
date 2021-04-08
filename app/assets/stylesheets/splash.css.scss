@@ -172,28 +172,58 @@
 
 //technologies
 #technologies{
-  
+  font-size: 4vh;
+  font-family: 'Comfortaa', serif;
   padding: 5vw
+}
+
+#technologies h2{
+  text-align: center;
 }
 
 .technologies-container{
   display: flex;
-}
-
-.technologies-left,
-.technologies-right{
   border: 10px solid wheat;
   width: 50vw;
-  height: 48vh;
   border-radius: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: whitesmoke;
 }
 
-.technologies-left li{
-  height: 6vh;
-  text-align: center;
-  margin-top: 6vh;
+
+
+.technologies-list li{
+  line-height: 8vh;
+  padding: 2vh;
+  border-radius: 10px;
 }
 
+.unselected-tech{
+  background-color: slateblue;
+  border: 4px solid whitesmoke;
+  border-left:none;
+  border-right: none;
+  color: whitesmoke;
+}
+
+.selected-tech{
+  background-color: whitesmoke;
+  font-weight: bold;
+  color: slateblue;
+  border: 2px solid slateblue
+}
+
+.selected-technology{
+  width: 30vw;
+  // border-radius: 20px;
+  // border-left: 2px solid slateblue
+}
+
+
+.technology-element{
+  text-decoration: none;
+}
 
 //animations
 

@@ -838,6 +838,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var SplashTechnologies = /*#__PURE__*/function (_React$Component) {
   _inherits(SplashTechnologies, _React$Component);
 
@@ -850,7 +851,7 @@ var SplashTechnologies = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      technology: "react"
+      tech: "react"
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
@@ -859,14 +860,9 @@ var SplashTechnologies = /*#__PURE__*/function (_React$Component) {
   _createClass(SplashTechnologies, [{
     key: "handleClick",
     value: function handleClick(e) {
-      var _this2 = this;
-
-      // debugger
       e.preventDefault();
       this.setState({
-        technology: [e.target.name]
-      }, function () {
-        console.log(_this2.state.technology);
+        tech: e.target.name
       });
     }
   }, {
@@ -877,21 +873,31 @@ var SplashTechnologies = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Technologies:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "technologies-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "technologies-left"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        className: "technologies-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: this.state.tech === "react" ? "selected-tech" : "unselected-tech"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         onClick: this.handleClick,
         name: "react"
-      }, "React")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      }, "React")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: this.state.tech === "ror" ? "selected-tech" : "unselected-tech"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         onClick: this.handleClick,
         name: "ror"
-      }, "Ruby on Rails")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      }, "Ruby on Rails")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: this.state.tech === "psql" ? "selected-tech" : "unselected-tech"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         onClick: this.handleClick,
         name: "psql"
-      }, "PostgreSQL")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      }, "PostgreSQL")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: this.state.tech === "heroku" ? "selected-tech" : "unselected-tech"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         onClick: this.handleClick,
         name: "heroku"
-      }, "Heroku"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_technology_display__WEBPACK_IMPORTED_MODULE_1__.default, {
-        technology: this.state.technology
+      }, "Heroku")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "selected-technology"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_technology_display__WEBPACK_IMPORTED_MODULE_1__.default, {
+        tech: this.state.tech
       }))));
     }
   }]);
@@ -900,6 +906,14 @@ var SplashTechnologies = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SplashTechnologies);
+{
+  /* <li><Link 
+  className={this.state.tech === "react" ? "selected-tech" : "technology-element"}
+  onClick={this.handleClick} name="react">React</Link></li>
+  <Link
+  className={this.state.tech === "ror" ? "selected-tech" : "technology-element"}
+  onClick={this.handleClick} className="technology-element" activeClassName="selected-tech" name="ror">Ruby on Rails</Link> */
+}
 
 /***/ }),
 
@@ -954,7 +968,7 @@ var TechnologyDisplay = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       // debugger
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.technology);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.tech);
     }
   }]);
 

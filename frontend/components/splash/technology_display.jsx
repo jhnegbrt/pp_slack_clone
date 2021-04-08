@@ -8,7 +8,7 @@ class TechnologyDisplay extends React.Component{
   render(){
     // debugger
     return(
-      <div>{this.props.technology}</div>
+      <div>{this.props.tech}</div>
     )
   }
 }

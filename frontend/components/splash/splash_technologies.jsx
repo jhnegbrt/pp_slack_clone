@@ -1,22 +1,22 @@
 import React from 'react'
 import TechnologyDisplay from './technology_display'
+import { NavLink } from 'react-router-dom'
 
 class SplashTechnologies extends React.Component{
 
   constructor(props){
     super(props)
     this.state = ({
-      technology: "react"
+      tech: "react"
     })
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(e){
-    // debugger
     e.preventDefault()
     this.setState({
-      technology: [e.target.name]
-    }, () => {console.log(this.state.technology)})
+      tech: e.target.name
+    })
   }
 
 
@@ -25,14 +25,24 @@ class SplashTechnologies extends React.Component{
       <div id="technologies">
         <h2>Technologies:</h2>
         <div className="technologies-container">
-          <div className="technologies-left">
+          <div className="technologies-list">
             <ul>
-              <li><a onClick={this.handleClick} name="react">React</a></li>
-              <li><a onClick={this.handleClick} name="ror">Ruby on Rails</a></li>
-              <li><a onClick={this.handleClick} name="psql">PostgreSQL</a></li>
-              <li><a onClick={this.handleClick} name="heroku">Heroku</a></li>
+              <li className={this.state.tech === "react" ? "selected-tech" : "unselected-tech"}>
+                <a onClick={this.handleClick} name='react'>React</a>
+              </li>
+              <li className={this.state.tech === "ror" ? "selected-tech" : "unselected-tech"}>
+                <a onClick={this.handleClick}  name="ror">Ruby on Rails</a>
+              </li>
+              <li className={this.state.tech === "psql" ? "selected-tech" : "unselected-tech"}>
+                <a onClick={this.handleClick} name="psql">PostgreSQL</a>
+              </li>
+              <li className={this.state.tech === "heroku" ? "selected-tech" : "unselected-tech"}>
+                <a onClick={this.handleClick}  name="heroku">Heroku</a>
+              </li>
             </ul>
-            <TechnologyDisplay technology={this.state.technology}></TechnologyDisplay>
+          </div>
+          <div className="selected-technology">
+            <TechnologyDisplay tech={this.state.tech}></TechnologyDisplay>
           </div>
         </div>
 
@@ -42,3 +52,10 @@ class SplashTechnologies extends React.Component{
 }
 
 export default SplashTechnologies
+
+{/* <li><Link 
+className={this.state.tech === "react" ? "selected-tech" : "technology-element"}
+onClick={this.handleClick} name="react">React</Link></li>
+<Link
+className={this.state.tech === "ror" ? "selected-tech" : "technology-element"}
+onClick={this.handleClick} className="technology-element" activeClassName="selected-tech" name="ror">Ruby on Rails</Link> */}
