@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import SplashContainer from './splash/splash_container'
 import LoginFormContainer from '../components/session_form/login_form_container'
 import SignupFormContainer from '../components/session_form/signup_form_container'
+import MessageIndexContainer from '../components/messages/message_index_container'
 import { AuthRoute } from '../util/route_util'
 
 const NotFoundPage = () => {
@@ -16,6 +17,7 @@ const App = () => (
     <Route exact path='/main' component={SplashContainer}></Route>
     <Route exact path='/features' component={SplashContainer}></Route>
     <Route exact path='/technologies' component={SplashContainer}></Route>
+    <Route exact path='/client' component={MessageIndexContainer}></Route>
     <AuthRoute exact path="/login" component={LoginFormContainer} />
     <AuthRoute exact path="/signup" component={SignupFormContainer} />
     

@@ -14,7 +14,7 @@ const receiveErrors = (errors) => {
   })
 }
 
-export const clearMessageErrors = () => {
+const clearMessageErrors = () => {
   return({
     type: CLEAR_MESSAGE_ERRORS
   })
@@ -30,7 +30,7 @@ const receiveMessage  = (message) => ({
   message
 })
 
-const deleteMessage = (messageId) => ({
+const removeMessage = (messageId) => ({
   type: REMOVE_MESSAGE,
   messageId
 })
@@ -49,7 +49,7 @@ export const fetchMessages = () => dispatch => (
 
 export const deleteMessage = (messageId) => dispatch => (
   APIUtil.deleteMessage(messageId)
-    .then(() => dispatch(deleteMessage(messageId)))
+    .then(() => dispatch(removeMessage(messageId)))
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 )
 

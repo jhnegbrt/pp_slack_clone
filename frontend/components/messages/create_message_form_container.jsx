@@ -4,7 +4,7 @@ import { createMessage } from '../../actions/message_actions'
 
 const mSTP = (store) => ({
   message: {
-    content = ""
+    content: ""
   }
 })
 
