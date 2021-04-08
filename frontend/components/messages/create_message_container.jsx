@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { createMessage } from '../../actions/message_actions'
 
 const mSTP = (store) => ({
-  post: {
+  message: {
     content = ""
   }
 })

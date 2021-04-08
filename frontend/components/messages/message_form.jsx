@@ -3,7 +3,7 @@ import React from 'react'
 class MessageForm extends React.Component{
   constructor(props){
     super(props)
-    this.state = this.props.post
+    this.state = this.props.,essage
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateConte
