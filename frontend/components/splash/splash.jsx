@@ -16,12 +16,12 @@ class Splash extends React.Component{
     super(props)
   }
 
-  handleScroll(){
+  // handleScroll(){
 
-    debugger
-    document.querySelectorAll()
+  //   debugger
+  //   document.querySelectorAll()
 
-  }
+  // }
 
   componentDidMount(){
     window.addEventListener('scroll', this.handleScroll)

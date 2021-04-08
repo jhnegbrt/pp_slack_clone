@@ -197,6 +197,11 @@
   line-height: 8vh;
   padding: 2vh;
   border-radius: 10px;
+  display: block;
+}
+
+.technologies-list li:hover{
+  cursor: pointer;
 }
 
 .unselected-tech{
