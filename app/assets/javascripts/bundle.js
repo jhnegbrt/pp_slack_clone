@@ -869,37 +869,19 @@ var SplashTechnologies = /*#__PURE__*/function (_React$Component) {
       tech: "react"
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    _this.handleLiClick = _this.handleLiClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(SplashTechnologies, [{
     key: "handleClick",
     value: function handleClick(e) {
-      // debugger
-      e.preventDefault();
       this.setState({
-        tech: e.target.name
+        tech: e.currentTarget.querySelector('a').name
       });
-    }
-  }, {
-    key: "handleLiClick",
-    value: function handleLiClick(field) {
-      var _this2 = this;
-
-      debugger;
-      return function () {
-        return _this2.setState({
-          tech: [field]
-        });
-      };
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "technologies"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Technologies:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -907,30 +889,24 @@ var SplashTechnologies = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "technologies-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        onClick: function onClick() {
-          return _this3.handleLiClick('react');
-        },
+        onClick: this.handleClick,
         className: this.state.tech === "react" ? "selected-tech" : "unselected-tech"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        onClick: this.handleClick,
         name: "react"
       }, "React")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        onClick: function onClick() {
-          return _this3.handleLiClick('ror');
-        },
+        onClick: this.handleClick,
         className: this.state.tech === "ror" ? "selected-tech" : "unselected-tech"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        onClick: this.handleClick,
         name: "ror"
       }, "Ruby on Rails")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: this.handleClick,
         className: this.state.tech === "psql" ? "selected-tech" : "unselected-tech"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        onClick: this.handleClick,
         name: "psql"
       }, "PostgreSQL")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        onClick: this.handleClick,
         className: this.state.tech === "heroku" ? "selected-tech" : "unselected-tech"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        onClick: this.handleClick,
         name: "heroku"
       }, "Heroku")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "selected-technology"

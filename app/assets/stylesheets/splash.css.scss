@@ -197,7 +197,14 @@
   line-height: 8vh;
   padding: 2vh;
   border-radius: 10px;
-  display: block;
+  // background-color: green
+  
+}
+
+.technology-list li a{
+  // display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .technologies-list li:hover{
@@ -210,6 +217,7 @@
   border-left:none;
   border-right: none;
   color: whitesmoke;
+ 
 }
 
 .selected-tech{
