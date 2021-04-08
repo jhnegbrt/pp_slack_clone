@@ -31,3 +31,10 @@ export const fetchMessages = () => (
     url: 'api/messages'
   })
 )
+
+export const fetchMessage = (messageId) => (
+  $.ajax({
+    method: 'GET',
+    url: `api/messages/${messageId}`
+  })
+)
