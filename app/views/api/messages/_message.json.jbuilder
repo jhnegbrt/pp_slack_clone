@@ -1,0 +1,1 @@
+json.extract! message, :id, :content, :sender_id, :channel_dms_id :parent_comment_id, :created_at
