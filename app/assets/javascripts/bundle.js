@@ -113,6 +113,7 @@ function _setPrototypeOf(o, p) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_MESSAGE": () => (/* binding */ RECEIVE_MESSAGE),
+/* harmony export */   "REMOVE_MESSAGE": () => (/* binding */ REMOVE_MESSAGE),
 /* harmony export */   "RECEIVE_MESSAGE_ERRORS": () => (/* binding */ RECEIVE_MESSAGE_ERRORS),
 /* harmony export */   "createMessage": () => (/* binding */ createMessage),
 /* harmony export */   "updateMessage": () => (/* binding */ updateMessage)
@@ -120,6 +121,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/message_api_util */ "./frontend/util/message_api_util.js");
 
 var RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
+var REMOVE_MESSAGE = "REMOVE_MESSAGE";
 var RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS";
 
 var receiveErrors = function receiveErrors(errors) {
@@ -133,6 +135,13 @@ var receiveMessage = function receiveMessage(message) {
   return {
     type: RECEIVE_MESSAGE,
     message: message
+  };
+};
+
+var deleteMessage = function deleteMessage(messageId) {
+  return {
+    type: REMOVE_MESSAGE,
+    messageId: messageId
   };
 };
 

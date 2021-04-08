@@ -1,6 +1,7 @@
 import * as APIUtil from '../util/message_api_util'
 
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
+export const REMOVE_MESSAGE = "REMOVE_MESSAGE"
 export const RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS"
 
 
@@ -14,6 +15,11 @@ const receiveErrors = (errors) => {
 const receiveMessage  = (message) => ({
   type: RECEIVE_MESSAGE,
   message
+})
+
+const deleteMessage = (messageId) => ({
+  type: REMOVE_MESSAGE,
+  messageId
 })
 
 export const createMessage = formMessage => dispatch => {
