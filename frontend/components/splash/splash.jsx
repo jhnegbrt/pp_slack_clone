@@ -16,10 +16,12 @@ class Splash extends React.Component{
     super(props)
   }
 
-  // handleScroll(){
-  //   let scrollPos =
+  handleScroll(){
 
-  // }
+    debugger
+    document.querySelectorAll()
+
+  }
 
   componentDidMount(){
     window.addEventListener('scroll', this.handleScroll)
@@ -49,11 +51,17 @@ class Splash extends React.Component{
 
         <div>
           <ul className="splash-header-list">
-            <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
-            <li><NavLink id="sleuth-item" activeClassName="active-link"  className={"link"} to="#main">Sleuth</NavLink></li>
-            <li><NavLink to="#intro" activeClassName="active-link" className={"link"} >Introduction</NavLink></li>
-            <li><NavLink to="#features" activeClassName="active-link" className={"link"} >Features</NavLink></li>
-            <li><NavLink to="#technologies" activeClassName="active-link" className={"link"} >Technologies</NavLink></li>
+            <li id="spy-icon"><a href="#main"><img src={Spy}></img></a></li>
+
+            <li><a id="sleuth-item" href="#main">Sleuth</a></li>
+            <li><a href="#intro" >Introduction</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#technologies">Technologies</a></li>
+
+            {/* <li><NavLink id="sleuth-item" to="#main"activeClassName="active-link">Sleuth</NavLink></li>
+            <li><NavLink to="#intro" activeClassName="active-link">Introduction</NavLink></li>
+            <li><NavLink to="#features" activeClassName="active-link">Features</NavLink></li>
+            <li><NavLink to="#technologies" activeClassName="active-link">Technologies</NavLink></li> */}
             {ourVar}
             {ourVariable}
           </ul>

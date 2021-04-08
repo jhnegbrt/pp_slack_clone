@@ -72,10 +72,14 @@ class SessionForm extends React.Component {
 
     if (this.props.formType === "signin"){
       sleuthDemo = (
-        <div>Enter With Sleuth Mode!
-          <h1>Use Sleuth Mode to chat anonymously or demo this application</h1>
-          <button onClick={this.enterSleuthMode}>Enter as Sleuth!</button>
+        <div className="sleuth-form">
+          <div>Enter With Sleuth Mode!
+            <h1>Use Sleuth Mode to chat anonymously or demo this application</h1>
+            <button onClick={this.enterSleuthMode}>Enter as Sleuth!</button>
+          </div>
+
         </div>
+
       )
     }
 
@@ -94,9 +98,9 @@ class SessionForm extends React.Component {
         {this.renderSwitchButton()}
         {this.renderErrors()}
       </div>
-        <div className="sleuth-form"> 
+
           {sleuthDemo}
-        </div>
+ 
       </div>
 
     )
