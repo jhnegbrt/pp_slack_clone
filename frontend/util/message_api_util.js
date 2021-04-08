@@ -17,3 +17,17 @@ export const updateMessage = (message) =>{
     })
   )
 }
+
+export const deleteMessage = (messageId) =>(
+  $.ajax({
+    method: 'DELETE',
+    url: `api/messages/${messageId}`
+  })
+)
+
+export const fetchMessages = () => (
+  $.ajax({
+    method: 'GET',
+    url: 'api/messages'
+  })
+)

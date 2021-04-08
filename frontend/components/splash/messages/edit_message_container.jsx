@@ -13,6 +13,7 @@ class EditMessageForm extends React.Component{
 
     if (!message) return null;
     return(
+      
       <MessageForm submit={submit} message={message} ></MessageForm>
 
     );

@@ -107,62 +107,9 @@ function _setPrototypeOf(o, p) {
 /*!*********************************************!*\
   !*** ./frontend/actions/message_actions.js ***!
   \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RECEIVE_MESSAGE": () => (/* binding */ RECEIVE_MESSAGE),
-/* harmony export */   "REMOVE_MESSAGE": () => (/* binding */ REMOVE_MESSAGE),
-/* harmony export */   "RECEIVE_MESSAGE_ERRORS": () => (/* binding */ RECEIVE_MESSAGE_ERRORS),
-/* harmony export */   "createMessage": () => (/* binding */ createMessage),
-/* harmony export */   "updateMessage": () => (/* binding */ updateMessage)
-/* harmony export */ });
-/* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/message_api_util */ "./frontend/util/message_api_util.js");
-
-var RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
-var REMOVE_MESSAGE = "REMOVE_MESSAGE";
-var RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS";
-
-var receiveErrors = function receiveErrors(errors) {
-  return {
-    type: RECEIVE_SESSION_ERRORS,
-    errors: errors
-  };
-};
-
-var receiveMessage = function receiveMessage(message) {
-  return {
-    type: RECEIVE_MESSAGE,
-    message: message
-  };
-};
-
-var deleteMessage = function deleteMessage(messageId) {
-  return {
-    type: REMOVE_MESSAGE,
-    messageId: messageId
-  };
-};
-
-var createMessage = function createMessage(formMessage) {
-  return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createMessage(formMessage).then(function (message) {
-      return dispatch(receiveMessage(message));
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
-  };
-};
-var updateMessage = function updateMessage(formMessage) {
-  return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.updateMessage(formMessage).then(function (message) {
-      return dispatch(receiveMessage(message));
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors));
-    });
-  };
-};
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jhnegbrt/appacademy/slack_clone/frontend/actions/message_actions.js: Unexpected keyword 'export' (27:0)\n\n\u001b[0m \u001b[90m 25 |\u001b[39m \u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m \u001b[0m\n\u001b[0m \u001b[90m 26 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m \u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m createMessage \u001b[33m=\u001b[39m formMessage \u001b[33m=>\u001b[39m dispatch \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 28 |\u001b[39m   \u001b[36mreturn\u001b[39m(\u001b[0m\n\u001b[0m \u001b[90m 29 |\u001b[39m     \u001b[33mAPIUtil\u001b[39m\u001b[33m.\u001b[39mcreateMessage(formMessage)\u001b[0m\n\u001b[0m \u001b[90m 30 |\u001b[39m       \u001b[33m.\u001b[39mthen(message \u001b[33m=>\u001b[39m dispatch(receiveMessage(message)))\u001b[0m\n    at Object._raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:775:17)\n    at Object.raiseWithData (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:768:17)\n    at Object.raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:736:17)\n    at Object.checkReservedWord (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11917:12)\n    at Object.parseIdentifierName (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11886:12)\n    at Object.parseIdentifier (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11853:23)\n    at Object.parseBindingAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10146:17)\n    at Object.parseVarId (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:12918:20)\n    at Object.parseVar (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:12894:12)\n    at Object.parseVarStatement (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:12711:10)");
 
 /***/ }),
 
@@ -1319,39 +1266,6 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
-
-/***/ }),
-
-/***/ "./frontend/util/message_api_util.js":
-/*!*******************************************!*\
-  !*** ./frontend/util/message_api_util.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createMessage": () => (/* binding */ createMessage),
-/* harmony export */   "updateMessage": () => (/* binding */ updateMessage)
-/* harmony export */ });
-var createMessage = function createMessage(message) {
-  return $.ajax({
-    method: 'POST',
-    url: 'api/messages',
-    data: {
-      message: message
-    }
-  });
-};
-var updateMessage = function updateMessage(message) {
-  return $.ajax({
-    method: 'PATCH',
-    url: "api/messages/".concat(message.id),
-    data: {
-      message: message
-    }
-  });
-};
 
 /***/ }),
 
