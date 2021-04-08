@@ -1,7 +1,6 @@
-import React from 'react'
 import MessageForm from './message_form'
 import {connect} from 'react-redux'
-import { createMEssage } from '../../actions/message_actions'
+import { createMessage } from '../../actions/message_actions'
 
 const mSTP = (store) => ({
   post: {
