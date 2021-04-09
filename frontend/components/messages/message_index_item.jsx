@@ -20,7 +20,7 @@ class MessageIndexItem extends React.Component{
 
   render(){
 
-    debugger
+    // debugger
     
     const edit = (
       <li>

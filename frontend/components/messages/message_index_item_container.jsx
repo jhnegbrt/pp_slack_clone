@@ -4,7 +4,7 @@ import MessageIndexItem from './message_index_item'
 
 
 const mSTP = state =>{
-  debugger
+  // debugger
   return({
     currentUserId: state.session.id
   })

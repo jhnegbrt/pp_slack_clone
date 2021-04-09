@@ -11,7 +11,7 @@ class MessageForm extends React.Component{
   }
 
   handleSubmit(e){
-    debugger
+    // debugger
     e.preventDefault()
     this.props.submit(this.state)
     if (this.props.formType === "Send"){
