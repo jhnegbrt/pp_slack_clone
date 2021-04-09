@@ -20,20 +20,28 @@ class MessageIndexItem extends React.Component{
 
   render(){
 
+    debugger
+    
     const edit = (
       <li>
         <EditMessageFormContainer toggleEdit={this.toggleEdit} id={this.props.message.id}></EditMessageFormContainer>
       </li>
-      
+    )
+
+    const buttons = (
+      <div>
+        <button onClick={this.toggleEdit}>Edit Message</button>
+        <button onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete</button>
+      </div>
     )
 
     const display = (
       <li>
         <Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link>
-        <button onClick={this.toggleEdit}>Edit Message</button>
-        <button onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete</button>
+        {this.props.message.sender_id === this.props.currentUserId ? buttons : null }
       </li>
     )
+
     return (
       this.state.edit ? edit : display 
     )

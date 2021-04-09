@@ -620,7 +620,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _message_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item */ "./frontend/components/messages/message_index_item.jsx");
+/* harmony import */ var _message_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item_container */ "./frontend/components/messages/message_index_item_container.jsx");
 /* harmony import */ var _create_message_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_message_form_container */ "./frontend/components/messages/create_message_form_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -671,7 +671,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           messages = _this$props.messages,
           deleteMessage = _this$props.deleteMessage;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, messages.map(function (message) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           message: message,
           deleteMessage: deleteMessage,
           key: message.id
@@ -796,19 +796,21 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      debugger;
       var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         toggleEdit: this.toggleEdit,
         id: this.props.message.id
       }));
-      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-        to: "/messages/".concat(this.props.message.id)
-      }, this.props.message.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      var buttons = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.toggleEdit
       }, "Edit Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: function onClick() {
           return _this2.props.deleteMessage(_this2.props.message.id);
         }
       }, "Delete"));
+      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        to: "/messages/".concat(this.props.message.id)
+      }, this.props.message.content), this.props.message.sender_id === this.props.currentUserId ? buttons : null);
       return this.state.edit ? edit : display;
     }
   }]);
@@ -817,6 +819,35 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessageIndexItem);
+
+/***/ }),
+
+/***/ "./frontend/components/messages/message_index_item_container.jsx":
+/*!***********************************************************************!*\
+  !*** ./frontend/components/messages/message_index_item_container.jsx ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _message_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_index_item */ "./frontend/components/messages/message_index_item.jsx");
+
+
+
+
+var mSTP = function mSTP(state) {
+  debugger;
+  return {
+    currentUserId: state.session.id
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP)(_message_index_item__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 

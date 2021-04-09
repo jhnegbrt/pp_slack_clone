@@ -1,5 +1,5 @@
 import React from 'react'
-import MessageIndexItem from './message_index_item'
+import MessageIndexItemContainer from './message_index_item_container'
 import CreateMessageFormContainer from './create_message_form_container'
 
 class MessageIndex extends React.Component{
@@ -16,7 +16,7 @@ class MessageIndex extends React.Component{
         <ul>
           {
             messages.map(message =>(
-              <MessageIndexItem
+              <MessageIndexItemContainer
                 message={message}
                 deleteMessage={deleteMessage}
                 key={message.id}
