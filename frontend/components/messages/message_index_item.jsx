@@ -1,18 +1,41 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import EditMessageFormContainer from './edit_message_form_container'
 
 class MessageIndexItem extends React.Component{
   constructor(props){
     super(props)
+    this.state = ({
+      edit: false
+    })
+
+    this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  toggleEdit(){
+    this.setState({
+      edit: !this.state.edit
+    })
   }
 
   render(){
-    return (
+
+    const edit = (
+      <li>
+        <EditMessageFormContainer toggleEdit={this.toggleEdit} id={this.props.message.id}></EditMessageFormContainer>
+      </li>
+      
+    )
+
+    const display = (
       <li>
         <Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link>
-        <Link to={`/messages/${this.props.message.id}/edit`}>Edit</Link>
+        <button onClick={this.toggleEdit}>Edit Message</button>
         <button onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete</button>
       </li>
+    )
+    return (
+      this.state.edit ? edit : display 
     )
   }
 

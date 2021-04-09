@@ -463,7 +463,7 @@ var EditMessageForm = /*#__PURE__*/function (_React$Component) {
   _createClass(EditMessageForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchMessage(this.props.match.params.messageId);
+      this.props.fetchMessage(this.props.id);
     }
   }, {
     key: "render",
@@ -474,6 +474,7 @@ var EditMessageForm = /*#__PURE__*/function (_React$Component) {
           formType = _this$props.formType;
       if (!message) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_message_form__WEBPACK_IMPORTED_MODULE_0__.default, {
+        toggleEdit: this.props.toggleEdit,
         formType: formType,
         submit: submit,
         message: message
@@ -486,7 +487,7 @@ var EditMessageForm = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    message: state.messages[ownProps.match.params.messageId],
+    message: state.messages[ownProps.id],
     formType: "Edit Message"
   };
 };
@@ -563,6 +564,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      debugger;
       e.preventDefault();
       this.props.submit(this.state);
 
@@ -570,6 +572,8 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
         this.setState({
           content: ""
         });
+      } else {
+        this.props.toggleEdit();
       }
     }
   }, {
@@ -733,7 +737,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit_message_form_container */ "./frontend/components/messages/edit_message_form_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -759,31 +764,51 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndexItem, _React$Component);
 
   var _super = _createSuper(MessageIndexItem);
 
   function MessageIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, MessageIndexItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      edit: false
+    };
+    _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(MessageIndexItem, [{
+    key: "toggleEdit",
+    value: function toggleEdit() {
+      this.setState({
+        edit: !this.state.edit
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        toggleEdit: this.toggleEdit,
+        id: this.props.message.id
+      }));
+      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
-      }, this.props.message.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/messages/".concat(this.props.message.id, "/edit")
-      }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, this.props.message.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.toggleEdit
+      }, "Edit Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: function onClick() {
-          return _this.props.deleteMessage(_this.props.message.id);
+          return _this2.props.deleteMessage(_this2.props.message.id);
         }
       }, "Delete"));
+      return this.state.edit ? edit : display;
     }
   }]);
 

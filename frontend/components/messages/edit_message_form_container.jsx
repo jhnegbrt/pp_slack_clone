@@ -6,7 +6,7 @@ import React from 'react'
 class EditMessageForm extends React.Component{
   
   componentDidMount(){
-    this.props.fetchMessage(this.props.match.params.messageId)
+    this.props.fetchMessage(this.props.id)
   }
 
   render(){
@@ -14,14 +14,14 @@ class EditMessageForm extends React.Component{
 
     if (!message) return null;
     return(
-      <MessageForm formType={formType} submit={submit} message={message} ></MessageForm>
+      <MessageForm toggleEdit={this.props.toggleEdit} formType={formType} submit={submit} message={message} ></MessageForm>
 
     );
   }
 }
 
 const mSTP = (state, ownProps) => ({
-  message: state.messages[ownProps.match.params.messageId],
+  message: state.messages[ownProps.id],
   formType: "Edit Message"
 })
 

@@ -11,12 +11,15 @@ class MessageForm extends React.Component{
   }
 
   handleSubmit(e){
+    debugger
     e.preventDefault()
     this.props.submit(this.state)
     if (this.props.formType === "Send"){
       this.setState({
         content: ""
       })
+    } else {
+      this.props.toggleEdit()
     }
   }
 
