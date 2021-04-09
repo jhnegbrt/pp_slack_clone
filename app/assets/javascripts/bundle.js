@@ -386,12 +386,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mSTP = function mSTP(store) {
+var mSTP = function mSTP(state) {
   return {
     message: {
       content: ""
     },
-    formType: "Send"
+    formType: "Send",
+    senderId: state.session.id
   };
 };
 
@@ -555,7 +556,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = _this.props.message;
-    _this.state.sender_id = 1;
+    _this.state.sender_id = _this.props.senderId;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     return _this;
@@ -673,7 +674,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
           message: message,
           deleteMessage: deleteMessage,
-          key: postMessage.id
+          key: message.id
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
     }

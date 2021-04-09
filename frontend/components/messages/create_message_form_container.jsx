@@ -2,11 +2,12 @@ import MessageForm from './message_form'
 import {connect} from 'react-redux'
 import { createMessage } from '../../actions/message_actions'
 
-const mSTP = (store) => ({
+const mSTP = (state) => ({
   message: {
     content: ""
   },
-  formType: "Send"
+  formType: "Send",
+  senderId: state.session.id
 })
 
 const mDTP = (dispatch) => ({

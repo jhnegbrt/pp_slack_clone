@@ -4,7 +4,7 @@ class MessageForm extends React.Component{
   constructor(props){
     super(props)
     this.state = this.props.message
-    this.state.sender_id = 1
+    this.state.sender_id = this.props.senderId
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateContent = this.updateContent.bind(this)

@@ -19,7 +19,7 @@ class MessageIndex extends React.Component{
               <MessageIndexItem
                 message={message}
                 deleteMessage={deleteMessage}
-                key={postMessage.id}
+                key={message.id}
                 />
             ))
           }
