@@ -8,6 +8,7 @@ class MessageIndex extends React.Component{
   }
 
   render(){
+    debugger
     const { messages, deleteMessage } = this.props
 
     return(

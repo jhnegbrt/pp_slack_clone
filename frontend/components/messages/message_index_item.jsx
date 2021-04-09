@@ -1,12 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const MessageIndexItem = props => (
-  <li>
-    <Link to={`/messages/${props.message.id}`}>{props.message.content}</Link>
-    <Link to={`/messages/${props.message.id}/edit`}>Edit</Link>
-    <button onClick={() => props.deleteMessage(props.message.id)}>Delete</button>
-  </li>
-)
+class MessageIndexItem extends React.Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return (
+      <li>
+        <Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link>
+        <Link to={`/messages/${this.props.message.id}/edit`}>Edit</Link>
+        <button onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete</button>
+      </li>
+    )
+  }
+
+}
 
 export default MessageIndexItem

@@ -4,11 +4,12 @@ import {
 
 
 const MessagesReducer = (state = {}, action) => {
+  // debugger
   Object.freeze(state)
   
   switch (action.type){
     case RECEIVE_MESSAGE:
-      return {[action.message.id]: action.message.id}
+      return Object.assign({}, state, {[action.message.id]: action.message})
     case RECEIVE_ALL_MESSAGES:
       return Object.assign({}, state, action.messages)
     case REMOVE_MESSAGE:
