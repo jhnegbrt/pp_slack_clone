@@ -1,4 +1,4 @@
-import { connect } from 'react-router'
+import { connect } from 'react-redux'
 import MessageIndex from './message_index'
 import {deleteMessage, fetchMessages } from '../../actions/message_actions'
 

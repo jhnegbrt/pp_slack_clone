@@ -449,14 +449,16 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = _this.props.message;
+    _this.state.sender_id = 1;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.updateConte;
+    _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(MessageForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      // debugger
       e.preventDefault();
       this.props.submit(this.state);
     }
@@ -581,9 +583,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
 
 
 
@@ -597,15 +599,15 @@ var mSTP = function mSTP(state) {
 var mDTP = function mDTP(dispatch) {
   return {
     fetchMessages: function fetchMessages() {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__.fetchMessages)());
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.fetchMessages)());
     },
     deleteMessage: function deleteMessage(messageId) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__.deleteMessage)(messageId));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.deleteMessage)(messageId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router__WEBPACK_IMPORTED_MODULE_2__.connect)(mSTP, mDTP)(_message_index__WEBPACK_IMPORTED_MODULE_0__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_message_index__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -1488,10 +1490,10 @@ var MessagesReducer = function MessagesReducer() {
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
       return _defineProperty({}, action.message.id, action.message.id);
 
-    case RECEIVE_ALL_POSTS:
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_MESSAGES:
       return Object.assign({}, state, action.messages);
 
-    case REMOVE_POST:
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_POST:
       var nextState = Object.assign({}, state);
       delete nextState[action.messageId];
       return nextState;

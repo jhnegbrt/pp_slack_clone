@@ -9,9 +9,11 @@ class Api::MessagesController < ApplicationController
   end
 
   def create
+    # debugger
     @message = Message.new(message_params)
 
     if @message.save
+      # render 'api/messages/show'
       render :show
     else
       render json: @message.errors.full_messages, status: 422

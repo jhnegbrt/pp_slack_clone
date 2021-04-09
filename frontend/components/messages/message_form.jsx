@@ -4,12 +4,14 @@ class MessageForm extends React.Component{
   constructor(props){
     super(props)
     this.state = this.props.message
+    this.state.sender_id = 1
 
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.updateConte
+    this.updateContent = this.updateContent.bind(this)
   }
 
   handleSubmit(e){
+    // debugger
     e.preventDefault()
     this.props.submit(this.state)
   }
