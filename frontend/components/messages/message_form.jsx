@@ -11,12 +11,13 @@ class MessageForm extends React.Component{
   }
 
   handleSubmit(e){
-    // debugger
     e.preventDefault()
     this.props.submit(this.state)
-    this.setState({
-      content: ""
-    })
+    if (this.props.formType === "Send"){
+      this.setState({
+        content: ""
+      })
+    }
   }
 
   updateContent(e){
@@ -29,7 +30,7 @@ class MessageForm extends React.Component{
     return(
       <form onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} type="text" placeholder="SEND MESSAGE" value={this.state.content}></input>
-        <input type="submit" value="SEND"></input>
+        <input type="submit" value={this.props.formType}></input>
       </form>
     )
   }

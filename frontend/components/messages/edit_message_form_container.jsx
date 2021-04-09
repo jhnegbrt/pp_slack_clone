@@ -1,6 +1,7 @@
 import MessageForm from './message_form'
 import { connect } from 'react-redux'
 import { fetchMessage, updateMessage } from '../../actions/message_actions'
+import React from 'react'
 
 class EditMessageForm extends React.Component{
   
@@ -9,18 +10,19 @@ class EditMessageForm extends React.Component{
   }
 
   render(){
-    const { submit, message } = this.props
+    const { submit, message, formType } = this.props
 
     if (!message) return null;
     return(
-      <MessageForm submit={submit} message={message} ></MessageForm>
+      <MessageForm formType={formType} submit={submit} message={message} ></MessageForm>
 
     );
   }
 }
 
-const mSTP = (state) => ({
-  message: state.messages[ownProps.match.params.messageId]
+const mSTP = (state, ownProps) => ({
+  message: state.messages[ownProps.match.params.messageId],
+  formType: "Edit Message"
 })
 
 const mDTP = (dispatch) => ({

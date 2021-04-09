@@ -303,12 +303,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./splash/splash_container */ "./frontend/components/splash/splash_container.jsx");
 /* harmony import */ var _components_session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _components_session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _components_messages_message_index_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/messages/message_index_container */ "./frontend/components/messages/message_index_container.jsx");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+/* harmony import */ var _components_messages_edit_message_form_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/messages/edit_message_form_container */ "./frontend/components/messages/edit_message_form_container.jsx");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+
 
 
 
@@ -322,39 +324,42 @@ var NotFoundPage = function NotFoundPage() {
 };
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/intro",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/main",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/features",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/technologies",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
-    path: "/client",
+    path: "/messages",
     component: _components_messages_message_index_container__WEBPACK_IMPORTED_MODULE_4__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+    path: "/messages/:messageId/edit",
+    component: _components_messages_edit_message_form_container__WEBPACK_IMPORTED_MODULE_5__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     exact: true,
     path: "/login",
     component: _components_session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     exact: true,
     path: "/signup",
     component: _components_session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_3__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     component: NotFoundPage
   }));
 };
@@ -385,7 +390,8 @@ var mSTP = function mSTP(store) {
   return {
     message: {
       content: ""
-    }
+    },
+    formType: "Send"
   };
 };
 
@@ -398,6 +404,105 @@ var mDTP = function mDTP(dispatch) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_message_form__WEBPACK_IMPORTED_MODULE_0__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/messages/edit_message_form_container.jsx":
+/*!**********************************************************************!*\
+  !*** ./frontend/components/messages/edit_message_form_container.jsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var EditMessageForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(EditMessageForm, _React$Component);
+
+  var _super = _createSuper(EditMessageForm);
+
+  function EditMessageForm() {
+    _classCallCheck(this, EditMessageForm);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(EditMessageForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchMessage(this.props.match.params.messageId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          submit = _this$props.submit,
+          message = _this$props.message,
+          formType = _this$props.formType;
+      if (!message) return null;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_message_form__WEBPACK_IMPORTED_MODULE_0__.default, {
+        formType: formType,
+        submit: submit,
+        message: message
+      });
+    }
+  }]);
+
+  return EditMessageForm;
+}(react__WEBPACK_IMPORTED_MODULE_3__.Component);
+
+var mSTP = function mSTP(state, ownProps) {
+  return {
+    message: state.messages[ownProps.match.params.messageId],
+    formType: "Edit Message"
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    submit: function submit(message) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.updateMessage)(message));
+    },
+    fetchMessage: function fetchMessage(messageId) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.fetchMessage)(messageId));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(EditMessageForm));
 
 /***/ }),
 
@@ -458,12 +563,14 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      // debugger
       e.preventDefault();
       this.props.submit(this.state);
-      this.setState({
-        content: ""
-      });
+
+      if (this.props.formType === "Send") {
+        this.setState({
+          content: ""
+        });
+      }
     }
   }, {
     key: "updateContent",
@@ -484,7 +591,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
         value: this.state.content
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
-        value: "SEND"
+        value: this.props.formType
       }));
     }
   }]);
@@ -555,7 +662,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       var _this$props = this.props,
           messages = _this$props.messages,
           deleteMessage = _this$props.deleteMessage;
