@@ -461,6 +461,9 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       // debugger
       e.preventDefault();
       this.props.submit(this.state);
+      this.setState({
+        content: ""
+      });
     }
   }, {
     key: "updateContent",
