@@ -169,45 +169,40 @@ var fetchMessage = function fetchMessage(messageId) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(messageId).then(function (message) {
       return dispatch(receiveMessage(message));
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
   };
 };
 var fetchMessages = function fetchMessages() {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessages().then(function (messages) {
       return dispatch(receiveAllMessages(messages));
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
   };
 };
 var deleteMessage = function deleteMessage(messageId) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(messageId).then(function () {
       return dispatch(removeMessage(messageId));
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
   };
 };
 var createMessage = function createMessage(formMessage) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createMessage(formMessage).then(function (message) {
       return dispatch(receiveMessage(message));
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
   };
 };
 var updateMessage = function updateMessage(formMessage) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.updateMessage(formMessage).then(function (message) {
       return dispatch(receiveMessage(message));
-    }).fail(function (errors) {
-      return dispatch(receiveErrors(errors));
-    });
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
   };
 };
 
@@ -1449,6 +1444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -1493,7 +1489,7 @@ var MessagesReducer = function MessagesReducer() {
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_MESSAGES:
       return Object.assign({}, state, action.messages);
 
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_POST:
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
       var nextState = Object.assign({}, state);
       delete nextState[action.messageId];
       return nextState;

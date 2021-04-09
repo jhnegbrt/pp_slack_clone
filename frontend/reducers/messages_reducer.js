@@ -1,5 +1,5 @@
 import {
-  RECEIVE_MESSAGE, REMOVE_POST, RECEIVE_ALL_MESSAGES
+  RECEIVE_MESSAGE, REMOVE_MESSAGE, RECEIVE_ALL_MESSAGES
 } from '../actions/message_actions'
 
 
@@ -11,7 +11,7 @@ const MessagesReducer = (state = {}, action) => {
       return {[action.message.id]: action.message.id}
     case RECEIVE_ALL_MESSAGES:
       return Object.assign({}, state, action.messages)
-    case REMOVE_POST:
+    case REMOVE_MESSAGE:
       let nextState = Object.assign({}, state)
       delete nextState[action.messageId]
       return nextState;
