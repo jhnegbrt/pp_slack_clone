@@ -117,6 +117,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_MESSAGE_ERRORS": () => (/* binding */ RECEIVE_MESSAGE_ERRORS),
 /* harmony export */   "RECEIVE_ALL_MESSAGES": () => (/* binding */ RECEIVE_ALL_MESSAGES),
 /* harmony export */   "CLEAR_MESSAGE_ERRORS": () => (/* binding */ CLEAR_MESSAGE_ERRORS),
+/* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
 /* harmony export */   "fetchMessages": () => (/* binding */ fetchMessages),
 /* harmony export */   "deleteMessage": () => (/* binding */ deleteMessage),
@@ -152,6 +153,7 @@ var receiveAllMessages = function receiveAllMessages(messages) {
 };
 
 var receiveMessage = function receiveMessage(message) {
+  debugger;
   return {
     type: RECEIVE_MESSAGE,
     message: message
@@ -303,15 +305,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./splash/splash_container */ "./frontend/components/splash/splash_container.jsx");
 /* harmony import */ var _components_session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _components_session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _components_messages_message_index_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/messages/message_index_container */ "./frontend/components/messages/message_index_container.jsx");
 /* harmony import */ var _components_messages_edit_message_form_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/messages/edit_message_form_container */ "./frontend/components/messages/edit_message_form_container.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './client/chat_room'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-
 
 
 
@@ -326,35 +326,31 @@ var NotFoundPage = function NotFoundPage() {
 };
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/intro",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/main",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/features",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/technologies",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
-    exact: true,
-    path: "/client",
-    component: Object(function webpackMissingModule() { var e = new Error("Cannot find module './client/chat_room'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     exact: true,
     path: "/messages",
     component: _components_messages_message_index_container__WEBPACK_IMPORTED_MODULE_4__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     path: "/messages/:messageId/edit",
     component: _components_messages_edit_message_form_container__WEBPACK_IMPORTED_MODULE_5__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
@@ -365,7 +361,7 @@ var App = function App() {
     exact: true,
     path: "/signup",
     component: _components_session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_3__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
     component: NotFoundPage
   }));
 };
@@ -566,23 +562,31 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // action cable handleSubmit
+
 
   _createClass(MessageForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      // debugger
       e.preventDefault();
-      this.props.submit(this.state);
+      App.cable.subscriptions.subscriptions[0].speak({
+        message: this.state
+      });
+      this.setState({
+        content: ""
+      });
+    } // handleSubmit(e){
+    //   e.preventDefault()
+    //   this.props.submit(this.state)
+    //   if (this.props.formType === "Send"){
+    //     this.setState({
+    //       content: ""
+    //     })
+    //   } else {
+    //     this.props.toggleEdit()
+    //   }
+    // }
 
-      if (this.props.formType === "Send") {
-        this.setState({
-          content: ""
-        });
-      } else {
-        this.props.toggleEdit();
-      }
-    }
   }, {
     key: "updateContent",
     value: function updateContent(e) {
@@ -628,6 +632,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _message_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item_container */ "./frontend/components/messages/message_index_item_container.jsx");
 /* harmony import */ var _create_message_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_message_form_container */ "./frontend/components/messages/create_message_form_container.jsx");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -654,28 +659,46 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndex, _React$Component);
 
   var _super = _createSuper(MessageIndex);
 
-  function MessageIndex() {
+  // componentDidMount(){
+  //   this.props.fetchMessages()
+  // }
+  function MessageIndex(props) {
     _classCallCheck(this, MessageIndex);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchMessages();
-    }
+      App.cable.subscriptions.create({
+        channel: "ChatChannel"
+      }, {
+        // received: message => {
+        //   this.props.receiveMessage(message)
+        // },
+        speak: function speak(message) {
+          return this.perform("speak", message);
+        }
+      });
+    } // componentDidUpdate() {
+    //   this.bottom.current.scrollIntoView();
+    // }
+
   }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           messages = _this$props.messages,
           deleteMessage = _this$props.deleteMessage;
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           message: message,
@@ -719,6 +742,9 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
+    receiveMessage: function receiveMessage(message) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveMessage)(message));
+    },
     fetchMessages: function fetchMessages() {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.fetchMessages)());
     },

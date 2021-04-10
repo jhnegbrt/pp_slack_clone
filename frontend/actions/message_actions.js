@@ -25,10 +25,14 @@ const receiveAllMessages = (messages) => ({
   messages
 })  
 
-const receiveMessage  = (message) => ({
-  type: RECEIVE_MESSAGE,
-  message
-})
+export const receiveMessage  = (message) => {
+  debugger
+  return({  
+    type: RECEIVE_MESSAGE,
+    message
+  })
+
+}
 
 const removeMessage = (messageId) => ({
   type: REMOVE_MESSAGE,

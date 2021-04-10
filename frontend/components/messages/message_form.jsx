@@ -10,18 +10,27 @@ class MessageForm extends React.Component{
     this.updateContent = this.updateContent.bind(this)
   }
 
+  // action cable handleSubmit
   handleSubmit(e){
-    // debugger
     e.preventDefault()
-    this.props.submit(this.state)
-    if (this.props.formType === "Send"){
-      this.setState({
-        content: ""
-      })
-    } else {
-      this.props.toggleEdit()
-    }
+    App.cable.subscriptions.subscriptions[0].speak({ message: this.state})
+    this.setState({
+      content: ""
+    })
   }
+
+
+  // handleSubmit(e){
+  //   e.preventDefault()
+  //   this.props.submit(this.state)
+  //   if (this.props.formType === "Send"){
+  //     this.setState({
+  //       content: ""
+  //     })
+  //   } else {
+  //     this.props.toggleEdit()
+  //   }
+  // }
 
   updateContent(e){
     this.setState({
