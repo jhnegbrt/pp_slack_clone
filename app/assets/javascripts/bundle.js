@@ -153,7 +153,6 @@ var receiveAllMessages = function receiveAllMessages(messages) {
 };
 
 var receiveMessage = function receiveMessage(message) {
-  debugger;
   return {
     type: RECEIVE_MESSAGE,
     message: message
@@ -677,13 +676,15 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this = this;
+
       this.props.fetchMessages();
       App.cable.subscriptions.create({
         channel: "ChatChannel"
       }, {
-        // received: message => {
-        //   this.props.receiveMessage(message)
-        // },
+        received: function received(message) {
+          _this.props.receiveMessage(message);
+        },
         speak: function speak(message) {
           return this.perform("speak", message);
         }
@@ -698,7 +699,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           messages = _this$props.messages,
           deleteMessage = _this$props.deleteMessage;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           message: message,
