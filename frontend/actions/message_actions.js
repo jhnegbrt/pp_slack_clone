@@ -20,9 +20,9 @@ const clearMessageErrors = () => {
   })
 }
 
-const receiveAllMessages = (messages) => ({
+export const receiveAllMessages = (data) => ({
   type: RECEIVE_ALL_MESSAGES,
-  messages
+  messages: data.messages
 })  
 
 export const receiveMessage = (message) => {

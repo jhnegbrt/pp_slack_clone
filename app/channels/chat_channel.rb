@@ -2,10 +2,24 @@ class ChatChannel < ApplicationCable::Channel
 
   def subscribed
     stream_for 'chat_channel'
+    self.load
+  end
+
+  def load
+    messages = Message.all
+    messages_hash = {}
+    messages.each do |m|
+      messages_hash[m.id] = m.as_json
+    end
+    socket = {
+      type: "messages",
+      messages: messages_hash
+    }
+    ChatChannel.broadcast_to('chat_channel', socket)
   end
 
   def speak(data)
-
+    # self.load
     new_message = Message.create(content: data['message']['content'], sender_id: data['message']['sender_id'])
     socket = {
       type: "message",
@@ -30,7 +44,6 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def remove_message(data)
-    # debugger
     message = Message.find_by(id: data['message'])
     message.delete
     socket = {
