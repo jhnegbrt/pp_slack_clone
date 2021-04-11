@@ -118,6 +118,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_ALL_MESSAGES": () => (/* binding */ RECEIVE_ALL_MESSAGES),
 /* harmony export */   "CLEAR_MESSAGE_ERRORS": () => (/* binding */ CLEAR_MESSAGE_ERRORS),
 /* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
+/* harmony export */   "removeMessage": () => (/* binding */ removeMessage),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
 /* harmony export */   "fetchMessages": () => (/* binding */ fetchMessages),
 /* harmony export */   "deleteMessage": () => (/* binding */ deleteMessage),
@@ -158,14 +159,13 @@ var receiveMessage = function receiveMessage(message) {
     message: message
   };
 };
-
 var removeMessage = function removeMessage(messageId) {
+  // debugger
   return {
     type: REMOVE_MESSAGE,
     messageId: messageId
   };
 };
-
 var fetchMessage = function fetchMessage(messageId) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(messageId).then(function (message) {
@@ -567,7 +567,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      debugger;
       e.preventDefault();
       App.cable.subscriptions.subscriptions[0].speak({
         message: this.state
@@ -667,13 +666,10 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(MessageIndex);
 
-  // componentDidMount(){
-  //   this.props.fetchMessages()
-  // }
   function MessageIndex(props) {
     _classCallCheck(this, MessageIndex);
 
-    return _super.call(this, props);
+    return _super.call(this, props); // this.props.deleteMessage = this.props.deleteMessage.bind(this)
   }
 
   _createClass(MessageIndex, [{
@@ -685,17 +681,24 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       App.cable.subscriptions.create({
         channel: "ChatChannel"
       }, {
-        received: function received(message) {
-          _this.props.receiveMessage(message);
+        received: function received(data) {
+          switch (data.type) {
+            case "message":
+              _this.props.receiveMessage(data);
+
+            case "delete":
+              _this.props.removeMessage(data['message_id']);
+
+          }
         },
         speak: function speak(message) {
           return this.perform("speak", message);
+        },
+        remove_message: function remove_message(data) {
+          return this.perform("remove_message", data);
         }
       });
-    } // componentDidUpdate() {
-    //   this.bottom.current.scrollIntoView();
-    // }
-
+    }
   }, {
     key: "render",
     value: function render() {
@@ -704,8 +707,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           deleteMessage = _this$props.deleteMessage;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-          message: message,
-          deleteMessage: deleteMessage,
+          message: message // deleteMessage={deleteMessage}
+          ,
           key: message.id
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
@@ -751,8 +754,8 @@ var mDTP = function mDTP(dispatch) {
     fetchMessages: function fetchMessages() {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.fetchMessages)());
     },
-    deleteMessage: function deleteMessage(messageId) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.deleteMessage)(messageId));
+    removeMessage: function removeMessage(messageId) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.removeMessage)(messageId));
     }
   };
 };
@@ -839,7 +842,9 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         onClick: this.toggleEdit
       }, "Edit Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: function onClick() {
-          return _this2.props.deleteMessage(_this2.props.message.id);
+          return App.cable.subscriptions.subscriptions[0].remove_message({
+            message: _this2.props.message.id
+          });
         }
       }, "Delete"));
       var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {

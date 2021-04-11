@@ -4,33 +4,39 @@ import CreateMessageFormContainer from './create_message_form_container'
 
 
 class MessageIndex extends React.Component{
-  // componentDidMount(){
-  //   this.props.fetchMessages()
-  // }
+
   constructor(props){
     super(props)
 
+    // this.props.deleteMessage = this.props.deleteMessage.bind(this)
+
   }
 
-
+  
   componentDidMount() {
     this.props.fetchMessages()
     App.cable.subscriptions.create(
       { channel: "ChatChannel" },
       {
-        received: message => {
-          this.props.receiveMessage(message)
+        received: data => {
+          switch (data.type){
+            case "message":
+              this.props.receiveMessage(data)
+            case "delete":
+              this.props.removeMessage(data['message_id'])
+          }
+        
         },
         speak: function(message) {
           return this.perform("speak", message);
+        },
+        remove_message: function(data){
+          return this.perform("remove_message", data)
         }
       }
     );
   }
 
-  // componentDidUpdate() {
-  //   this.bottom.current.scrollIntoView();
-  // }
 
   render(){
     
@@ -43,7 +49,7 @@ class MessageIndex extends React.Component{
             messages.map(message =>(
               <MessageIndexItemContainer
                 message={message}
-                deleteMessage={deleteMessage}
+                // deleteMessage={deleteMessage}
                 key={message.id}
                 />
             ))

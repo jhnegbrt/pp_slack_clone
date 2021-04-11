@@ -25,7 +25,7 @@ const receiveAllMessages = (messages) => ({
   messages
 })  
 
-export const receiveMessage  = (message) => {
+export const receiveMessage = (message) => {
   return({  
     type: RECEIVE_MESSAGE,
     message
@@ -33,10 +33,13 @@ export const receiveMessage  = (message) => {
 
 }
 
-const removeMessage = (messageId) => ({
-  type: REMOVE_MESSAGE,
-  messageId
-})
+export const removeMessage = (messageId) => {
+  // debugger
+  return({
+    type: REMOVE_MESSAGE,
+    messageId
+  })
+}
 
 export const fetchMessage = (messageId) => dispatch => (
   APIUtil.fetchMessage(messageId)

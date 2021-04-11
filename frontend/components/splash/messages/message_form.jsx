@@ -6,7 +6,7 @@ class MessageForm extends React.Component{
     this.state = this.props.message
 
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.updateConte
+    this.updateContent
   }
 
   handleSubmit(e){

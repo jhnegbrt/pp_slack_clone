@@ -29,9 +29,11 @@ class MessageIndexItem extends React.Component{
     const buttons = (
       <div>
         <button onClick={this.toggleEdit}>Edit Message</button>
-        <button onClick={() => this.props.deleteMessage(this.props.message.id)}>Delete</button>
+        <button onClick={() => App.cable.subscriptions.subscriptions[0].remove_message({ message: this.props.message.id})}>Delete</button>
       </div>
     )
+
+    
 
     const display = (
       <li>
