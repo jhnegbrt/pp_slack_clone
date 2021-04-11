@@ -720,14 +720,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessageIndex);
 
   function MessageIndex(props) {
-    var _this;
-
     _classCallCheck(this, MessageIndex);
 
-    _this = _super.call(this, props); // this.props.deleteMessage = this.props.deleteMessage.bind(this)
-
-    _this.loadChat = _this.loadChat.bind(_assertThisInitialized(_this));
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(MessageIndex, [{

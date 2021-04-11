@@ -9,9 +9,6 @@ class MessageIndex extends React.Component{
   constructor(props){
     super(props)
 
-    // this.props.deleteMessage = this.props.deleteMessage.bind(this)
-    this.loadChat = this.loadChat.bind(this)
-
   }
 
 
