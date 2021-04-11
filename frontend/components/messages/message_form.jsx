@@ -12,11 +12,15 @@ class MessageForm extends React.Component{
 
   // action cable handleSubmit
   handleSubmit(e){
+    debugger
     e.preventDefault()
     App.cable.subscriptions.subscriptions[0].speak({ message: this.state})
     this.setState({
       content: ""
     })
+    if (this.props.formType === "Edit Message"){
+      this.props.toggleEdit();
+    }
   }
 
 

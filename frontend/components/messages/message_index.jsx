@@ -1,7 +1,7 @@
 import React from 'react'
 import MessageIndexItemContainer from './message_index_item_container'
 import CreateMessageFormContainer from './create_message_form_container'
-import { receiveMessage } from '../../actions/message_actions'
+
 
 class MessageIndex extends React.Component{
   // componentDidMount(){
