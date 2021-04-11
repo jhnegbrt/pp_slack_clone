@@ -30,6 +30,9 @@ class MessageIndex extends React.Component{
         speak: function(message) {
           return this.perform("speak", message);
         },
+        update: function(message){
+          return this.perform("update_message", message)
+        },
         remove_message: function(data){
           return this.perform("remove_message", data)
         }

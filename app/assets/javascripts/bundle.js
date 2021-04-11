@@ -568,15 +568,19 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      App.cable.subscriptions.subscriptions[0].speak({
-        message: this.state
-      });
-      this.setState({
-        content: ""
-      });
 
       if (this.props.formType === "Edit Message") {
+        App.cable.subscriptions.subscriptions[0].update({
+          message: this.state
+        });
         this.props.toggleEdit();
+      } else {
+        App.cable.subscriptions.subscriptions[0].speak({
+          message: this.state
+        });
+        this.setState({
+          content: ""
+        });
       }
     } // handleSubmit(e){
     //   e.preventDefault()
@@ -693,6 +697,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         },
         speak: function speak(message) {
           return this.perform("speak", message);
+        },
+        update: function update(message) {
+          return this.perform("update_message", message);
         },
         remove_message: function remove_message(data) {
           return this.perform("remove_message", data);
