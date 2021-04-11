@@ -12,6 +12,8 @@
   display: flex;
   align-items: center;
   font-family: 'Comfortaa', cursive;
+  font-size: 3vh;
+  font-weight: bold;
   width: 100%;
 }
 
@@ -30,11 +32,12 @@
 .splash-header-list li span{
   cursor: pointer;
   text-decoration: none;
-
+  color: rgb(40, 27, 128)
 }
 
 .splash-header-list, #main{
-  background-color: wheat;
+  background-color: rgb(241, 238, 232);
+  // background-color: white
 }
 
 #spy-icon{
@@ -47,7 +50,7 @@
 }
 
 #spy-icon:hover + li > a{
-  color: firebrick;
+  color: rgba(178, 34, 34, 0.658);
   text-decoration: underline;
   font-weight: bold;
 
@@ -56,7 +59,7 @@
 .active-link,
 .splash-header-list li span:hover,
 .splash-header-list li a:hover{
-  color: firebrick;
+  color: rgba(178, 34, 34, 0.658);
   text-decoration: underline;
   font-weight: bold;
 
@@ -125,11 +128,11 @@
 
 .main-left h2{
   font-family: 'Playfair Display', serif;
-  font-size: 3vh;
-  margin-left: 6vw;
+  font-size: 4vh;
+  margin-left: 5vw;
   margin-top: 2vh;
-  margin-right: 6vw;
-  line-height: 5vh;
+  margin-right: 5vw;
+  line-height: 6vh;
   background-color: whitesmoke;
   padding: 1vh;
   border-radius: 10px;
@@ -139,8 +142,8 @@
 
 .splash-spy{
   margin-right: 10vw;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin-top: 15vh;
+  margin-bottom: 15vh;
   border: 1px solid black;
   border-radius: 25px;
   height: 50vh;
@@ -148,12 +151,13 @@
   background-position-y: bottom;
   background-position-x: center;
   background-size:cover;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 19px 38px, rgba(0, 0, 0, 0.35) 0px 15px 12px;
 }
 
 //introduction styling
 
 #intro{
-  background-color: firebrick;
+  background-color: rgb(40, 41, 95);
   padding: 8vh;
   padding-right: 40vh;
   padding-left: 40vh;
@@ -219,6 +223,7 @@
   color: whitesmoke;
  
 }
+
 
 .selected-tech{
   background-color: whitesmoke;

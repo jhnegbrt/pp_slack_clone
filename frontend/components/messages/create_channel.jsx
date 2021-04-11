@@ -1,8 +1,8 @@
 
-export default function createChannel(receive, receiveAll, remove){
+export default function createChannel(thread, receive, receiveAll, remove){
 
   App.cable.subscriptions.create(
-    { channel: "ChatChannel" },
+    { channel: "ChatChannel", thread: thread },
     {
       received: data => {
         switch (data.type){

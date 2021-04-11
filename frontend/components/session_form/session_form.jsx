@@ -99,7 +99,7 @@ class SessionForm extends React.Component {
         {this.renderErrors()}
       </div>
 
-          {sleuthDemo}
+        {sleuthDemo}
  
       </div>
 

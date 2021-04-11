@@ -11,13 +11,11 @@ class MessageIndex extends React.Component{
 
   }
 
-
   componentDidMount() {
 
-    createChannel(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+    createChannel(this.state.thread, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
 
   }
-
 
   render(){
     

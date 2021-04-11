@@ -1,7 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
-    stream_for 'chat_channel'
+    stream_for 'chat_channel#{params[:thread]}'
     self.load
   end
 
@@ -19,7 +19,6 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    # self.load
     new_message = Message.create(content: data['message']['content'], sender_id: data['message']['sender_id'])
     socket = {
       type: "message",
@@ -55,6 +54,3 @@ class ChatChannel < ApplicationCable::Channel
 
   def unsubscribed; end
 end
-
-
-# ['content'], sender_id: data['message']['sender_id']

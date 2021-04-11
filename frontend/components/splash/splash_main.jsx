@@ -5,9 +5,9 @@ function SplashMain(){
   return(
   <div id="main">
     <div className="main-left">
-      <h1>Sleuth: A chat-app featuring anonymous 'Sleuth' mode</h1>
+      <h1>Sleuth: messaging undercover</h1>
       <h2>Connect with your friends, family and co-workers through your personal
-        account, or as an anonymous <i>Sleuth</i> <NavLink to="#intro">(Learn More)</NavLink>
+        account, or as the anonymous <i>Sleuth</i> <NavLink to="#intro">(Learn More)</NavLink>
       </h2>
     </div>
     <div className="main-right">
