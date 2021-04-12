@@ -888,11 +888,9 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       time = time.slice(0, time.length - 6);
       var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.props.message.sender_id === this.props.currentUserId ? "thread-message-current" : "thread-message"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "name-time"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.message.sender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, time)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, this.props.message.sender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
-      }, this.props.message.content), this.props.message.sender_id === this.props.currentUserId ? buttons : null);
+      }, this.props.message.content)), this.props.message.sender_id === this.props.currentUserId ? buttons : null);
       return this.state.edit ? edit : display;
     }
   }]);

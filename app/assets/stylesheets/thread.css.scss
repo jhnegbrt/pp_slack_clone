@@ -6,8 +6,10 @@
   width: 30%;
   margin: 16vh auto;
   padding: 1vh 1vh;
-  border: 7px solid blue;
-  border-radius: 25px
+  border: 7px solid rgba(40, 41, 95, 0.856);
+  border-radius: 4px;
+  scrollbar-color: rgb(159, 240, 243) white;
+  scrollbar-width: thin;
 }
 
 
@@ -39,7 +41,11 @@
 }
 
 div::-webkit-scrollbar{
-  width: 5px
+  width: 7px
+}
+
+.name-time{
+  display: flex
 }
 
 .thread-message{
@@ -47,7 +53,7 @@ div::-webkit-scrollbar{
   border: 1px solid rgba(40, 41, 95, 0.856);
   margin-bottom: 1vh;
   background-color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 2vh;
 }
 
@@ -57,7 +63,7 @@ div::-webkit-scrollbar{
   border: 1px solid rgba(40, 41, 95, 0.856);
   margin-bottom: 1vh;
   background-color: rgb(207, 226, 233);
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 2vh;
 }
 
@@ -66,10 +72,25 @@ div::-webkit-scrollbar{
   text-decoration: none;
 }
 
+.thread-message-current span:first-child,
+.thread-message span:first-child{
+  font-weight: bold;
+  font-size: 3vh;
+  letter-spacing: 2px;
+  padding-right: 2vh
+}
+
+.thread-message-current span:last-child,
+.thread-message span:last-child{
+  font-weight: lighter;
+}
+
 
 div::-webkit-scrollbar-thumb {
-  background-color: blue;    /* color of the scroll thumb */
+  background-color: rgb(159, 240, 243);    /* color of the scroll thumb */
   border-radius: 25px;       /* roundness of the scroll thumb */
-  border: 1px solid white;  /* creates padding around scroll thumb */
+
 }
+
+
 
