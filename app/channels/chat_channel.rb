@@ -24,11 +24,13 @@ class ChatChannel < ApplicationCable::Channel
 
   def speak(data)
     new_message = Message.create(content: data['message']['content'], sender_id: data['message']['sender_id'])
+    sender = Message.find_by(id: new_message.id).sender
     socket = {
       type: "message",
       id: new_message.id, 
       content: new_message.content,
       sender_id: new_message.sender_id,
+      sender: sender["username"]
     }
     ChatChannel.broadcast_to('chat_channel', socket)
   end
