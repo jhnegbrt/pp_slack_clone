@@ -13,7 +13,8 @@ class ChatChannel < ApplicationCable::Channel
   
       messages_hash[m.id] = m.as_json
       messages_hash[m.id]["sender"] = m.sender["username"]
-
+      # time = 
+      messages_hash[m.id]["time"] = m["updated_at"]
     end
     socket = {
       type: "messages",
@@ -25,12 +26,15 @@ class ChatChannel < ApplicationCable::Channel
   def speak(data)
     new_message = Message.create(content: data['message']['content'], sender_id: data['message']['sender_id'])
     sender = Message.find_by(id: new_message.id).sender
+    time = new_message["updated_at"]
+    # time = time.hour.to_s + ":" + time.min.to_s
     socket = {
       type: "message",
       id: new_message.id, 
       content: new_message.content,
       sender_id: new_message.sender_id,
-      sender: sender["username"]
+      sender: sender["username"],
+      time: time
     }
     ChatChannel.broadcast_to('chat_channel', socket)
   end
@@ -38,12 +42,17 @@ class ChatChannel < ApplicationCable::Channel
   def update_message(data)
     message = Message.find_by(id: data['message']['id'])
     updated_message = message.update(content: data['message']['content'])
+    sender = Message.find_by(id: updated_message.id).sender
+    time = updated_message["updated_at"]
+    # time = time.hour.to_s + ":" + time.min.to_s
     socket = { 
       
       id: message.id, 
       content: message.content,
       sender_id: message.sender_id,
-      type: "message"
+      type: "message",
+      sender: sender["username"],
+      time: time
     }
     ChatChannel.broadcast_to('chat_channel', socket)
   end
