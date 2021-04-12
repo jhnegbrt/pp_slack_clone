@@ -1,11 +1,18 @@
 class User < ApplicationRecord
 
+  has_many(
+    :messages,
+    class_name: "Message",
+    foreign_key: :sender_id,
+    primary_key: :id
+  ) 
+
   validates :password_digest, presence: true
   validates :username, presence: true, uniqueness: true
   validates :session_token, presence: true
   validates :password, length: {minimum: 6}, allow_nil: true
 
-  attr_reader :password
+  attr_reader :password, :username
   after_initialize :ensure_session_token
 
   def self.find_by_credentials(username, password)

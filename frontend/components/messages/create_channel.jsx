@@ -1,8 +1,7 @@
-
-export default function createChannel(thread, receive, receiveAll, remove){
+export default function createChannel(receive, receiveAll, remove){
 
   App.cable.subscriptions.create(
-    { channel: "ChatChannel", thread: thread },
+    { channel: "ChatChannel" },
     {
       received: data => {
         switch (data.type){
@@ -16,7 +15,6 @@ export default function createChannel(thread, receive, receiveAll, remove){
             remove(data['message_id'])
             break
         }
-      
       },
       load: function() { return this.perform("load")},
       speak: function(message) {

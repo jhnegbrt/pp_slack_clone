@@ -380,10 +380,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createChannel)
 /* harmony export */ });
-function createChannel(thread, receive, receiveAll, remove) {
+function createChannel(receive, receiveAll, remove) {
   App.cable.subscriptions.create({
-    channel: "ChatChannel",
-    thread: thread
+    channel: "ChatChannel"
   }, {
     received: function received(data) {
       switch (data.type) {
@@ -729,7 +728,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      (0,_create_channel__WEBPACK_IMPORTED_MODULE_3__.default)(this.state.thread, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+      (0,_create_channel__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
     }
   }, {
     key: "render",
@@ -784,9 +783,6 @@ var mDTP = function mDTP(dispatch) {
     },
     receiveMessages: function receiveMessages(messages) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveAllMessages)(messages));
-    },
-    fetchMessages: function fetchMessages() {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.fetchMessages)());
     },
     removeMessage: function removeMessage(messageId) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.removeMessage)(messageId));
@@ -881,7 +877,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
           });
         }
       }, "Delete"));
-      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, this.props.message.sender, ":", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
       }, this.props.message.content), this.props.message.sender_id === this.props.currentUserId ? buttons : null);
       return this.state.edit ? edit : display;
@@ -1094,13 +1090,13 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     key: "renderSwitchButton",
     value: function renderSwitchButton() {
       if (this.props.formType === "signup") {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Already have an account? Sign-In", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Already have an account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
           to: "/login"
-        }, " here"));
+        }, "Sign-In"));
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "New to Sleuth? Sign-Up", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "New to Sleuth? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
           to: "/signup"
-        }, " here"));
+        }, "Sign-Up"));
       }
     }
   }, {
@@ -1118,9 +1114,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       if (this.props.formType === "signin") {
         sleuthDemo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "sleuth-form"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Enter With Sleuth Mode!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Use Sleuth Mode to chat anonymously or demo this application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           onClick: this.enterSleuthMode
-        }, "Enter as Sleuth!")));
+        }, "Enter as Sleuth!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter With Sleuth Mode to chat Anonymously. Read more ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", null, "here")));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

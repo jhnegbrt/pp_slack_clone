@@ -50,11 +50,11 @@ class SessionForm extends React.Component {
   renderSwitchButton(){
     if (this.props.formType === "signup"){
       return(
-        <p>Already have an account? Sign-In<Link to='/login'> here</Link></p>
+        <p>Already have an account? <Link to='/login'>Sign-In</Link></p>
       )
     } else {
       return(
-        <p>New to Sleuth? Sign-Up<Link to='/signup'> here</Link></p>
+        <p>New to Sleuth? <Link to='/signup'>Sign-Up</Link></p>
       )
     }
   }
@@ -73,11 +73,10 @@ class SessionForm extends React.Component {
     if (this.props.formType === "signin"){
       sleuthDemo = (
         <div className="sleuth-form">
-          <div>Enter With Sleuth Mode!
-            <h1>Use Sleuth Mode to chat anonymously or demo this application</h1>
+  
             <button onClick={this.enterSleuthMode}>Enter as Sleuth!</button>
-          </div>
-
+            <h3>Enter With Sleuth Mode to chat Anonymously. Read more <a>here</a></h3>
+  
         </div>
 
       )

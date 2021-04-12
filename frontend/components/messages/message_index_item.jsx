@@ -37,6 +37,7 @@ class MessageIndexItem extends React.Component{
 
     const display = (
       <li>
+        {this.props.message.sender}:
         <Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link>
         {this.props.message.sender_id === this.props.currentUserId ? buttons : null }
       </li>

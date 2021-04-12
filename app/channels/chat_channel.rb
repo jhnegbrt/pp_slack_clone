@@ -1,15 +1,19 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
-    stream_for 'chat_channel#{params[:thread]}'
+    stream_for 'chat_channel'
     self.load
   end
 
   def load
-    messages = Message.all
+    
+    messages = Message.all.includes(:sender)
     messages_hash = {}
     messages.each do |m|
+  
       messages_hash[m.id] = m.as_json
+      messages_hash[m.id]["sender"] = m.sender["username"]
+
     end
     socket = {
       type: "messages",
