@@ -26,18 +26,6 @@ class MessageForm extends React.Component{
   }
 
 
-  // handleSubmit(e){
-  //   e.preventDefault()
-  //   this.props.submit(this.state)
-  //   if (this.props.formType === "Send"){
-  //     this.setState({
-  //       content: ""
-  //     })
-  //   } else {
-  //     this.props.toggleEdit()
-  //   }
-  // }
-
   updateContent(e){
     this.setState({
       content: e.target.value
@@ -46,7 +34,7 @@ class MessageForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form className="thread-form" onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} type="text" placeholder="SEND MESSAGE" value={this.state.content}></input>
         <input type="submit" value={this.props.formType}></input>
       </form>

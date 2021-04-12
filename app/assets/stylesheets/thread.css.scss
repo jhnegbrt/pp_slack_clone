@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+.thread-container{
+  height: 66vh;
+  overflow-y: scroll;
+  width: 30%;
+  margin: 16vh auto;
+  padding: 1vh 1vh;
+  border: 7px solid blue;
+  border-radius: 25px
+}
+
+
+.thread-form input[type=text]{
+  width: 100%
+}
+
+.thread-form{
+  display: flex
+}
+
+.thread-message-current,
+.thread-message{
+  font-family: 'Comfortaa', serif;
+}
+
+.thread-message-current p,
+.thread-message p{
+  color: rgb(40, 41, 95)
+}
+
+.thread-message-current,
+.thread-message{
+  font-family: 'Comfortaa', serif;
+}
+
+.thread-message p{
+  display: block
+}
+
+div::-webkit-scrollbar{
+  width: 5px
+}
+
+.thread-message{
+  line-height: 3vh;
+  border: 1px solid rgba(40, 41, 95, 0.856);
+  margin-bottom: 1vh;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding: 2vh;
+}
+
+.thread-message-current{
+  text-align: right;
+  line-height: 3vh;
+  border: 1px solid rgba(40, 41, 95, 0.856);
+  margin-bottom: 1vh;
+  background-color: rgb(207, 226, 233);
+  border-radius: 5px;
+  padding: 2vh;
+}
+
+.thread-message-current a,
+.thread-message a{
+  text-decoration: none;
+}
+
+
+div::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 25px;       /* roundness of the scroll thumb */
+  border: 1px solid white;  /* creates padding around scroll thumb */
+}
+

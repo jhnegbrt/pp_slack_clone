@@ -36,8 +36,10 @@ class MessageIndexItem extends React.Component{
     
 
     const display = (
-      <li>
-        {this.props.message.sender}:
+      <li className={this.props.message.sender_id === this.props.currentUserId ?
+        "thread-message-current": "thread-message"
+        }>
+        <p>{this.props.message.sender}</p>
         <Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link>
         {this.props.message.sender_id === this.props.currentUserId ? buttons : null }
       </li>

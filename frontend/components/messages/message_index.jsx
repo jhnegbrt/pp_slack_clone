@@ -8,7 +8,7 @@ class MessageIndex extends React.Component{
 
   constructor(props){
     super(props)
-
+    this.bottom = React.createRef();
   }
 
   componentDidMount() {
@@ -17,13 +17,17 @@ class MessageIndex extends React.Component{
 
   }
 
+  componentDidUpdate() {
+    this.bottom.current.scrollIntoView();
+  }
+
   render(){
     
     const { messages, deleteMessage } = this.props
   
     return(
-      <div>
-        <ul>
+      <div className = "thread-container">
+        <ul className="thread">
           {
             messages.map(message =>(
               <MessageIndexItemContainer
@@ -34,6 +38,7 @@ class MessageIndex extends React.Component{
           }
         </ul>
         <CreateMessageFormContainer />
+        <div ref={this.bottom} />
       </div>
     )
   }

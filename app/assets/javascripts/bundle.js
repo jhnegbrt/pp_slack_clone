@@ -629,18 +629,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
           content: ""
         });
       }
-    } // handleSubmit(e){
-    //   e.preventDefault()
-    //   this.props.submit(this.state)
-    //   if (this.props.formType === "Send"){
-    //     this.setState({
-    //       content: ""
-    //     })
-    //   } else {
-    //     this.props.toggleEdit()
-    //   }
-    // }
-
+    }
   }, {
     key: "updateContent",
     value: function updateContent(e) {
@@ -652,6 +641,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "thread-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         onChange: this.updateContent,
@@ -720,9 +710,13 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessageIndex);
 
   function MessageIndex(props) {
+    var _this;
+
     _classCallCheck(this, MessageIndex);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+    return _this;
   }
 
   _createClass(MessageIndex, [{
@@ -731,17 +725,28 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       (0,_create_channel__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.bottom.current.scrollIntoView();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           messages = _this$props.messages,
           deleteMessage = _this$props.deleteMessage;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, messages.map(function (message) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "thread-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "thread"
+      }, messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           message: message,
           key: message.id
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        ref: this.bottom
+      }));
     }
   }]);
 
@@ -877,7 +882,9 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
           });
         }
       }, "Delete"));
-      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, this.props.message.sender, ":", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: this.props.message.sender_id === this.props.currentUserId ? "thread-message-current" : "thread-message"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.message.sender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
       }, this.props.message.content), this.props.message.sender_id === this.props.currentUserId ? buttons : null);
       return this.state.edit ? edit : display;
