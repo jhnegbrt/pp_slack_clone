@@ -1,5 +1,5 @@
 import threadDisplayContainer from '../threads/thread_display_container'
-import threadIndex from '../threads/index'
+import threadIndexContainer from '../threads/index_container'
 
 class Client extends React.Component{
   constructor(props){
@@ -9,7 +9,7 @@ class Client extends React.Component{
   render(){
     return(
       <div>
-        <threadIndex></threadIndex>
+        <threadIndexContainer></threadIndexContainer>
         <threadDisplayContainer></threadDisplayContainer>
       </div>
     )

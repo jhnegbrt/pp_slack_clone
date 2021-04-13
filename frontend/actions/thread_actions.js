@@ -4,13 +4,13 @@ export const RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS"
 export const receiveCurrentThread = (data) => {
   return({
     type: RECEIVE_CURRENT_THREAD,
-    data.?
+    data
   })
 }
 
 export const receiveAllThreads = (data) => {
   return({
     type: RECEIVE_ALL_THREADS,
-    data.?
+    data
   })
 }

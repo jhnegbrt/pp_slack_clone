@@ -1,7 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
-    stream_for 'chat_channel'
+    stream_for 'chat_channel_#{params["thread_id"]'
     self.load
   end
 
@@ -13,7 +13,6 @@ class ChatChannel < ApplicationCable::Channel
   
       messages_hash[m.id] = m.as_json
       messages_hash[m.id]["sender"] = m.sender["username"]
-      # time = 
       messages_hash[m.id]["time"] = m["updated_at"]
     end
     socket = {

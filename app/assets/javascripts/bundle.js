@@ -296,9 +296,30 @@ var logout = function logout() {
 /*!********************************************!*\
   !*** ./frontend/actions/thread_actions.js ***!
   \********************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jhnegbrt/appacademy/slack_clone/frontend/actions/thread_actions.js: Unexpected token, expected \",\" (7:8)\n\n\u001b[0m \u001b[90m  5 |\u001b[39m   \u001b[36mreturn\u001b[39m({\u001b[0m\n\u001b[0m \u001b[90m  6 |\u001b[39m     type\u001b[33m:\u001b[39m \u001b[33mRECEIVE_CURRENT_THREAD\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  7 |\u001b[39m     data\u001b[33m.\u001b[39m\u001b[33m?\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  8 |\u001b[39m   })\u001b[0m\n\u001b[0m \u001b[90m  9 |\u001b[39m }\u001b[0m\n\u001b[0m \u001b[90m 10 |\u001b[39m\u001b[0m\n    at Object._raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:775:17)\n    at Object.raiseWithData (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:768:17)\n    at Object.raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:736:17)\n    at Object.unexpected (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:9716:16)\n    at Object.expect (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:9702:28)\n    at Object.parseObjectLike (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11460:14)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11028:23)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:5173:20)\n    at Object.parseExprSubscripts (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10689:23)\n    at Object.parseUpdate (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10669:21)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_CURRENT_THREAD": () => (/* binding */ RECEIVE_CURRENT_THREAD),
+/* harmony export */   "RECEIVE_ALL_THREADS": () => (/* binding */ RECEIVE_ALL_THREADS),
+/* harmony export */   "receiveCurrentThread": () => (/* binding */ receiveCurrentThread),
+/* harmony export */   "receiveAllThreads": () => (/* binding */ receiveAllThreads)
+/* harmony export */ });
+var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
+var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
+var receiveCurrentThread = function receiveCurrentThread(data) {
+  return {
+    type: RECEIVE_CURRENT_THREAD,
+    data: data
+  };
+};
+var receiveAllThreads = function receiveAllThreads(data) {
+  return {
+    type: RECEIVE_ALL_THREADS,
+    data: data
+  };
+};
 
 /***/ }),
 
@@ -403,7 +424,8 @@ var mSTP = function mSTP(state) {
       content: ""
     },
     formType: "Send",
-    senderId: state.session.id
+    senderId: state.session.id,
+    threadId: state.entities.thread.currentThread
   };
 };
 
@@ -430,9 +452,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createThread)
 /* harmony export */ });
-function createThread(receive, receiveAll, remove) {
+function createThread(threadId, receive, receiveAll, remove) {
   App.cable.subscriptions.create({
-    channel: "ChatChannel"
+    channel: "ChatChannel",
+    thread_id: threadId
   }, {
     received: function received(data) {
       switch (data.type) {
@@ -615,6 +638,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = _this.props.message;
     _this.state.sender_id = _this.props.senderId;
+    _this.state.current_thread = _this.props.threadId;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     return _this;
@@ -733,7 +757,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
     } // componentDidMount() {
     //   createThread(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
     // }
@@ -790,7 +814,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    messages: Object.values(state.entities.messages)
+    messages: Object.values(state.entities.messages),
+    threadId: state.entities.threads.currentThread
   };
 };
 
@@ -2028,7 +2053,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__);
 
 
 var threadsReducer = function threadsReducer() {
