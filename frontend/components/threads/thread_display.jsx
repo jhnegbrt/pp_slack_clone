@@ -1,5 +1,5 @@
 import React from 'react'
-import MessageIndex from '../messages/message_index'
+import MessageIndexContainer from '../messages/message_index_container'
 
 class ThreadDisplay extends React.Component{
   constructor(props){
@@ -9,7 +9,7 @@ class ThreadDisplay extends React.Component{
 
   render(){
     return(
-      <MessageIndex threadId={this.props.threadId}></MessageIndex>
+      <MessageIndexContainer threadId={this.props.threadId} />
     )
   }
 }

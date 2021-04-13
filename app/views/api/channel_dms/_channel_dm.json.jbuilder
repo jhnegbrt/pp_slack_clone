@@ -1,0 +1,1 @@
+json.extract! channel_dm, :id, :title, :creator_id, :updated_at

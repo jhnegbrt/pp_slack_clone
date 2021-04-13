@@ -27,7 +27,7 @@ class MessageIndex extends React.Component{
   }
 
   render(){
-    
+
     const { messages } = this.props
   
     return(

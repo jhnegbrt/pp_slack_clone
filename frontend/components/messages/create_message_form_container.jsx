@@ -8,7 +8,7 @@ const mSTP = (state) => ({
   },
   formType: "Send",
   senderId: state.session.id,
-  threadId: state.entities.thread.currentThread
+  threadId: state.entities.threads.currentThread
 })
 
 const mDTP = (dispatch) => ({

@@ -10,7 +10,29 @@ class ThreadForm extends React.Component{
     this.updateTitle = this.updateTitle.bind(this)
   }
 
+  handleSubmit(e){
+    e.preventDefault()
+    this.props.submit(this.state)
+  }
+
   
+  updateTitle(e){
+    this.setState({
+      title: e.target.value
+    })
+  }
+
+
+  render(){
+    return(
+    <form className="thread-form" onSubmit={this.handleSubmit}>
+      <input onChange={this.updateTitle} type="text" placeholder="Channel Title" value={this.state.title}></input>
+      <input type="submit"></input>
+    </form>
+    )
+
+  }
+
 }
 
 export default ThreadForm

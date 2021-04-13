@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   // window.signup = signup
 
   // const store = configureStore();
-  // window.getState = store.getState;
+  
   // window.dispatch = store.dispatch;
 
   let store;
@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   } else {
     store = configureStore()
   }
+
+  window.getState = store.getState;
 
 
   const root = document.getElementById('root')

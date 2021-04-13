@@ -17,7 +17,6 @@ class MessageForm extends React.Component{
 
     if (this.props.formType === "Edit Message"){
       App.cable.subscriptions.subscriptions[0].update({ message: this.state})
-      debugger
       this.props.toggleEdit();
     } else {
       App.cable.subscriptions.subscriptions[0].speak({ message: this.state})

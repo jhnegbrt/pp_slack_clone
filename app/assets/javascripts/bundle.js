@@ -304,28 +304,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_CURRENT_THREAD": () => (/* binding */ RECEIVE_CURRENT_THREAD),
 /* harmony export */   "RECEIVE_ALL_THREADS": () => (/* binding */ RECEIVE_ALL_THREADS),
 /* harmony export */   "receiveCurrentThread": () => (/* binding */ receiveCurrentThread),
-/* harmony export */   "receiveAllThreads": () => (/* binding */ receiveAllThreads),
 /* harmony export */   "createThread": () => (/* binding */ createThread)
 /* harmony export */ });
 /* harmony import */ var _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/thread_api_util */ "./frontend/util/thread_api_util.js");
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
-var receiveCurrentThread = function receiveCurrentThread(threadId) {
+var receiveCurrentThread = function receiveCurrentThread(thread) {
+  debugger;
   return {
     type: RECEIVE_CURRENT_THREAD,
-    threadId: threadId
+    thread: thread
   };
 };
+
 var receiveAllThreads = function receiveAllThreads(data) {
   return {
     type: RECEIVE_ALL_THREADS,
     data: data
   };
 };
+
 var createThread = function createThread(data) {
-  return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(formThread).then(function (thread) {
-    return dispatchEvent(receiveCurrentThread(thread));
+  debugger;
+  return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
+    return dispatch(receiveCurrentThread(thread));
   }).fail(function (errors) {
     return dispatch(receiveErrors(errors.responseJSON));
   });
@@ -425,6 +428,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../threads/thread_display_container */ "./frontend/components/threads/thread_display_container.jsx");
 /* harmony import */ var _threads_thread_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../threads/thread_index_container */ "./frontend/components/threads/thread_index_container.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -450,6 +454,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Client = /*#__PURE__*/function (_React$Component) {
   _inherits(Client, _React$Component);
 
@@ -464,12 +469,12 @@ var Client = /*#__PURE__*/function (_React$Component) {
   _createClass(Client, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("threadIndexContainer", null), /*#__PURE__*/React.createElement("threadDisplayContainer", null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_threads_thread_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__.default, null));
     }
   }]);
 
   return Client;
-}(React.Component);
+}(react__WEBPACK_IMPORTED_MODULE_2__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Client);
 
@@ -500,7 +505,7 @@ var mSTP = function mSTP(state) {
     },
     formType: "Send",
     senderId: state.session.id,
-    threadId: state.entities.thread.currentThread
+    threadId: state.entities.threads.currentThread
   };
 };
 
@@ -729,7 +734,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
         App.cable.subscriptions.subscriptions[0].update({
           message: this.state
         });
-        debugger;
         this.props.toggleEdit();
       } else {
         App.cable.subscriptions.subscriptions[0].speak({
@@ -998,7 +1002,6 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         toggleEdit: this.toggleEdit,
         id: this.props.message.id
@@ -1919,7 +1922,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _messages_message_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../messages/message_index */ "./frontend/components/messages/message_index.jsx");
+/* harmony import */ var _messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../messages/message_index_container */ "./frontend/components/messages/message_index_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1959,7 +1962,7 @@ var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadDisplay, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index__WEBPACK_IMPORTED_MODULE_1__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         threadId: this.props.threadId
       });
     }
@@ -1990,7 +1993,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    threadId: state.threads.currentThread
+    threadId: state.entities.threads.currentThread
   };
 };
 
@@ -2013,6 +2016,10 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -2047,6 +2054,36 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
     _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_this));
     return _this;
   }
+
+  _createClass(ThreadForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.submit(this.state);
+    }
+  }, {
+    key: "updateTitle",
+    value: function updateTitle(e) {
+      this.setState({
+        title: e.target.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "thread-form",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        onChange: this.updateTitle,
+        type: "text",
+        placeholder: "Channel Title",
+        value: this.state.title
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit"
+      }));
+    }
+  }]);
 
   return ThreadForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
@@ -2146,7 +2183,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    threads: state.entities.threads
+    threads: Object.values(state.entities.threads)
   };
 };
 
@@ -2495,6 +2532,7 @@ __webpack_require__.r(__webpack_exports__);
 var threadsReducer = function threadsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -39414,7 +39452,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 document.addEventListener('DOMContentLoaded', function () {
   // window.signup = signup
   // const store = configureStore();
-  // window.getState = store.getState;
   // window.dispatch = store.dispatch;
   var store;
 
@@ -39433,6 +39470,7 @@ document.addEventListener('DOMContentLoaded', function () {
     store = (0,_store_store__WEBPACK_IMPORTED_MODULE_2__.default)();
   }
 
+  window.getState = store.getState;
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__.default, {
     store: store
