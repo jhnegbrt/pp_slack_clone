@@ -851,9 +851,11 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      edit: false
+      editting: false,
+      hover: false
     };
     _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_this));
+    _this.toggleHover = _this.toggleHover.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -861,7 +863,15 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "toggleEdit",
     value: function toggleEdit() {
       this.setState({
-        edit: !this.state.edit
+        editting: !this.state.edit
+      });
+    }
+  }, {
+    key: "toggleHover",
+    value: function toggleHover() {
+      debugger;
+      this.setState({
+        hover: !this.state.hover
       });
     }
   }, {
@@ -869,14 +879,15 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      debugger;
       var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         toggleEdit: this.toggleEdit,
         id: this.props.message.id
       }));
-      var buttons = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      var buttons = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "message-buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.toggleEdit
-      }, "Edit Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: function onClick() {
           return App.cable.subscriptions.subscriptions[0].remove_message({
             message: _this2.props.message.id
@@ -886,11 +897,13 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       var date_time = new Date(this.props.message.time);
       var time = date_time.toLocaleTimeString();
       time = time.slice(0, time.length - 6);
-      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        onMouseEnter: this.toggleHover,
+        onMouseLeave: this.toggleHover,
         className: this.props.message.sender_id === this.props.currentUserId ? "thread-message-current" : "thread-message"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, this.props.message.sender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
-      }, this.props.message.content)), this.props.message.sender_id === this.props.currentUserId ? buttons : null);
+      }, this.props.message.content)), this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null);
       return this.state.edit ? edit : display;
     }
   }]);

@@ -21,19 +21,17 @@
   display: flex
 }
 
-.thread-message-current,
-.thread-message{
-  font-family: 'Comfortaa', serif;
-}
 
 .thread-message-current p,
 .thread-message p{
-  color: rgb(40, 41, 95)
+  color: rgb(40, 41, 95);
+  
 }
 
 .thread-message-current,
 .thread-message{
   font-family: 'Comfortaa', serif;
+  position: relative
 }
 
 .thread-message p{
@@ -83,6 +81,26 @@ div::-webkit-scrollbar{
 .thread-message-current span:last-child,
 .thread-message span:last-child{
   font-weight: lighter;
+}
+
+.message-buttons{
+  position: absolute;
+  top: 0;
+}
+
+.message-buttons button{
+  font-family: 'Comfortaa', serif;
+  background-color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 1vh;
+  margin: 1vh;
+  box-shadow: rgba(62, 85, 148, 0.774) 0px 5px 15px;
+}
+
+.message-buttons button:hover{
+  cursor:pointer;
+  background-color:rgb(192, 238, 240) 
 }
 
 

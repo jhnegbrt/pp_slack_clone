@@ -6,20 +6,29 @@ class MessageIndexItem extends React.Component{
   constructor(props){
     super(props)
     this.state = ({
-      edit: false
+      editting: false,
+      hover: false
+
     })
 
     this.toggleEdit = this.toggleEdit.bind(this)
+    this.toggleHover = this.toggleHover.bind(this)
   }
 
   toggleEdit(){
     this.setState({
-      edit: !this.state.edit
+      editting: !this.state.edit
+    })
+  }
+
+  toggleHover(){
+    debugger
+    this.setState({
+      hover: !this.state.hover
     })
   }
 
   render(){
-    debugger
     const edit = (
       <li>
         <EditMessageFormContainer toggleEdit={this.toggleEdit} id={this.props.message.id}></EditMessageFormContainer>
@@ -27,8 +36,8 @@ class MessageIndexItem extends React.Component{
     )
 
     const buttons = (
-      <div>
-        <button onClick={this.toggleEdit}>Edit Message</button>
+      <div className="message-buttons">
+        <button onClick={this.toggleEdit}>Edit</button>
         <button onClick={() => App.cable.subscriptions.subscriptions[0].remove_message({ message: this.props.message.id})}>Delete</button>
       </div>
     )
@@ -40,14 +49,16 @@ class MessageIndexItem extends React.Component{
     const display = (
 
       
-      <li className={this.props.message.sender_id === this.props.currentUserId ?
-        "thread-message-current": "thread-message"
-        }>
+      <div 
+        onMouseEnter={this.toggleHover}
+        onMouseLeave={this.toggleHover}
+        className={this.props.message.sender_id === this.props.currentUserId ?
+        "thread-message-current": "thread-message"}>
           <span>{this.props.message.sender}</span>
           <span>{time}</span>
         <p><Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link></p>
-        {this.props.message.sender_id === this.props.currentUserId ? buttons : null }
-      </li>
+        {this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null }
+      </div>
     )
 
     return (
