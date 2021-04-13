@@ -713,7 +713,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = _this.props.message;
     _this.state.sender_id = _this.props.senderId;
-    _this.state.current_thread = _this.props.threadId;
+    _this.state.channel_dms_id = _this.props.threadId;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     return _this;
@@ -751,7 +751,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: "thread-form",
+        className: "message-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         onChange: this.updateContent,
@@ -847,9 +847,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var messages = this.props.messages;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "thread-container"
+        className: "messages-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "thread"
+        className: "messages"
       }, messages.map(function (message, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           previous: messages[idx - 1],
@@ -1033,7 +1033,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         onMouseEnter: this.toggleHover,
         onMouseLeave: this.toggleHover,
-        className: this.props.message.sender_id === this.props.currentUserId ? "thread-message-current" : "thread-message"
+        className: this.props.message.sender_id === this.props.currentUserId ? "message-current" : "message"
       }, new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-name"
       }, this.props.message.sender) : null, time_diff > 18000 || new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
@@ -2006,6 +2006,9 @@ var mSTP = function mSTP(state) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2038,12 +2041,17 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ThreadForm);
 
     _this = _super.call(this, props);
+    _this.state = _this.props.thread;
     _this.state.creator_id = _this.props.creatorId;
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   return ThreadForm;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThreadForm);
 
 /***/ }),
 

@@ -5,7 +5,7 @@ class MessageForm extends React.Component{
     super(props)
     this.state = this.props.message
     this.state.sender_id = this.props.senderId
-    this.state.current_thread = this.props.threadId
+    this.state.channel_dms_id = this.props.threadId
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateContent = this.updateContent.bind(this)
@@ -36,7 +36,7 @@ class MessageForm extends React.Component{
 
   render(){
     return(
-      <form className="thread-form" onSubmit={this.handleSubmit}>
+      <form className="message-form" onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} type="text" placeholder="SEND MESSAGE" value={this.state.content}></input>
         <input type="submit" value={this.props.formType}></input>
       </form>

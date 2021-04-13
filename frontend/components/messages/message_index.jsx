@@ -31,8 +31,8 @@ class MessageIndex extends React.Component{
     const { messages } = this.props
   
     return(
-      <div className = "thread-container">
-        <ul className="thread">
+      <div className = "messages-container">
+        <ul className="messages">
           {
             messages.map((message, idx) =>(
               <MessageIndexItemContainer

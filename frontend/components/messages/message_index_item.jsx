@@ -75,7 +75,7 @@ class MessageIndexItem extends React.Component{
         onMouseEnter={this.toggleHover}
         onMouseLeave={this.toggleHover}
         className={this.props.message.sender_id === this.props.currentUserId ?
-        "thread-message-current": "thread-message"}>
+        "message-current": "message"}>
           {new_user === true ? <span className="message-name">{this.props.message.sender}</span> : null}
           {time_diff > 18000 || new_user === true ? <span className="message-time">{time}</span> : null}
           <p><Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link></p>
