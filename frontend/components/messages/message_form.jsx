@@ -36,7 +36,7 @@ class MessageForm extends React.Component{
     return(
       <form className="thread-form" onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} type="text" placeholder="SEND MESSAGE" value={this.state.content}></input>
-        <input type="submit" value={this.props.formType}></input>
+        <input type="submit" value={this.props.formType}> </input>
       </form>
     )
   }
