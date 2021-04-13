@@ -9,7 +9,6 @@ class Api::ChannelDmsController < ApplicationController
   end
 
   def create
-    
     @channel_dm = ChannelDm.new(channel_dm_params)
 
     if @channel_dm.save

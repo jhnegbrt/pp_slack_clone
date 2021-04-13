@@ -23,7 +23,12 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    new_message = Message.create(content: data['message']['content'], sender_id: data['message']['sender_id'])
+
+    new_message = Message.create(
+      content: data['message']['content'], 
+      sender_id: data['message']['sender_id'],
+      channel_dms_id: data['message']['channel_dms_id']
+    )
     sender = Message.find_by(id: new_message.id).sender
     time = new_message["updated_at"]
     # time = time.hour.to_s + ":" + time.min.to_s
@@ -32,6 +37,7 @@ class ChatChannel < ApplicationCable::Channel
       id: new_message.id, 
       content: new_message.content,
       sender_id: new_message.sender_id,
+      channel_dms_id: new_message.channel_dms_id,
       sender: sender["username"],
       time: time
     }
