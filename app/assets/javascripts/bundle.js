@@ -304,34 +304,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_CURRENT_THREAD": () => (/* binding */ RECEIVE_CURRENT_THREAD),
 /* harmony export */   "RECEIVE_ALL_THREADS": () => (/* binding */ RECEIVE_ALL_THREADS),
 /* harmony export */   "receiveCurrentThread": () => (/* binding */ receiveCurrentThread),
-/* harmony export */   "createThread": () => (/* binding */ createThread)
+/* harmony export */   "createThread": () => (/* binding */ createThread),
+/* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads)
 /* harmony export */ });
 /* harmony import */ var _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/thread_api_util */ "./frontend/util/thread_api_util.js");
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
 var receiveCurrentThread = function receiveCurrentThread(thread) {
-  debugger;
   return {
     type: RECEIVE_CURRENT_THREAD,
     thread: thread
   };
 };
 
-var receiveAllThreads = function receiveAllThreads(data) {
+var receiveAllThreads = function receiveAllThreads(threads) {
   return {
     type: RECEIVE_ALL_THREADS,
-    data: data
+    threads: threads
   };
 };
 
 var createThread = function createThread(data) {
-  debugger;
-  return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
-    return dispatch(receiveCurrentThread(thread));
-  }).fail(function (errors) {
-    return dispatch(receiveErrors(errors.responseJSON));
-  });
+  return function (dispatch) {
+    debugger;
+    return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
+      return dispatch(receiveCurrentThread(thread));
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
+  };
+};
+var fetchThreads = function fetchThreads() {
+  return function (dispatch) {
+    return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchThreads().then(function (threads) {
+      return dispatch(receiveAllThreads(threads));
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
+  };
 };
 
 /***/ }),
@@ -2146,6 +2155,11 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ThreadIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchThreads();
+    }
+  }, {
     key: "render",
     value: function render() {
       var threads = this.props.threads;
@@ -2179,7 +2193,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _thread_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_index */ "./frontend/components/threads/thread_index.jsx");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _thread_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./thread_index */ "./frontend/components/threads/thread_index.jsx");
+
 
 
 
@@ -2189,7 +2205,15 @@ var mSTP = function mSTP(state) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP)(_thread_index__WEBPACK_IMPORTED_MODULE_1__.default));
+var mDTP = function mDTP(dispatch) {
+  return {
+    fetchThreads: function fetchThreads() {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.fetchThreads)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_thread_index__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -2254,9 +2278,10 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         name: this.props.thread.id,
-        onCLick: this.selectThread
+        onClick: this.selectThread
       }, this.props.thread.title));
     }
   }]);
@@ -2534,7 +2559,6 @@ __webpack_require__.r(__webpack_exports__);
 var threadsReducer = function threadsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -2785,7 +2809,8 @@ var logout = function logout() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createThread": () => (/* binding */ createThread)
+/* harmony export */   "createThread": () => (/* binding */ createThread),
+/* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads)
 /* harmony export */ });
 var createThread = function createThread(thread) {
   return $.ajax({
@@ -2794,6 +2819,12 @@ var createThread = function createThread(thread) {
     data: {
       channel_dm: thread
     }
+  });
+};
+var fetchThreads = function fetchThreads() {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/channel_dms'
   });
 };
 

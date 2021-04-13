@@ -1,7 +1,7 @@
 import {RECEIVE_CURRENT_THREAD, RECEIVE_ALL_THREADS } from '../actions/thread_actions'
 
+
 const threadsReducer = (state = {}, action) =>{
-  debugger
   Object.freeze(state)
     switch(action.type){
       case RECEIVE_CURRENT_THREAD:

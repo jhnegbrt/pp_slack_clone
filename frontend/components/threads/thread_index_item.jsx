@@ -13,8 +13,9 @@ class ThreadIndexItem extends React.Component{
   }
 
   render(){
+    debugger
     return(
-      <li><button name={this.props.thread.id} onCLick={this.selectThread}>{this.props.thread.title}</button></li>
+      <li><button name={this.props.thread.id} onClick={this.selectThread}>{this.props.thread.title}</button></li>
     )
   }
 }

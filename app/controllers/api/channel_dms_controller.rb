@@ -1,7 +1,7 @@
 class Api::ChannelDmsController < ApplicationController
 
   def index
-    @channel_dms = ChannelDM.all
+    @channel_dms = ChannelDm.all
   end
 
   def show
