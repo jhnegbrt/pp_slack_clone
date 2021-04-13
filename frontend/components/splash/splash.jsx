@@ -59,6 +59,8 @@ class Splash extends React.Component{
         <li><a href="#intro" >Introduction</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#technologies">Technologies</a></li>
+        {signUpLink}
+        {demoLink}
 
       </ul>
     </div>
@@ -75,8 +77,7 @@ class Splash extends React.Component{
               <li onClick={this.handleDropdown}><a href="#technologies">Technologies</a></li>
               <li onClick={this.handleDropdown}>Close Menu</li>
             </ul>
-          {signUpLink}
-          {demoLink}
+
         </ul>
 
       </div>
