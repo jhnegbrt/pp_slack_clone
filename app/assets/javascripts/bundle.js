@@ -418,9 +418,9 @@ var mDTP = function mDTP(dispatch) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createChannel)
+/* harmony export */   "default": () => (/* binding */ createThread)
 /* harmony export */ });
-function createChannel(receive, receiveAll, remove) {
+function createThread(receive, receiveAll, remove) {
   App.cable.subscriptions.create({
     channel: "ChatChannel"
   }, {
@@ -723,7 +723,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
     }
   }, {
     key: "componentDidUpdate",

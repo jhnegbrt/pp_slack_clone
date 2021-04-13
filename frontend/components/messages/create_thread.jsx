@@ -1,4 +1,4 @@
-export default function createChannel(receive, receiveAll, remove){
+export default function createThread(receive, receiveAll, remove){
 
   App.cable.subscriptions.create(
     { channel: "ChatChannel" },
