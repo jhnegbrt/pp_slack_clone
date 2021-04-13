@@ -308,10 +308,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
-var receiveCurrentThread = function receiveCurrentThread(data) {
+var receiveCurrentThread = function receiveCurrentThread(threadId) {
   return {
     type: RECEIVE_CURRENT_THREAD,
-    data: data
+    threadId: threadId
   };
 };
 var receiveAllThreads = function receiveAllThreads(data) {
