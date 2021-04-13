@@ -13,9 +13,14 @@ class MessageIndex extends React.Component{
 
   componentDidMount() {
 
-    createThread(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+    createThread(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
 
   }
+  // componentDidMount() {
+
+  //   createThread(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+
+  // }
 
   componentDidUpdate() {
     this.bottom.current.scrollIntoView();

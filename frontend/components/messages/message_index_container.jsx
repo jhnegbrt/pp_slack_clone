@@ -3,7 +3,7 @@ import MessageIndex from './message_index'
 import {removeMessage, fetchMessages, receiveMessage, receiveAllMessages } from '../../actions/message_actions'
 
 const mSTP = state => ({
-  messages: Object.values(state.messages)
+  messages: Object.values(state.entities.messages)
 })
 
 const mDTP = dispatch => ({

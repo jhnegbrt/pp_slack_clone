@@ -292,6 +292,16 @@ var logout = function logout() {
 
 /***/ }),
 
+/***/ "./frontend/actions/thread_actions.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/thread_actions.js ***!
+  \********************************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jhnegbrt/appacademy/slack_clone/frontend/actions/thread_actions.js: Unexpected token, expected \",\" (7:8)\n\n\u001b[0m \u001b[90m  5 |\u001b[39m   \u001b[36mreturn\u001b[39m({\u001b[0m\n\u001b[0m \u001b[90m  6 |\u001b[39m     type\u001b[33m:\u001b[39m \u001b[33mRECEIVE_CURRENT_THREAD\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  7 |\u001b[39m     data\u001b[33m.\u001b[39m\u001b[33m?\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m  8 |\u001b[39m   })\u001b[0m\n\u001b[0m \u001b[90m  9 |\u001b[39m }\u001b[0m\n\u001b[0m \u001b[90m 10 |\u001b[39m\u001b[0m\n    at Object._raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:775:17)\n    at Object.raiseWithData (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:768:17)\n    at Object.raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:736:17)\n    at Object.unexpected (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:9716:16)\n    at Object.expect (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:9702:28)\n    at Object.parseObjectLike (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11460:14)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11028:23)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:5173:20)\n    at Object.parseExprSubscripts (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10689:23)\n    at Object.parseUpdate (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10669:21)");
+
+/***/ }),
+
 /***/ "./frontend/components/App.jsx":
 /*!*************************************!*\
   !*** ./frontend/components/App.jsx ***!
@@ -723,8 +733,11 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
-    }
+      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+    } // componentDidMount() {
+    //   createThread(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+    // }
+
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
@@ -777,7 +790,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    messages: Object.values(state.messages)
+    messages: Object.values(state.entities.messages)
   };
 };
 
@@ -1765,12 +1778,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _messages_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages_reducer */ "./frontend/reducers/messages_reducer.js");
+/* harmony import */ var _threads_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./threads_reducer */ "./frontend/reducers/threads_reducer.js");
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  messages: _messages_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
+  threads: _threads_reducer__WEBPACK_IMPORTED_MODULE_2__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1899,7 +1918,6 @@ __webpack_require__.r(__webpack_exports__);
 var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
-  messages: _messages_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
@@ -1995,6 +2013,44 @@ var sessionReducer = function sessionReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sessionReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/threads_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/threads_reducer.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var threadsReducer = function threadsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_THREAD:
+      return Object.assign({}, state, {
+        currentThread: action.thread.id
+      });
+
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
+      return Object.assign({}, state, action.threads);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (threadsReducer);
 
 /***/ }),
 
