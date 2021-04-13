@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV['REDIS_URL'] %>
+  url: redis://redistogo:66ce2bb51b0b02689a76a33c4fff81ee@scat.redistogo.com:11609/
   # channel_prefix: slack_clone_production
