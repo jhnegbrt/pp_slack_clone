@@ -7,4 +7,4 @@ test:
 production:
   adapter: redis
   url: <%= ENV['REDIS_URL'] %>
-  channel_prefix: slack_clone_production
+  # channel_prefix: slack_clone_production
