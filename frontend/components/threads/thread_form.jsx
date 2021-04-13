@@ -13,6 +13,9 @@ class ThreadForm extends React.Component{
   handleSubmit(e){
     e.preventDefault()
     this.props.submit(this.state)
+    this.setState({
+      title: ""
+    })
   }
 
   
@@ -25,10 +28,10 @@ class ThreadForm extends React.Component{
 
   render(){
     return(
-    <form className="thread-form" onSubmit={this.handleSubmit}>
-      <input onChange={this.updateTitle} type="text" placeholder="Channel Title" value={this.state.title}></input>
-      <input type="submit"></input>
-    </form>
+      <form className="thread-form" onSubmit={this.handleSubmit}>
+        <input onChange={this.updateTitle} type="text" placeholder="Channel Title" value={this.state.title}></input>
+        <input type="submit"></input>
+      </form>
     )
 
   }

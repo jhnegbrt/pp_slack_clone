@@ -22,9 +22,9 @@ class MessageIndex extends React.Component{
 
   // }
 
-  componentDidUpdate() {
-    this.bottom.current.scrollIntoView();
-  }
+  // componentDidUpdate() {
+  //   this.bottom.current.scrollIntoView();
+  // }
 
   render(){
 
@@ -44,7 +44,7 @@ class MessageIndex extends React.Component{
           }
         </ul>
         <CreateMessageFormContainer />
-        <div ref={this.bottom} />
+        {/* <div ref={this.bottom} /> */}
       </div>
     )
   }

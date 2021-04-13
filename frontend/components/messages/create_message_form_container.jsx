@@ -4,11 +4,13 @@ import { createMessage } from '../../actions/message_actions'
 
 const mSTP = (state) => ({
   message: {
-    content: ""
+    content: "",
+    sender_id: state.session.id,
+    channel_dms_id: state.ui.currentThread
   },
   formType: "Send",
-  senderId: state.session.id,
-  threadId: state.entities.threads.currentThread
+  
+  
 })
 
 const mDTP = (dispatch) => ({

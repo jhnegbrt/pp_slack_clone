@@ -510,11 +510,11 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     message: {
-      content: ""
+      content: "",
+      sender_id: state.session.id,
+      channel_dms_id: state.ui.currentThread
     },
-    formType: "Send",
-    senderId: state.session.id,
-    threadId: state.entities.threads.currentThread
+    formType: "Send"
   };
 };
 
@@ -737,6 +737,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      debugger;
       e.preventDefault();
 
       if (this.props.formType === "Edit Message") {
@@ -849,12 +850,10 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     } // componentDidMount() {
     //   createThread(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
     // }
+    // componentDidUpdate() {
+    //   this.bottom.current.scrollIntoView();
+    // }
 
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.bottom.current.scrollIntoView();
-    }
   }, {
     key: "render",
     value: function render() {
@@ -869,9 +868,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           message: message,
           key: message.id
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        ref: this.bottom
-      }));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
     }
   }]);
 
@@ -2071,6 +2068,9 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       this.props.submit(this.state);
+      this.setState({
+        title: ""
+      });
     }
   }, {
     key: "updateTitle",
@@ -2158,6 +2158,21 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchThreads();
+    } // componentDidUpdate(){
+    //   this.props.fetchThreads()
+    // }
+
+  }, {
+    key: "mapThread",
+    value: function mapThread(thread) {
+      if (typeof thread === "number") {
+        return;
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+          thread: thread,
+          key: thread.id
+        });
+      }
     }
   }, {
     key: "render",
@@ -2165,12 +2180,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       var threads = this.props.threads;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-index"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(function (thread) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
-          thread: thread,
-          key: thread.id
-        });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_thread_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(this.mapThread)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_thread_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
     }
   }]);
 
@@ -2278,7 +2288,6 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         name: this.props.thread.id,
         onClick: this.selectThread
@@ -2290,6 +2299,40 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThreadIndexItem);
+
+/***/ }),
+
+/***/ "./frontend/reducers/current_thread_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/current_thread_reducer.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
+
+var threadsReducer = function threadsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_THREAD:
+      return Object.assign({}, state, {
+        currentThread: action.thread.id
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (threadsReducer);
 
 /***/ }),
 
@@ -2434,7 +2477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
 /* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
-/* harmony import */ var _messages_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages_reducer */ "./frontend/reducers/messages_reducer.js");
+/* harmony import */ var _ui_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui_reducer */ "./frontend/reducers/ui_reducer.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
 
@@ -2443,6 +2486,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
@@ -2497,22 +2541,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-// import {RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER} from '../actions/session_actions'
-// const _nullUser = Object.freeze({
-//   id: null
-// })
-// const sessionReducer = (state = _nullUser, action) => {
-//   Object.freeze(state);
-//   switch(action.type){
-//     case RECEIVE_CURRENT_USER:
-//       return Object.assign({}, {id: action.user.id})
-//     case LOGOUT_CURRENT_USER:
-//       return _nullUser;
-//     default:
-//       return state;
-//   }
-// }
-// export default sessionReducer;
 
 
 var _nullUser = Object.freeze({
@@ -2562,11 +2590,6 @@ var threadsReducer = function threadsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_THREAD:
-      return Object.assign({}, state, {
-        currentThread: action.thread.id
-      });
-
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
       return Object.assign({}, state, action.threads);
 
@@ -2576,6 +2599,28 @@ var threadsReducer = function threadsReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (threadsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/ui_reducer.js":
+/*!*****************************************!*\
+  !*** ./frontend/reducers/ui_reducer.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./current_thread_reducer */ "./frontend/reducers/current_thread_reducer.js");
+
+
+var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
+  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
 
 /***/ }),
 

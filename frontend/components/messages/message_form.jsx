@@ -13,6 +13,7 @@ class MessageForm extends React.Component{
 
   // action cable handleSubmit
   handleSubmit(e){
+    debugger
     e.preventDefault()
 
     if (this.props.formType === "Edit Message"){

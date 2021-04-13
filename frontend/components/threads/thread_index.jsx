@@ -12,19 +12,25 @@ class ThreadIndex extends React.Component{
     this.props.fetchThreads()
   }
 
-  render(){
+  // componentDidUpdate(){
+  //   this.props.fetchThreads()
+  // }
 
+  mapThread(thread){
+    if (typeof thread === "number"){
+      return
+    } else {
+      return <ThreadIndexItem thread={thread} key={thread.id}/>
+    }
+  }
+
+  render(){
     const { threads } = this.props
     return(
       <div className="thread-index">
         <ul>
           {
-            threads.map((thread) =>(
-              <ThreadIndexItem
-                thread={thread}
-                key={thread.id}
-              />
-            ))
+            threads.map(this.mapThread)
           }
         </ul>
         <CreateThreadFormContainer />
