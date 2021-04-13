@@ -70,16 +70,14 @@ div::-webkit-scrollbar{
   text-decoration: none;
 }
 
-.thread-message-current span:first-child,
-.thread-message span:first-child{
+.message-name{
   font-weight: bold;
   font-size: 3vh;
   letter-spacing: 2px;
   padding-right: 2vh
 }
 
-.thread-message-current span:last-child,
-.thread-message span:last-child{
+.message-time{
   font-weight: lighter;
 }
 

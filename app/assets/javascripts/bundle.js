@@ -870,7 +870,6 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "toggleHover",
     value: function toggleHover() {
-      debugger;
       this.setState({
         hover: !this.state.hover
       });
@@ -880,7 +879,6 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      debugger;
       var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         toggleEdit: this.toggleEdit,
         id: this.props.message.id
@@ -899,11 +897,33 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       var date_time = new Date(this.props.message.time);
       var time = date_time.toLocaleTimeString();
       time = time.slice(0, time.length - 6);
+      var time_diff;
+
+      if (this.props.previous === undefined) {
+        time_diff = 6001;
+      } else {
+        var prev_time = new Date(this.props.previous.time);
+        time_diff = Date.parse(date_time) - Date.parse(prev_time);
+      }
+
+      var new_user;
+
+      if (this.props.previous == undefined || this.props.message.sender_id !== this.props.previous.sender_id) {
+        new_user = true;
+      } else {
+        new_user = false;
+      }
+
+      debugger;
       var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         onMouseEnter: this.toggleHover,
         onMouseLeave: this.toggleHover,
         className: this.props.message.sender_id === this.props.currentUserId ? "thread-message-current" : "thread-message"
-      }, this.props.previous == undefined || this.props.message.sender_id !== this.props.previous.sender_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, this.props.message.sender) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      }, new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "message-name"
+      }, this.props.message.sender) : null, time_diff > 18000 || new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "message-time"
+      }, time) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
       }, this.props.message.content)), this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null);
       return this.state.edit ? edit : display;
