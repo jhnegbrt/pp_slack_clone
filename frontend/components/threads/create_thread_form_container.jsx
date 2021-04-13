@@ -5,7 +5,9 @@ import {createThread} from '../../actions/thread_actions'
 
 const mSTP = state => ({
   thread: {
-    title: ""
+    title: "",
+    channel: true,
+    private: false
   },
   formType: "Create Thread",
   creatorId: state.session.id

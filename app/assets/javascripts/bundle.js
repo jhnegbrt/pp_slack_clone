@@ -1891,7 +1891,9 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     thread: {
-      title: ""
+      title: "",
+      channel: true,
+      "private": false
     },
     formType: "Create Thread",
     creatorId: state.session.id

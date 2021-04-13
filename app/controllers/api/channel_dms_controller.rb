@@ -1,4 +1,4 @@
-class Api::ChannelDms < ApplicationController
+class Api::ChannelDmsController < ApplicationController
 
   def index
     @channel_dms = ChannelDM.all
@@ -21,7 +21,7 @@ class Api::ChannelDms < ApplicationController
   end
 
   def channel_dm_params
-    params.require(:channel_dm).permit(:creator_id, :title)
+    params.require(:channel_dm).permit(:creator_id, :title, :channel, :private)
   end
 
 end
