@@ -304,7 +304,7 @@
 
 }
 
-@media (max-width: 813){
+@media screen and (max-width: 768px){
   .splash-header-list-mobile{
     display: flex;
     align-items: center;
@@ -353,3 +353,4 @@
     transition: 350ms;
   }
 }
+

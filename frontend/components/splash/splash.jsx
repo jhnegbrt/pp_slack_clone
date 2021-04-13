@@ -77,6 +77,8 @@ class Splash extends React.Component{
               <li onClick={this.handleDropdown}><a href="#technologies">Technologies</a></li>
               <li onClick={this.handleDropdown}>Close Menu</li>
             </ul>
+          {signUpLink}
+          {demoLink}
 
         </ul>
 
