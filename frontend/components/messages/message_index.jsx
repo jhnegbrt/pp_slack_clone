@@ -1,7 +1,7 @@
 import React from 'react'
 import MessageIndexItemContainer from './message_index_item_container'
 import CreateMessageFormContainer from './create_message_form_container'
-import createChannel from './create_channel'
+import createThread from './create_thread'
 
 
 class MessageIndex extends React.Component{
@@ -13,7 +13,7 @@ class MessageIndex extends React.Component{
 
   componentDidMount() {
 
-    createChannel(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+    createThread(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
 
   }
 
@@ -23,7 +23,7 @@ class MessageIndex extends React.Component{
 
   render(){
     
-    const { messages, deleteMessage } = this.props
+    const { messages } = this.props
   
     return(
       <div className = "thread-container">

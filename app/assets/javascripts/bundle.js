@@ -369,10 +369,50 @@ var App = function App() {
 
 /***/ }),
 
-/***/ "./frontend/components/messages/create_channel.jsx":
-/*!*********************************************************!*\
-  !*** ./frontend/components/messages/create_channel.jsx ***!
-  \*********************************************************/
+/***/ "./frontend/components/messages/create_message_form_container.jsx":
+/*!************************************************************************!*\
+  !*** ./frontend/components/messages/create_message_form_container.jsx ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+
+
+
+
+var mSTP = function mSTP(state) {
+  return {
+    message: {
+      content: ""
+    },
+    formType: "Send",
+    senderId: state.session.id
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    submit: function submit(message) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.createMessage)(message));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_message_form__WEBPACK_IMPORTED_MODULE_0__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/messages/create_thread.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/components/messages/create_thread.jsx ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -413,46 +453,6 @@ function createChannel(receive, receiveAll, remove) {
     }
   });
 }
-
-/***/ }),
-
-/***/ "./frontend/components/messages/create_message_form_container.jsx":
-/*!************************************************************************!*\
-  !*** ./frontend/components/messages/create_message_form_container.jsx ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
-
-
-
-
-var mSTP = function mSTP(state) {
-  return {
-    message: {
-      content: ""
-    },
-    formType: "Send",
-    senderId: state.session.id
-  };
-};
-
-var mDTP = function mDTP(dispatch) {
-  return {
-    submit: function submit(message) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.createMessage)(message));
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_message_form__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
@@ -677,7 +677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _message_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item_container */ "./frontend/components/messages/message_index_item_container.jsx");
 /* harmony import */ var _create_message_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_message_form_container */ "./frontend/components/messages/create_message_form_container.jsx");
-/* harmony import */ var _create_channel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_channel */ "./frontend/components/messages/create_channel.jsx");
+/* harmony import */ var _create_thread__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_thread */ "./frontend/components/messages/create_thread.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -723,7 +723,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      (0,_create_channel__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
     }
   }, {
     key: "componentDidUpdate",
@@ -733,9 +733,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          messages = _this$props.messages,
-          deleteMessage = _this$props.deleteMessage;
+      var messages = this.props.messages;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
