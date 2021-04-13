@@ -6,10 +6,9 @@ class ThreadDisplay extends React.Component{
     super(props)
   }
 
-
   render(){
     return(
-      <MessageIndexContainer threadId={this.props.threadId} />
+      this.props.currentThreadId === undefined ? null : <MessageIndexContainer currentThreadId={this.props.currentThreadId} />
     )
   }
 }

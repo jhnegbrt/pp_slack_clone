@@ -1,5 +1,4 @@
 import React from 'react'
-import {receiveCurrentThread } from '../../actions/thread_actions'
 
 class ThreadIndexItem extends React.Component{
   constructor(props){

@@ -2,9 +2,10 @@ import { connect } from 'react-redux'
 import MessageIndex from './message_index'
 import {removeMessage, fetchMessages, receiveMessage, receiveAllMessages } from '../../actions/message_actions'
 
-const mSTP = state => {
+const mSTP = (state, ownProps) => {
   return({
     messages: Object.values(state.entities.messages),
+    currentThreadId: ownProps.currentThreadId
   })
 }
 

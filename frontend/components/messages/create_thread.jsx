@@ -1,7 +1,8 @@
-export default function createThread(threadId, receive, receiveAll, remove){
-
+export default function createThread(currentThreadId, receive, receiveAll, remove){
+  debugger
   App.cable.subscriptions.create(
-    { channel: "ChatChannel", thread_id: threadId },
+    
+    { channel: "ChatChannel", thread_id: currentThreadId },
     {
       received: data => {
         switch (data.type){

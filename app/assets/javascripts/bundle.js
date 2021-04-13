@@ -505,14 +505,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mSTP = function mSTP(state) {
+var mSTP = function mSTP(state, ownProps) {
+  debugger;
   return {
     message: {
       content: "",
-      sender_id: state.session.id
+      sender_id: state.session.id,
+      channel_dms_id: ownProps.currentThreadId
     },
     formType: "Send",
-    currentThreadId: state.ui.currentThread.Id
+    currentThreadId: state.ui.currentThread
   };
 };
 
@@ -539,10 +541,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createThread)
 /* harmony export */ });
-function createThread(threadId, receive, receiveAll, remove) {
+function createThread(currentThreadId, receive, receiveAll, remove) {
+  debugger;
   App.cable.subscriptions.create({
     channel: "ChatChannel",
-    thread_id: threadId
+    thread_id: currentThreadId
   }, {
     received: function received(data) {
       switch (data.type) {
@@ -734,9 +737,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.setState({
-        channel_dms_id: this.props.currentThreadId
-      });
 
       if (this.props.formType === "Edit Message") {
         App.cable.subscriptions.subscriptions[0].update({
@@ -844,11 +844,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
-    } // componentDidMount() {
-    //   createThread(this.props.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
-    // }
-    // componentDidUpdate() {
+      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.currentThreadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+    } // componentDidUpdate() {
     //   this.bottom.current.scrollIntoView();
     // }
 
@@ -866,7 +863,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           message: message,
           key: message.id
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, null));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        currentThreadId: this.props.currentThreadId
+      }));
     }
   }]);
 
@@ -895,9 +894,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mSTP = function mSTP(state) {
+var mSTP = function mSTP(state, ownProps) {
   return {
-    messages: Object.values(state.entities.messages)
+    messages: Object.values(state.entities.messages),
+    currentThreadId: ownProps.currentThreadId
   };
 };
 
@@ -1967,8 +1967,8 @@ var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadDisplay, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-        threadId: this.props.threadId
+      return this.props.currentThreadId === undefined ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        currentThreadId: this.props.currentThreadId
       });
     }
   }]);
@@ -1998,7 +1998,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    threadId: state.entities.threads.currentThread
+    currentThreadId: state.ui.currentThread.id
   };
 };
 
@@ -2236,7 +2236,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2258,7 +2257,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 

@@ -12,10 +12,6 @@ class MessageForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
-  
-    this.setState({
-      channel_dms_id: this.props.currentThreadId
-    })
     
     if (this.props.formType === "Edit Message"){
       App.cable.subscriptions.subscriptions[0].update({ message: this.state})
