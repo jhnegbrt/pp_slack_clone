@@ -19,3 +19,5 @@ class ThreadIndexItem extends React.Component{
   }
 }
 
+export default ThreadIndexItem
+
