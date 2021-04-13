@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
 
 
-
-
 *{
   scroll-behavior: smooth;
 }
@@ -15,6 +13,7 @@
   font-size: 3vh;
   font-weight: bold;
   width: 100%;
+
 }
 
 .splash-page{
@@ -267,3 +266,90 @@
 //     box-shadow: 0 0 5px #2ba805;
 //   }
 // }
+
+//responsive design
+
+
+@media (max-width: 1024px){
+  .main-left h2{
+    font-size: 3vh;
+    line-height: 5vh
+  }
+
+  #intro{
+    padding-right: 20vh;
+    padding-left: 20vh;
+  }
+
+  .technologies-container{
+    width: 66vw
+  }
+
+  .splash-spy{
+    margin-right: 3vw;
+    margin-left: 3vw
+  }
+
+  .splash-header-list li{
+    font-size: 2vw;
+  }
+
+}
+
+@media (max-width: 851px){
+
+  .main-left h1{
+    margin-bottom: 4vh;
+  }
+
+}
+
+@media (max-width: 768px){
+  .splash-header-list-mobile{
+    display: flex;
+    align-items: center;
+    font-family: 'Comfortaa', cursive;
+    font-size: 3vh;
+    font-weight: bold;
+    width: 100%;
+    position: fixed;
+    height: 10vh;
+    justify-content: space-evenly;
+    background-color: rgb(241, 238, 232);
+  }
+
+  .splash-header-list-mobile li,
+  .splash-header-list-mobile li a{
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(40, 27, 128);
+    font-size: 3vw;
+    
+  }
+
+  .mobile-nav-menu-active,
+  .mobile-nav-menu{
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    position: fixed;
+    top: -100%;
+    transition: 850ms;
+    background-color: rgb(241, 238, 232);
+    
+  }
+
+  
+  .mobile-nav-menu-active li{
+    padding: 10vh;
+  }
+
+  .mobile-nav-menu li{
+    padding: 10vh;
+  }
+
+  .mobile-nav-menu-active{
+    top: 0;
+    transition: 350ms;
+  }
+}

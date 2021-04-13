@@ -14,59 +14,78 @@ import SplashTechnologies from './splash_technologies'
 class Splash extends React.Component{
   constructor(props){
     super(props)
+    this.state = ({
+      dropDown: false
+    })
+    this.handleDropdown = this.handleDropdown.bind(this)
   }
 
-  // handleScroll(){
+  handleDropdown(){
 
-  //   debugger
-  //   document.querySelectorAll()
-
-  // }
+    this.setState({
+      dropDown: !this.state.dropDown
+    })
+  }
 
   componentDidMount(){
     window.addEventListener('scroll', this.handleScroll)
   }
 
   render(){
-    let ourVar;
-    let ourVariable
+    let signUpLink;
+    let demoLink
+    let width = window.innerWidth
     if(this.props.currentUser){
-      ourVar = (
+      signUpLink = (
         <li><span onClick={this.props.logout}>Logout</span></li>
       )
     } else {
-      ourVar = (
+      signUpLink = (
         <li className="blink-me"><Link to='/signup'>Sign Up</Link></li>
-          
       )
     }
     if(this.props.currentUser){
     } else {
-      ourVariable = (
+      demoLink = (
         <li><Link to='/login'>Sign In/Demo</Link></li>
       )
     }
+
+    let desktopNav = (
+      <div>
+      <ul className="splash-header-list">
+        <li id="spy-icon"><a href="#main"><img src={Spy}></img></a></li>
+        <li><a id="sleuth-item" href="#main">Sleuth</a></li>
+        <li><a href="#intro" >Introduction</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#technologies">Technologies</a></li>
+
+      </ul>
+    </div>
+    )
+
+    let mobileNav = (
+      <div>
+        <ul className="splash-header-list-mobile">
+          <li id="spy-icon"><a href="#main"><img src={Spy}></img></a></li>
+          <li onClick={this.handleDropdown}>Menu</li>
+            <ul className={this.state.dropDown === true ? "mobile-nav-menu-active" :"mobile-nav-menu"}>
+              <li onClick={this.handleDropdown}><a href="#intro" >Introduction</a></li>
+              <li onClick={this.handleDropdown}><a href="#features">Features</a></li>
+              <li onClick={this.handleDropdown}><a href="#technologies">Technologies</a></li>
+              <li onClick={this.handleDropdown}>Close Menu</li>
+            </ul>
+          {signUpLink}
+          {demoLink}
+        </ul>
+
+      </div>
+    )
+
     return(
       <div className="splash-page">
 
-        <div>
-          <ul className="splash-header-list">
-            <li id="spy-icon"><a href="#main"><img src={Spy}></img></a></li>
-
-            <li><a id="sleuth-item" href="#main">Sleuth</a></li>
-            <li><a href="#intro" >Introduction</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#technologies">Technologies</a></li>
-
-            {/* <li><NavLink id="sleuth-item" to="#main"activeClassName="active-link">Sleuth</NavLink></li>
-            <li><NavLink to="#intro" activeClassName="active-link">Introduction</NavLink></li>
-            <li><NavLink to="#features" activeClassName="active-link">Features</NavLink></li>
-            <li><NavLink to="#technologies" activeClassName="active-link">Technologies</NavLink></li> */}
-            {ourVar}
-            {ourVariable}
-          </ul>
-        </div>
-
+        {width > 768 ? desktopNav : mobileNav}
 
         
         <SplashMain></SplashMain>
@@ -97,5 +116,11 @@ export default Splash
   {ourVariable}
 </ul>
 </div> */}
+
+
+            {/* <li><NavLink id="sleuth-item" to="#main"activeClassName="active-link">Sleuth</NavLink></li>
+            <li><NavLink to="#intro" activeClassName="active-link">Introduction</NavLink></li>
+            <li><NavLink to="#features" activeClassName="active-link">Features</NavLink></li>
+            <li><NavLink to="#technologies" activeClassName="active-link">Technologies</NavLink></li> */}
 
 
