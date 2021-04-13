@@ -1113,7 +1113,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     value: function enterSleuthMode(e) {
       e.preventDefault();
       this.props.processForm({
-        username: "sleuthaccount",
+        username: "The Sleuth",
         password: "123456"
       });
     }

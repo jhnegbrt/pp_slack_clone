@@ -22,7 +22,7 @@ class SessionForm extends React.Component {
 
   enterSleuthMode(e){
     e.preventDefault()
-    this.props.processForm({username: "sleuthaccount", password: "123456"})
+    this.props.processForm({username: "The Sleuth", password: "123456"})
   }
 
   handleChange(e){
