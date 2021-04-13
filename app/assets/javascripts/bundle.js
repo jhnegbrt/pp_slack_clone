@@ -620,6 +620,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
         App.cable.subscriptions.subscriptions[0].update({
           message: this.state
         });
+        debugger;
         this.props.toggleEdit();
       } else {
         App.cable.subscriptions.subscriptions[0].speak({
@@ -651,7 +652,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: this.props.formType
-      }, " "));
+      }));
     }
   }]);
 
@@ -857,6 +858,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     };
     _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_this));
     _this.toggleHover = _this.toggleHover.bind(_assertThisInitialized(_this));
+    _this.onDelete = _this.onDelete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -864,7 +866,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "toggleEdit",
     value: function toggleEdit() {
       this.setState({
-        editting: !this.state.edit
+        editting: !this.state.editting
       });
     }
   }, {
@@ -875,10 +877,17 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "onDelete",
+    value: function onDelete() {
+      this.toggleHover();
+      App.cable.subscriptions.subscriptions[0].remove_message({
+        message: this.props.message.id
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
+      debugger;
       var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         toggleEdit: this.toggleEdit,
         id: this.props.message.id
@@ -888,11 +897,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.toggleEdit
       }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: function onClick() {
-          return App.cable.subscriptions.subscriptions[0].remove_message({
-            message: _this2.props.message.id
-          });
-        }
+        onClick: this.onDelete
       }, "Delete"));
       var date_time = new Date(this.props.message.time);
       var time = date_time.toLocaleTimeString();
@@ -914,7 +919,6 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         new_user = false;
       }
 
-      debugger;
       var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         onMouseEnter: this.toggleHover,
         onMouseLeave: this.toggleHover,
@@ -926,7 +930,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       }, time) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
       }, this.props.message.content)), this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null);
-      return this.state.edit ? edit : display;
+      return this.state.editting ? edit : display;
     }
   }]);
 

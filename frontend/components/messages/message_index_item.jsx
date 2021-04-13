@@ -13,12 +13,14 @@ class MessageIndexItem extends React.Component{
 
     this.toggleEdit = this.toggleEdit.bind(this)
     this.toggleHover = this.toggleHover.bind(this)
+    this.onDelete = this.onDelete.bind(this)
   }
 
   toggleEdit(){
     this.setState({
-      editting: !this.state.edit
+      editting: !this.state.editting
     })
+
   }
 
   toggleHover(){
@@ -27,7 +29,13 @@ class MessageIndexItem extends React.Component{
     })
   }
 
+  onDelete(){
+    this.toggleHover()
+    App.cable.subscriptions.subscriptions[0].remove_message({ message: this.props.message.id})
+  }
+
   render(){
+    debugger
     const edit = (
       <li>
         <EditMessageFormContainer toggleEdit={this.toggleEdit} id={this.props.message.id}></EditMessageFormContainer>
@@ -37,11 +45,9 @@ class MessageIndexItem extends React.Component{
     const buttons = (
       <div className="message-buttons">
         <button onClick={this.toggleEdit}>Edit</button>
-        <button onClick={() => App.cable.subscriptions.subscriptions[0].remove_message({ message: this.props.message.id})}>Delete</button>
+        <button onClick={this.onDelete}>Delete</button>
       </div>
     )
-
-
     
     let date_time = new Date(this.props.message.time)
     let time = date_time.toLocaleTimeString()
@@ -64,7 +70,6 @@ class MessageIndexItem extends React.Component{
       new_user = false
     }
     
-    debugger
     const display = (
       <div 
         onMouseEnter={this.toggleHover}
@@ -74,14 +79,14 @@ class MessageIndexItem extends React.Component{
           {new_user === true ? <span className="message-name">{this.props.message.sender}</span> : null}
           {time_diff > 18000 || new_user === true ? <span className="message-time">{time}</span> : null}
           <p><Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link></p>
-          {this.props.message.sender_id === this.props.currentUserId 
+          {this.props.message.sender_id === this.props.currentUserId
           && this.state.hover === true ? 
           buttons : null }
       </div>
     )
 
     return (
-      this.state.edit ? edit : display 
+      this.state.editting ? edit : display 
     )
   }
 

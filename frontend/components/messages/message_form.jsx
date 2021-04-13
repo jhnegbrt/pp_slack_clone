@@ -16,6 +16,7 @@ class MessageForm extends React.Component{
 
     if (this.props.formType === "Edit Message"){
       App.cable.subscriptions.subscriptions[0].update({ message: this.state})
+      debugger
       this.props.toggleEdit();
     } else {
       App.cable.subscriptions.subscriptions[0].speak({ message: this.state})
@@ -36,7 +37,7 @@ class MessageForm extends React.Component{
     return(
       <form className="thread-form" onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} type="text" placeholder="SEND MESSAGE" value={this.state.content}></input>
-        <input type="submit" value={this.props.formType}> </input>
+        <input type="submit" value={this.props.formType}></input>
       </form>
     )
   }
