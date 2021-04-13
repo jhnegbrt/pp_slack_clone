@@ -29,6 +29,7 @@ class MessageIndexItem extends React.Component{
   }
 
   render(){
+    debugger
     const edit = (
       <li>
         <EditMessageFormContainer toggleEdit={this.toggleEdit} id={this.props.message.id}></EditMessageFormContainer>
@@ -47,17 +48,17 @@ class MessageIndexItem extends React.Component{
     time = time.slice(0, time.length-6)
 
     const display = (
-
-      
       <div 
         onMouseEnter={this.toggleHover}
         onMouseLeave={this.toggleHover}
         className={this.props.message.sender_id === this.props.currentUserId ?
         "thread-message-current": "thread-message"}>
-          <span>{this.props.message.sender}</span>
+          {this.props.previous == undefined || this.props.message.sender_id !== this.props.previous.sender_id ? <span>{this.props.message.sender}</span> : null}
           <span>{time}</span>
-        <p><Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link></p>
-        {this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null }
+          <p><Link to={`/messages/${this.props.message.id}`}>{this.props.message.content}</Link></p>
+          {this.props.message.sender_id === this.props.currentUserId 
+          && this.state.hover === true ? 
+          buttons : null }
       </div>
     )
 

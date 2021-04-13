@@ -739,8 +739,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         className: "thread-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "thread"
-      }, messages.map(function (message) {
+      }, messages.map(function (message, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+          previous: messages[idx - 1],
           message: message,
           key: message.id
         });
@@ -879,6 +880,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      debugger;
       var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         toggleEdit: this.toggleEdit,
         id: this.props.message.id
@@ -901,7 +903,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         onMouseEnter: this.toggleHover,
         onMouseLeave: this.toggleHover,
         className: this.props.message.sender_id === this.props.currentUserId ? "thread-message-current" : "thread-message"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, this.props.message.sender), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      }, this.props.previous == undefined || this.props.message.sender_id !== this.props.previous.sender_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, this.props.message.sender) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, time), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/messages/".concat(this.props.message.id)
       }, this.props.message.content)), this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null);
       return this.state.edit ? edit : display;

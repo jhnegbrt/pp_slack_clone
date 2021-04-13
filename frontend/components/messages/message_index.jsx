@@ -29,8 +29,9 @@ class MessageIndex extends React.Component{
       <div className = "thread-container">
         <ul className="thread">
           {
-            messages.map(message =>(
+            messages.map((message, idx) =>(
               <MessageIndexItemContainer
+                previous={messages[idx-1]}
                 message={message}
                 key={message.id}
                 />

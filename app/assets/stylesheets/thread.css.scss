@@ -103,6 +103,21 @@ div::-webkit-scrollbar{
   background-color:rgb(192, 238, 240) 
 }
 
+.thread-form input[type=submit]{
+  font-family: 'Comfortaa', serif;
+  background-color: rgba(62, 85, 148, 0.774);
+  border: none;
+  border-radius: 2px;
+  padding: 1vh;
+  margin: 1vh;
+  box-shadow: rgba(62, 85, 148, 0.774) 0px 5px 15px;
+  color: rgb(40, 41, 95);
+}
+
+.thread-form input[type=submit]:hover{
+  background-color: rgb(192, 238, 240)
+}
+
 
 div::-webkit-scrollbar-thumb {
   background-color: rgb(159, 240, 243);    /* color of the scroll thumb */
