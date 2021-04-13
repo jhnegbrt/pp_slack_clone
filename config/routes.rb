@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :messages, except: [:new, :edit]
     resources :users, only: [:create]
     resource :session, only: [:create, :destroy]
+    resources :channel_dms, except: [:new, :edit]
 
   end
 

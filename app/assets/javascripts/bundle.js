@@ -307,7 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "receiveAllThreads": () => (/* binding */ receiveAllThreads),
 /* harmony export */   "createThread": () => (/* binding */ createThread)
 /* harmony export */ });
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../util/thread_api_util'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/thread_api_util */ "./frontend/util/thread_api_util.js");
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
@@ -324,7 +324,7 @@ var receiveAllThreads = function receiveAllThreads(data) {
   };
 };
 var createThread = function createThread(data) {
-  return Object(function webpackMissingModule() { var e = new Error("Cannot find module '../util/thread_api_util'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(formThread).then(function (thread) {
+  return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(formThread).then(function (thread) {
     return dispatchEvent(receiveCurrentThread(thread));
   }).fail(function (errors) {
     return dispatch(receiveErrors(errors.responseJSON));
@@ -2634,6 +2634,29 @@ var logout = function logout() {
   return $.ajax({
     method: 'DELETE',
     url: '/api/session'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/thread_api_util.js":
+/*!******************************************!*\
+  !*** ./frontend/util/thread_api_util.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createThread": () => (/* binding */ createThread)
+/* harmony export */ });
+var createThread = function createThread(thread) {
+  return $.ajax({
+    method: 'POST',
+    url: 'api/channel_dms',
+    data: {
+      channel_dm: thread
+    }
   });
 };
 
