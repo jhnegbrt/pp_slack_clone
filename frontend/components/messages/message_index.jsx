@@ -1,7 +1,7 @@
 import React from 'react'
 import MessageIndexItemContainer from './message_index_item_container'
 import CreateMessageFormContainer from './create_message_form_container'
-import createThread from './create_thread'
+
 
 
 class MessageIndex extends React.Component{
@@ -11,11 +11,11 @@ class MessageIndex extends React.Component{
     this.bottom = React.createRef();
   }
 
-  componentDidMount() {
+  // componentDidMount() {
 
-    createThread(this.props.currentThreadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+  //   createThread(this.props.currentThreadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
 
-  }
+  // }
 
 
   // componentDidUpdate() {

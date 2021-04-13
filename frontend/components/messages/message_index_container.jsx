@@ -9,10 +9,10 @@ const mSTP = (state, ownProps) => {
   })
 }
 
-const mDTP = dispatch => ({
-  receiveMessage: (message) => dispatch(receiveMessage(message)),
-  receiveMessages: (messages) => dispatch(receiveAllMessages(messages)),
-  removeMessage: (messageId)=> dispatch(removeMessage(messageId))
-})
+// const mDTP = dispatch => ({
+//   receiveMessage: (message) => dispatch(receiveMessage(message)),
+//   receiveMessages: (messages) => dispatch(receiveAllMessages(messages)),
+//   removeMessage: (messageId)=> dispatch(removeMessage(messageId))
+// })
 
-export default connect(mSTP, mDTP)(MessageIndex)
+export default connect(mSTP, null)(MessageIndex)

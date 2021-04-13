@@ -530,55 +530,6 @@ var mDTP = function mDTP(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/messages/create_thread.jsx":
-/*!********************************************************!*\
-  !*** ./frontend/components/messages/create_thread.jsx ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createThread)
-/* harmony export */ });
-function createThread(currentThreadId, receive, receiveAll, remove) {
-  debugger;
-  App.cable.subscriptions.create({
-    channel: "ChatChannel",
-    thread_id: currentThreadId
-  }, {
-    received: function received(data) {
-      switch (data.type) {
-        case "message":
-          receive(data);
-          break;
-
-        case "messages":
-          receiveAll(data);
-          break;
-
-        case "delete":
-          remove(data['message_id']);
-          break;
-      }
-    },
-    load: function load() {
-      return this.perform("load");
-    },
-    speak: function speak(message) {
-      return this.perform("speak", message);
-    },
-    update: function update(message) {
-      return this.perform("update_message", message);
-    },
-    remove_message: function remove_message(data) {
-      return this.perform("remove_message", data);
-    }
-  });
-}
-
-/***/ }),
-
 /***/ "./frontend/components/messages/edit_message_form_container.jsx":
 /*!**********************************************************************!*\
   !*** ./frontend/components/messages/edit_message_form_container.jsx ***!
@@ -798,7 +749,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _message_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item_container */ "./frontend/components/messages/message_index_item_container.jsx");
 /* harmony import */ var _create_message_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_message_form_container */ "./frontend/components/messages/create_message_form_container.jsx");
-/* harmony import */ var _create_thread__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_thread */ "./frontend/components/messages/create_thread.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -825,7 +775,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndex, _React$Component);
 
@@ -839,17 +788,15 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
     return _this;
-  }
+  } // componentDidMount() {
+  //   createThread(this.props.currentThreadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+  // }
+  // componentDidUpdate() {
+  //   this.bottom.current.scrollIntoView();
+  // }
+
 
   _createClass(MessageIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      (0,_create_thread__WEBPACK_IMPORTED_MODULE_3__.default)(this.props.currentThreadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
-    } // componentDidUpdate() {
-    //   this.bottom.current.scrollIntoView();
-    // }
-
-  }, {
     key: "render",
     value: function render() {
       var messages = this.props.messages;
@@ -899,23 +846,14 @@ var mSTP = function mSTP(state, ownProps) {
     messages: Object.values(state.entities.messages),
     currentThreadId: ownProps.currentThreadId
   };
-};
+}; // const mDTP = dispatch => ({
+//   receiveMessage: (message) => dispatch(receiveMessage(message)),
+//   receiveMessages: (messages) => dispatch(receiveAllMessages(messages)),
+//   removeMessage: (messageId)=> dispatch(removeMessage(messageId))
+// })
 
-var mDTP = function mDTP(dispatch) {
-  return {
-    receiveMessage: function receiveMessage(message) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveMessage)(message));
-    },
-    receiveMessages: function receiveMessages(messages) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveAllMessages)(messages));
-    },
-    removeMessage: function removeMessage(messageId) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.removeMessage)(messageId));
-    }
-  };
-};
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_message_index__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, null)(_message_index__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -1873,6 +1811,55 @@ var TechnologyDisplay = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/threads/create_thread.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/threads/create_thread.jsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createThread)
+/* harmony export */ });
+function createThread(currentThreadId, receive, receiveAll, remove) {
+  debugger;
+  App.cable.subscriptions.create({
+    channel: "ChatChannel",
+    thread_id: currentThreadId
+  }, {
+    received: function received(data) {
+      switch (data.type) {
+        case "message":
+          receive(data);
+          break;
+
+        case "messages":
+          receiveAll(data);
+          break;
+
+        case "delete":
+          remove(data['message_id']);
+          break;
+      }
+    },
+    load: function load() {
+      return this.perform("load");
+    },
+    speak: function speak(message) {
+      return this.perform("speak", message);
+    },
+    update: function update(message) {
+      return this.perform("update_message", message);
+    },
+    remove_message: function remove_message(data) {
+      return this.perform("remove_message", data);
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./frontend/components/threads/create_thread_form_container.jsx":
 /*!**********************************************************************!*\
   !*** ./frontend/components/threads/create_thread_form_container.jsx ***!
@@ -1907,6 +1894,38 @@ var mDTP = function mDTP(dispatch) {
   return {
     submit: function submit(thread) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(thread));
+    },
+    receiveMessage: function (_receiveMessage) {
+      function receiveMessage(_x) {
+        return _receiveMessage.apply(this, arguments);
+      }
+
+      receiveMessage.toString = function () {
+        return _receiveMessage.toString();
+      };
+
+      return receiveMessage;
+    }(function (message) {
+      return dispatch(receiveMessage(message));
+    }),
+    receiveMessages: function receiveMessages(messages) {
+      return dispatch(receiveAllMessages(messages));
+    },
+    removeMessage: function (_removeMessage) {
+      function removeMessage(_x2) {
+        return _removeMessage.apply(this, arguments);
+      }
+
+      removeMessage.toString = function () {
+        return _removeMessage.toString();
+      };
+
+      return removeMessage;
+    }(function (messageId) {
+      return dispatch(removeMessage(messageId));
+    }),
+    receiveCurrentThread: function receiveCurrentThread(thread) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(thread.id));
     }
   };
 };
@@ -2018,6 +2037,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _create_thread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_thread */ "./frontend/components/threads/create_thread.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2042,6 +2062,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ThreadForm = /*#__PURE__*/function (_React$Component) {
   _inherits(ThreadForm, _React$Component);
 
@@ -2061,10 +2082,20 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ThreadForm, [{
+    key: "helperFunction",
+    value: function helperFunction(thread) {
+      (0,_create_thread__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+      this.props.receiveCurrentThread(thread);
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
-      this.props.submit(this.state);
+      this.props.submit(this.state).then(function (thread) {
+        return _this2.helperFunction(thread);
+      });
       this.setState({
         title: ""
       });

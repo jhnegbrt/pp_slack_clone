@@ -29,9 +29,9 @@ class ChatChannel < ApplicationCable::Channel
       sender_id: data['message']['sender_id'],
       channel_dms_id: data['message']['channel_dms_id']
     )
+    
     sender = Message.find_by(id: new_message.id).sender
     time = new_message["updated_at"]
-    # time = time.hour.to_s + ":" + time.min.to_s
     socket = {
       type: "message",
       id: new_message.id, 

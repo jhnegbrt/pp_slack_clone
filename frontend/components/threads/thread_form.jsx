@@ -1,4 +1,5 @@
 import React from 'react'
+import createThread from './create_thread'
 
 class ThreadForm extends React.Component{
   constructor(props){
@@ -10,9 +11,15 @@ class ThreadForm extends React.Component{
     this.updateTitle = this.updateTitle.bind(this)
   }
 
+  helperFunction(thread){ 
+    createThread(thread.id, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+    this.props.receiveCurrentThread(thread)
+  }
+
   handleSubmit(e){
     e.preventDefault()
     this.props.submit(this.state)
+      .then((thread) => this.helperFunction(thread))
     this.setState({
       title: ""
     })
