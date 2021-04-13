@@ -26,7 +26,7 @@ class MessageIndex extends React.Component{
   //   this.bottom.current.scrollIntoView();
   // }
 
-  render(){
+  render(){ 
 
     const { messages } = this.props
   

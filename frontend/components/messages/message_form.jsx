@@ -4,18 +4,19 @@ class MessageForm extends React.Component{
   constructor(props){
     super(props)
     this.state = this.props.message
-    this.state.sender_id = this.props.senderId
-    this.state.channel_dms_id = this.props.threadId
-
+    // this.state.channel_dms_id = this.props.currentThreadId
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateContent = this.updateContent.bind(this)
   }
 
-  // action cable handleSubmit
-  handleSubmit(e){
-    debugger
-    e.preventDefault()
 
+  handleSubmit(e){
+    e.preventDefault()
+  
+    this.setState({
+      channel_dms_id: this.props.currentThreadId
+    })
+    
     if (this.props.formType === "Edit Message"){
       App.cable.subscriptions.subscriptions[0].update({ message: this.state})
       this.props.toggleEdit();
@@ -27,7 +28,6 @@ class MessageForm extends React.Component{
     }
   }
 
-
   updateContent(e){
     this.setState({
       content: e.target.value
@@ -35,9 +35,10 @@ class MessageForm extends React.Component{
   }
 
   render(){
+  
     return(
       <form className="message-form" onSubmit={this.handleSubmit}>
-        <input onChange={this.updateContent} type="text" placeholder="SEND MESSAGE" value={this.state.content}></input>
+        <input onChange={this.updateContent} type="text" placeholder="MESSAGE" value={this.state.content}></input>
         <input type="submit" value={this.props.formType}></input>
       </form>
     )

@@ -9,7 +9,7 @@ class ThreadIndexItem extends React.Component{
   }
 
   selectThread(e){
-    receiveCurrentThread(e.currentTarget.name)
+    this.props.selectThread(e.currentTarget.name)
   }
 
   render(){

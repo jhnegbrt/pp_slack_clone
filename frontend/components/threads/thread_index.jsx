@@ -1,5 +1,5 @@
 import React from 'react'
-import ThreadIndexItem from './thread_index_item'
+import ThreadIndexItemContainer from './thread_index_item_container'
 import CreateThreadFormContainer from './create_thread_form_container'
 
 
@@ -20,7 +20,7 @@ class ThreadIndex extends React.Component{
     if (typeof thread === "number"){
       return
     } else {
-      return <ThreadIndexItem thread={thread} key={thread.id}/>
+      return <ThreadIndexItemContainer thread={thread} key={thread.id}/>
     }
   }
 

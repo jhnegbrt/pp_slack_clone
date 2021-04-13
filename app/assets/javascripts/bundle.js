@@ -160,7 +160,6 @@ var receiveMessage = function receiveMessage(message) {
   };
 };
 var removeMessage = function removeMessage(messageId) {
-  // debugger
   return {
     type: REMOVE_MESSAGE,
     messageId: messageId
@@ -311,10 +310,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
-var receiveCurrentThread = function receiveCurrentThread(thread) {
+var receiveCurrentThread = function receiveCurrentThread(threadId) {
   return {
     type: RECEIVE_CURRENT_THREAD,
-    thread: thread
+    threadId: threadId
   };
 };
 
@@ -327,9 +326,8 @@ var receiveAllThreads = function receiveAllThreads(threads) {
 
 var createThread = function createThread(data) {
   return function (dispatch) {
-    debugger;
     return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
-      return dispatch(receiveCurrentThread(thread));
+      return dispatch(receiveCurrentThread(thread.id));
     }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
     ;
   };
@@ -511,10 +509,10 @@ var mSTP = function mSTP(state) {
   return {
     message: {
       content: "",
-      sender_id: state.session.id,
-      channel_dms_id: state.ui.currentThread
+      sender_id: state.session.id
     },
-    formType: "Send"
+    formType: "Send",
+    currentThreadId: state.ui.currentThread.Id
   };
 };
 
@@ -725,20 +723,20 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageForm);
 
     _this = _super.call(this, props);
-    _this.state = _this.props.message;
-    _this.state.sender_id = _this.props.senderId;
-    _this.state.channel_dms_id = _this.props.threadId;
+    _this.state = _this.props.message; // this.state.channel_dms_id = this.props.currentThreadId
+
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     return _this;
-  } // action cable handleSubmit
-
+  }
 
   _createClass(MessageForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      debugger;
       e.preventDefault();
+      this.setState({
+        channel_dms_id: this.props.currentThreadId
+      });
 
       if (this.props.formType === "Edit Message") {
         App.cable.subscriptions.subscriptions[0].update({
@@ -770,7 +768,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         onChange: this.updateContent,
         type: "text",
-        placeholder: "SEND MESSAGE",
+        placeholder: "MESSAGE",
         value: this.state.content
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
@@ -899,8 +897,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    messages: Object.values(state.entities.messages),
-    threadId: state.entities.threads.currentThread
+    messages: Object.values(state.entities.messages)
   };
 };
 
@@ -2115,7 +2112,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _thread_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_index_item */ "./frontend/components/threads/thread_index_item.jsx");
+/* harmony import */ var _thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_index_item_container */ "./frontend/components/threads/thread_index_item_container.jsx");
 /* harmony import */ var _create_thread_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_thread_form_container */ "./frontend/components/threads/create_thread_form_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2168,7 +2165,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       if (typeof thread === "number") {
         return;
       } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           thread: thread,
           key: thread.id
         });
@@ -2283,7 +2280,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadIndexItem, [{
     key: "selectThread",
     value: function selectThread(e) {
-      (0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveCurrentThread)(e.currentTarget.name);
+      this.props.selectThread(e.currentTarget.name);
     }
   }, {
     key: "render",
@@ -2299,6 +2296,36 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThreadIndexItem);
+
+/***/ }),
+
+/***/ "./frontend/components/threads/thread_index_item_container.jsx":
+/*!*********************************************************************!*\
+  !*** ./frontend/components/threads/thread_index_item_container.jsx ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _thread_index_item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./thread_index_item */ "./frontend/components/threads/thread_index_item.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
+
+
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    selectThread: function selectThread(threadId) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(threadId));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(null, mDTP)(_thread_index_item__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
@@ -2324,7 +2351,7 @@ var threadsReducer = function threadsReducer() {
   switch (action.type) {
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_THREAD:
       return Object.assign({}, state, {
-        currentThread: action.thread.id
+        id: action.threadId
       });
 
     default:

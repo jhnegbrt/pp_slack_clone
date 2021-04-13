@@ -34,7 +34,6 @@ export const receiveMessage = (message) => {
 }
 
 export const removeMessage = (messageId) => {
-  // debugger
   return({
     type: REMOVE_MESSAGE,
     messageId
