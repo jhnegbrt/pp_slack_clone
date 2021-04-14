@@ -1,5 +1,4 @@
-export default function createConnection(currentThreadId, receive, receiveCurrentThread, remove){
-
+export default function createConnection(currentThreadId, receive, receiveCurrentMessages, remove){
   App.cable.subscriptions.create(
     
     { channel: "ChatChannel", thread_id: currentThreadId },
@@ -10,7 +9,7 @@ export default function createConnection(currentThreadId, receive, receiveCurren
             receive(data)
             break
           case "messages":
-            receiveCurrentThread(data)
+            receiveCurrentMessages(data)
             break
           case "delete":
             remove(data['message_id'])

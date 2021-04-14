@@ -1,5 +1,5 @@
 import React from 'react'
-import createConnection from './create_connection'
+
 import { NavLink } from 'react-router-dom'
 
 class ThreadIndexItem extends React.Component{
@@ -14,8 +14,13 @@ class ThreadIndexItem extends React.Component{
   }
 
   render(){
+    
     return(
-      <li><NavLink to={`/client/thread/${this.props.thread.id}`}>{this.props.thread.title}</NavLink></li>
+      <li>
+        <NavLink to={`/client/thread/${this.props.thread.id}`}>
+          { this.props.thread.title }
+        </NavLink>
+      </li>
     )
   }
 }

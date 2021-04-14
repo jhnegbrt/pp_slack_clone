@@ -7,7 +7,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def load
-    messages = Message.all.includes(:sender)
+    messages = Message.where("channel_dms_id = #{params['thread_id']}").includes(:sender)
     messages_hash = {}
     messages.each do |m|
   
