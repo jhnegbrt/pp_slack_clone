@@ -18,7 +18,6 @@ const mDTP = (dispatch) => ({
   submit: (thread) => dispatch(createThread(thread)),
   receiveMessage: (message) => dispatch(receiveMessage(message)),
   receiveMessages: (messages) => dispatch(receiveAllMessages(messages)),
-  removeMessage: (messageId)=> dispatch(removeMessage(messageId)),
   receiveCurrentThread: (thread) => dispatch(receiveCurrentThread(thread.id)),
   fetchThreads: () => dispatch(fetchThreads())
 })

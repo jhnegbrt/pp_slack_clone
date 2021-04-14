@@ -1,7 +1,8 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
-    
+    debugger
+    UserChannelDm.create(channel_dm_id: params['thread_id'], user_id: params['user_id'] )
     stream_for "chat_channel_#{params['thread_id']}"
     self.load
     

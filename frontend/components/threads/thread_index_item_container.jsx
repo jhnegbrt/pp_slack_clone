@@ -4,9 +4,10 @@ import { receiveCurrentThread, fetchThreads, createThread } from '../../actions/
 import {receiveMessage, removeMessage, receiveMessages} from '../../actions/message_actions'
 
 
-const mSTP = (state, ownProps) => ({
-  currentThreadId: state.ui.currentThread.id
-})
+const mSTP = (state, ownProps) => {
+  return{
+  user_id: state.session.id
+}}
 
 const mDTP = dispatch => ({
   selectThread: (threadId) => dispatch(receiveCurrentThread(threadId)),
@@ -19,4 +20,4 @@ const mDTP = dispatch => ({
 
 })
 
-export default connect(null, mDTP)(ThreadIndexItem)
+export default connect(mSTP, mDTP)(ThreadIndexItem)

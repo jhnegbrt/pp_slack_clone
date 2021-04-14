@@ -1859,10 +1859,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createConnection)
 /* harmony export */ });
-function createConnection(currentThreadId, receive, receiveCurrentMessages, remove) {
+function createConnection(currentThreadId, currentUserId, receive, receiveCurrentMessages, remove) {
   App.cable.subscriptions.create({
     channel: "ChatChannel",
-    thread_id: currentThreadId
+    thread_id: currentThreadId,
+    user_id: currentUserId
   }, {
     received: function received(data) {
       switch (data.type) {
@@ -1939,19 +1940,6 @@ var mDTP = function mDTP(dispatch) {
     receiveMessages: function receiveMessages(messages) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveAllMessages)(messages));
     },
-    removeMessage: function (_removeMessage) {
-      function removeMessage(_x) {
-        return _removeMessage.apply(this, arguments);
-      }
-
-      removeMessage.toString = function () {
-        return _removeMessage.toString();
-      };
-
-      return removeMessage;
-    }(function (messageId) {
-      return dispatch(removeMessage(messageId));
-    }),
     receiveCurrentThread: function receiveCurrentThread(thread) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(thread.id));
     },
@@ -2351,9 +2339,10 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           receiveMessage = _this$props.receiveMessage,
           thread = _this$props.thread,
+          user_id = _this$props.user_id,
           receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
-      (0,_create_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage);
+      (0,_create_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, user_id, receiveMessage, receiveMessages, removeMessage);
     }
   }, {
     key: "render",
@@ -2397,7 +2386,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    currentThreadId: state.ui.currentThread.id
+    user_id: state.session.id
   };
 };
 
@@ -2427,7 +2416,7 @@ var mDTP = function mDTP(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(null, mDTP)(_thread_index_item__WEBPACK_IMPORTED_MODULE_0__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_thread_index_item__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
