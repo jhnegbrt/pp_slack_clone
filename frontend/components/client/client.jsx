@@ -11,7 +11,7 @@ class Client extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="client">
         <Route path='/client' component={ThreadIndexContainer} />
         <Route path='/client/thread/:threadId' component={ThreadDisplayContainer} />
       </div>

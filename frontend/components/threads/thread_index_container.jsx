@@ -3,7 +3,8 @@ import {fetchThreads } from '../../actions/thread_actions'
 import ThreadIndex from './thread_index'
 
 const mSTP = state =>({
-  threads: Object.values(state.entities.threads)
+  threads: Object.values(state.entities.threads),
+  currentThreadId: state.ui.currentThread.id
 })
 
 const mDTP = (dispatch) => ({

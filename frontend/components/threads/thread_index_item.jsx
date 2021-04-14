@@ -10,8 +10,8 @@ class ThreadIndexItem extends React.Component{
     this.selectThread = this.selectThread.bind(this)
   }
 
-  selectThread(e){
-    this.props.selectThread(e.currentTarget.name)
+  selectThread(){
+    this.props.selectThread(this.props.thread.id)
   }
 
   componentDidMount(){
@@ -20,10 +20,9 @@ class ThreadIndexItem extends React.Component{
   }
 
   render(){
-    
     return(
-      <li>
-        <NavLink to={`/client/thread/${this.props.thread.id}`}>
+      <li className={this.props.currentThreadId === this.props.thread.id ? "thread-hover" : null}>
+        <NavLink onClick={this.selectThread} to={`/client/thread/${this.props.thread.id}`}>
           { this.props.thread.title }
         </NavLink>
       </li>

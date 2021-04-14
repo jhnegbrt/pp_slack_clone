@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+
+.thread-index{
+  width: 20%;
+  padding: 3%;
+  background-color: rgb(2, 2, 59);
+  font-family: 'Comfortaa', serif;
+  
+}
+
+.thread-index li a{
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.thread-index li{
+  padding: 2vh;
+}
+
+.thread-index li:hover{
+  background-color: rgb(44, 44, 83);
+  border-radius: 5px;
+  box-shadow: rgba(150, 151, 216, 0.3) 0px 1vh 1vh, rgba(160, 148, 231, 0.22) 0px 1vh 1vh;
+}

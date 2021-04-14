@@ -485,7 +485,9 @@ var Client = /*#__PURE__*/function (_React$Component) {
   _createClass(Client, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+        className: "client"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
         path: "/client",
         component: _threads_thread_index_container__WEBPACK_IMPORTED_MODULE_1__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
@@ -2256,7 +2258,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    threads: Object.values(state.entities.threads)
+    threads: Object.values(state.entities.threads),
+    currentThreadId: state.ui.currentThread.id
   };
 };
 
@@ -2329,8 +2332,8 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
 
   _createClass(ThreadIndexItem, [{
     key: "selectThread",
-    value: function selectThread(e) {
-      this.props.selectThread(e.currentTarget.name);
+    value: function selectThread() {
+      this.props.selectThread(this.props.thread.id);
     }
   }, {
     key: "componentDidMount",
@@ -2345,7 +2348,10 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: this.props.currentThreadId === this.props.thread.id ? "thread-hover" : null
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+        onClick: this.selectThread,
         to: "/client/thread/".concat(this.props.thread.id)
       }, this.props.thread.title));
     }
