@@ -852,8 +852,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
-
 
 
 
@@ -865,12 +863,7 @@ var mSTP = function mSTP(state, ownProps) {
     }),
     currentThreadId: ownProps.currentThreadId
   };
-}; // const mDTP = dispatch => ({
-//   receiveMessage: (message) => dispatch(receiveMessage(message)),
-//   receiveMessages: (messages) => dispatch(receiveAllMessages(messages)),
-//   removeMessage: (messageId)=> dispatch(removeMessage(messageId))
-// })
-
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, null)(_message_index__WEBPACK_IMPORTED_MODULE_1__.default));
 
