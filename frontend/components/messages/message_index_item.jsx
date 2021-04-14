@@ -12,7 +12,8 @@ class MessageIndexItem extends React.Component{
     })
 
     this.toggleEdit = this.toggleEdit.bind(this)
-    this.toggleHover = this.toggleHover.bind(this)
+    this.hovering = this.hovering.bind(this)
+    this.notHovering = this.notHovering.bind(this)
     this.onDelete = this.onDelete.bind(this)
   }
 
@@ -23,15 +24,26 @@ class MessageIndexItem extends React.Component{
 
   }
 
-  toggleHover(){
-    this.setState({
-      hover: !this.state.hover
-    })
+  hovering(){
+    if(this.state.hover === false){
+      this.setState({
+        hover: true
+      })
+    }
+  }
+
+  notHovering(){
+    if(this.state.hover === true){
+      this.setState({
+        hover: false
+      })
+    }
   }
 
   onDelete(){
-    this.toggleHover()
+  
     App.cable.subscriptions.subscriptions[0].remove_message({ message: this.props.message.id})
+
   }
 
   render(){
@@ -72,8 +84,8 @@ class MessageIndexItem extends React.Component{
     
     const display = (
       <div 
-        onMouseEnter={this.toggleHover}
-        onMouseLeave={this.toggleHover}
+        onMouseEnter={this.hovering}
+        onMouseLeave={this.notHovering}
         className={this.props.message.sender_id === this.props.currentUserId ?
         "message-current": "message"}>
           {new_user === true ? <span className="message-name">{this.props.message.sender}</span> : null}

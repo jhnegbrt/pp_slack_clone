@@ -49,18 +49,20 @@ class ChatChannel < ApplicationCable::Channel
 
   def update_message(data)
 
+    channel_dms_id = data['message']['channel_dms_id']
+
     message = Message.find_by(id: data['message']['id'])
-    updated_message = message.update(content: data['message']['content'])
-    sender = Message.find_by(id: updated_message.id).sender
-    time = updated_message["updated_at"]
+    message.update(content: data['message']['content'])
+    sender = Message.find_by(id: message.id).sender
+    time = message["updated_at"]
     socket = { 
-      
+      type: "message",
       id: message.id, 
       content: message.content,
       sender_id: message.sender_id,
-      type: "message",
       sender: sender["username"],
-      time: time
+      time: time,
+      channel_dms_id: channel_dms_id
     }
     ChatChannel.broadcast_to("chat_channel_#{params['thread_id']}", socket)
   end
@@ -72,7 +74,7 @@ class ChatChannel < ApplicationCable::Channel
       type: "delete",
       message_id: data['message']
     }
-    ChatChannel.broadcast_to('chat_channel', socket)
+    ChatChannel.broadcast_to("chat_channel_#{params['thread_id']}", socket)
   end
 
   def unsubscribed; end

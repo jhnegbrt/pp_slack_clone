@@ -926,7 +926,8 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       hover: false
     };
     _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_this));
-    _this.toggleHover = _this.toggleHover.bind(_assertThisInitialized(_this));
+    _this.hovering = _this.hovering.bind(_assertThisInitialized(_this));
+    _this.notHovering = _this.notHovering.bind(_assertThisInitialized(_this));
     _this.onDelete = _this.onDelete.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -939,16 +940,26 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "toggleHover",
-    value: function toggleHover() {
-      this.setState({
-        hover: !this.state.hover
-      });
+    key: "hovering",
+    value: function hovering() {
+      if (this.state.hover === false) {
+        this.setState({
+          hover: true
+        });
+      }
+    }
+  }, {
+    key: "notHovering",
+    value: function notHovering() {
+      if (this.state.hover === true) {
+        this.setState({
+          hover: false
+        });
+      }
     }
   }, {
     key: "onDelete",
     value: function onDelete() {
-      this.toggleHover();
       App.cable.subscriptions.subscriptions[0].remove_message({
         message: this.props.message.id
       });
@@ -989,8 +1000,8 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       }
 
       var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        onMouseEnter: this.toggleHover,
-        onMouseLeave: this.toggleHover,
+        onMouseEnter: this.hovering,
+        onMouseLeave: this.notHovering,
         className: this.props.message.sender_id === this.props.currentUserId ? "message-current" : "message"
       }, new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-name"
@@ -2387,19 +2398,9 @@ var mDTP = function mDTP(dispatch) {
     receiveMessages: function receiveMessages(messages) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessages)(messages));
     },
-    removeMessage: function (_removeMessage) {
-      function removeMessage(_x) {
-        return _removeMessage.apply(this, arguments);
-      }
-
-      removeMessage.toString = function () {
-        return _removeMessage.toString();
-      };
-
-      return removeMessage;
-    }(function (messageId) {
-      return dispatch(removeMessage(messageId));
-    }),
+    removeMessage: function removeMessage(messageId) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.removeMessage)(messageId));
+    },
     receiveCurrentThread: function receiveCurrentThread(thread) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(thread.id));
     },
