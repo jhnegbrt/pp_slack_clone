@@ -12,7 +12,6 @@ class MessageForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
-    debugger
     if (this.props.formType === "Edit Message"){
       App.cable.subscriptions.subscriptions[0].update({ message: this.state})
       this.props.toggleEdit();

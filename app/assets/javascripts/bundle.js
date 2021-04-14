@@ -399,7 +399,6 @@ var App = function App() {
     path: "/technologies",
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__.ProtectedRoute, {
-    exact: true,
     path: "/client",
     component: _components_client_client__WEBPACK_IMPORTED_MODULE_6__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
@@ -435,9 +434,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../threads/thread_display_container */ "./frontend/components/threads/thread_display_container.jsx");
 /* harmony import */ var _threads_thread_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../threads/thread_index_container */ "./frontend/components/threads/thread_index_container.jsx");
-/* harmony import */ var _threads_thread_display__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../threads/thread_display */ "./frontend/components/threads/thread_display.jsx");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -465,7 +463,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var Client = /*#__PURE__*/function (_React$Component) {
   _inherits(Client, _React$Component);
 
@@ -480,10 +477,10 @@ var Client = /*#__PURE__*/function (_React$Component) {
   _createClass(Client, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
         path: "/client",
         component: _threads_thread_index_container__WEBPACK_IMPORTED_MODULE_1__.default
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
         path: "/client/thread/:threadId",
         component: _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__.default
       }));
@@ -491,7 +488,7 @@ var Client = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return Client;
-}(react__WEBPACK_IMPORTED_MODULE_3__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_2__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Client);
 
@@ -696,7 +693,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
 
       if (this.props.formType === "Edit Message") {
         App.cable.subscriptions.subscriptions[0].update({
@@ -1814,19 +1810,18 @@ var TechnologyDisplay = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/components/threads/create_thread.jsx":
-/*!*******************************************************!*\
-  !*** ./frontend/components/threads/create_thread.jsx ***!
-  \*******************************************************/
+/***/ "./frontend/components/threads/create_connection.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/threads/create_connection.jsx ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createThread)
+/* harmony export */   "default": () => (/* binding */ createConnection)
 /* harmony export */ });
-function createThread(currentThreadId, receive, receiveAll, remove) {
-  debugger;
+function createConnection(currentThreadId, receive, receiveCurrentThread, remove) {
   App.cable.subscriptions.create({
     channel: "ChatChannel",
     thread_id: currentThreadId
@@ -1838,7 +1833,7 @@ function createThread(currentThreadId, receive, receiveAll, remove) {
           break;
 
         case "messages":
-          receiveAll(data);
+          receiveCurrentThread(data);
           break;
 
         case "delete":
@@ -1985,7 +1980,7 @@ var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-        currentThreadId: this.props.match.parms.threadId
+        currentThreadId: this.props.match.params.threadId
       });
     }
   }]);
@@ -2035,7 +2030,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _create_thread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_thread */ "./frontend/components/threads/create_thread.jsx");
+/* harmony import */ var _create_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_connection */ "./frontend/components/threads/create_connection.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2082,7 +2077,7 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadForm, [{
     key: "helperFunction",
     value: function helperFunction(thread) {
-      (0,_create_thread__WEBPACK_IMPORTED_MODULE_1__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+      (0,_create_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
       this.props.fetchThreads();
     }
   }, {
@@ -2265,7 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _create_thread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_thread */ "./frontend/components/threads/create_thread.jsx");
+/* harmony import */ var _create_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_connection */ "./frontend/components/threads/create_connection.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 

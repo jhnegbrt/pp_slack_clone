@@ -11,8 +11,6 @@ class MessageIndex extends React.Component{
     this.bottom = React.createRef();
   }
 
-
-
   render(){ 
 
     const { messages } = this.props

@@ -1,6 +1,5 @@
 import ThreadDisplayContainer from '../threads/thread_display_container'
 import ThreadIndexContainer from '../threads/thread_index_container'
-import ThreadDisplay from '../threads/thread_display'
 import React from 'react'
 
 import { Route } from 'react-router-dom'

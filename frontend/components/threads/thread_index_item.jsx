@@ -1,5 +1,5 @@
 import React from 'react'
-import createThread from './create_thread'
+import createConnection from './create_connection'
 import { NavLink } from 'react-router-dom'
 
 class ThreadIndexItem extends React.Component{

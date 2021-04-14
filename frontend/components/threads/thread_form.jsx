@@ -1,5 +1,5 @@
 import React from 'react'
-import createThread from './create_thread'
+import createConnection from './create_connection'
 
 class ThreadForm extends React.Component{
   constructor(props){
@@ -12,7 +12,7 @@ class ThreadForm extends React.Component{
   }
 
   helperFunction(thread){ 
-    createThread(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+    createConnection(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
     this.props.fetchThreads()
   }
 
