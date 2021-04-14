@@ -9,7 +9,7 @@ const mSTP = (state, ownProps) => {
       sender_id: state.session.id,
       channel_dms_id: ownProps.currentThreadId
     },
-    formType: "Send",
+    formType: "Send"
   }) 
 }
 

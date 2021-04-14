@@ -15,7 +15,6 @@ class EditMessageForm extends React.Component{
     if (!message) return null;
     return(
       <MessageForm toggleEdit={this.props.toggleEdit} formType={formType} submit={submit} message={message}></MessageForm>
-
     );
   }
 }

@@ -31,8 +31,10 @@ class MessageIndex extends React.Component{
               )
             }
           </ul>
-          <CreateMessageFormContainer currentThreadId={this.props.currentThreadId}/>
           <div ref={this.bottom} />
+        </div>
+        <div className="message-input">
+          <CreateMessageFormContainer currentThreadId={this.props.currentThreadId}/>
         </div>
       </div>
 

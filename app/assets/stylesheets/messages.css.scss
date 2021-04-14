@@ -4,7 +4,7 @@
 .messages-display{
   width: 80%;
   background-color: rgb(44, 44, 83);
-  padding-top: 10vh;
+  padding-top: 5vh;
 }
 .messages-container{
   box-sizing: border-box;
@@ -12,12 +12,18 @@
   overflow-y: scroll;
   width: 65vw;
   margin: auto auto;
+  margin-bottom: 2vh;
   padding: 1vh 1vh;
   border: 7px solid rgba(40, 41, 95, 0.856);
   border-radius: 4px;
   scrollbar-color: rgb(159, 240, 243) white;
   scrollbar-width: thin;
   background-color: rgb(241, 238, 232);
+}
+
+.message-input{
+  width: 65vw;
+  margin: 0 auto
 }
 
 

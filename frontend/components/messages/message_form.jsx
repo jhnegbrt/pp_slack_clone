@@ -4,7 +4,6 @@ class MessageForm extends React.Component{
   constructor(props){
     super(props)
     this.state = this.props.message
-    // this.state.channel_dms_id = this.props.currentThreadId
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateContent = this.updateContent.bind(this)
   }
@@ -12,7 +11,7 @@ class MessageForm extends React.Component{
   componentDidUpdate(){
     if (this.props.formType === "Edit Message"){
       return
-    } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
+    } else if (this.state.message.channel_dms_id !== parseInt(this.props.currentThreadId)){
       this.setState({
         channel_dms_id: parseInt(this.props.currentThreadId)
       })
@@ -28,7 +27,7 @@ class MessageForm extends React.Component{
     } else {
       App.cable.subscriptions.subscriptions[0].speak({ message: this.state})
       this.setState({
-        content: ""
+          content: ""
       })
     }
   }
@@ -40,11 +39,13 @@ class MessageForm extends React.Component{
   }
 
   render(){
-  
     return(
       <form className="message-form" onSubmit={this.handleSubmit}>
-        <input onChange={this.updateContent} type="text" placeholder="MESSAGE" value={this.state.content}></input>
-        <input type="submit" value={this.props.formType}></input>
+        <input onChange={this.updateContent} 
+        type="text" 
+        placeholder="Message"
+        value={this.state.content}></input>
+        <input type="submit" value={this.props.formType === "Edit Message" ? "Save" : this.props.formType}></input>
       </form>
     )
   }

@@ -692,8 +692,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageForm);
 
     _this = _super.call(this, props);
-    _this.state = _this.props.message; // this.state.channel_dms_id = this.props.currentThreadId
-
+    _this.state = _this.props.message;
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     return _this;
@@ -704,7 +703,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate() {
       if (this.props.formType === "Edit Message") {
         return;
-      } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)) {
+      } else if (this.state.message.channel_dms_id !== parseInt(this.props.currentThreadId)) {
         this.setState({
           channel_dms_id: parseInt(this.props.currentThreadId)
         });
@@ -745,11 +744,11 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         onChange: this.updateContent,
         type: "text",
-        placeholder: "MESSAGE",
+        placeholder: "Message",
         value: this.state.content
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
-        value: this.props.formType
+        value: this.props.formType === "Edit Message" ? "Save" : this.props.formType
       }));
     }
   }]);
@@ -837,10 +836,12 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           message: message,
           key: message.id
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
-        currentThreadId: this.props.currentThreadId
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         ref: this.bottom
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "message-input"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        currentThreadId: this.props.currentThreadId
       })));
     }
   }]);
@@ -2357,7 +2358,6 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.props.currentThreadId === this.props.thread.id ? "thread-select" : null
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
