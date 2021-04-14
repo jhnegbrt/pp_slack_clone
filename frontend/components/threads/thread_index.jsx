@@ -12,15 +12,11 @@ class ThreadIndex extends React.Component{
     this.props.fetchThreads()
   }
 
-  // componentDidUpdate(){
-  //   this.props.fetchThreads()
-  // }
-
   mapThread(thread){
     if (typeof thread === "number"){
       return
     } else {
-      return <ThreadIndexItemContainer thread={thread} key={thread.id}/>
+      return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>
     }
   }
 

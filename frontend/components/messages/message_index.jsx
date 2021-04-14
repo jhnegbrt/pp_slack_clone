@@ -14,17 +14,17 @@ class MessageIndex extends React.Component{
   render(){ 
 
     const { messages } = this.props
-  
     return(
       <div className = "messages-container">
         <ul className="messages">
           {
-            messages.map((message, idx) =>(
+            messages.map((message, idx) => (message.channel_dms_id === this.props.currentThreadId ?
               <MessageIndexItemContainer
                 previous={messages[idx-1]}
                 message={message}
                 key={message.id}
-                />
+                /> 
+                : null
             ))
           }
         </ul>

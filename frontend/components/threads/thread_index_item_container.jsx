@@ -3,6 +3,11 @@ import {connect} from 'react-redux'
 import { receiveCurrentThread, fetchThreads, createThread } from '../../actions/thread_actions'
 import {receiveMessage, receiveAllMessages} from '../../actions/message_actions'
 
+
+const mSTP = (state, ownProps) => ({
+  currentThreadId: ownProps.match.params.threadId
+})
+
 const mDTP = dispatch => ({
   selectThread: (threadId) => dispatch(receiveCurrentThread(threadId)),
   submit: (thread) => dispatch(createThread(thread)),

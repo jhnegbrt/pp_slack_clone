@@ -1,5 +1,5 @@
 import {
-  RECEIVE_MESSAGE, REMOVE_MESSAGE, RECEIVE_CURRENT_MESSAGES
+  RECEIVE_MESSAGE, REMOVE_MESSAGE, RECEIVE_CURRENT_MESSAGES, CLEAR_PREVIOUS_MESSAGES
 } from '../actions/message_actions'
 
 
@@ -14,6 +14,9 @@ const MessagesReducer = (state = {}, action) => {
       let nextState = Object.assign({}, state)
       delete nextState[action.messageId]
       return nextState;
+    case CLEAR_PREVIOUS_MESSAGES:
+      let clearedMessages = Object.assign({})
+      return clearedMessages
     default:
       return state;
   }

@@ -5,6 +5,7 @@ export const REMOVE_MESSAGE = "REMOVE_MESSAGE"
 export const RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS"
 export const RECEIVE_CURRENT_MESSAGES = "RECEIVE_CURRENT_MESSAGES"
 export const CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS"
+export const CLEAR_PREVIOUS_MESSAGES = "CLEAR_PREVIOUS_MESSAGES"
 
 
 const receiveErrors = (errors) => {
@@ -23,7 +24,11 @@ const clearMessageErrors = () => {
 export const receiveCurrentMessages = (data) => ({
   type: RECEIVE_CURRENT_MESSAGES,
   messages: data.messages
-})  
+})
+
+export const clearPreviousMessages = () => ({
+  type: CLEAR_PREVIOUS_MESSAGES
+})
 
 export const receiveMessage = (message) => {
   return({  
