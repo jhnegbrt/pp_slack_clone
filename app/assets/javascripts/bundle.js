@@ -115,10 +115,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_MESSAGE": () => (/* binding */ RECEIVE_MESSAGE),
 /* harmony export */   "REMOVE_MESSAGE": () => (/* binding */ REMOVE_MESSAGE),
 /* harmony export */   "RECEIVE_MESSAGE_ERRORS": () => (/* binding */ RECEIVE_MESSAGE_ERRORS),
-/* harmony export */   "RECEIVE_CURRENT_MESSAGES": () => (/* binding */ RECEIVE_CURRENT_MESSAGES),
+/* harmony export */   "RECEIVE_MESSAGES": () => (/* binding */ RECEIVE_MESSAGES),
 /* harmony export */   "CLEAR_MESSAGE_ERRORS": () => (/* binding */ CLEAR_MESSAGE_ERRORS),
 /* harmony export */   "CLEAR_PREVIOUS_MESSAGES": () => (/* binding */ CLEAR_PREVIOUS_MESSAGES),
-/* harmony export */   "receiveCurrentMessages": () => (/* binding */ receiveCurrentMessages),
+/* harmony export */   "receiveMessages": () => (/* binding */ receiveMessages),
 /* harmony export */   "clearPreviousMessages": () => (/* binding */ clearPreviousMessages),
 /* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
 /* harmony export */   "removeMessage": () => (/* binding */ removeMessage),
@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 var REMOVE_MESSAGE = "REMOVE_MESSAGE";
 var RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS";
-var RECEIVE_CURRENT_MESSAGES = "RECEIVE_CURRENT_MESSAGES";
+var RECEIVE_MESSAGES = "RECEIVE_MESSAGES";
 var CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS";
 var CLEAR_PREVIOUS_MESSAGES = "CLEAR_PREVIOUS_MESSAGES";
 
@@ -150,9 +150,9 @@ var clearMessageErrors = function clearMessageErrors() {
   };
 };
 
-var receiveCurrentMessages = function receiveCurrentMessages(data) {
+var receiveMessages = function receiveMessages(data) {
   return {
-    type: RECEIVE_CURRENT_MESSAGES,
+    type: RECEIVE_MESSAGES,
     messages: data.messages
   };
 };
@@ -698,6 +698,15 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MessageForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)) {
+        this.setState({
+          channel_dms_id: parseInt(this.props.currentThreadId)
+        });
+      }
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
@@ -814,7 +823,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "messages"
       }, messages.map(function (message, idx) {
-        return message.channel_dms_id === _this2.props.currentThreadId ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        return message.channel_dms_id === parseInt(_this2.props.currentThreadId) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           previous: messages[idx - 1],
           message: message,
           key: message.id
@@ -2321,10 +2330,10 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this$props = this.props,
           receiveMessage = _this$props.receiveMessage,
-          threadId = _this$props.threadId,
-          receiveCurrentMessages = _this$props.receiveCurrentMessages,
+          thread = _this$props.thread,
+          receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
-      (0,_create_connection__WEBPACK_IMPORTED_MODULE_1__.default)(threadId, receiveMessage, receiveCurrentMessages, removeMessage);
+      (0,_create_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage);
     }
   }, {
     key: "render",
@@ -2380,7 +2389,7 @@ var mDTP = function mDTP(dispatch) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));
     },
     receiveMessages: function receiveMessages(messages) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveAllMessages)(messages));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessages)(messages));
     },
     removeMessage: function (_removeMessage) {
       function removeMessage(_x) {
@@ -2552,7 +2561,7 @@ var MessagesReducer = function MessagesReducer() {
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
       return Object.assign({}, state, _defineProperty({}, action.message.id, action.message));
 
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_MESSAGES:
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGES:
       return Object.assign({}, state, action.messages);
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:

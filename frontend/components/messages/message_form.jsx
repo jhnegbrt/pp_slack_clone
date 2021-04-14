@@ -9,6 +9,14 @@ class MessageForm extends React.Component{
     this.updateContent = this.updateContent.bind(this)
   }
 
+  componentDidUpdate(){
+    if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
+      this.setState({
+        channel_dms_id: parseInt(this.props.currentThreadId)
+      })
+    } 
+  };
+
 
   handleSubmit(e){
     e.preventDefault()

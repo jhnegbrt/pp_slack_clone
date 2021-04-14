@@ -3,7 +3,7 @@ import * as APIUtil from '../util/message_api_util'
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
 export const REMOVE_MESSAGE = "REMOVE_MESSAGE"
 export const RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS"
-export const RECEIVE_CURRENT_MESSAGES = "RECEIVE_CURRENT_MESSAGES"
+export const RECEIVE_MESSAGES = "RECEIVE_MESSAGES"
 export const CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS"
 export const CLEAR_PREVIOUS_MESSAGES = "CLEAR_PREVIOUS_MESSAGES"
 
@@ -21,8 +21,8 @@ const clearMessageErrors = () => {
   })
 }
 
-export const receiveCurrentMessages = (data) => ({
-  type: RECEIVE_CURRENT_MESSAGES,
+export const receiveMessages = (data) => ({
+  type: RECEIVE_MESSAGES,
   messages: data.messages
 })
 
