@@ -3,8 +3,9 @@ import MessageIndex from './message_index'
 import {removeMessage, fetchMessages, receiveMessage, receiveAllMessages } from '../../actions/message_actions'
 
 const mSTP = (state, ownProps) => {
+  debugger
   return({
-    messages: Object.values(state.entities.messages),
+    messages: Object.values(state.entities.messages).filter(el => el.channel_dms_id === parseInt(ownProps.currentThreadId)),
     currentThreadId: ownProps.currentThreadId
   })
 }

@@ -63,7 +63,8 @@ class MessageIndexItem extends React.Component{
 
     let new_user;
     
-    if (this.props.previous == undefined || this.props.message.sender_id !== this.props.previous.sender_id){
+    if (this.props.previous == undefined || 
+      this.props.message.sender_id !== this.props.previous.sender_id){
       new_user = true
     } else {
       new_user = false

@@ -18,13 +18,11 @@ class MessageIndex extends React.Component{
         <ul className="messages">
           {
             messages.map((message, idx) => 
-            (message.channel_dms_id === parseInt(this.props.currentThreadId) ?
               <MessageIndexItemContainer
                 previous={messages[idx-1]}
                 message={message}
                 key={message.id}
                 /> 
-                : null)
             )
           }
         </ul>

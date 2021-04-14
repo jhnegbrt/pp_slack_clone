@@ -815,19 +815,17 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var messages = this.props.messages;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "messages-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "messages"
       }, messages.map(function (message, idx) {
-        return message.channel_dms_id === parseInt(_this2.props.currentThreadId) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           previous: messages[idx - 1],
           message: message,
           key: message.id
-        }) : null;
+        });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
         currentThreadId: this.props.currentThreadId
       }));
@@ -860,8 +858,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state, ownProps) {
+  debugger;
   return {
-    messages: Object.values(state.entities.messages),
+    messages: Object.values(state.entities.messages).filter(function (el) {
+      return el.channel_dms_id === parseInt(ownProps.currentThreadId);
+    }),
     currentThreadId: ownProps.currentThreadId
   };
 }; // const mDTP = dispatch => ({
