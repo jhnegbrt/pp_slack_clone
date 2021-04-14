@@ -8,6 +8,13 @@ class Message < ApplicationRecord
     primary_key: :id
   )
 
-  belongs_to: channel_dm
+  belongs_to(
+    :channel_dm,
+    class_name: "ChannelDm",
+    foreign_key: :channel_dms_id,
+    primary_key: :id
+  ) 
 
 end
+
+

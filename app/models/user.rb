@@ -8,14 +8,20 @@ class User < ApplicationRecord
   ) 
 
   has_many(
-    :channel_dms,
+    :created_threads,
     class_name: "ChannelDm",
     foreign_key: :creator_id,
     primary_key: :id
   )
 
-  has_many :user_channel_dms
-  has_many :channel_dms, through => :user_channel_dms
+  has_many(
+    :user_channel_dms,
+    class_name: "UserChannelDm",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
+  has_many :channel_dms, through: :user_channel_dms, source: :channel_dm
 
   validates :password_digest, presence: true
   validates :username, presence: true, uniqueness: true
