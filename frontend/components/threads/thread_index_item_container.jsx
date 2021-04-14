@@ -5,7 +5,7 @@ import {receiveMessage, removeMessage, receiveMessages} from '../../actions/mess
 
 
 const mSTP = (state, ownProps) => ({
-  currentThreadId: ownProps.match.params.threadId
+  currentThreadId: state.ui.currentThread.id
 })
 
 const mDTP = dispatch => ({

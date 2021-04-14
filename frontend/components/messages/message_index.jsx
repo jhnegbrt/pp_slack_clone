@@ -11,24 +11,31 @@ class MessageIndex extends React.Component{
     this.bottom = React.createRef();
   }
 
+  componentDidUpdate() {
+    this.bottom.current.scrollIntoView();
+  }
+
   render(){ 
     const { messages } = this.props
     return(
-      <div className = "messages-container">
-        <ul className="messages">
-          {
-            messages.map((message, idx) => 
-              <MessageIndexItemContainer
-                previous={messages[idx-1]}
-                message={message}
-                key={message.id}
-                /> 
-            )
-          }
-        </ul>
-        <CreateMessageFormContainer currentThreadId={this.props.currentThreadId}/>
-        {/* <div ref={this.bottom} /> */}
+      <div className="messages-display">
+        <div className = "messages-container">
+          <ul className="messages">
+            {
+              messages.map((message, idx) => 
+                <MessageIndexItemContainer
+                  previous={messages[idx-1]}
+                  message={message}
+                  key={message.id}
+                  /> 
+              )
+            }
+          </ul>
+          <CreateMessageFormContainer currentThreadId={this.props.currentThreadId}/>
+          <div ref={this.bottom} />
+        </div>
       </div>
+
     )
   }
 }

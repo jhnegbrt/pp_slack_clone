@@ -817,10 +817,17 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MessageIndex, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.bottom.current.scrollIntoView();
+    }
+  }, {
     key: "render",
     value: function render() {
       var messages = this.props.messages;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "messages-display"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "messages-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "messages"
@@ -832,7 +839,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
         currentThreadId: this.props.currentThreadId
-      }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        ref: this.bottom
+      })));
     }
   }]);
 
@@ -2348,10 +2357,12 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        className: this.props.currentThreadId === this.props.thread.id ? "thread-hover" : null
+        className: this.props.currentThreadId === this.props.thread.id ? "thread-select" : null
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
         onClick: this.selectThread,
+        activeClassName: "active-thread",
         to: "/client/thread/".concat(this.props.thread.id)
       }, this.props.thread.title));
     }
@@ -2386,7 +2397,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    currentThreadId: ownProps.match.params.threadId
+    currentThreadId: state.ui.currentThread.id
   };
 };
 

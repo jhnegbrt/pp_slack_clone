@@ -3,7 +3,7 @@
 
 .thread-index{
   width: 20%;
-  padding: 3%;
+  padding: 3% 0% 3% 3%;
   background-color: rgb(2, 2, 59);
   font-family: 'Comfortaa', serif;
   
@@ -15,12 +15,22 @@
   display: block;
 }
 
+.thread-index li a{
+  padding: 1vh;
+}
+
 .thread-index li{
-  padding: 2vh;
+  margin-left: 1vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 .thread-index li:hover{
   background-color: rgb(44, 44, 83);
   border-radius: 5px;
   box-shadow: rgba(150, 151, 216, 0.3) 0px 1vh 1vh, rgba(160, 148, 231, 0.22) 0px 1vh 1vh;
+}
+
+.active-thread{
+  background-color: rgb(44, 44, 83)
 }
