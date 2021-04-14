@@ -48,11 +48,11 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def update_message(data)
+
     message = Message.find_by(id: data['message']['id'])
     updated_message = message.update(content: data['message']['content'])
     sender = Message.find_by(id: updated_message.id).sender
     time = updated_message["updated_at"]
-    # time = time.hour.to_s + ":" + time.min.to_s
     socket = { 
       
       id: message.id, 
@@ -62,7 +62,7 @@ class ChatChannel < ApplicationCable::Channel
       sender: sender["username"],
       time: time
     }
-    ChatChannel.broadcast_to('chat_channel', socket)
+    ChatChannel.broadcast_to("chat_channel_#{params['thread_id']}", socket)
   end
 
   def remove_message(data)
