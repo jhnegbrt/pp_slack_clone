@@ -1,12 +1,12 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
-    stream_for "chat_channel_#{params["thread_id"]}"
+    
+    stream_for "chat_channel_#{params['thread_id']}"
     self.load
   end
 
   def load
-    
     messages = Message.all.includes(:sender)
     messages_hash = {}
     messages.each do |m|
@@ -19,7 +19,7 @@ class ChatChannel < ApplicationCable::Channel
       type: "messages",
       messages: messages_hash
     }
-    ChatChannel.broadcast_to('chat_channel', socket)
+    ChatChannel.broadcast_to("chat_channel_#{params['thread_id']}", socket)
   end
 
   def speak(data)
