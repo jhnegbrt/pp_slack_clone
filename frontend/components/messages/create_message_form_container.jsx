@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import { createMessage } from '../../actions/message_actions'
 
 const mSTP = (state, ownProps) => {
-  debugger
   return({
     message: {
       content: "",

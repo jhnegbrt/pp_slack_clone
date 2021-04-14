@@ -506,7 +506,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state, ownProps) {
-  debugger;
   return {
     message: {
       content: "",
@@ -688,6 +687,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      debugger;
 
       if (this.props.formType === "Edit Message") {
         App.cable.subscriptions.subscriptions[0].update({
@@ -2087,7 +2087,7 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadForm, [{
     key: "helperFunction",
     value: function helperFunction(thread) {
-      (0,_create_thread__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
+      (0,_create_thread__WEBPACK_IMPORTED_MODULE_1__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
       this.props.fetchThreads();
     }
   }, {

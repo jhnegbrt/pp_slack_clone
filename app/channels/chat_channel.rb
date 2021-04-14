@@ -1,7 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
-    stream_for 'chat_channel_#{params["thread_id"]}'
+    stream_for "chat_channel_#{params["thread_id"]}"
     self.load
   end
 
@@ -24,10 +24,12 @@ class ChatChannel < ApplicationCable::Channel
 
   def speak(data)
 
+    channel_dms_id = data['message']['channel_dms_id']
+
     new_message = Message.create(
       content: data['message']['content'], 
       sender_id: data['message']['sender_id'],
-      channel_dms_id: data['message']['channel_dms_id']
+      channel_dms_id: channel_dms_id
     )
     
     sender = Message.find_by(id: new_message.id).sender
@@ -41,7 +43,7 @@ class ChatChannel < ApplicationCable::Channel
       sender: sender["username"],
       time: time
     }
-    ChatChannel.broadcast_to('chat_channel', socket)
+    ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
   end
 
   def update_message(data)

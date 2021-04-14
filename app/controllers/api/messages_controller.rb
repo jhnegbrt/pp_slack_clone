@@ -8,8 +8,7 @@ class Api::MessagesController < ApplicationController
     @message = Message.find(params[:id])
   end
 
-  def create
-    debugger
+  def create  
     @message = Message.new(message_params)
 
     if @message.save
