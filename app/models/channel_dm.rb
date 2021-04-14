@@ -6,5 +6,10 @@ class ChannelDm < ApplicationRecord
     foreign_key: :creator_id,
     primary_key: :id
   )
+
+  has_many :messages
+
+  has_many :user_channel_dms
+  has_many :users, through => :user_channel_dms
   
 end

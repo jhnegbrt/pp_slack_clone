@@ -14,6 +14,9 @@ class User < ApplicationRecord
     primary_key: :id
   )
 
+  has_many :user_channel_dms
+  has_many :channel_dms, through => :user_channel_dms
+
   validates :password_digest, presence: true
   validates :username, presence: true, uniqueness: true
   validates :session_token, presence: true
