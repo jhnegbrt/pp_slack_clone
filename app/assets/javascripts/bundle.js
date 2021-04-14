@@ -1926,6 +1926,9 @@ var mDTP = function mDTP(dispatch) {
     }),
     receiveCurrentThread: function receiveCurrentThread(thread) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(thread.id));
+    },
+    fetchThreads: function fetchThreads() {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchThreads)());
     }
   };
 };
@@ -2085,7 +2088,7 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
     key: "helperFunction",
     value: function helperFunction(thread) {
       (0,_create_thread__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage);
-      this.props.receiveCurrentThread(thread);
+      this.props.fetchThreads();
     }
   }, {
     key: "handleSubmit",

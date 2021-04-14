@@ -13,7 +13,7 @@ class ThreadForm extends React.Component{
 
   helperFunction(thread){ 
     createThread(thread.id, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
-    this.props.receiveCurrentThread(thread)
+    this.props.fetchThreads()
   }
 
   handleSubmit(e){

@@ -1,6 +1,6 @@
 import ThreadForm from './thread_form'
 import {connect} from 'react-redux'
-import {createThread, receiveCurrentThread} from '../../actions/thread_actions'
+import {createThread, receiveCurrentThread, fetchThreads} from '../../actions/thread_actions'
 
 
 const mSTP = state => ({
@@ -18,7 +18,8 @@ const mDTP = (dispatch) => ({
   receiveMessage: (message) => dispatch(receiveMessage(message)),
   receiveMessages: (messages) => dispatch(receiveAllMessages(messages)),
   removeMessage: (messageId)=> dispatch(removeMessage(messageId)),
-  receiveCurrentThread: (thread) => dispatch(receiveCurrentThread(thread.id))
+  receiveCurrentThread: (thread) => dispatch(receiveCurrentThread(thread.id)),
+  fetchThreads: () => dispatch(fetchThreads())
 })
 
 export default connect(mSTP, mDTP)(ThreadForm)
