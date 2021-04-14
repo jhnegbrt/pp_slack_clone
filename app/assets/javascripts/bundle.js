@@ -623,7 +623,7 @@ var EditMessageForm = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    message: state.messages[ownProps.id],
+    message: state.entities.messages[ownProps.id],
     formType: "Edit Message"
   };
 };
@@ -700,7 +700,9 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)) {
+      if (this.props.formType === "Edit Message") {
+        return;
+      } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)) {
         this.setState({
           channel_dms_id: parseInt(this.props.currentThreadId)
         });
@@ -856,7 +858,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state, ownProps) {
-  debugger;
   return {
     messages: Object.values(state.entities.messages).filter(function (el) {
       return el.channel_dms_id === parseInt(ownProps.currentThreadId);
@@ -956,6 +957,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var edit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        editting: this.state.editting,
         toggleEdit: this.toggleEdit,
         id: this.props.message.id
       }));

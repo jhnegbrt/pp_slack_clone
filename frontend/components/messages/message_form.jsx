@@ -10,7 +10,9 @@ class MessageForm extends React.Component{
   }
 
   componentDidUpdate(){
-    if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
+    if (this.props.formType === "Edit Message"){
+      return
+    } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
       this.setState({
         channel_dms_id: parseInt(this.props.currentThreadId)
       })

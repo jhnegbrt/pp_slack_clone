@@ -37,7 +37,7 @@ class MessageIndexItem extends React.Component{
   render(){
     const edit = (
       <li>
-        <EditMessageFormContainer toggleEdit={this.toggleEdit} id={this.props.message.id}></EditMessageFormContainer>
+        <EditMessageFormContainer editting={this.state.editting} toggleEdit={this.toggleEdit} id={this.props.message.id}></EditMessageFormContainer>
       </li>
     )
 
