@@ -11,16 +11,7 @@ class MessageIndex extends React.Component{
     this.bottom = React.createRef();
   }
 
-  // componentDidMount() {
 
-  //   createThread(this.props.currentThreadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
-
-  // }
-
-
-  // componentDidUpdate() {
-  //   this.bottom.current.scrollIntoView();
-  // }
 
   render(){ 
 

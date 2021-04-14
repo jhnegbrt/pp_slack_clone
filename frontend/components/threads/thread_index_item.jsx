@@ -1,4 +1,6 @@
 import React from 'react'
+import createThread from './create_thread'
+import { NavLink } from 'react-router-dom'
 
 class ThreadIndexItem extends React.Component{
   constructor(props){
@@ -13,7 +15,7 @@ class ThreadIndexItem extends React.Component{
 
   render(){
     return(
-      <li><button name={this.props.thread.id} onClick={this.selectThread}>{this.props.thread.title}</button></li>
+      <li><NavLink to={`/client/thread/${this.props.thread.id}`}>{this.props.thread.title}</NavLink></li>
     )
   }
 }

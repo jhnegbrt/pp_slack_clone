@@ -1,6 +1,7 @@
 import ThreadForm from './thread_form'
 import {connect} from 'react-redux'
 import {createThread, receiveCurrentThread, fetchThreads} from '../../actions/thread_actions'
+import {receiveMessage, receiveAllMessages} from '../../actions/message_actions'
 
 
 const mSTP = state => ({
