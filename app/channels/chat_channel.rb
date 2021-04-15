@@ -1,6 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
+    
     if (UserChannelDm.where(user_id: params['user_id']).where(channel_dm_id: params['thread_id']).length == 0)
       UserChannelDm.create(channel_dm_id: params['thread_id'], user_id: params['user_id'] )
     end
@@ -10,7 +11,7 @@ class ChatChannel < ApplicationCable::Channel
     
   end
 
-  def load
+  def load    
     messages = Message.where("channel_dms_id = #{params['thread_id']}").includes(:sender)
     messages_hash = {}
     messages.each do |m|

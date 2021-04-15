@@ -41,8 +41,18 @@ class MessageIndexItem extends React.Component{
   }
 
   onDelete(){
+
+    let subscriptions = App.cable.subscriptions.subscriptions
+    let index;
+    for (let i = 0; i < subscriptions.length; i++){
+      let identifier = JSON.parse(subscriptions[i].identifier)
+      if (identifier.channel === "ChatChannel"){
+        index = i
+        break
+      }
+    }
   
-    App.cable.subscriptions.subscriptions[0].remove_message({ message: this.props.message.id})
+    subscriptions[index].remove_message({ message: this.props.message.id})
 
   }
 

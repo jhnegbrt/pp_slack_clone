@@ -2,7 +2,9 @@ import React from 'react'
 import createConnection from './create_connection'
 
 class ThreadForm extends React.Component{
+
   constructor(props){
+    
     super(props)
     this.state = this.props.thread
     this.state.creator_id = this.props.creatorId

@@ -1,4 +1,4 @@
-import {RECEIVE_CURRENT_THREAD, RECEIVE_ALL_THREADS } from '../actions/thread_actions'
+import {RECEIVE_THREAD, RECEIVE_ALL_THREADS } from '../actions/thread_actions'
 
 
 const threadsReducer = (state = {}, action) =>{
@@ -7,7 +7,7 @@ const threadsReducer = (state = {}, action) =>{
       case RECEIVE_THREAD:
         return Object.assign({}, state, {[action.thread.id]: action.thread})
       case RECEIVE_ALL_THREADS:
-        return Object.assign({}, state, action.threads)
+        return Object.assign({}, state, action.threads.threads)
       default:
         return state
   }

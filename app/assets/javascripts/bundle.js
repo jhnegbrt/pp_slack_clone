@@ -485,7 +485,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../threads/thread_display_container */ "./frontend/components/threads/thread_display_container.jsx");
 /* harmony import */ var _threads_thread_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../threads/thread_index_container */ "./frontend/components/threads/thread_index_container.jsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _threads_thread_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../threads/thread_modal_container */ "./frontend/components/threads/thread_modal_container.jsx");
+/* harmony import */ var _threads_create_thread_modal_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../threads/create_thread_modal_container */ "./frontend/components/threads/create_thread_modal_container.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -534,6 +534,7 @@ var Client = /*#__PURE__*/function (_React$Component) {
       newDm: false
     };
     _this.toggleModal = _this.toggleModal.bind(_assertThisInitialized(_this));
+    _this.closeModal = _this.closeModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -555,6 +556,13 @@ var Client = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "closeModal",
+    value: function closeModal() {
+      this.setState({
+        modal: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -571,8 +579,9 @@ var Client = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
         path: "/client/thread/:threadId",
         component: _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__.default
-      }), this.state.modal === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_threads_thread_modal_container__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }), this.state.modal === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_threads_create_thread_modal_container__WEBPACK_IMPORTED_MODULE_3__.default, {
         toggleModal: this.toggleModal,
+        closeModal: this.closeModal,
         formType: this.state.newChannel ? "channel" : "message"
       }) : null);
     }
@@ -794,14 +803,25 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ChatChannel") {
+          index = i;
+          break;
+        }
+      }
 
       if (this.props.formType === "Edit Message") {
-        App.cable.subscriptions.subscriptions[0].update({
+        App.cable.subscriptions.subscriptions[index].update({
           message: this.state
         });
         this.props.toggleEdit();
       } else {
-        App.cable.subscriptions.subscriptions[0].speak({
+        App.cable.subscriptions.subscriptions[index].speak({
           message: this.state
         });
         this.setState({
@@ -1053,7 +1073,19 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "onDelete",
     value: function onDelete() {
-      App.cable.subscriptions.subscriptions[0].remove_message({
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ChatChannel") {
+          index = i;
+          break;
+        }
+      }
+
+      subscriptions[index].remove_message({
         message: this.props.message.id
       });
     }
@@ -1929,6 +1961,115 @@ var TechnologyDisplay = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/threads/create_messages_connection.jsx":
+/*!********************************************************************!*\
+  !*** ./frontend/components/threads/create_messages_connection.jsx ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createMessagesConnection)
+/* harmony export */ });
+function createMessagesConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId) {
+  App.cable.subscriptions.create({
+    channel: "ChatChannel",
+    thread_id: currentThreadId,
+    user_id: currentUserId
+  }, {
+    received: function received(data) {
+      switch (data.type) {
+        case "message":
+          receive(data);
+          break;
+
+        case "messages":
+          receiveCurrentMessages(data);
+          break;
+
+        case "delete":
+          remove(data['message_id']);
+          break;
+      }
+    },
+    load: function load() {
+      return this.perform("load");
+    },
+    speak: function speak(message) {
+      return this.perform("speak", message);
+    },
+    update: function update(message) {
+      return this.perform("update_message", message);
+    },
+    remove_message: function remove_message(data) {
+      return this.perform("remove_message", data);
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./frontend/components/threads/create_thread_modal_container.jsx":
+/*!***********************************************************************!*\
+  !*** ./frontend/components/threads/create_thread_modal_container.jsx ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _thread_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./thread_modal */ "./frontend/components/threads/thread_modal.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
+
+
+
+
+
+var mSTP = function mSTP(state) {
+  return {
+    thread: {
+      title: "",
+      selectedUsers: [],
+      channel: true,
+      "private": false
+    },
+    formType: "Create Thread",
+    creatorId: state.session.id,
+    users: state.entities.workspace.users
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    submit: function submit(thread) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(thread));
+    },
+    receiveMessage: function receiveMessage(message) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));
+    },
+    receiveMessages: function receiveMessages(messages) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessages)(messages));
+    },
+    receiveCurrentThread: function receiveCurrentThread(thread) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(thread.id));
+    },
+    fetchAllUsers: function fetchAllUsers() {
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__.fetchAllUsers)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_thread_modal__WEBPACK_IMPORTED_MODULE_0__.default));
+
+/***/ }),
+
 /***/ "./frontend/components/threads/create_threads_connection.jsx":
 /*!*******************************************************************!*\
   !*** ./frontend/components/threads/create_threads_connection.jsx ***!
@@ -2112,8 +2253,11 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var currentUserId = this.props.currentUserId;
-      (0,_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__.default)(currentUserId, receiveThread, receiveAllThreads);
+      var _this$props = this.props,
+          currentUserId = _this$props.currentUserId,
+          receiveThread = _this$props.receiveThread,
+          receiveThreads = _this$props.receiveThreads;
+      (0,_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__.default)(currentUserId, receiveThread, receiveThreads);
     }
   }, {
     key: "mapThread",
@@ -2186,7 +2330,9 @@ var mSTP = function mSTP(state, ownProps) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    // fetchThreads: () => dispatch(fetchThreads()),
+    fetchThreads: function fetchThreads() {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.fetchThreads)());
+    },
     receiveThreads: function receiveThreads(threads) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveAllThreads)(threads));
     },
@@ -2212,7 +2358,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_messages_connection */ "./frontend/components/threads/create_messages_connection.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2264,11 +2410,11 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this$props = this.props,
-          receiveMessage = _this$props.receiveMessage,
           thread = _this$props.thread,
+          receiveMessage = _this$props.receiveMessage,
           receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
-      Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(thread.id, receiveMessage, receiveMessages, removeMessage);
+      (0,_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId);
     }
   }, {
     key: "render",
@@ -2312,7 +2458,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    user_id: state.session.id
+    currentUserId: state.session.id
   };
 };
 
@@ -2357,7 +2503,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _create_messages_connection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create_messages_connection */ "./frontend/components/threads/create_messages_connection.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2380,6 +2527,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+ // import CreateThreadModalContainer from './create_thread_form_container'
+
 
 
 var ThreadModal = /*#__PURE__*/function (_React$Component) {
@@ -2393,10 +2542,8 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ThreadModal);
 
     _this = _super.call(this, props);
-    _this.state = {
-      selectedUsers: [],
-      newMessage: ""
-    };
+    _this.state = _this.props.thread;
+    _this.state.creator_id = _this.props.creatorId;
     _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -2410,16 +2557,13 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
       for (var i = 0; i < allUsers.length; i++) {
         if (allUsers[i].selected && !selected.includes(allUsers[i].value)) {
           selected.push(allUsers[i].value);
-        } // else if (allUsers[i].selected){
-        //   selected = selected.filter(el => el !== allUsers[i].value)
-        // }
-
+        }
       }
 
       this.setState({
         selectedUsers: selected
       });
-      this.updateMessage = this.updateMessage.bind(this);
+      this.updateTitle = this.updateTitle.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
   }, {
@@ -2428,101 +2572,98 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
       this.props.fetchAllUsers();
     }
   }, {
-    key: "updateMessage",
-    value: function updateMessage(e) {
+    key: "updateTitle",
+    value: function updateTitle(e) {
       this.setState({
-        newMessage: e.target.value
+        title: e.target.value
+      });
+    }
+  }, {
+    key: "helperFunction",
+    value: function helperFunction(thread) {
+      (0,_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ThreadChannel") {
+          index = i;
+          break;
+        }
+      }
+
+      subscriptions[index].speak({
+        thread: thread.threadId,
+        users: this.state.selectedUsers,
+        channel: this.props.thread.channel,
+        "private": this.props.thread["private"],
+        creator_id: this.props.creatorId,
+        title: this.state.title
       });
     }
   }, {
     key: "handleSubmit",
-    value: function handleSubmit() {}
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      this.props.submit(this.state).then(function (thread) {
+        return _this2.helperFunction(thread);
+      }).then(function () {
+        return _this2.setState({
+          title: "",
+          selectedUsers: []
+        });
+      }); //redirect to this thread
+    }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "thread-modal-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "thread-modal"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "thread-close"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: function onClick() {
-          return _this2.props.toggleModal(_this2.props.formType);
-        }
-      }, "Close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        onClick: this.props.closeModal
+      }, "Close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "modal-header"
-      }, this.props.formType === "message" ? "New Direct Message" : "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+      }, this.props.formType === "message" ? "New Direct Message" : "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", null, "Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("select", {
         multiple: true,
         value: this.state.selectedUsers,
         onChange: this.selectUsers
       }, Object.values(users).map(function (user) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("option", {
           key: user.id,
           value: user.id
         }, user.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, selectedUsers.map(function (id) {
-        debugger;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", null, selectedUsers.map(function (id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
           key: id
         }, users[id].username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        onChange: this.updateMessage,
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+        onChange: this.updateTitle,
+        placeholder: "Channel Title",
         type: "text",
-        value: this.state.newMessage
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        value: this.state.title
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
         type: "submit",
-        value: "Send!"
+        value: "Create!"
       })))));
     }
   }]);
 
   return ThreadModal;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThreadModal);
-
-/***/ }),
-
-/***/ "./frontend/components/threads/thread_modal_container.jsx":
-/*!****************************************************************!*\
-  !*** ./frontend/components/threads/thread_modal_container.jsx ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _thread_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./thread_modal */ "./frontend/components/threads/thread_modal.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
-
-
-
-
-var mSTP = function mSTP(state, ownProps) {
-  return {
-    users: state.entities.workspace.users
-  };
-};
-
-var mDTP = function mDTP(dispatch) {
-  return {
-    fetchAllUsers: function fetchAllUsers() {
-      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers)());
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_thread_modal__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
@@ -2823,11 +2964,11 @@ var threadsReducer = function threadsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case RECEIVE_THREAD:
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_THREAD:
       return Object.assign({}, state, _defineProperty({}, action.thread.id, action.thread));
 
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
-      return Object.assign({}, state, action.threads);
+      return Object.assign({}, state, action.threads.threads);
 
     default:
       return state;

@@ -1,5 +1,5 @@
 export default function createMessagesConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId){
- 
+  
   App.cable.subscriptions.create(
     
     { channel: "ChatChannel", thread_id: currentThreadId, user_id: currentUserId },

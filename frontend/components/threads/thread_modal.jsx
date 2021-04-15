@@ -1,12 +1,14 @@
+import createMessagesConnection from './create_messages_connection'
+// import CreateThreadModalContainer from './create_thread_form_container'
 import React from 'react'
+
 
 class ThreadModal extends React.Component{
   constructor(props){
+    
     super(props)
-    this.state = {
-      selectedUsers: [],
-      newMessage: ""
-    }
+    this.state = this.props.thread
+    this.state.creator_id = this.props.creatorId
     this.selectUsers = this.selectUsers.bind(this)
   }
 
@@ -17,15 +19,11 @@ class ThreadModal extends React.Component{
       if (allUsers[i].selected && !selected.includes(allUsers[i].value)){
         selected.push(allUsers[i].value)
       } 
-      // else if (allUsers[i].selected){
-      //   selected = selected.filter(el => el !== allUsers[i].value)
-      // }
     }
     this.setState({
       selectedUsers: selected
     })
-
-    this.updateMessage = this.updateMessage.bind(this)
+    this.updateTitle = this.updateTitle.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -34,15 +32,53 @@ class ThreadModal extends React.Component{
     this.props.fetchAllUsers()
   }
 
-  updateMessage(e){
+  updateTitle(e){
     this.setState({
-      newMessage: e.target.value
+      title: e.target.value
     })
   }
 
-  handleSubmit(){
-
+  helperFunction(thread){
+    createMessagesConnection(
+      thread.threadId,
+      this.props.receiveMessage,
+      this.props.receiveMessages,
+      this.props.removeMessage,
+      this.props.creatorId)
+    
+    let subscriptions = App.cable.subscriptions.subscriptions
+    let index;
+    for (let i = 0; i < subscriptions.length; i++){
+      let identifier = JSON.parse(subscriptions[i].identifier)
+      if (identifier.channel === "ThreadChannel"){
+        index = i
+        break
+      }
+    }
+    
+    subscriptions[index].speak({ 
+      thread: thread.threadId,
+      users: this.state.selectedUsers,
+      channel: this.props.thread.channel,
+      private: this.props.thread.private,
+      creator_id: this.props.creatorId,
+      title: this.state.title
+    })
   }
+
+  handleSubmit(e){
+    
+    e.preventDefault()
+    this.props.submit(this.state)
+      .then((thread) => this.helperFunction(thread)
+      )
+      .then(() => this.setState({
+        title: "",
+        selectedUsers: [],
+      }))
+    //redirect to this thread
+  }
+
 
   render(){
     const {users} = this.props
@@ -51,7 +87,7 @@ class ThreadModal extends React.Component{
       <div className="thread-modal-container">
         <div className="thread-modal">
           <div className="thread-close">
-            <button onClick={()=>this.props.toggleModal(this.props.formType)}>Close</button>
+            <button onClick={this.props.closeModal}>Close</button>
           </div>
           
           <div className="modal-header">
@@ -72,7 +108,6 @@ class ThreadModal extends React.Component{
               <h2>To:</h2>
               <ul>
                 {selectedUsers.map(id =>{
-                  debugger
                   return <li key={id}>{users[id].username}</li>
                 }
                 )}
@@ -80,13 +115,20 @@ class ThreadModal extends React.Component{
             </div>
 
             <div>
-              <form onSubmit={this.handleSubmit}>
-                <input onChange = {this.updateMessage}
+              <form onSubmit = {this.handleSubmit}>
+                <input onChange = {this.updateTitle}
+                  placeholder={"Channel Title"}
                   type="text"
-                  value={this.state.newMessage}></input>
-                <input type="submit" value="Send!"></input>
+                  value={this.state.title}></input>
+                <input type="submit" value="Create!"></input>
               </form>
             </div>
+            {/* <div>
+              <CreateThreadFormContainer 
+                selectedUsers={this.state.selectedUsers}
+                closeModal = {this.props.closeModal}
+                thread={this.state}/>
+            </div> */}
           </div>
       </div>
     )

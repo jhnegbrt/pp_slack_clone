@@ -14,7 +14,7 @@ const mSTP = (state, ownProps) =>{
 }
 
 const mDTP = (dispatch) => ({
-  // fetchThreads: () => dispatch(fetchThreads()),
+  fetchThreads: () => dispatch(fetchThreads()),
 
   receiveThreads: (threads) => dispatch(receiveAllThreads(threads)),
   receiveThread: (thread) => dispatch(receiveThread(thread))

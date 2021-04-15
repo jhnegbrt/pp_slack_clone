@@ -19,30 +19,29 @@ class ThreadChannel < ApplicationCable::Channel
     ThreadChannel.broadcast_to("thread_channel_#{params['user_id']}", socket)
   end
 
-  # t.boolean "channel", null: false
-  # t.boolean "private", null: false
-  # t.string "title", null: false
-  # t.integer "creator_id"
-
   def speak(data)
-
-    thread = ChannelDm.create(
-      channel: data['thread']['channel'],
-      private: data['thread']['private'],
-      title: data['thread']['title'],
-      creator_id: data['thread'][]
+    
+    channel_dm = ChannelDm.create(
+      channel: data['channel'],
+      private: data['private'],
+      title: data['title'],
+      creator_id: data['creator_id']
     )
 
-    socket = {
-      type: "thread",
-      id: thread.id,
-      title: thread.title,
-      creator_id: thread.creator_id,
-      channel: thread.channel,
-      private: thread.private
-    }
-
-    ThreadChannel.broadcast_to("thread_channel_#{params['user_id']}", socket)
+    i = 0
+    while i < data["users"].length
+      socket = {
+        type: "thread",
+        id: channel_dm.id,
+        title: channel_dm.title,
+        creator_id: channel_dm.creator_id,
+        channel: channel_dm.channel,
+        private: channel_dm.private
+      }
+      user = data["users"][i]
+      ThreadChannel.broadcast_to("thread_channel_#{user}", socket)
+      i += 1
+    end
 
   end
 

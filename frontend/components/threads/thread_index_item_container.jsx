@@ -6,7 +6,7 @@ import {receiveMessage, removeMessage, receiveMessages} from '../../actions/mess
 
 const mSTP = (state, ownProps) => {
   return{
-  user_id: state.session.id
+  currentUserId: state.session.id
 }}
 
 const mDTP = dispatch => ({

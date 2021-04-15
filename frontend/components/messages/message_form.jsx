@@ -21,11 +21,21 @@ class MessageForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
+    let subscriptions = App.cable.subscriptions.subscriptions
+    let index;
+    for (let i = 0; i < subscriptions.length; i++){
+      let identifier = JSON.parse(subscriptions[i].identifier)
+      if (identifier.channel === "ChatChannel"){
+        index = i
+        break
+      }
+    }
+    
     if (this.props.formType === "Edit Message"){
-      App.cable.subscriptions.subscriptions[0].update({ message: this.state})
+      App.cable.subscriptions.subscriptions[index].update({ message: this.state})
       this.props.toggleEdit();
     } else {
-      App.cable.subscriptions.subscriptions[0].speak({ message: this.state})
+      App.cable.subscriptions.subscriptions[index].speak({ message: this.state})
       this.setState({
           content: ""
       })

@@ -5,7 +5,7 @@ import {fetchAllUsers} from '../../actions/user_actions'
 
 
 const mSTP = (state, ownProps) => ({
-  users: state.entities.workspace.users
+  
 })
 
 const mDTP = dispatch => ({
