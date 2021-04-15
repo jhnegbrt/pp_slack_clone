@@ -2,6 +2,7 @@ import * as APIUtil from '../util/thread_api_util'
 
 export const RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD"
 export const RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS"
+export const RECEIVE_THREAD = "RECEIVE_THREAD"
 
 export const receiveCurrentThread = (threadId) => {
   return({
@@ -10,7 +11,14 @@ export const receiveCurrentThread = (threadId) => {
   })
 }
 
-const receiveAllThreads = (threads) => {
+export const receiveThread = (thread) =>{
+  return({
+    type: RECEIVE_THREAD,
+    thread
+  })
+}
+
+export const receiveAllThreads = (threads) => {
   return({
     type: RECEIVE_ALL_THREADS,
     threads

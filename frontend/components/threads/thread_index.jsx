@@ -1,7 +1,6 @@
 import React from 'react'
 import ThreadIndexItemContainer from './thread_index_item_container'
-import CreateThreadFormContainer from './create_thread_form_container'
-
+import createThreadsConnection from './create_threads_connection'
 
 class ThreadIndex extends React.Component{
   constructor(props){
@@ -11,6 +10,11 @@ class ThreadIndex extends React.Component{
 
   componentDidMount(){
     this.props.fetchThreads()
+  }
+
+  componentDidMount(){
+    const {currentUserId} = this.props
+    createThreadsConnection(currentUserId, receiveThread, receiveAllThreads)
   }
 
   mapThread(thread){
@@ -32,7 +36,6 @@ class ThreadIndex extends React.Component{
         </ul>
         <button name="channel" onClick={() => this.props.toggleModal("channel")}>Create Channel</button>
         <button name="message" onClick={() => this.props.toggleModal("message")}>New Message</button>
-        {/* <CreateThreadFormContainer /> */}
       </div>
     )
   }

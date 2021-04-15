@@ -310,7 +310,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_CURRENT_THREAD": () => (/* binding */ RECEIVE_CURRENT_THREAD),
 /* harmony export */   "RECEIVE_ALL_THREADS": () => (/* binding */ RECEIVE_ALL_THREADS),
+/* harmony export */   "RECEIVE_THREAD": () => (/* binding */ RECEIVE_THREAD),
 /* harmony export */   "receiveCurrentThread": () => (/* binding */ receiveCurrentThread),
+/* harmony export */   "receiveThread": () => (/* binding */ receiveThread),
+/* harmony export */   "receiveAllThreads": () => (/* binding */ receiveAllThreads),
 /* harmony export */   "createThread": () => (/* binding */ createThread),
 /* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads)
 /* harmony export */ });
@@ -318,20 +321,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
+var RECEIVE_THREAD = "RECEIVE_THREAD";
 var receiveCurrentThread = function receiveCurrentThread(threadId) {
   return {
     type: RECEIVE_CURRENT_THREAD,
     threadId: threadId
   };
 };
-
+var receiveThread = function receiveThread(thread) {
+  return {
+    type: RECEIVE_THREAD,
+    thread: thread
+  };
+};
 var receiveAllThreads = function receiveAllThreads(threads) {
   return {
     type: RECEIVE_ALL_THREADS,
     threads: threads
   };
 };
-
 var createThread = function createThread(data) {
   return function (dispatch) {
     return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
@@ -1921,59 +1929,41 @@ var TechnologyDisplay = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/components/threads/create_thread_form_container.jsx":
-/*!**********************************************************************!*\
-  !*** ./frontend/components/threads/create_thread_form_container.jsx ***!
-  \**********************************************************************/
+/***/ "./frontend/components/threads/create_threads_connection.jsx":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/threads/create_threads_connection.jsx ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ createThreadsConnection)
 /* harmony export */ });
-/* harmony import */ var _thread_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./thread_form */ "./frontend/components/threads/thread_form.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads) {
+  App.cable.subscriptions.create({
+    channel: "ThreadChannel",
+    user_id: currentUserId
+  }, {
+    received: function received(data) {
+      switch (data.type) {
+        case "thread":
+          receiveThread(data);
+          break;
 
-
-
-
-
-var mSTP = function mSTP(state) {
-  return {
-    thread: {
-      title: "",
-      channel: true,
-      "private": false
+        case "threads":
+          receiveAllThreads(data);
+          break;
+      }
     },
-    formType: "Create Thread",
-    creatorId: state.session.id
-  };
-};
-
-var mDTP = function mDTP(dispatch) {
-  return {
-    submit: function submit(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(thread));
+    load: function load() {
+      return this.perform("load");
     },
-    receiveMessage: function receiveMessage(message) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));
-    },
-    receiveMessages: function receiveMessages(messages) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveAllMessages)(messages));
-    },
-    receiveCurrentThread: function receiveCurrentThread(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(thread.id));
-    },
-    fetchThreads: function fetchThreads() {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchThreads)());
+    speak: function speak(thread) {
+      return this.perform("speak", thread);
     }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_thread_form__WEBPACK_IMPORTED_MODULE_0__.default));
+  });
+}
 
 /***/ }),
 
@@ -2068,112 +2058,6 @@ var mSTP = function mSTP(state, ownProps) {
 
 /***/ }),
 
-/***/ "./frontend/components/threads/thread_form.jsx":
-/*!*****************************************************!*\
-  !*** ./frontend/components/threads/thread_form.jsx ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var ThreadForm = /*#__PURE__*/function (_React$Component) {
-  _inherits(ThreadForm, _React$Component);
-
-  var _super = _createSuper(ThreadForm);
-
-  function ThreadForm(props) {
-    var _this;
-
-    _classCallCheck(this, ThreadForm);
-
-    _this = _super.call(this, props);
-    _this.state = _this.props.thread;
-    _this.state.creator_id = _this.props.creatorId;
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(ThreadForm, [{
-    key: "helperFunction",
-    value: function helperFunction(thread) {
-      Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
-      this.props.fetchThreads();
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      var _this2 = this;
-
-      e.preventDefault();
-      this.props.submit(this.state).then(function (thread) {
-        return _this2.helperFunction(thread);
-      });
-      this.setState({
-        title: ""
-      });
-    }
-  }, {
-    key: "updateTitle",
-    value: function updateTitle(e) {
-      this.setState({
-        title: e.target.value
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: "thread-form",
-        onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        onChange: this.updateTitle,
-        type: "text",
-        placeholder: "Channel Title",
-        value: this.state.title
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "submit"
-      }));
-    }
-  }]);
-
-  return ThreadForm;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThreadForm);
-
-/***/ }),
-
 /***/ "./frontend/components/threads/thread_index.jsx":
 /*!******************************************************!*\
   !*** ./frontend/components/threads/thread_index.jsx ***!
@@ -2187,7 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_index_item_container */ "./frontend/components/threads/thread_index_item_container.jsx");
-/* harmony import */ var _create_thread_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_thread_form_container */ "./frontend/components/threads/create_thread_form_container.jsx");
+/* harmony import */ var _create_threads_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_threads_connection */ "./frontend/components/threads/create_threads_connection.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2228,7 +2112,8 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchThreads();
+      var currentUserId = this.props.currentUserId;
+      (0,_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__.default)(currentUserId, receiveThread, receiveAllThreads);
     }
   }, {
     key: "mapThread",
@@ -2290,17 +2175,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mSTP = function mSTP(state, ownProps) {
   return {
     threads: Object.values(state.entities.threads),
-    currentThreadId: state.ui.currentThread
+    currentThreadId: state.ui.currentThread,
+    currentUserId: state.session.id
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
-    fetchThreads: function fetchThreads() {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.fetchThreads)());
+    // fetchThreads: () => dispatch(fetchThreads()),
+    receiveThreads: function receiveThreads(threads) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveAllThreads)(threads));
+    },
+    receiveThread: function receiveThread(thread) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveThread)(thread));
     }
   };
 };
@@ -2922,6 +2813,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var threadsReducer = function threadsReducer() {
@@ -2930,6 +2823,9 @@ var threadsReducer = function threadsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
+    case RECEIVE_THREAD:
+      return Object.assign({}, state, _defineProperty({}, action.thread.id, action.thread));
+
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
       return Object.assign({}, state, action.threads);
 
