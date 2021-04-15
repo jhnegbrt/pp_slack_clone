@@ -2633,9 +2633,9 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
         className: "modal-header"
       }, this.props.formType === "message" ? "New Direct Message" : "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "modal-select-users"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "users-label"
-      }, "Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("select", {
+      }, "Select Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("select", {
         className: "modal-select",
         value: this.state.selectedUsers,
         onChange: this.selectUsers

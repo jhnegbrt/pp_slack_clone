@@ -94,15 +94,15 @@ class ThreadModal extends React.Component{
             {this.props.formType === "message" ? "New Direct Message" : "Create Channel"}
           </div>
           <div className="modal-select-users">
-            <label className="users-label">
-              Users
+            <div className="users-label">
+              Select Users:
               <select className="modal-select" value={this.state.selectedUsers} onChange={this.selectUsers}>
                 {Object.values(users).map((user) => 
                 <option key={user.id} value={user.id}>
                 {user.username}
                 </option>)}
               </select>
-            </label>
+            </div>
 
             <div className="recipients-list">
               <h2>To:</h2>
