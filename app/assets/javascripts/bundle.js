@@ -2616,7 +2616,9 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
           title: "",
           selectedUsers: []
         });
-      }); //redirect to this thread
+      }).then(function () {
+        return _this2.props.closeModal();
+      });
     }
   }, {
     key: "render",

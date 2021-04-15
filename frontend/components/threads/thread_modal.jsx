@@ -76,7 +76,7 @@ class ThreadModal extends React.Component{
         title: "",
         selectedUsers: [],
       }))
-    //redirect to this thread
+      .then(() => this.props.closeModal())
   }
 
 
