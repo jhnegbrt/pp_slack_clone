@@ -3,14 +3,36 @@ import React from 'react'
 class ThreadModal extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      selectedUsers: []
+    }
+    this.selectUsers = this.selectUsers.bind(this)
   }
+
+  selectUsers(e){
+    let allUsers = e.target.options
+    let selected = this.state.selectedUsers
+    for (let i = 0; i < allUsers.length; i++){
+      if (allUsers[i].selected && !selected.includes(allUsers[i].value)){
+        selected.push(allUsers[i].value)
+      } 
+      // else if (allUsers[i].selected){
+      //   selected = selected.filter(el => el !== allUsers[i].value)
+      // }
+    }
+    this.setState({
+      selectedUsers: selected
+    })
+  }
+ 
 
   componentDidMount(){
     this.props.fetchAllUsers()
   }
 
   render(){
-    debugger
+    const {users} = this.props
+    const selectedUsers = this.state.selectedUsers
     return(
       <div className="thread-modal-container">
         <div className="thread-modal">
@@ -19,8 +41,32 @@ class ThreadModal extends React.Component{
           </div>
           
           <div className="modal-header">
-            {this.props.formType === "message" ? "New Direct Message" : "Create Channel"}</div>
-        </div>
+            {this.props.formType === "message" ? "New Direct Message" : "Create Channel"}
+          </div>
+
+            <label>
+              Users
+              <select multiple={true} value={this.state.selectedUsers} onChange={this.selectUsers}>
+                {Object.values(users).map((user) => 
+                <option key={user.id} value={user.id}>
+                {user.username}
+                </option>)}
+              </select>
+            </label>
+
+            <div>
+              <h2>To:</h2>
+              <ul>
+                {selectedUsers.map(id =>{
+                  debugger
+                  return <li key={id}>{users[id].username}</li>
+                }
+                )}
+              </ul>
+              
+            </div>
+
+          </div>
       </div>
     )
   }

@@ -2546,12 +2546,38 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(ThreadModal);
 
   function ThreadModal(props) {
+    var _this;
+
     _classCallCheck(this, ThreadModal);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      selectedUsers: []
+    };
+    _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ThreadModal, [{
+    key: "selectUsers",
+    value: function selectUsers(e) {
+      var allUsers = e.target.options;
+      var selected = this.state.selectedUsers;
+
+      for (var i = 0; i < allUsers.length; i++) {
+        if (allUsers[i].selected && !selected.includes(allUsers[i].value)) {
+          selected.push(allUsers[i].value);
+        } // else if (allUsers[i].selected){
+        //   selected = selected.filter(el => el !== allUsers[i].value)
+        // }
+
+      }
+
+      this.setState({
+        selectedUsers: selected
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchAllUsers();
@@ -2559,9 +2585,10 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
-      debugger;
+      var users = this.props.users;
+      var selectedUsers = this.state.selectedUsers;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-modal-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2570,11 +2597,25 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
         className: "thread-close"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: function onClick() {
-          return _this.props.toggleModal(_this.props.formType);
+          return _this2.props.toggleModal(_this2.props.formType);
         }
       }, "Close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-header"
-      }, this.props.formType === "message" ? "New Direct Message" : "Create Channel")));
+      }, this.props.formType === "message" ? "New Direct Message" : "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        multiple: true,
+        value: this.state.selectedUsers,
+        onChange: this.selectUsers
+      }, Object.values(users).map(function (user) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          key: user.id,
+          value: user.id
+        }, user.username);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, selectedUsers.map(function (id) {
+        debugger;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: id
+        }, users[id].username);
+      })))));
     }
   }]);
 
@@ -2605,7 +2646,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    users: Object.values(state.entities.workspace.users)
+    users: state.entities.workspace.users
   };
 };
 
