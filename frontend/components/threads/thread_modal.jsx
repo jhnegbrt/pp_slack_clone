@@ -4,7 +4,8 @@ class ThreadModal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      selectedUsers: []
+      selectedUsers: [],
+      newMessage: ""
     }
     this.selectUsers = this.selectUsers.bind(this)
   }
@@ -23,11 +24,19 @@ class ThreadModal extends React.Component{
     this.setState({
       selectedUsers: selected
     })
+
+    this.updateMessage = this.updateMessage.bind(this)
   }
- 
+
 
   componentDidMount(){
     this.props.fetchAllUsers()
+  }
+
+  updateMessage(e){
+    this.setState({
+      newMessage: e.target.value
+    })
   }
 
   render(){
@@ -63,7 +72,13 @@ class ThreadModal extends React.Component{
                 }
                 )}
               </ul>
-              
+            </div>
+
+            <div>
+              <input onChange = {this.updateMessage}
+                type="text"
+                value={this.state.newMessage}></input>
+              <input type="submit" value="Send!"></input>
             </div>
 
           </div>

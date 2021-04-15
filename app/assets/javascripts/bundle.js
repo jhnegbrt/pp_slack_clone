@@ -2552,7 +2552,8 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      selectedUsers: []
+      selectedUsers: [],
+      newMessage: ""
     };
     _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
     return _this;
@@ -2576,11 +2577,19 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
       this.setState({
         selectedUsers: selected
       });
+      this.updateMessage = this.updateMessage.bind(this);
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchAllUsers();
+    }
+  }, {
+    key: "updateMessage",
+    value: function updateMessage(e) {
+      this.setState({
+        newMessage: e.target.value
+      });
     }
   }, {
     key: "render",
@@ -2615,7 +2624,14 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: id
         }, users[id].username);
-      })))));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        onChange: this.updateMessage,
+        type: "text",
+        value: this.state.newMessage
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: "Send!"
+      }))));
     }
   }]);
 

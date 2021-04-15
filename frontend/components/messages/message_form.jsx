@@ -42,9 +42,9 @@ class MessageForm extends React.Component{
     return(
       <form className="message-form" onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} 
-        type="text" 
-        placeholder="Message"
-        value={this.state.content}></input>
+          type="text" 
+          placeholder="Message"
+          value={this.state.content}></input>
         <input type="submit" value={this.props.formType === "Edit Message" ? "Save" : this.props.formType}></input>
       </form>
     )
