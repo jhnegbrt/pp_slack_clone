@@ -26,6 +26,7 @@ class ThreadModal extends React.Component{
     })
 
     this.updateMessage = this.updateMessage.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
 
@@ -37,6 +38,10 @@ class ThreadModal extends React.Component{
     this.setState({
       newMessage: e.target.value
     })
+  }
+
+  handleSubmit(){
+
   }
 
   render(){
@@ -75,12 +80,13 @@ class ThreadModal extends React.Component{
             </div>
 
             <div>
-              <input onChange = {this.updateMessage}
-                type="text"
-                value={this.state.newMessage}></input>
-              <input type="submit" value="Send!"></input>
+              <form onSubmit={this.handleSubmit}>
+                <input onChange = {this.updateMessage}
+                  type="text"
+                  value={this.state.newMessage}></input>
+                <input type="submit" value="Send!"></input>
+              </form>
             </div>
-
           </div>
       </div>
     )

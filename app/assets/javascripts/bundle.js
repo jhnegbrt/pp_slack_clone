@@ -1921,55 +1921,6 @@ var TechnologyDisplay = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/components/threads/create_connection.jsx":
-/*!***********************************************************!*\
-  !*** ./frontend/components/threads/create_connection.jsx ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createConnection)
-/* harmony export */ });
-function createConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId) {
-  App.cable.subscriptions.create({
-    channel: "ChatChannel",
-    thread_id: currentThreadId,
-    user_id: currentUserId
-  }, {
-    received: function received(data) {
-      switch (data.type) {
-        case "message":
-          receive(data);
-          break;
-
-        case "messages":
-          receiveCurrentMessages(data);
-          break;
-
-        case "delete":
-          remove(data['message_id']);
-          break;
-      }
-    },
-    load: function load() {
-      return this.perform("load");
-    },
-    speak: function speak(message) {
-      return this.perform("speak", message);
-    },
-    update: function update(message) {
-      return this.perform("update_message", message);
-    },
-    remove_message: function remove_message(data) {
-      return this.perform("remove_message", data);
-    }
-  });
-}
-
-/***/ }),
-
 /***/ "./frontend/components/threads/create_thread_form_container.jsx":
 /*!**********************************************************************!*\
   !*** ./frontend/components/threads/create_thread_form_container.jsx ***!
@@ -2129,7 +2080,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _create_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_connection */ "./frontend/components/threads/create_connection.jsx");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2176,7 +2127,7 @@ var ThreadForm = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadForm, [{
     key: "helperFunction",
     value: function helperFunction(thread) {
-      (0,_create_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
+      Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
       this.props.fetchThreads();
     }
   }, {
@@ -2370,7 +2321,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _create_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./create_connection */ "./frontend/components/threads/create_connection.jsx");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2426,7 +2377,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
           thread = _this$props.thread,
           receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
-      (0,_create_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage);
+      Object(function webpackMissingModule() { var e = new Error("Cannot find module './create_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(thread.id, receiveMessage, receiveMessages, removeMessage);
     }
   }, {
     key: "render",
@@ -2578,6 +2529,7 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
         selectedUsers: selected
       });
       this.updateMessage = this.updateMessage.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
   }, {
     key: "componentDidMount",
@@ -2591,6 +2543,9 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
         newMessage: e.target.value
       });
     }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {}
   }, {
     key: "render",
     value: function render() {
@@ -2624,14 +2579,16 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: id
         }, users[id].username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         onChange: this.updateMessage,
         type: "text",
         value: this.state.newMessage
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: "Send!"
-      }))));
+      })))));
     }
   }]);
 
