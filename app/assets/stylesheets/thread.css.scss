@@ -37,12 +37,36 @@
 
 //thread-modal
 
+.thread-modal-container{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.603);
+  position: absolute;
+}
+
 .thread-modal{
   height: 80vh;
-  width: 60vw;
+  width: 50vw;
   background-color: rgba(44, 44, 83, 0.753);
   position: fixed;
   margin-top: 10vh;
-  margin-left: 30vw;
+  margin-left: 35vw;
   border-radius: 25px;
+  position: relative;
+  padding: 1%;
+}
+
+.modal-header{
+  text-align: center;
+  font-family: 'Comfortaa', serif;
+  color: whitesmoke;
+  font-size: 5vh;
+  margin-top: 3vh;
+}
+
+.thread-close{
+  position: absolute;
+  left: auto;
+  right: 2%;
+  margin-top: 1vh;
 }
