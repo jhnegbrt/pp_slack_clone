@@ -6,6 +6,7 @@ import CreateThreadFormContainer from './create_thread_form_container'
 class ThreadIndex extends React.Component{
   constructor(props){
     super(props)
+    
   }
 
   componentDidMount(){
@@ -21,6 +22,7 @@ class ThreadIndex extends React.Component{
   }
 
   render(){
+    debugger
     const { threads } = this.props
     return(
       <div className="thread-index">
@@ -29,7 +31,9 @@ class ThreadIndex extends React.Component{
             threads.map(this.mapThread)
           }
         </ul>
-        <CreateThreadFormContainer />
+        <button name="channel" onClick={()=>this.props.toggleModal("channel")}>Create Channel</button>
+        <button name="message" onClick={() => this.props.toggleModal("message")}>New Message</button>
+        {/* <CreateThreadFormContainer /> */}
       </div>
     )
   }

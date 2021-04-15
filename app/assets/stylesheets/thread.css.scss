@@ -34,3 +34,15 @@
 .active-thread{
   background-color: rgb(44, 44, 83)
 }
+
+//thread-modal
+
+.thread-modal{
+  height: 80vh;
+  width: 60vw;
+  background-color: rgba(44, 44, 83, 0.753);
+  position: fixed;
+  margin-top: 10vh;
+  margin-left: 30vw;
+  border-radius: 25px;
+}

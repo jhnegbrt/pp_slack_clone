@@ -1,4 +1,4 @@
-export default function createConnection(currentThreadId, currentUserId, receive, receiveCurrentMessages, remove){
+export default function createConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId){
  
   App.cable.subscriptions.create(
     

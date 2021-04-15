@@ -12,7 +12,12 @@ class ThreadForm extends React.Component{
   }
 
   helperFunction(thread){ 
-    createConnection(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage)
+    createConnection(
+      thread.threadId, 
+      this.props.receiveMessage, 
+      this.props.receiveMessages, 
+      this.props.removeMessage, 
+      this.props.creatorId)
     this.props.fetchThreads()
   }
 
