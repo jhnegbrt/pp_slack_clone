@@ -2635,8 +2635,12 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
         onClick: this.props.closeModal
       }, "Close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "modal-header"
-      }, this.props.formType === "message" ? "New Direct Message" : "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", null, "Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("select", {
-        multiple: true,
+      }, this.props.formType === "message" ? "New Direct Message" : "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "modal-select-users"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("label", {
+        className: "users-label"
+      }, "Users", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("select", {
+        className: "modal-select",
         value: this.state.selectedUsers,
         onChange: this.selectUsers
       }, Object.values(users).map(function (user) {
@@ -2644,11 +2648,15 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
           key: user.id,
           value: user.id
         }, user.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", null, selectedUsers.map(function (id) {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "recipients-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", null, selectedUsers.map(function (id) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
           key: id
         }, users[id].username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "create-thread"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
         onChange: this.updateTitle,

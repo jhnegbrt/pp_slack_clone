@@ -68,7 +68,7 @@ class ChatChannel < ApplicationCable::Channel
       time: time,
       channel_dms_id: channel_dms_id
     }
-    ChatChannel.broadcast_to("chat_channel_#{params['thread_id']}", socket)
+    ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
   end
 
   def remove_message(data)

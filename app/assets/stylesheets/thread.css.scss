@@ -70,3 +70,42 @@
   right: 2%;
   margin-top: 1vh;
 }
+
+.modal-select-users{
+  text-align: center;
+}
+
+.users-label{
+  font-family: 'Comfortaa', serif;
+  color: whitesmoke;
+
+}
+
+.modal-select{
+  width: 20vw;
+  height: 4vh;
+}
+
+.modal-select option{
+  background-color: rgb(60, 98, 179);
+  font-family: 'Comfortaa', serif;
+  color: whitesmoke;
+  font-size: 3vh;
+}
+
+.recipients-list{
+  font-family: 'Comfortaa', serif;
+  color: whitesmoke;
+}
+
+.recipients-list h2{
+  height: 3vh;
+}
+
+.recipients-list li{
+  height: 2vh;
+}
+
+.create-thread{
+  text-align:center;
+}

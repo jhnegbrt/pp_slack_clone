@@ -93,10 +93,10 @@ class ThreadModal extends React.Component{
           <div className="modal-header">
             {this.props.formType === "message" ? "New Direct Message" : "Create Channel"}
           </div>
-
-            <label>
+          <div className="modal-select-users">
+            <label className="users-label">
               Users
-              <select multiple={true} value={this.state.selectedUsers} onChange={this.selectUsers}>
+              <select className="modal-select" value={this.state.selectedUsers} onChange={this.selectUsers}>
                 {Object.values(users).map((user) => 
                 <option key={user.id} value={user.id}>
                 {user.username}
@@ -104,7 +104,7 @@ class ThreadModal extends React.Component{
               </select>
             </label>
 
-            <div>
+            <div className="recipients-list">
               <h2>To:</h2>
               <ul>
                 {selectedUsers.map(id =>{
@@ -113,8 +113,10 @@ class ThreadModal extends React.Component{
                 )}
               </ul>
             </div>
+          </div>
 
-            <div>
+
+            <div className="create-thread">
               <form onSubmit = {this.handleSubmit}>
                 <input onChange = {this.updateTitle}
                   placeholder={"Channel Title"}
@@ -123,12 +125,6 @@ class ThreadModal extends React.Component{
                 <input type="submit" value="Create!"></input>
               </form>
             </div>
-            {/* <div>
-              <CreateThreadFormContainer 
-                selectedUsers={this.state.selectedUsers}
-                closeModal = {this.props.closeModal}
-                thread={this.state}/>
-            </div> */}
           </div>
       </div>
     )
