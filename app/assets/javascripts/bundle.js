@@ -2280,17 +2280,13 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       var threads = this.props.threads;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-index"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(this.mapThread)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(this.mapThread), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "create-channel-button",
         name: "channel",
         onClick: function onClick() {
           return _this.props.toggleModal("channel");
         }
-      }, "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        name: "message",
-        onClick: function onClick() {
-          return _this.props.toggleModal("message");
-        }
-      }, "New Message"));
+      }, "Create Channel")));
     }
   }]);
 

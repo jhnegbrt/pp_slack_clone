@@ -72,13 +72,14 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def remove_message(data)
+    channel_dms_id = data['message']['channel_dms_id']
     message = Message.find_by(id: data['message'])
     message.delete
     socket = {
       type: "delete",
       message_id: data['message']
     }
-    ChatChannel.broadcast_to("chat_channel_#{params['thread_id']}", socket)
+    ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
   end
 
   def unsubscribed; end

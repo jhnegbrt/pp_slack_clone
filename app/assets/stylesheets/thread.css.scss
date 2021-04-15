@@ -31,6 +31,22 @@
   box-shadow: rgba(150, 151, 216, 0.3) 0px 1vh 1vh, rgba(160, 148, 231, 0.22) 0px 1vh 1vh;
 }
 
+
+.create-channel-button{
+  color: rgb(44, 44, 83);
+  font-size: 3vh;
+  background-color: rgb(207, 226, 233);
+  border-radius: 2px;
+  padding: 2%;
+  margin-right: 3vw;
+  
+}
+
+.create-channel-button:hover{
+  cursor:pointer;
+  color:white;
+}
+
 .active-thread{
   background-color: rgb(44, 44, 83)
 }
@@ -101,6 +117,8 @@
 .recipients-list h2{
   height: 3vh;
 }
+
+
 
 .recipients-list li{
   height: 2vh;

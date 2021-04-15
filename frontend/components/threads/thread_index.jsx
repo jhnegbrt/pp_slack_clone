@@ -31,9 +31,10 @@ class ThreadIndex extends React.Component{
           {
             threads.map(this.mapThread)
           }
+          <li className="create-channel-button" name="channel" onClick={() => this.props.toggleModal("channel")}>Create Channel</li>
         </ul>
-        <button name="channel" onClick={() => this.props.toggleModal("channel")}>Create Channel</button>
-        <button name="message" onClick={() => this.props.toggleModal("message")}>New Message</button>
+        
+        {/* <button name="message" onClick={() => this.props.toggleModal("message")}>New Message</button>  */}
       </div>
     )
   }
