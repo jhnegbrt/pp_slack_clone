@@ -38,10 +38,10 @@ export const receiveMessage = (message) => {
 
 }
 
-export const removeMessage = (messageId) => {
+export const removeMessage = (message) => {
   return({
     type: REMOVE_MESSAGE,
-    messageId
+    message
   })
 }
 

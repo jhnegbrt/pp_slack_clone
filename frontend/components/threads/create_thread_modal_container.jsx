@@ -1,6 +1,6 @@
 import ThreadModal from './thread_modal'
 import {connect} from 'react-redux'
-import {createThread, receiveCurrentThread, fetchThreads} from '../../actions/thread_actions'
+import {createThread, receiveCurrentThread} from '../../actions/thread_actions'
 import {receiveMessage, receiveMessages} from '../../actions/message_actions'
 import {fetchAllUsers} from '../../actions/user_actions'
 

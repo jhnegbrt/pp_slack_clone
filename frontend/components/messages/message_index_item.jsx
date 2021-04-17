@@ -51,8 +51,13 @@ class MessageIndexItem extends React.Component{
         break
       }
     }
-  
-    subscriptions[index].remove_message({ message: this.props.message.id})
+    
+    let message = {
+      id: this.props.message.id,
+      channel_dms_id: this.props.channel_dms_id
+    }
+    
+    subscriptions[index].remove_message({ message })
 
   }
 

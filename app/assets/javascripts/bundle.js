@@ -167,10 +167,10 @@ var receiveMessage = function receiveMessage(message) {
     message: message
   };
 };
-var removeMessage = function removeMessage(messageId) {
+var removeMessage = function removeMessage(message) {
   return {
     type: REMOVE_MESSAGE,
-    messageId: messageId
+    message: message
   };
 };
 var fetchMessage = function fetchMessage(messageId) {
@@ -924,6 +924,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var messages = this.props.messages;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "messages-display"
@@ -935,7 +937,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           previous: messages[idx - 1],
           message: message,
-          key: message.id
+          key: message.id,
+          currentThreadId: _this2.props.currentThreadId
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         ref: this.bottom
@@ -1085,8 +1088,12 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         }
       }
 
+      var message = {
+        id: this.props.message.id,
+        channel_dms_id: this.props.channel_dms_id
+      };
       subscriptions[index].remove_message({
-        message: this.props.message.id
+        message: message
       });
     }
   }, {
@@ -1164,9 +1171,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mSTP = function mSTP(state) {
+var mSTP = function mSTP(state, ownProps) {
   return {
-    currentUserId: state.session.id
+    currentUserId: state.session.id,
+    channel_dms_id: ownProps.currentThreadId
   };
 };
 
@@ -2463,9 +2471,6 @@ var mDTP = function mDTP(dispatch) {
     selectThread: function selectThread(threadId) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(threadId));
     },
-    submit: function submit(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(thread));
-    },
     receiveMessage: function receiveMessage(message) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));
     },
@@ -2474,12 +2479,6 @@ var mDTP = function mDTP(dispatch) {
     },
     removeMessage: function removeMessage(messageId) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.removeMessage)(messageId));
-    },
-    receiveCurrentThread: function receiveCurrentThread(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(thread.id));
-    },
-    fetchThreads: function fetchThreads() {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchThreads)());
     }
   };
 };
@@ -2824,8 +2823,9 @@ var MessagesReducer = function MessagesReducer() {
       return Object.assign({}, state, action.messages);
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
+      debugger;
       var nextState = Object.assign({}, state);
-      delete nextState[action.messageId];
+      delete nextState[action.message.id];
       return nextState;
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.CLEAR_PREVIOUS_MESSAGES:
@@ -3134,42 +3134,30 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createMessage": () => (/* binding */ createMessage),
-/* harmony export */   "updateMessage": () => (/* binding */ updateMessage),
 /* harmony export */   "deleteMessage": () => (/* binding */ deleteMessage),
-/* harmony export */   "fetchMessages": () => (/* binding */ fetchMessages),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage)
 /* harmony export */ });
-var createMessage = function createMessage(message) {
-  return $.ajax({
-    method: 'POST',
-    url: 'api/messages',
-    data: {
-      message: message
-    }
-  });
-};
-var updateMessage = function updateMessage(message) {
-  return $.ajax({
-    method: 'PATCH',
-    url: "api/messages/".concat(message.id),
-    data: {
-      message: message
-    }
-  });
-};
+// export const updateMessage = (message) =>{
+//   return(
+//     $.ajax({
+//       method: 'PATCH',
+//       url: `api/messages/${message.id}`,
+//       data: {message: message}
+//     })
+//   )
+// }
 var deleteMessage = function deleteMessage(messageId) {
   return $.ajax({
     method: 'DELETE',
     url: "api/messages/".concat(messageId)
   });
-};
-var fetchMessages = function fetchMessages() {
-  return $.ajax({
-    method: 'GET',
-    url: 'api/messages'
-  });
-};
+}; // export const fetchMessages = () => (
+//   $.ajax({
+//     method: 'GET',
+//     url: 'api/messages'
+//   })
+// )
+
 var fetchMessage = function fetchMessage(messageId) {
   return $.ajax({
     method: 'GET',

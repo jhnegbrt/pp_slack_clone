@@ -1,22 +1,14 @@
-export const createMessage = (message) =>{
-  return(
-    $.ajax({
-      method: 'POST',
-      url: 'api/messages',
-      data: {message: message}
-    })
-  )
-}
 
-export const updateMessage = (message) =>{
-  return(
-    $.ajax({
-      method: 'PATCH',
-      url: `api/messages/${message.id}`,
-      data: {message: message}
-    })
-  )
-}
+
+// export const updateMessage = (message) =>{
+//   return(
+//     $.ajax({
+//       method: 'PATCH',
+//       url: `api/messages/${message.id}`,
+//       data: {message: message}
+//     })
+//   )
+// }
 
 export const deleteMessage = (messageId) =>(
   $.ajax({
@@ -25,12 +17,12 @@ export const deleteMessage = (messageId) =>(
   })
 )
 
-export const fetchMessages = () => (
-  $.ajax({
-    method: 'GET',
-    url: 'api/messages'
-  })
-)
+// export const fetchMessages = () => (
+//   $.ajax({
+//     method: 'GET',
+//     url: 'api/messages'
+//   })
+// )
 
 export const fetchMessage = (messageId) => (
   $.ajax({

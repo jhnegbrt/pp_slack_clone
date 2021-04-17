@@ -28,7 +28,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-
+    
     channel_dms_id = data['message']['channel_dms_id']
 
     new_message = Message.create(
@@ -52,6 +52,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def update_message(data)
+    
 
     channel_dms_id = data['message']['channel_dms_id']
 
@@ -73,7 +74,7 @@ class ChatChannel < ApplicationCable::Channel
 
   def remove_message(data)
     channel_dms_id = data['message']['channel_dms_id']
-    message = Message.find_by(id: data['message'])
+    message = Message.find_by(id: data['message']['id'])
     message.delete
     socket = {
       type: "delete",

@@ -27,6 +27,7 @@ class MessageIndex extends React.Component{
                   previous={messages[idx-1]}
                   message={message}
                   key={message.id}
+                  currentThreadId={this.props.currentThreadId}
                   /> 
               )
             }
