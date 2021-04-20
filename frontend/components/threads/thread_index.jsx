@@ -8,7 +8,6 @@ class ThreadIndex extends React.Component{
     
   }
 
-
   componentDidMount(){
     const {currentUserId, receiveThread, receiveThreads} = this.props
     createThreadsConnection(currentUserId, receiveThread, receiveThreads)
@@ -16,7 +15,7 @@ class ThreadIndex extends React.Component{
   }
 
   mapThread(thread){
-    if (typeof thread === "number"){
+    if (typeof thread === "number" || thread.title == undefined || thread.title == ""){
       return
     } else {
       return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>

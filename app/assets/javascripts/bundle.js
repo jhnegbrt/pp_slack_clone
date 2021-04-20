@@ -2311,7 +2311,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "mapThread",
     value: function mapThread(thread) {
-      if (typeof thread === "number") {
+      if (typeof thread === "number" || thread.title == undefined || thread.title == "") {
         return;
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
