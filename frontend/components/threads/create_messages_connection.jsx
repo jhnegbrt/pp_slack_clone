@@ -1,8 +1,8 @@
 export default function createMessagesConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId){
   
   App.cable.subscriptions.create(
-    
-    { channel: "ChatChannel", thread_id: currentThreadId, user_id: currentUserId },
+    // thread_id: currentThreadId, 
+    { channel: "ChatChannel", user_id: currentUserId },
     {
       received: data => {
         switch (data.type){

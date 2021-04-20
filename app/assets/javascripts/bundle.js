@@ -411,7 +411,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _components_messages_message_index_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/messages/message_index_container */ "./frontend/components/messages/message_index_container.jsx");
 /* harmony import */ var _components_messages_edit_message_form_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/messages/edit_message_form_container */ "./frontend/components/messages/edit_message_form_container.jsx");
-/* harmony import */ var _components_client_client__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/client/client */ "./frontend/components/client/client.jsx");
+/* harmony import */ var _components_client_client_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/client/client_container */ "./frontend/components/client/client_container.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
 
 
@@ -450,7 +450,7 @@ var App = function App() {
     component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_1__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__.ProtectedRoute, {
     path: "/client",
-    component: _components_client_client__WEBPACK_IMPORTED_MODULE_6__.default
+    component: _components_client_client_container__WEBPACK_IMPORTED_MODULE_6__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
     path: "/messages/:messageId/edit",
     component: _components_messages_edit_message_form_container__WEBPACK_IMPORTED_MODULE_5__.default
@@ -563,6 +563,11 @@ var Client = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchThreads();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -591,6 +596,42 @@ var Client = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_2__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Client);
+
+/***/ }),
+
+/***/ "./frontend/components/client/client_container.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/client/client_container.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./client */ "./frontend/components/client/client.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+ // const mSTP = (state, ownProps) =>{
+//   return({
+//     threads: Object.values(state.entities.threads),
+//     currentThreadId: state.ui.currentThread,
+//     currentUserId: state.session.id
+//   })
+// }
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    fetchThreads: function fetchThreads() {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.fetchThreads)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(null, mDTP)(_client__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -1981,9 +2022,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ createMessagesConnection)
 /* harmony export */ });
 function createMessagesConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId) {
-  App.cable.subscriptions.create({
+  App.cable.subscriptions.create( // thread_id: currentThreadId, 
+  {
     channel: "ChatChannel",
-    thread_id: currentThreadId,
     user_id: currentUserId
   }, {
     received: function received(data) {
@@ -2576,7 +2617,8 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "helperFunction",
     value: function helperFunction(thread) {
-      (0,_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
+      (0,_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)( // thread.threadId,
+      this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -2590,7 +2632,7 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
       }
 
       subscriptions[index].speak({
-        thread: thread.threadId,
+        // thread: thread.threadId,
         users: this.state.selectedUsers,
         channel: this.props.thread.channel,
         "private": this.props.thread["private"],
@@ -2603,10 +2645,11 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault();
-      this.props.submit(this.state).then(function (thread) {
-        return _this2.helperFunction(thread);
-      }).then(function () {
+      e.preventDefault(); // this.props.submit(this.state)
+      // .then((thread) => 
+
+      this.helperFunction(this.state) // )
+      .then(function () {
         return _this2.setState({
           title: "",
           selectedUsers: []
@@ -2974,7 +3017,7 @@ var threadsReducer = function threadsReducer() {
       return Object.assign({}, state, _defineProperty({}, action.thread.id, action.thread));
 
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
-      return Object.assign({}, state, action.threads.threads);
+      return Object.assign({}, state, action.threads);
 
     default:
       return state;

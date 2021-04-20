@@ -5,7 +5,7 @@ import LoginFormContainer from '../components/session_form/login_form_container'
 import SignupFormContainer from '../components/session_form/signup_form_container'
 import MessageIndexContainer from '../components/messages/message_index_container'
 import EditMessageFormContainer from '../components/messages/edit_message_form_container'
-import Client from '../components/client/client'
+import ClientContainer from '../components/client/client_container'
 import { AuthRoute, ProtectedRoute } from '../util/route_util'
 
 const NotFoundPage = () => {
@@ -20,7 +20,7 @@ const App = () => (
     <Route exact path='/features' component={SplashContainer}></Route>
     <Route exact path='/technologies' component={SplashContainer}></Route>
     {/* <ProtectedRoute exact path='/client' component={MessageIndexContainer} /> */}
-    <ProtectedRoute path='/client' component={Client} />
+    <ProtectedRoute path='/client' component={ClientContainer} />
     <Route path='/messages/:messageId/edit' component={EditMessageFormContainer}></Route>
     <AuthRoute exact path="/login" component={LoginFormContainer} />
     <AuthRoute exact path="/signup" component={SignupFormContainer} />
