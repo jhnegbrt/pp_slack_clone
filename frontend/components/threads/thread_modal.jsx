@@ -40,7 +40,7 @@ class ThreadModal extends React.Component{
 
   helperFunction(thread){
     createMessagesConnection(
-      // thread.threadId,
+      thread.threadId,
       this.props.receiveMessage,
       this.props.receiveMessages,
       this.props.removeMessage,
@@ -57,7 +57,7 @@ class ThreadModal extends React.Component{
     }
     
     subscriptions[index].speak({ 
-      // thread: thread.threadId,
+      thread: thread.threadId,
       users: this.state.selectedUsers,
       channel: this.props.thread.channel,
       private: this.props.thread.private,

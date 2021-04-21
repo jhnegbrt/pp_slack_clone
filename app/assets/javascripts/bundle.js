@@ -2022,9 +2022,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ createMessagesConnection)
 /* harmony export */ });
 function createMessagesConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId) {
-  App.cable.subscriptions.create( // thread_id: currentThreadId, 
-  {
+  App.cable.subscriptions.create({
     channel: "ChatChannel",
+    thread_id: currentThreadId,
     user_id: currentUserId
   }, {
     received: function received(data) {
@@ -2617,8 +2617,7 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "helperFunction",
     value: function helperFunction(thread) {
-      (0,_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)( // thread.threadId,
-      this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
+      (0,_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -2632,7 +2631,7 @@ var ThreadModal = /*#__PURE__*/function (_React$Component) {
       }
 
       subscriptions[index].speak({
-        // thread: thread.threadId,
+        thread: thread.threadId,
         users: this.state.selectedUsers,
         channel: this.props.thread.channel,
         "private": this.props.thread["private"],
