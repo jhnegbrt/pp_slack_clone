@@ -1,5 +1,5 @@
 import React from 'react'
-import createMessagesConnection from './create_messages_connection'
+import createMessagesConnection from '../../util/create_messages_connection'
 
 import { NavLink } from 'react-router-dom'
 

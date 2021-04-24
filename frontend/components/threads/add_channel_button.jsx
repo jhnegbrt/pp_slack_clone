@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class AddChannelButton extends React.Component{
   constructor(props){
@@ -12,8 +13,6 @@ class AddChannelButton extends React.Component{
     this.setWrapperRef = this.setWrapperRef.bind(this)
     this.toggleChannelButtons = this.toggleChannelButtons.bind(this)
     this.handleClickOutside = this.handleClickOutside.bind(this)
-    
-
 
   
   }
@@ -50,14 +49,11 @@ class AddChannelButton extends React.Component{
 
   render(){
     
-    
     const channelButtons = (
       <div className={"channel-buttons"}>
-        <div classNane={"triangle"}></div>
-        <a name="channel" onClick={() => this.props.toggleModal("channel")}>Create Channel
-        </a>
-        <a name="channel" onClick={() => this.props.toggleModal("channel")}>Browse Channel
-        </a>
+        <div className={"triangle"}></div>
+        <Link to="/client/newChannel">Create Channel</Link>
+        <Link to="/client/browseChannels">Browse Channels</Link>
       </div>
     )
     return(

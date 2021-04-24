@@ -1,4 +1,4 @@
-import createMessagesConnection from './create_messages_connection'
+import createMessagesConnection from '../../util/create_messages_connection'
 // import CreateThreadModalContainer from './create_thread_form_container'
 import React from 'react'
 

@@ -1,7 +1,8 @@
 import ThreadDisplayContainer from '../threads/thread_display_container'
 import ThreadIndexContainer from '../threads/thread_index_container'
 import React from 'react'
-import CreateThreadModalContainer from '../threads/create_thread_modal_container'
+import ChannelFormContainer from '../threads/channel_form_container'
+import DMFormContainer from '../threads/dm_form_container'
 
 import { Route } from 'react-router-dom'
 
@@ -48,10 +49,13 @@ class Client extends React.Component{
       <div className="client">
         <Route path='/client' render={(props) => <ThreadIndexContainer {...props} toggleModal={this.toggleModal}/>} />
         <Route path='/client/thread/:threadId' component={ThreadDisplayContainer} />
-        {this.state.modal === true ? <CreateThreadModalContainer 
+        <Route path='/client/browseChannels' component={ChannelFormContainer} />
+        <Route path='/client/newChannel' component={ChannelFormContainer} />
+        <Route path='/client/addDM' component={DMFormContainer} />
+        {/* {this.state.modal === true ? <CreateThreadModalContainer 
           toggleModal={this.toggleModal}
           closeModal={this.closeModal}
-          formType={this.state.newChannel ? "channel" : "message"}/> : null}
+          formType={this.state.newChannel ? "channel" : "message"}/> : null} */}
       </div>
     )
   }
