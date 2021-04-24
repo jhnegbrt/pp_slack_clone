@@ -1,11 +1,11 @@
 import React from 'react'
 import ThreadIndexItemContainer from './thread_index_item_container'
 import createThreadsConnection from './create_threads_connection'
+import AddChannelButton from './add_channel_button'
 
 class ThreadIndex extends React.Component{
   constructor(props){
     super(props)
-    
   }
 
   componentDidMount(){
@@ -22,15 +22,25 @@ class ThreadIndex extends React.Component{
     }
   }
 
+
+
   render(){
     const { threads } = this.props
     return(
       <div className="thread-index">
+        <ul className="channel-index">
+          {
+            threads.map(this.mapThread)
+          }
+
+          <AddChannelButton toggleModal={this.props.toggleModal} />
+
+        </ul>
         <ul>
           {
             threads.map(this.mapThread)
           }
-          <li className="create-channel-button" name="channel" onClick={() => this.props.toggleModal("channel")}>Create Channel</li>
+          <li className="create-channel-button" name="channel" onClick={() => this.props.toggleModal("channel")}>New Conversation</li>
         </ul>
         
         {/* <button name="message" onClick={() => this.props.toggleModal("message")}>New Message</button>  */}

@@ -6,6 +6,7 @@
   padding: 3% 0% 3% 3%;
   background-color: rgb(2, 2, 59);
   font-family: 'Comfortaa', serif;
+  position: relative;
   
 }
 
@@ -29,6 +30,28 @@
   background-color: rgb(44, 44, 83);
   border-radius: 5px;
   box-shadow: rgba(150, 151, 216, 0.3) 0px 1vh 1vh, rgba(160, 148, 231, 0.22) 0px 1vh 1vh;
+}
+
+
+.channel-index{
+  position:relative;
+}
+.channel-buttons{
+  position:absolute;
+  background-color: antiquewhite;
+  padding: 5%;
+  top: 50px;
+  width: 100%;
+
+  a{
+    display: block;
+    padding: 1%;
+  }
+
+  .triangle{
+    content: "";
+    border: 10px solid yellow
+  }
 }
 
 
