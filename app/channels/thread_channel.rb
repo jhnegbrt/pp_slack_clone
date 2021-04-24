@@ -5,12 +5,25 @@ class ThreadChannel < ApplicationCable::Channel
   end
 
   def load
-    channel_dms = User.find_by(id: params['user_id']).channel_dms
+  
+    users_channel_dms = User.find_by(id: params['user_id']).channel_dms
+
+    users_channel_dms_ids = []
+    users_channel_dms.each do |channel_dm|
+      users_channel_dms_ids << channel_dm.id
+    end
+
+    channel_dms_with_users = ChannelDm.includes(:users).find(users_channel_dms_ids)
 
     channel_dms_hash = {}
-    channel_dms.each do |thread|
+    channel_dms_with_users.each do |thread|
       channel_dms_hash[thread.id] = thread.as_json
+      users = thread.users.map do |user|
+        user.id
+      end
+      channel_dms_hash[thread.id][:users] = users
     end
+
     socket = {
       type: "threads",
       threads: channel_dms_hash

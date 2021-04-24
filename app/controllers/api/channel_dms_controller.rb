@@ -2,6 +2,7 @@ class Api::ChannelDmsController < ApplicationController
 
   def index
     @channel_dms = ChannelDm.all
+    debugger
   end
 
   def show
