@@ -10,7 +10,7 @@ export default function createThreadsConnection(currentUserId, receiveThread, re
             receiveThread(data)
             break
           case "threads":
-            receiveAllThreads(data)
+            receiveAllThreads(data.threads)
             break
         }
       },

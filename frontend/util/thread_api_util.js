@@ -8,9 +8,11 @@ export const createThread = (thread) =>{
   )
 }
 
-export const fetchThreads = () => (
-  $.ajax({
-    method: 'GET',
-    url: 'api/channel_dms'
-  })
-)
+export const fetchThreads = () => {
+  return(
+    $.ajax({
+      method: 'GET',
+      url: 'api/channel_dms'
+    })
+  )
+}

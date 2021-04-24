@@ -51,7 +51,7 @@ class AddChannelButton extends React.Component{
     
     const channelButtons = (
       <div className={"channel-buttons"}>
-        <div className={"triangle"}></div>
+        {/* <div className={"triangle"}></div> */}
         <Link to="/client/newChannel">Create Channel</Link>
         <Link to="/client/browseChannels">Browse Channels</Link>
       </div>

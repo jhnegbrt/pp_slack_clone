@@ -2,6 +2,7 @@ import React from 'react'
 import ThreadIndexItemContainer from './thread_index_item_container'
 import createThreadsConnection from '../../util/create_threads_connection'
 import AddChannelButton from './add_channel_button'
+import {Link} from 'react-router-dom'
 
 class ThreadIndex extends React.Component{
   constructor(props){
@@ -40,10 +41,8 @@ class ThreadIndex extends React.Component{
           {
             threads.map(this.mapThread)
           }
-          <li className="create-channel-button" name="channel" onClick={() => this.props.toggleModal("channel")}>New Conversation</li>
+          <li className="create-channel-button"><Link to='/client/addDM'>New Conversation</Link></li>
         </ul>
-        
-        {/* <button name="message" onClick={() => this.props.toggleModal("message")}>New Message</button>  */}
       </div>
     )
   }

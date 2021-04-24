@@ -13,8 +13,7 @@ import {connect} from 'react-redux'
 // }
 
 const mDTP = (dispatch) => ({
-  fetchThreads: () => dispatch(fetchThreads()),
-  
+  fetchThreads: () => dispatch(fetchThreads())
 })
 
 export default connect(null, mDTP)(Client)

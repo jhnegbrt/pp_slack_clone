@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import BrowseChannels from './BrowseChannels'
+import BrowseChannels from './browse_channels'
 
 const mSTP = state => ({
 

@@ -40,9 +40,9 @@ class Client extends React.Component{
     })
   }
 
-  componentDidMount(){
-    this.props.fetchThreads()
-  }
+  // componentDidMount(){
+  //   this.props.fetchThreads()
+  // }
 
 
   render(){

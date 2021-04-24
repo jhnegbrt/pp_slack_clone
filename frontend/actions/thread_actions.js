@@ -19,6 +19,7 @@ export const receiveThread = (thread) =>{
 }
 
 export const receiveAllThreads = (threads) => {
+  debugger
   return({
     type: RECEIVE_ALL_THREADS,
     threads
