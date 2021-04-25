@@ -2233,7 +2233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _thread_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_form */ "./frontend/components/threads/add_thread/thread_form.jsx");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
@@ -2245,7 +2245,7 @@ var mDTP = function mDTP(dispatch) {
   return {};
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_thread_form__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 
 /***/ }),
 
@@ -2261,7 +2261,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _thread_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_form */ "./frontend/components/threads/add_thread/thread_form.jsx");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
@@ -2305,173 +2305,7 @@ var mDTP = function mDTP(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_thread_form__WEBPACK_IMPORTED_MODULE_1__.default));
-
-/***/ }),
-
-/***/ "./frontend/components/threads/add_thread/thread_form.jsx":
-/*!****************************************************************!*\
-  !*** ./frontend/components/threads/add_thread/thread_form.jsx ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/create_messages_connection */ "./frontend/util/create_messages_connection.jsx");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-var ThreadForm = /*#__PURE__*/function (_React$Component) {
-  _inherits(ThreadForm, _React$Component);
-
-  var _super = _createSuper(ThreadForm);
-
-  function ThreadForm(props) {
-    var _this;
-
-    _classCallCheck(this, ThreadForm);
-
-    _this = _super.call(this, props);
-    _this.state = _this.props.thread;
-    _this.state.creator_id = _this.props.creatorId;
-    _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(ThreadForm, [{
-    key: "selectUsers",
-    value: function selectUsers(e) {
-      var allUsers = e.target.options;
-      var selected = this.state.selectedUsers;
-
-      for (var i = 0; i < allUsers.length; i++) {
-        if (allUsers[i].selected && !selected.includes(allUsers[i].value)) {
-          selected.push(allUsers[i].value);
-        }
-      }
-
-      this.setState({
-        selectedUsers: selected
-      });
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchAllUsers();
-    }
-  }, {
-    key: "helperFunction",
-    value: function helperFunction(thread) {
-      (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
-      var subscriptions = App.cable.subscriptions.subscriptions;
-      var index;
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ThreadChannel") {
-          index = i;
-          break;
-        }
-      }
-
-      subscriptions[index].speak({
-        thread: thread.threadId,
-        users: this.state.selectedUsers,
-        channel: this.props.thread.channel,
-        "private": this.props.thread["private"],
-        creator_id: this.props.creatorId,
-        title: this.state.title
-      });
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      var _this2 = this;
-
-      e.preventDefault(); // this.props.submit(this.state)
-      // .then((thread) => 
-
-      this.helperFunction(this.state) // )
-      .then(function () {
-        return _this2.setState({
-          title: "",
-          selectedUsers: []
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var users = this.props.users;
-      var selectedUsers = this.state.selectedUsers;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "thread-modal-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "thread-modal"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-header"
-      }, this.props.formType === "New Conversation" ? "New Conversation" : "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-select-users"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "users-label"
-      }, "Select Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        className: "modal-select",
-        value: this.state.selectedUsers,
-        onChange: this.selectUsers
-      }, Object.values(users).map(function (user) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-          key: user.id,
-          value: user.id
-        }, user.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "recipients-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, selectedUsers.map(function (id) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          key: id
-        }, users[id].username);
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "create-thread"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "submit",
-        value: "Create!"
-      })))));
-    }
-  }]);
-
-  return ThreadForm;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThreadForm);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 
 /***/ }),
 
