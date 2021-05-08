@@ -2798,6 +2798,38 @@ var MessagesReducer = function MessagesReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/public_threads_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/public_threads_reducer.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
+
+var publicThreadsReducer = function publicThreadsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PUBLIC_THREADS:
+      return Object.assign({}, state, action.threads);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (publicThreadsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/root_reducer.js":
 /*!*******************************************!*\
   !*** ./frontend/reducers/root_reducer.js ***!
@@ -3009,12 +3041,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _workspace_users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./workspace_users_reducer */ "./frontend/reducers/workspace_users_reducer.js");
+/* harmony import */ var _public_threads_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public_threads_reducer */ "./frontend/reducers/public_threads_reducer.js");
 
 
-var workspaceReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  users: _workspace_users_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var workspaceReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  users: _workspace_users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  publicThreads: _public_threads_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (workspaceReducer);
 
