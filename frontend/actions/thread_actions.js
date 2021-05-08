@@ -3,7 +3,7 @@ import * as APIUtil from '../util/thread_api_util'
 export const RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD"
 export const RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS"
 export const RECEIVE_THREAD = "RECEIVE_THREAD"
-export const RECEIVE_PUBLIC_THREADS = "RECEIVE_PUBLIC_THREADS"
+export const RECEIVE_PUBLIC_CHANNELS = "RECEIVE_PUBLIC_THREADS"
 
 export const receiveCurrentThread = (threadId) => {
   return({
@@ -26,6 +26,13 @@ export const receiveAllThreads = (threads) => {
   })
 }
 
+const receivePublicChannels = (channels) => {
+  return({
+    type: RECEIVE_PUBLIC_CHANNELS,
+    channels
+  })
+}
+
 export const createThread = (data) => dispatch => {
   return(APIUtil.createThread(data)
     .then(thread => dispatch(receiveCurrentThread(thread.id)))
@@ -41,5 +48,5 @@ export const fetchThreads = () => dispatch => (
 
 export const fetchPublicChannels = () => dispatch =>(
   APIUti.fetchPublicChannels()
-    .then((channels) => dispatch(receivePublicThreads(channels)))
+    .then((channels) => dispatch(receivePublicChannels(channels)))
 )
