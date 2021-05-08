@@ -3345,7 +3345,10 @@ var fetchThreads = function fetchThreads() {
 var fetchPublicChannels = function fetchPublicChannels() {
   return $.ajax({
     method: 'GET',
-    url: 'api/channel_dms'
+    url: 'api/channel_dms',
+    data: {
+      "public": true
+    }
   });
 };
 

@@ -21,7 +21,8 @@ export const fetchPublicChannels = () => {
   return(
     $.ajax({
       method: 'GET',
-      url: 'api/channel_dms'
+      url: 'api/channel_dms',
+      data: {public: true}
     })
   )
 }
