@@ -23,8 +23,6 @@ class ThreadIndex extends React.Component{
     }
   }
 
-
-
   render(){
     const { threads } = this.props
     return(

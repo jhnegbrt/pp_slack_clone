@@ -51,11 +51,11 @@ export const fetchMessage = (messageId) => dispatch => (
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 )
 
-export const fetchMessages = () => dispatch => (
-  APIUtil.fetchMessages()
-    .then((messages) => dispatch(receiveAllMessages(messages)))
-    .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
-)
+// export const fetchMessages = () => dispatch => (
+//   APIUtil.fetchMessages()
+//     .then((messages) => dispatch(receiveAllMessages(messages)))
+//     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+// )
 
 export const deleteMessage = (messageId) => dispatch => (
   APIUtil.deleteMessage(messageId)
@@ -71,10 +71,10 @@ export const createMessage = formMessage => dispatch => {
   )
 }
 
-export const updateMessage = formMessage => dispatch => {
-  return(
-    APIUtil.updateMessage(formMessage)
-      .then(message => dispatch(receiveMessage(message)))
-      .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
-  )
-}
+// export const updateMessage = formMessage => dispatch => {
+//   return(
+//     APIUtil.updateMessage(formMessage)
+//       .then(message => dispatch(receiveMessage(message)))
+//       .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+//   )
+// }

@@ -74,12 +74,12 @@ class ThreadForm extends React.Component{
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
 
-    return(
+    // return(
 
-      <form>
-        <input type 
-      </form>
-    )
+    //   <form>
+    //     <input type 
+    //   </form>
+    // )
 
 
     return(
