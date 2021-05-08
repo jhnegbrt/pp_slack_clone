@@ -16,3 +16,12 @@ export const fetchThreads = () => {
     })
   )
 }
+
+export const fetchPublicChannels = () => {
+  return(
+    $.ajax({
+      method: 'GET',
+      url: 'api/channel_dms'
+    })
+  )
+}
