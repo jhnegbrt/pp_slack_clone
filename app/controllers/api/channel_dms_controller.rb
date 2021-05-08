@@ -1,8 +1,8 @@
 class Api::ChannelDmsController < ApplicationController
 
   def index
-    if params[:public]
-      @channel_dms = ChannelDm.where(public: true)
+    if params[:private]
+      @channel_dms = ChannelDm.where(private: false)
     else
       @channel_dms = ChannelDm.all
     end

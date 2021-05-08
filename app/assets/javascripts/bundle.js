@@ -3347,7 +3347,7 @@ var fetchPublicChannels = function fetchPublicChannels() {
     method: 'GET',
     url: 'api/channel_dms',
     data: {
-      "public": true
+      "private": false
     }
   });
 };
