@@ -2248,7 +2248,9 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
 
 
 var mSTP = function mSTP(state) {
-  return {};
+  return {
+    publicChannels: state.entities.workspace.publicChannels
+  };
 };
 
 var mDTP = function mDTP(dispatch) {
