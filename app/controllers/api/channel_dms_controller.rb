@@ -1,8 +1,11 @@
 class Api::ChannelDmsController < ApplicationController
 
   def index
-    @channel_dms = ChannelDm.all
-    debugger
+    if params[:filter]
+      @channel_dms = ChannelDm.where(:filter => params[:filter])
+    else
+      @channel_dms = ChannelDm.all
+    end
   end
 
   def show
