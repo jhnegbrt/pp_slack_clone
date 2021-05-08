@@ -1,12 +1,12 @@
-import {connect} from 'react-redux'
-import ThreadForm from './thread_form'
+// import {connect} from 'react-redux'
+// import ThreadForm from './thread_form'
 
-const mSTP = state => ({
+// const mSTP = state => ({
 
-})
+// })
 
-const mDTP = dispatch => ({
+// const mDTP = dispatch => ({
 
-})
+// })
 
-export default connect(mSTP, mDTP)(ThreadForm)
+// export default connect(mSTP, mDTP)(ThreadForm)

@@ -1,10 +1,11 @@
 import {RECEIVE_PUBLIC_CHANNELS} from '../actions/thread_actions'
 
 const publicChannelsReducer = (state = {}, action) => {
+  debugger
   Object.freeze(state)
   switch(action.type){
     case RECEIVE_PUBLIC_CHANNELS:
-      return Object.assign({}, state, action.threads)
+      return Object.assign({}, state, action.channels)
     default:
       return state
   }

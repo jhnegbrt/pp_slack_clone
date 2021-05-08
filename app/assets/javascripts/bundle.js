@@ -360,7 +360,7 @@ var fetchThreads = function fetchThreads() {
 };
 var fetchPublicChannels = function fetchPublicChannels() {
   return function (dispatch) {
-    return APIUti.fetchPublicChannels().then(function (channels) {
+    return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchPublicChannels().then(function (channels) {
       return dispatch(receivePublicChannels(channels));
     });
   };
@@ -495,7 +495,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _threads_thread_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../threads/thread_index_container */ "./frontend/components/threads/thread_index_container.jsx");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _threads_add_thread_channel_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../threads/add_thread/channel_form_container */ "./frontend/components/threads/add_thread/channel_form_container.jsx");
+/* harmony import */ var _threads_add_thread_channel_form_container__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_threads_add_thread_channel_form_container__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _threads_add_thread_dm_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../threads/add_thread/dm_form_container */ "./frontend/components/threads/add_thread/dm_form_container.jsx");
+/* harmony import */ var _threads_add_thread_dm_form_container__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_threads_add_thread_dm_form_container__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _threads_add_thread_explore_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../threads/add_thread/explore_container */ "./frontend/components/threads/add_thread/explore_container.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -598,12 +600,6 @@ var Client = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/client/explore",
         component: _threads_add_thread_explore_container__WEBPACK_IMPORTED_MODULE_5__.default
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
-        path: "/client/newChannel",
-        component: _threads_add_thread_channel_form_container__WEBPACK_IMPORTED_MODULE_3__.default
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
-        path: "/client/addDM",
-        component: _threads_add_thread_dm_form_container__WEBPACK_IMPORTED_MODULE_4__.default
       }));
     }
   }]);
@@ -2124,7 +2120,7 @@ var AddChannelButton = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/client/newChannel"
       }, "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/client/browseChannels"
+        to: "/client/explore"
       }, "Browse Channels"));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         ref: this.wrapperRef
@@ -2145,27 +2141,15 @@ var AddChannelButton = /*#__PURE__*/function (_React$Component) {
 /*!***************************************************************************!*\
   !*** ./frontend/components/threads/add_thread/channel_form_container.jsx ***!
   \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-
-
-
-var mSTP = function mSTP(state) {
-  return {};
-};
-
-var mDTP = function mDTP(dispatch) {
-  return {};
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+// import {connect} from 'react-redux'
+// import ThreadForm from './thread_form'
+// const mSTP = state => ({
+// })
+// const mDTP = dispatch => ({
+// })
+// export default connect(mSTP, mDTP)(ThreadForm)
 
 /***/ }),
 
@@ -2173,6 +2157,39 @@ var mDTP = function mDTP(dispatch) {
 /*!**********************************************************************!*\
   !*** ./frontend/components/threads/add_thread/dm_form_container.jsx ***!
   \**********************************************************************/
+/***/ (() => {
+
+// import {connect} from 'react-redux'
+// import ThreadForm from './thread_form'
+// import {fetchAllUsers} from '../../../actions/user_actions'
+// import {createThread, receiveCurrentThread} from '../../../actions/thread_actions'
+// import {receiveMessage, receiveMessages} from '../../../actions/message_actions'
+// const mSTP = state => ({
+//   thread: {
+//     title: "",
+//     selectedUsers: [],
+//     channel: true,
+//     private: true
+//   },
+//   formType: "New Conversation",
+//   creatorId: state.session.id,
+//   users: state.entities.workspace.users
+// })
+// const mDTP = dispatch => ({
+//   submit: (thread) => dispatch(createThread(thread)),
+//   receiveMessage: (message) => dispatch(receiveMessage(message)),
+//   receiveMessages: (messages) => dispatch(receiveMessages(messages)),
+//   receiveCurrentThread: (thread) => dispatch(receiveCurrentThread(thread.id)),
+//   fetchAllUsers: () => dispatch(fetchAllUsers()),
+// })
+// export default connect(mSTP, mDTP)(ThreadForm)
+
+/***/ }),
+
+/***/ "./frontend/components/threads/add_thread/explore.jsx":
+/*!************************************************************!*\
+  !*** ./frontend/components/threads/add_thread/explore.jsx ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2180,52 +2197,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/create_messages_connection */ "./frontend/util/create_messages_connection.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
+var Explore = /*#__PURE__*/function (_React$Component) {
+  _inherits(Explore, _React$Component);
 
+  var _super = _createSuper(Explore);
 
-var mSTP = function mSTP(state) {
-  return {
-    thread: {
-      title: "",
-      selectedUsers: [],
-      channel: true,
-      "private": true
-    },
-    formType: "New Conversation",
-    creatorId: state.session.id,
-    users: state.entities.workspace.users
-  };
-};
+  function Explore(props) {
+    _classCallCheck(this, Explore);
 
-var mDTP = function mDTP(dispatch) {
-  return {
-    submit: function submit(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.createThread)(thread));
-    },
-    receiveMessage: function receiveMessage(message) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.receiveMessage)(message));
-    },
-    receiveMessages: function receiveMessages(messages) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.receiveMessages)(messages));
-    },
-    receiveCurrentThread: function receiveCurrentThread(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.receiveCurrentThread)(thread.id));
-    },
-    fetchAllUsers: function fetchAllUsers() {
-      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers)());
+    return _super.call(this, props);
+  }
+
+  _createClass(Explore, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchPublicChannels();
     }
-  };
-};
+  }, {
+    key: "mapThread",
+    value: function mapThread(thread) {
+      /*#__PURE__*/
+      react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, thread); // return <PublicThreadsItem />
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var publicChannels = this.props.publicChannels;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, publicChannels.map(this.mapThread));
+    }
+  }]);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+  return Explore;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Explore);
 
 /***/ }),
 
@@ -2241,27 +2273,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './browse_channels'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _explore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./explore */ "./frontend/components/threads/add_thread/explore.jsx");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 
 
 
 
 var mSTP = function mSTP(state) {
   return {
-    publicChannels: state.entities.workspace.publicChannels
+    publicChannels: Object.keys(state.entities.workspace.publicChannels)
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
     fetchPublicChannels: function fetchPublicChannels() {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())());
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPublicChannels)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(Object(function webpackMissingModule() { var e = new Error("Cannot find module './browse_channels'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -2825,11 +2857,12 @@ __webpack_require__.r(__webpack_exports__);
 var publicChannelsReducer = function publicChannelsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  debugger;
   Object.freeze(state);
 
   switch (action.type) {
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PUBLIC_CHANNELS:
-      return Object.assign({}, state, action.threads);
+      return Object.assign({}, state, action.channels);
 
     default:
       return state;

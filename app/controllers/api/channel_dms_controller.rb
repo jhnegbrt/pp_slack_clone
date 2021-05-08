@@ -6,6 +6,7 @@ class Api::ChannelDmsController < ApplicationController
     else
       @channel_dms = ChannelDm.all
     end
+    render 'api/channel_dms/index'
   end
 
   def show

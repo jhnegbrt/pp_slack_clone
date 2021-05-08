@@ -7,18 +7,17 @@ class Explore extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchPublicThreads()
+    this.props.fetchPublicChannels()
   }
 
   mapThread(thread){
-    <li>{thread.title}</li>
+    <li>{thread}</li>
     // return <PublicThreadsItem />
   }
 
   render(){
 
     const { publicChannels } = this.props
-      
     return(
       <ul>
         {publicChannels.map(this.mapThread)}

@@ -47,6 +47,6 @@ export const fetchThreads = () => dispatch => (
 )
 
 export const fetchPublicChannels = () => dispatch =>(
-  APIUti.fetchPublicChannels()
+  APIUtil.fetchPublicChannels()
     .then((channels) => dispatch(receivePublicChannels(channels)))
 )

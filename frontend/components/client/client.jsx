@@ -51,8 +51,8 @@ class Client extends React.Component{
         <Route path='/client' render={(props) => <ThreadIndexContainer {...props} toggleModal={this.toggleModal}/>} />
         <Route path='/client/thread/:threadId' component={ThreadDisplayContainer} />
         <Route path='/client/explore' component={exploreContainer} />
-        <Route path='/client/newChannel' component={ChannelFormContainer} />
-        <Route path='/client/addDM' component={DMFormContainer} />
+        {/* <Route path='/client/newChannel' component={ChannelFormContainer} />
+        <Route path='/client/addDM' component={DMFormContainer} /> */}
         {/* {this.state.modal === true ? <CreateThreadModalContainer 
           toggleModal={this.toggleModal}
           closeModal={this.closeModal}
