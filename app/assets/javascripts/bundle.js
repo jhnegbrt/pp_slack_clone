@@ -2243,14 +2243,16 @@ var Explore = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "mapThread",
     value: function mapThread(thread) {
-      /*#__PURE__*/
-      react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, thread); // return <PublicThreadsItem />
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, thread); // return <PublicThreadsItem />
     }
   }, {
     key: "render",
     value: function render() {
       var publicChannels = this.props.publicChannels;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, publicChannels.map(this.mapThread));
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "publicChannels"
+      }, publicChannels.map(this.mapThread));
     }
   }]);
 
@@ -2857,7 +2859,6 @@ __webpack_require__.r(__webpack_exports__);
 var publicChannelsReducer = function publicChannelsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(state);
 
   switch (action.type) {

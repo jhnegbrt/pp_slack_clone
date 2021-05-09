@@ -11,15 +11,16 @@ class Explore extends React.Component{
   }
 
   mapThread(thread){
-    <li>{thread}</li>
+    return <li>{thread}</li>
     // return <PublicThreadsItem />
   }
 
   render(){
 
     const { publicChannels } = this.props
+    debugger
     return(
-      <ul>
+      <ul className='publicChannels'>
         {publicChannels.map(this.mapThread)}
       </ul>
     )
