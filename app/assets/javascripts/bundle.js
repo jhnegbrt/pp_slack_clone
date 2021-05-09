@@ -2161,6 +2161,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2194,8 +2206,17 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, AddMembersModal);
 
     _this = _super.call(this, props);
-    _this.state = props.newChannel;
+    _this.state = {
+      creatorId: props.newChannel.creatorId,
+      "private": props.newChannel["private"],
+      channel: props.newChannel.channel,
+      title: props.newChannel.title,
+      selectedUsers: props.newChannel.selectedUsers,
+      newMember: ""
+    };
     _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2214,8 +2235,31 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       this.setState({
         selectedUsers: selected
       });
-      this.updateTitle = this.updateTitle.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      debugger;
+      this.setState({
+        newMember: e.target.value
+      });
+    }
+  }, {
+    key: "handleKeyDown",
+    value: function handleKeyDown(e) {
+      if (["Enter", "Tab", ","].includes(e.key)) {
+        e.preventDefault();
+        var newMember = this.state.newMember.trim();
+        var users = this.props.users;
+
+        for (var key in users) {
+          if (users[key].username === newMember) this.setState({
+            selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
+            newMember: ""
+          });
+        }
+      }
     }
   }, {
     key: "handleSubmit",
@@ -2236,10 +2280,10 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       subscriptions[index].speak({
         thread: thread.threadId,
         users: this.state.selectedUsers,
-        channel: this.props.channel,
-        "private": this.props["private"],
-        creator_id: this.props.creatorId,
-        title: this.state.title
+        channel: this.props.newChanne.channel,
+        "private": this.props.newChannel["private"],
+        creator_id: this.props.newChannel.creatorId,
+        title: this.state.newChannel.title
       });
       this.props.selectThread(this.props.thread.threadId);
     }
@@ -2248,28 +2292,33 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "add-members-modal"
+        className: "thread-modal-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "thread-modal"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-select-users"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "users-label"
-      }, "Select Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        className: "modal-select",
-        value: this.state.selectedUsers,
-        onChange: this.selectUsers
-      }, Object.values(users).map(function (user) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-          key: user.id,
-          value: user.id
-        }, user.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "Add Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "recipients-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, selectedUsers.map(function (id) {
+      }, selectedUsers.map(function (id) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: id
         }, users[id].username);
-      })))));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        placeholder: "enter username to add and press `Enter`",
+        value: this.state.newMember,
+        onChange: this.handleChange,
+        onKeyDown: this.handleKeyDown
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "recipients-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, selectedUsers.map(function (id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: id
+        }, users[id].username);
+      }))))));
     }
   }]);
 

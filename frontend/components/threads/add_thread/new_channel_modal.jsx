@@ -34,7 +34,6 @@ class NewChannelModal extends React.Component{
     })
   }
 
-
   render(){
     return(
       <div className="thread-modal-container">

@@ -3,8 +3,17 @@ import React from 'react'
 class AddMembersModal extends React.Component{
   constructor(props){
     super(props)
-    this.state = props.newChannel
+    this.state = {
+      creatorId: props.newChannel.creatorId,
+      private: props.newChannel.private,
+      channel: props.newChannel.channel,
+      title: props.newChannel.title,
+      selectedUsers: props.newChannel.selectedUsers,
+      newMember: ""
+    }
     this.selectUsers = this.selectUsers.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   selectUsers(e){
@@ -18,8 +27,29 @@ class AddMembersModal extends React.Component{
     this.setState({
       selectedUsers: selected
     })
-    this.updateTitle = this.updateTitle.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange(e){
+    debugger
+    this.setState({
+      newMember: e.target.value
+    })
+  }
+
+  handleKeyDown(e){
+    if (["Enter", "Tab", ","].includes(e.key)){
+      e.preventDefault()
+      let newMember = this.state.newMember.trim()
+      const {users} = this.props
+      for (const key in users){
+        if(users[key].username === newMember)
+        this.setState({
+          selectedUsers: [...this.state.selectedUsers, users[key].id],
+          newMember: ""
+        })
+      }
+    }
   }
 
 
@@ -38,10 +68,10 @@ class AddMembersModal extends React.Component{
     subscriptions[index].speak({ 
       thread: thread.threadId,
       users: this.state.selectedUsers,
-      channel: this.props.channel,
-      private: this.props.private,
-      creator_id: this.props.creatorId,
-      title: this.state.title
+      channel: this.props.newChanne.channel,
+      private: this.props.newChannel.private,
+      creator_id: this.props.newChannel.creatorId,
+      title: this.state.newChannel.title
     })
     this.props.selectThread(this.props.thread.threadId)
 
@@ -50,28 +80,36 @@ class AddMembersModal extends React.Component{
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
+    debugger
     return(
-      <div className="add-members-modal">
-        <div className="modal-select-users">
-          <div className="users-label">
-            Select Users:
-            <select className="modal-select" value={this.state.selectedUsers} onChange={this.selectUsers}>
-              {Object.values(users).map((user) => 
-              <option key={user.id} value={user.id}>
-              {user.username}
-              </option>)}
-            </select>
-          </div>
+      <div className="thread-modal-container">
+        <div className="thread-modal">
+          <div className="modal-select-users">
+            <div className="users-label">
+              Add Users:
+                <ul className="recipients-list">
+                  {selectedUsers.map(id =>{
+                    return <li key={id}>{users[id].username}</li>
+                  })}
+                </ul>
+              <input
+                placeholder="enter username to add and press `Enter`"
+                value={this.state.newMember}
+                onChange={this.handleChange}
+                onKeyDown={this.handleKeyDown}
+              />
+            </div>
 
-          <div className="recipients-list">
-            <h2>To:</h2>
-            <ul>
-              {selectedUsers.map(id =>{
-                return <li key={id}>{users[id].username}</li>
-              })}
-            </ul>
+            <div className="recipients-list">
+              <ul>
+                {selectedUsers.map(id =>{
+                  return <li key={id}>{users[id].username}</li>
+                })}
+              </ul>
+            </div>
           </div>
         </div>
+
       </div>
     )
   }

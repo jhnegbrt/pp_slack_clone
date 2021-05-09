@@ -1,0 +1,117 @@
+.thread-modal-container{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(36, 30, 30, 0.822);
+  position: absolute;
+}
+
+.thread-modal{
+  height: 80vh;
+  width: 50vw;
+  background-color: rgba(44, 44, 83, 0.753);
+  position: fixed;
+  margin-top: 10vh;
+  margin-left: 25vw;
+  border-radius: 25px;
+  position: relative;
+  padding: 1%;
+}
+
+.modal-header{
+  text-align: center;
+  font-family: 'Comfortaa', serif;
+  color: whitesmoke;
+  font-size: 5vh;
+  margin-top: 3vh;
+}
+
+.thread-close{
+  position: absolute;
+  left: auto;
+  right: 2%;
+  margin-top: 1vh;
+}
+
+.modal-select-users{
+  padding: 8%;
+}
+
+.users-label{
+  font-family: 'Comfortaa', serif;
+  color: whitesmoke;
+  margin: 2%;
+}
+
+.modal-select{
+  width: 20vw;
+  height: 4vh;
+  display: block;
+  margin-top: 2%;
+}
+
+.modal-select option{
+  background-color: rgb(212, 221, 241);
+  font-family: 'Comfortaa', serif;
+  color: rgba(44, 44, 83, 0.753);
+  font-size: 3vh;
+}
+
+.recipients-list{
+  font-family: 'Comfortaa', serif;
+  color: whitesmoke;
+}
+
+.recipients-list h2{
+  height: 3vh;
+  padding: 2%
+}
+
+
+
+.recipients-list li{
+  height: 2vh;
+  padding-top: 2%;
+  padding-left: 2%
+}
+
+.create-thread{
+  text-align: center;
+  position: relative
+}
+
+.create-thread input[type=text]{
+  border-radius: 5px;
+  height: 4vh;
+  margin-bottom: 2%
+}
+
+.create-thread input[type=submit]{
+  margin: 0 auto;
+  display: block;
+  border-radius: 5px;
+  height: 6vh;
+  width: 7vw;
+  background-color: rgb(207, 226, 233);
+}
+
+.create-thread input[type=submit]:hover{
+  color:white;
+  cursor: pointer;
+  background-color: rgb(44, 44, 83);
+}
+
+
+.create-channel-button{
+  color: rgb(44, 44, 83);
+  font-size: 3vh;
+  background-color: rgb(207, 226, 233);
+  border-radius: 2px;
+  padding: 2%;
+  margin-right: 3vw;
+  
+}
+
+.create-channel-button:hover{
+  cursor:pointer;
+  color:white;
+}
