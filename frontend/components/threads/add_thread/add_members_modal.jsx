@@ -88,7 +88,7 @@ class AddMembersModal extends React.Component{
             <div className="users-label">
               Add Users:
                 <ul className="recipients-list">
-                  {this.state.value === "" && this.state.selectUsers.length === 1 ?
+                  {this.state.newMember === "" && this.state.selectedUsers.length === 1 ?
                   <li>Enter Username to add Member!</li> : ""
                   }
                   {selectedUsers.map(id =>{
