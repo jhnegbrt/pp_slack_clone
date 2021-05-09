@@ -3070,11 +3070,20 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
     } //I Believe that I do not need to pass in "threadId"
 
   }, {
-    key: "mapThread",
-    value: function mapThread(thread) {
-      if (typeof thread === "number" || thread.title == undefined || thread.title == "") {
-        return;
-      } else {
+    key: "mapChannels",
+    value: function mapChannels(thread) {
+      if (thread.channel === true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+          thread: thread,
+          key: thread.id,
+          threadId: thread.channel_dms_id
+        });
+      }
+    }
+  }, {
+    key: "mapDirectMessages",
+    value: function mapDirectMessages(thread) {
+      if (thread.channel === false) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
           thread: thread,
           key: thread.id,
@@ -3090,9 +3099,9 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
         className: "thread-index"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "channel-index"
-      }, threads.map(this.mapThread), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_channel_button__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, threads.map(this.mapChannels), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_channel_button__WEBPACK_IMPORTED_MODULE_3__.default, {
         toggleModal: this.props.toggleModal
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(this.mapThread), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(this.mapDirectMessages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "create-channel-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
         to: "/client/addDM"

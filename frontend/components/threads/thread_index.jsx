@@ -16,11 +16,15 @@ class ThreadIndex extends React.Component{
   }
 
   //I Believe that I do not need to pass in "threadId"
-  mapThread(thread){
-    if (typeof thread === "number" || thread.title == undefined || thread.title == ""){
-      return
-    } else {
+  mapChannels(thread){
+    if(thread.channel === true){
       return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>
+    }
+  }
+
+  mapDirectMessages(thread){
+    if(thread.channel === false){
+      return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/> 
     }
   }
 
@@ -30,7 +34,7 @@ class ThreadIndex extends React.Component{
       <div className="thread-index">
         <ul className="channel-index">
           {
-            threads.map(this.mapThread)
+            threads.map(this.mapChannels)
           }
 
           <AddChannelButton toggleModal={this.props.toggleModal} />
@@ -38,7 +42,7 @@ class ThreadIndex extends React.Component{
         </ul>
         <ul>
           {
-            threads.map(this.mapThread)
+            threads.map(this.mapDirectMessages)
           }
           <li className="create-channel-button"><Link to='/client/addDM'>New Conversation</Link></li>
         </ul>
