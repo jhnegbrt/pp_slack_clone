@@ -14,7 +14,6 @@ class AddChannelButton extends React.Component{
     this.toggleChannelButtons = this.toggleChannelButtons.bind(this)
     this.handleClickOutside = this.handleClickOutside.bind(this)
 
-  
   }
 
   toggleChannelButtons(){
@@ -52,7 +51,7 @@ class AddChannelButton extends React.Component{
     const channelButtons = (
       <div className={"channel-buttons"}>
         {/* <div className={"triangle"}></div> */}
-        <Link to="/client/newChannel">Create Channel</Link>
+        <a onClick={()=>this.props.toggleModal("createChannel")}>Create Channel</a>
         <Link to="/client/explore">Browse Channels</Link>
       </div>
     )
