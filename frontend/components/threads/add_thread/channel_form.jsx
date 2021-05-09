@@ -30,13 +30,7 @@ class ThreadForm extends React.Component{
 
 
   helperFunction(thread){
-    createMessagesConnection(
-      thread.threadId,
-      this.props.receiveMessage,
-      this.props.receiveMessages,
-      this.props.removeMessage,
-      this.props.creatorId)
-    
+
     let subscriptions = App.cable.subscriptions.subscriptions
     let index;
     for (let i = 0; i < subscriptions.length; i++){
