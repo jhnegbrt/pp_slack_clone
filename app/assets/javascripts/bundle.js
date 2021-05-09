@@ -558,7 +558,7 @@ var Client = /*#__PURE__*/function (_React$Component) {
     key: "toggleModal",
     value: function toggleModal(modalType) {
       this.setState({
-        modal: !this.state.modal,
+        modal: true,
         modalType: modalType
       });
     }
@@ -2500,7 +2500,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../util/create_messages_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../util/create_messages_connection */ "./frontend/util/create_messages_connection.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2549,7 +2549,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
           receiveMessage = _this$props.receiveMessage,
           receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
-      Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../util/create_messages_connection'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId);
+      (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId);
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -2594,9 +2594,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../actions/thread_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _explore_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./explore_item */ "./frontend/components/threads/add_thread/explore/explore_item.jsx");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _explore_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./explore_item */ "./frontend/components/threads/add_thread/explore/explore_item.jsx");
 
 
 
@@ -2611,21 +2611,21 @@ var mSTP = function mSTP(state, ownProps) {
 var mDTP = function mDTP(dispatch) {
   return {
     selectThread: function selectThread(threadId) {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../actions/thread_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(threadId));
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveCurrentThread)(threadId));
     },
     receiveMessage: function receiveMessage(message) {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(message));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveMessage)(message));
     },
     receiveMessages: function receiveMessages(messages) {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(messages));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveMessages)(messages));
     },
     removeMessage: function removeMessage(messageId) {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(messageId));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.removeMessage)(messageId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore_item__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore_item__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 
@@ -2633,9 +2633,160 @@ var mDTP = function mDTP(dispatch) {
 /*!**********************************************************************!*\
   !*** ./frontend/components/threads/add_thread/new_channel_modal.jsx ***!
   \**********************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jhnegbrt/appacademy/slack_clone/frontend/components/threads/add_thread/new_channel_modal.jsx: Unexpected token (38:13)\n\n\u001b[0m \u001b[90m 36 |\u001b[39m         selectedUsers\u001b[33m:\u001b[39m []\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 37 |\u001b[39m       }))\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m       \u001b[33m.\u001b[39mthen(())\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 39 |\u001b[39m   }\u001b[0m\n\u001b[0m \u001b[90m 40 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 41 |\u001b[39m\u001b[0m\n    at Object._raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:775:17)\n    at Object.raiseWithData (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:768:17)\n    at Object.raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:736:17)\n    at Object.unexpected (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:9716:16)\n    at Object.parseParenAndDistinguishExpression (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11310:12)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:11007:21)\n    at Object.parseExprAtom (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:5173:20)\n    at Object.parseExprSubscripts (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10689:23)\n    at Object.parseUpdate (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10669:21)\n    at Object.parseMaybeUnary (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:10647:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _util_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../util/create_messages_connection */ "./frontend/util/create_messages_connection.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var NewChannelModal = /*#__PURE__*/function (_React$Component) {
+  _inherits(NewChannelModal, _React$Component);
+
+  var _super = _createSuper(NewChannelModal);
+
+  function NewChannelModal(props) {
+    var _this;
+
+    _classCallCheck(this, NewChannelModal);
+
+    _this = _super.call(this, props); //I am pretty sure that I can remove line 11 and just set creator_id in state
+    //would require changing the way state is passed in from the container
+
+    _this.state = _this.props.thread;
+    _this.state.creator_id = _this.props.creatorId;
+    return _this;
+  }
+
+  _createClass(NewChannelModal, [{
+    key: "updateTitle",
+    value: function updateTitle(e) {
+      this.setState({
+        title: e.target.value
+      });
+    }
+  }, {
+    key: "helperFunction",
+    value: function helperFunction(thread) {
+      (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
+      this.props.selectThread(this.props.thread.threadId);
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ThreadChannel") {
+          index = i;
+          break;
+        }
+      }
+
+      subscriptions[index].speak({
+        thread: thread.threadId,
+        users: this.state.selectedUsers,
+        channel: this.props.thread.channel,
+        "private": this.props.thread["private"],
+        creator_id: this.props.creatorId,
+        title: this.state.title
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      this.helperFunction(this.state).then(function () {
+        return _this2.setState({
+          title: "",
+          selectedUsers: []
+        });
+      }).then(function () {
+        return _this2.props.toggleModal("addMembers");
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var users = this.props.users;
+      var selectedUsers = this.state.selectedUsers;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "thread-modal-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "thread-modal"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "thread-close"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        onClick: this.props.closeModal
+      }, "Close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "modal-header"
+      }, "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "modal-select-users"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "users-label"
+      }, "Select Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("select", {
+        className: "modal-select",
+        value: this.state.selectedUsers,
+        onChange: this.selectUsers
+      }, Object.values(users).map(function (user) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("option", {
+          key: user.id,
+          value: user.id
+        }, user.username);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "recipients-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", null, selectedUsers.map(function (id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
+          key: id
+        }, users[id].username);
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "create-thread"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+        onChange: this.updateTitle,
+        placeholder: "Channel Title",
+        type: "text",
+        value: this.state.title
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+        type: "submit",
+        value: "Create!"
+      })))));
+    }
+  }]);
+
+  return NewChannelModal;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewChannelModal);
 
 /***/ }),
 
@@ -2678,6 +2829,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     submit: function submit(thread) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(thread));
+    },
+    selectThread: function selectThread(threadId) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(threadId));
     },
     receiveMessage: function receiveMessage(message) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));

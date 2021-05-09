@@ -19,6 +19,7 @@ const mSTP = state => ({
 
 const mDTP = (dispatch) => ({
   submit: (thread) => dispatch(createThread(thread)),
+  selectThread: (threadId) => dispatch(receiveCurrentThread(threadId)),
   receiveMessage: (message) => dispatch(receiveMessage(message)),
   receiveMessages: (messages) => dispatch(receiveMessages(messages)),
   receiveCurrentThread: (thread) => dispatch(receiveCurrentThread(thread.id)),

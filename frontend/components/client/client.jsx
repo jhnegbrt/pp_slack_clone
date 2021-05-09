@@ -21,7 +21,7 @@ class Client extends React.Component{
 
   toggleModal(modalType){
     this.setState({
-      modal: !this.state.modal,
+      modal: true,
       modalType: modalType
     })
   }
