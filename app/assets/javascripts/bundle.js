@@ -2211,14 +2211,13 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       creatorId: props.newChannel.creatorId,
-      "private": props.newChannel["private"],
-      channel: props.newChannel.channel,
       title: props.newChannel.title,
       selectedUsers: props.newChannel.selectedUsers,
       newMember: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2273,14 +2272,13 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       }
 
       subscriptions[index].speak({
-        thread: thread.threadId,
         users: this.state.selectedUsers,
-        channel: this.props.newChanne.channel,
+        channel: this.props.newChannel.channel,
         "private": this.props.newChannel["private"],
         creator_id: this.props.newChannel.creatorId,
-        title: this.state.newChannel.title
+        title: this.state.title
       });
-      this.props.selectThread(this.props.thread.threadId);
+      this.props.closeModal(); // this.props.selectThread(this.props.thread.threadId)
     }
   }, {
     key: "render",
@@ -2319,7 +2317,9 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         value: this.state.newMember,
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      }))))));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleSubmit
+      }, "Add Members!")))));
     }
   }]);
 
@@ -2428,10 +2428,10 @@ var CreateChannelModal = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var modal = this.props.modalType === "createChannel" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_new_channel_modal_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-        closeModal: this.props.closeModal,
         toggleModal: this.props.toggleModal
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_members_modal_container__WEBPACK_IMPORTED_MODULE_2__.default, {
-        newChannel: this.props.newChannel
+        newChannel: this.props.newChannel,
+        closeModal: this.props.closeModal
       });
       return modal;
     }

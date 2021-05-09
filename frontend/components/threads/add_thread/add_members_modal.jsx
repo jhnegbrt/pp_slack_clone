@@ -7,14 +7,13 @@ class AddMembersModal extends React.Component{
     super(props)
     this.state = {
       creatorId: props.newChannel.creatorId,
-      private: props.newChannel.private,
-      channel: props.newChannel.channel,
       title: props.newChannel.title,
       selectedUsers: props.newChannel.selectedUsers,
       newMember: ""
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(e){
@@ -62,14 +61,14 @@ class AddMembersModal extends React.Component{
     }
     
     subscriptions[index].speak({ 
-      thread: thread.threadId,
       users: this.state.selectedUsers,
-      channel: this.props.newChanne.channel,
+      channel: this.props.newChannel.channel,
       private: this.props.newChannel.private,
       creator_id: this.props.newChannel.creatorId,
-      title: this.state.newChannel.title
+      title: this.state.title
     })
-    this.props.selectThread(this.props.thread.threadId)
+    this.props.closeModal()
+    // this.props.selectThread(this.props.thread.threadId)
 
   }
 
@@ -103,10 +102,10 @@ class AddMembersModal extends React.Component{
                   onKeyDown={this.handleKeyDown}
                   />
                 </ul>
+                <button onClick={this.handleSubmit}>Add Members!</button>
             </div>
           </div>
         </div>
-
       </div>
     )
   }
