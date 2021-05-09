@@ -2696,7 +2696,6 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
     key: "helperFunction",
     value: function helperFunction(thread) {
       (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
-      this.props.selectThread(this.props.thread.threadId);
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -2717,6 +2716,7 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
         creator_id: this.props.creatorId,
         title: this.state.title
       });
+      this.props.selectThread(this.props.thread.threadId);
     }
   }, {
     key: "handleSubmit",

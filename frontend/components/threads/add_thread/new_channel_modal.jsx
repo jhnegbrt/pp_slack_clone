@@ -26,7 +26,7 @@ class NewChannelModal extends React.Component{
       this.props.removeMessage,
       this.props.creatorId
     )
-    this.props.selectThread(this.props.thread.threadId)
+    
     let subscriptions = App.cable.subscriptions.subscriptions
     let index;
     for (let i = 0; i < subscriptions.length; i++){
@@ -45,6 +45,8 @@ class NewChannelModal extends React.Component{
       creator_id: this.props.creatorId,
       title: this.state.title
     })
+
+    this.props.selectThread(this.props.thread.threadId)
   }
 
   handleSubmit(e){
