@@ -88,9 +88,13 @@ class AddMembersModal extends React.Component{
             <div className="users-label">
               Add Users:
                 <ul className="recipients-list">
-                  <li>Enter Username to add Member!</li>
+                  {this.state.value === "" && this.state.selectUsers.length === 1 ?
+                  <li>Enter Username to add Member!</li> : ""
+                  }
                   {selectedUsers.map(id =>{
-                    return <li key={id}>{users[id].username}</li>
+                    if( id !== this.props.currentUser){
+                      return <li key={id}>{users[id].username}</li>
+                    }
                   })}
                   <input
                   autoFocus

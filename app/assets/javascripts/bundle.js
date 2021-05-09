@@ -2290,6 +2290,8 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
       debugger;
@@ -2303,10 +2305,12 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         className: "users-label"
       }, "Add Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "recipients-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Enter Username to add Member!"), selectedUsers.map(function (id) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          key: id
-        }, users[id].username);
+      }, this.state.value === "" && this.state.selectUsers.length === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Enter Username to add Member!") : "", selectedUsers.map(function (id) {
+        if (id !== _this2.props.currentUser) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+            key: id
+          }, users[id].username);
+        }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         autoFocus: true,
         className: "new-member-input",
@@ -2342,7 +2346,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    users: state.entities.workspace.users
+    users: state.entities.workspace.users,
+    currentUser: state.session.id
   };
 };
 
