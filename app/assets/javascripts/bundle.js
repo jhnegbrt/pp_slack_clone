@@ -2271,11 +2271,12 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         }
       }
 
+      debugger;
       subscriptions[index].speak({
         users: this.state.selectedUsers,
         channel: this.props.newChannel.channel,
         "private": this.props.newChannel["private"],
-        creator_id: this.props.newChannel.creatorId,
+        creator_id: this.props.newChannel.creator_id,
         title: this.state.title
       });
       this.props.closeModal(); // this.props.selectThread(this.props.thread.threadId)
@@ -3224,6 +3225,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.props.currentThreadId === this.props.thread.id ? "thread-select" : null
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
