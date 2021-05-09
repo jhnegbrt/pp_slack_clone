@@ -2,7 +2,6 @@ import React from 'react'
 
 class AddMembersModal extends React.Component{
   constructor(props){
-    debugger
     super(props)
     this.state = props.newChannel
     this.selectUsers = this.selectUsers.bind(this)
@@ -23,9 +22,6 @@ class AddMembersModal extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount(){
-    this.props.fetchAllUsers()
-  }
 
   handleSubmit(e){
     e.preventDefault()

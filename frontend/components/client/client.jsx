@@ -36,7 +36,6 @@ class Client extends React.Component{
   }
 
   closeModal(){
-    debugger
     this.setState({
       modal: false
     })

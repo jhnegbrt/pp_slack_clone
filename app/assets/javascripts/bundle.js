@@ -574,7 +574,6 @@ var Client = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "closeModal",
     value: function closeModal() {
-      debugger;
       this.setState({
         modal: false
       });
@@ -2194,7 +2193,6 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, AddMembersModal);
 
-    debugger;
     _this = _super.call(this, props);
     _this.state = props.newChannel;
     _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
@@ -2218,11 +2216,6 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       });
       this.updateTitle = this.updateTitle.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchAllUsers();
     }
   }, {
     key: "handleSubmit",
@@ -2745,11 +2738,16 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
     _this.state.creator_id = _this.props.creatorId;
     _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    debugger;
     return _this;
   }
 
   _createClass(NewChannelModal, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      debugger;
+      this.props.fetchAllUsers();
+    }
+  }, {
     key: "updateTitle",
     value: function updateTitle(e) {
       this.setState({

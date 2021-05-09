@@ -11,7 +11,11 @@ class NewChannelModal extends React.Component{
     this.state.creator_id = this.props.creatorId
     this.updateTitle = this.updateTitle.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount(){
     debugger
+    this.props.fetchAllUsers()
   }
 
   updateTitle(e){
