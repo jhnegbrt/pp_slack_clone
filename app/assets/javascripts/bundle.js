@@ -2303,21 +2303,16 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         className: "users-label"
       }, "Add Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "recipients-list"
-      }, selectedUsers.map(function (id) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Enter Username to add Member!"), selectedUsers.map(function (id) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: id
         }, users[id].username);
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        placeholder: "enter username to add and press `Enter`",
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        autoFocus: true,
+        className: "new-member-input",
         value: this.state.newMember,
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "recipients-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, selectedUsers.map(function (id) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          key: id
-        }, users[id].username);
       }))))));
     }
   }]);

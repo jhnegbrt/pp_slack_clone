@@ -88,24 +88,18 @@ class AddMembersModal extends React.Component{
             <div className="users-label">
               Add Users:
                 <ul className="recipients-list">
+                  <li>Enter Username to add Member!</li>
                   {selectedUsers.map(id =>{
                     return <li key={id}>{users[id].username}</li>
                   })}
+                  <input
+                  autoFocus
+                  className="new-member-input"
+                  value={this.state.newMember}
+                  onChange={this.handleChange}
+                  onKeyDown={this.handleKeyDown}
+                  />
                 </ul>
-              <input
-                placeholder="enter username to add and press `Enter`"
-                value={this.state.newMember}
-                onChange={this.handleChange}
-                onKeyDown={this.handleKeyDown}
-              />
-            </div>
-
-            <div className="recipients-list">
-              <ul>
-                {selectedUsers.map(id =>{
-                  return <li key={id}>{users[id].username}</li>
-                })}
-              </ul>
             </div>
           </div>
         </div>
