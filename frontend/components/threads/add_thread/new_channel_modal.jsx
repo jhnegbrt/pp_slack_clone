@@ -4,12 +4,14 @@ import React from 'react'
 
 class NewChannelModal extends React.Component{
   constructor(props){
-    
     super(props)
     //I am pretty sure that I can remove line 11 and just set creator_id in state
     //would require changing the way state is passed in from the container
     this.state = this.props.channel
     this.state.creator_id = this.props.creatorId
+    this.updateTitle = this.updateTitle.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    debugger
   }
 
   updateTitle(e){
@@ -22,10 +24,10 @@ class NewChannelModal extends React.Component{
   handleSubmit(e){
     e.preventDefault()
     this.props.toggleModal("addMembers", this.state)
-    .then(() => this.setState({
+    this.setState({
       title: "",
       selectedUsers: [],
-    }))
+    })
   }
 
 

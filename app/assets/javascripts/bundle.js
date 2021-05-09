@@ -574,8 +574,9 @@ var Client = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "closeModal",
     value: function closeModal() {
+      debugger;
       this.setState({
-        modal: "hidden"
+        modal: false
       });
     } // componentDidMount(){
     //   this.props.fetchThreads()
@@ -602,6 +603,7 @@ var Client = /*#__PURE__*/function (_React$Component) {
         path: "/client/explore",
         component: _threads_add_thread_explore_explore_container__WEBPACK_IMPORTED_MODULE_5__.default
       }), this.state.modal === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_threads_add_thread_create_channel_modal__WEBPACK_IMPORTED_MODULE_6__.default, {
+        newChannel: this.state.newChannel,
         toggleModal: this.toggleModal,
         closeModal: this.closeModal,
         modalType: this.state.modalType
@@ -2192,8 +2194,10 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, AddMembersModal);
 
+    debugger;
     _this = _super.call(this, props);
-    _this.selectUSers = _this.selectedUsers.bind(_assertThisInitialized(_this));
+    _this.state = props.newChannel;
+    _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2239,8 +2243,8 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       subscriptions[index].speak({
         thread: thread.threadId,
         users: this.state.selectedUsers,
-        channel: this.props.thread.channel,
-        "private": this.props.thread["private"],
+        channel: this.props.channel,
+        "private": this.props["private"],
         creator_id: this.props.creatorId,
         title: this.state.title
       });
@@ -2291,6 +2295,9 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var _add_members_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add_members_modal */ "./frontend/components/threads/add_thread/add_members_modal.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
@@ -2301,6 +2308,8 @@ var mSTP = function mSTP(state) {
     users: state.entities.workspace.users
   };
 };
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP)(_add_members_modal__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
@@ -2374,10 +2383,13 @@ var CreateChannelModal = /*#__PURE__*/function (_React$Component) {
   _createClass(CreateChannelModal, [{
     key: "render",
     value: function render() {
-      var modal = this.props.modalType === "createChannel" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_new_channel_modal_container__WEBPACK_IMPORTED_MODULE_1__.default, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_members_modal_container__WEBPACK_IMPORTED_MODULE_2__.default, null);
-      return {
-        modal: modal
-      };
+      var modal = this.props.modalType === "createChannel" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_new_channel_modal_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        closeModal: this.props.closeModal,
+        toggleModal: this.props.toggleModal
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_members_modal_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        newChannel: this.props.newChannel
+      });
+      return modal;
     }
   }]);
 
@@ -2488,7 +2500,6 @@ var Explore = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var publicChannels = this.props.publicChannels;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "publicChannels"
       }, publicChannels.map(this.mapThread));
@@ -2732,6 +2743,9 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
 
     _this.state = _this.props.channel;
     _this.state.creator_id = _this.props.creatorId;
+    _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    debugger;
     return _this;
   }
 
@@ -2745,14 +2759,11 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
-
       e.preventDefault();
-      this.props.toggleModal("addMembers", this.state).then(function () {
-        return _this2.setState({
-          title: "",
-          selectedUsers: []
-        });
+      this.props.toggleModal("addMembers", this.state);
+      this.setState({
+        title: "",
+        selectedUsers: []
       });
     }
   }, {

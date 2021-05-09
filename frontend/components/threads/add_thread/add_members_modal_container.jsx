@@ -4,3 +4,5 @@ import {connect} from 'react-redux'
 const mSTP = state => ({
   users: state.entities.workspace.users
 })
+
+export default connect(mSTP)(AddMembersModal)

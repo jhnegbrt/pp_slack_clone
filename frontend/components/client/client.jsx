@@ -36,8 +36,9 @@ class Client extends React.Component{
   }
 
   closeModal(){
+    debugger
     this.setState({
-      modal: "hidden"
+      modal: false
     })
   }
 
@@ -55,6 +56,7 @@ class Client extends React.Component{
         {/* <Route path='/client/newChannel' component={ChannelFormContainer} />
         <Route path='/client/addDM' component={DMFormContainer} /> */}
         {this.state.modal === true ? <CreateChannelModal
+          newChannel={this.state.newChannel}
           toggleModal={this.toggleModal}
           closeModal={this.closeModal}
           modalType={this.state.modalType}/> : null}

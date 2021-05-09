@@ -17,7 +17,6 @@ class Explore extends React.Component{
   render(){
 
     const { publicChannels } = this.props
-    debugger
     return(
       <ul className='publicChannels'>
         {publicChannels.map(this.mapThread)}

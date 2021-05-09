@@ -2,9 +2,10 @@ import React from 'react'
 
 class AddMembersModal extends React.Component{
   constructor(props){
+    debugger
     super(props)
-
-    this.selectUSers = this.selectedUsers.bind(this)
+    this.state = props.newChannel
+    this.selectUsers = this.selectUsers.bind(this)
   }
 
   selectUsers(e){
@@ -41,8 +42,8 @@ class AddMembersModal extends React.Component{
     subscriptions[index].speak({ 
       thread: thread.threadId,
       users: this.state.selectedUsers,
-      channel: this.props.thread.channel,
-      private: this.props.thread.private,
+      channel: this.props.channel,
+      private: this.props.private,
       creator_id: this.props.creatorId,
       title: this.state.title
     })
