@@ -2159,6 +2159,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../app/assets/images/close.svg */ "./app/assets/images/close.svg");
+/* harmony import */ var _app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -2195,6 +2197,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var AddMembersModal = /*#__PURE__*/function (_React$Component) {
   _inherits(AddMembersModal, _React$Component);
 
@@ -2214,35 +2217,27 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       selectedUsers: props.newChannel.selectedUsers,
       newMember: ""
     };
-    _this.selectUsers = _this.selectUsers.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(AddMembersModal, [{
-    key: "selectUsers",
-    value: function selectUsers(e) {
-      var allUsers = e.target.options;
-      var selected = this.state.selectedUsers;
-
-      for (var i = 0; i < allUsers.length; i++) {
-        if (allUsers[i].selected && !selected.includes(allUsers[i].value)) {
-          selected.push(allUsers[i].value);
-        }
-      }
-
-      this.setState({
-        selectedUsers: selected
-      });
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  }, {
     key: "handleChange",
     value: function handleChange(e) {
       debugger;
       this.setState({
         newMember: e.target.value
+      });
+    }
+  }, {
+    key: "removeUser",
+    value: function removeUser(userId) {
+      var users = this.state.selectedUsers.filter(function (id) {
+        return id !== userId;
+      });
+      this.setState({
+        selectedUsers: users
       });
     }
   }, {
@@ -2254,7 +2249,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         var users = this.props.users;
 
         for (var key in users) {
-          if (users[key].username === newMember) this.setState({
+          if (users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id)) this.setState({
             selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
             newMember: ""
           });
@@ -2309,7 +2304,14 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         if (id !== _this2.props.currentUser) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: id
-          }, users[id].username);
+          }, users[id].username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            onClick: function onClick() {
+              return _this2.removeUser(id);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+            className: "remove-new-member-button",
+            src: (_app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_1___default())
+          })));
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         autoFocus: true,
@@ -40406,6 +40408,16 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
 
+
+/***/ }),
+
+/***/ "./app/assets/images/close.svg":
+/*!*************************************!*\
+  !*** ./app/assets/images/close.svg ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'%3e%3cline x1='18' y1='6' x2='6' y2='18'%3e%3c/line%3e%3cline x1='6' y1='6' x2='18' y2='18'%3e%3c/line%3e%3c/svg%3e"
 
 /***/ }),
 

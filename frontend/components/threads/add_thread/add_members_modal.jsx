@@ -1,4 +1,6 @@
 import React from 'react'
+import Close from '../../../../app/assets/images/close.svg'
+
 
 class AddMembersModal extends React.Component{
   constructor(props){
@@ -11,23 +13,8 @@ class AddMembersModal extends React.Component{
       selectedUsers: props.newChannel.selectedUsers,
       newMember: ""
     }
-    this.selectUsers = this.selectUsers.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
-  }
-
-  selectUsers(e){
-    let allUsers = e.target.options
-    let selected = this.state.selectedUsers
-    for (let i = 0; i < allUsers.length; i++){
-      if (allUsers[i].selected && !selected.includes(allUsers[i].value)){
-        selected.push(allUsers[i].value)
-      } 
-    }
-    this.setState({
-      selectedUsers: selected
-    })
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(e){
@@ -37,13 +24,22 @@ class AddMembersModal extends React.Component{
     })
   }
 
+  removeUser(userId){
+    let users = this.state.selectedUsers.filter(function(id){
+      return id !== userId
+    })
+    this.setState({
+      selectedUsers: users
+    })
+  }
+
   handleKeyDown(e){
     if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
       let newMember = this.state.newMember.trim()
       const {users} = this.props
       for (const key in users){
-        if(users[key].username === newMember)
+        if(users[key].username === newMember  && !this.state.selectedUsers.includes(users[key].id))
         this.setState({
           selectedUsers: [...this.state.selectedUsers, users[key].id],
           newMember: ""
@@ -93,7 +89,10 @@ class AddMembersModal extends React.Component{
                   }
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){
-                      return <li key={id}>{users[id].username}</li>
+                      return <li key={id}>
+                        {users[id].username}
+                      <a onClick={()=>this.removeUser(id)}><img className="remove-new-member-button" 
+                      src={Close}></img></a></li>
                     }
                   })}
                   <input
