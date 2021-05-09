@@ -19,13 +19,8 @@ class NewChannelModal extends React.Component{
   }
 
   helperFunction(thread){
-    createMessagesConnection(
-      thread.threadId,
-      this.props.receiveMessage,
-      this.props.receiveMessages,
-      this.props.removeMessage,
-      this.props.creatorId
-    )
+
+
     
     let subscriptions = App.cable.subscriptions.subscriptions
     let index;
@@ -58,6 +53,11 @@ class NewChannelModal extends React.Component{
         selectedUsers: [],
       }))
       .then(() => this.props.toggleModal("addMembers"))
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    this.props.toggleModal("addMembers", this.state)
   }
 
 

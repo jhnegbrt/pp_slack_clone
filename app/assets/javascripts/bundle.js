@@ -547,7 +547,8 @@ var Client = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       modal: false,
-      modalType: "createChannel"
+      modalType: "createChannel",
+      newChannel: {}
     };
     _this.toggleModal = _this.toggleModal.bind(_assertThisInitialized(_this));
     _this.closeModal = _this.closeModal.bind(_assertThisInitialized(_this));
@@ -556,11 +557,19 @@ var Client = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Client, [{
     key: "toggleModal",
-    value: function toggleModal(modalType) {
-      this.setState({
-        modal: true,
-        modalType: modalType
-      });
+    value: function toggleModal(modalType, newChannel) {
+      if (modalType === "addMembers") {
+        this.setState({
+          newChannel: newChannel,
+          modal: true,
+          modalType: modalType
+        });
+      } else {
+        this.setState({
+          modal: true,
+          modalType: modalType
+        });
+      }
     }
   }, {
     key: "closeModal",
@@ -2695,7 +2704,6 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "helperFunction",
     value: function helperFunction(thread) {
-      (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_0__.default)(thread.threadId, this.props.receiveMessage, this.props.receiveMessages, this.props.removeMessage, this.props.creatorId);
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -2721,17 +2729,8 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
-
       e.preventDefault();
-      this.helperFunction(this.state).then(function () {
-        return _this2.setState({
-          title: "",
-          selectedUsers: []
-        });
-      }).then(function () {
-        return _this2.props.toggleModal("addMembers");
-      });
+      this.props.toggleModal("addMembers", this.state);
     }
   }, {
     key: "render",

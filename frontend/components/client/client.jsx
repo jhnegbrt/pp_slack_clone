@@ -13,17 +13,26 @@ class Client extends React.Component{
     super(props)
     this.state = {
       modal: false,
-      modalType: "createChannel"
+      modalType: "createChannel",
+      newChannel: {}
     }
     this.toggleModal = this.toggleModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
-  toggleModal(modalType){
-    this.setState({
-      modal: true,
-      modalType: modalType
-    })
+  toggleModal(modalType, newChannel){
+    if (modalType === "addMembers"){
+      this.setState({
+        newChannel: newChannel,
+        modal: true,
+        modalType: modalType
+      })
+    } else {
+      this.setState({
+        modal: true,
+        modalType: modalType
+      })
+    }
   }
 
   closeModal(){
