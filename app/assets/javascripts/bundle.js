@@ -2365,6 +2365,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
           receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
       (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId);
+      this.props.selectThread(this.props.thread.id);
     }
   }, {
     key: "render",
