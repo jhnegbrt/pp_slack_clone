@@ -30,37 +30,13 @@ class NewChannelModal extends React.Component{
 
 
   render(){
-    const {users} = this.props
-    const selectedUsers = this.state.selectedUsers
     return(
       <div className="thread-modal-container">
         <div className="thread-modal">
           <div className="thread-close">
             <button onClick={this.props.closeModal}>Close</button>
           </div>
-          
           <div className="modal-header">Create Channel</div>
-          <div className="modal-select-users">
-            <div className="users-label">
-              Select Users:
-              <select className="modal-select" value={this.state.selectedUsers} onChange={this.selectUsers}>
-                {Object.values(users).map((user) => 
-                <option key={user.id} value={user.id}>
-                {user.username}
-                </option>)}
-              </select>
-            </div>
-
-            <div className="recipients-list">
-              <h2>To:</h2>
-              <ul>
-                {selectedUsers.map(id =>{
-                  return <li key={id}>{users[id].username}</li>
-                }
-                )}
-              </ul>
-            </div>
-          </div>
             <div className="create-thread">
               <form onSubmit = {this.handleSubmit}>
                 <input onChange = {this.updateTitle}

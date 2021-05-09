@@ -2247,6 +2247,28 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "add-members-modal"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-select-users"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "users-label"
+      }, "Select Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        className: "modal-select",
+        value: this.state.selectedUsers,
+        onChange: this.selectUsers
+      }, Object.values(users).map(function (user) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          key: user.id,
+          value: user.id
+        }, user.username);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "recipients-list"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, selectedUsers.map(function (id) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: id
+        }, users[id].username);
+      })))));
     }
   }]);
 
@@ -2732,8 +2754,6 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var users = this.props.users;
-      var selectedUsers = this.state.selectedUsers;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "thread-modal-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
@@ -2745,25 +2765,6 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
       }, "Close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "modal-header"
       }, "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "modal-select-users"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "users-label"
-      }, "Select Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("select", {
-        className: "modal-select",
-        value: this.state.selectedUsers,
-        onChange: this.selectUsers
-      }, Object.values(users).map(function (user) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("option", {
-          key: user.id,
-          value: user.id
-        }, user.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "recipients-list"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", null, selectedUsers.map(function (id) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("li", {
-          key: id
-        }, users[id].username);
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "create-thread"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
         onSubmit: this.handleSubmit
