@@ -1,8 +1,8 @@
-import ThreadModal from './thread_modal'
+import NewChannelModal from './new_channel_modal'
 import {connect} from 'react-redux'
-import {createThread, receiveCurrentThread} from '../../actions/thread_actions'
-import {receiveMessage, receiveMessages} from '../../actions/message_actions'
-import {fetchAllUsers} from '../../actions/user_actions'
+import {createThread, receiveCurrentThread} from '../../../actions/thread_actions'
+import {receiveMessage, receiveMessages} from '../../../actions/message_actions'
+import {fetchAllUsers} from '../../../actions/user_actions'
 
 
 
@@ -13,7 +13,6 @@ const mSTP = state => ({
     channel: true,
     private: false
   },
-  formType: "Create Thread",
   creatorId: state.session.id,
   users: state.entities.workspace.users
 })
@@ -26,4 +25,4 @@ const mDTP = (dispatch) => ({
   fetchAllUsers: () => dispatch(fetchAllUsers()),
 })
 
-export default connect(mSTP, mDTP)(ThreadModal)
+export default connect(mSTP, mDTP)(NewChannelModal)

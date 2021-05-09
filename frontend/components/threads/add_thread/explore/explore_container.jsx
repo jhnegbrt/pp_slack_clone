@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import Explore from './explore'
-import {fetchPublicChannels} from '../../../actions/thread_actions'
+import {fetchPublicChannels} from '../../../../actions/thread_actions'
 
 const mSTP = state => ({
   publicChannels: Object.values(state.entities.workspace.publicChannels)

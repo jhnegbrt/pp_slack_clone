@@ -1,35 +1,15 @@
-import createMessagesConnection from '../../util/create_messages_connection'
-// import CreateThreadModalContainer from './create_thread_form_container'
+import createMessagesConnection from '../../../util/create_messages_connection'
 import React from 'react'
 
 
-class ThreadModal extends React.Component{
+class NewChannelModal extends React.Component{
   constructor(props){
     
     super(props)
+    //I am pretty sure that I can remove line 11 and just set creator_id in state
+    //would require changing the way state is passed in from the container
     this.state = this.props.thread
     this.state.creator_id = this.props.creatorId
-    this.selectUsers = this.selectUsers.bind(this)
-  }
-
-  selectUsers(e){
-    let allUsers = e.target.options
-    let selected = this.state.selectedUsers
-    for (let i = 0; i < allUsers.length; i++){
-      if (allUsers[i].selected && !selected.includes(allUsers[i].value)){
-        selected.push(allUsers[i].value)
-      } 
-    }
-    this.setState({
-      selectedUsers: selected
-    })
-    this.updateTitle = this.updateTitle.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-
-  componentDidMount(){
-    this.props.fetchAllUsers()
   }
 
   updateTitle(e){
@@ -90,9 +70,7 @@ class ThreadModal extends React.Component{
             <button onClick={this.props.closeModal}>Close</button>
           </div>
           
-          <div className="modal-header">
-            {this.props.formType === "message" ? "New Direct Message" : "Create Channel"}
-          </div>
+          <div className="modal-header">Create Channel</div>
           <div className="modal-select-users">
             <div className="users-label">
               Select Users:
@@ -114,8 +92,6 @@ class ThreadModal extends React.Component{
               </ul>
             </div>
           </div>
-
-
             <div className="create-thread">
               <form onSubmit = {this.handleSubmit}>
                 <input onChange = {this.updateTitle}
@@ -131,4 +107,4 @@ class ThreadModal extends React.Component{
   }
 }
 
-export default ThreadModal
+export default NewChannelModal
