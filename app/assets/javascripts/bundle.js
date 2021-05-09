@@ -2365,7 +2365,19 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
           receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
       (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId);
-      this.props.selectThread(this.props.thread.id);
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ThreadChannel") {
+          index = i;
+          break;
+        }
+      }
+
+      subscriptions[index].load(); // this.props.selectThread(this.props.thread.id)
     }
   }, {
     key: "render",
@@ -2397,8 +2409,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _explore_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./explore_item */ "./frontend/components/threads/add_thread/explore_item.jsx");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _explore_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./explore_item */ "./frontend/components/threads/add_thread/explore_item.jsx");
+
 
 
 
@@ -2412,21 +2426,21 @@ var mSTP = function mSTP(state, ownProps) {
 var mDTP = function mDTP(dispatch) {
   return {
     selectThread: function selectThread(threadId) {
-      return dispatch(receiveCurrentThread(threadId));
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveCurrentThread)(threadId));
     },
     receiveMessage: function receiveMessage(message) {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(message));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveMessage)(message));
     },
     receiveMessages: function receiveMessages(messages) {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(messages));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.receiveMessages)(messages));
     },
     removeMessage: function removeMessage(messageId) {
-      return dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../actions/message_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(messageId));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.removeMessage)(messageId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore_item__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore_item__WEBPACK_IMPORTED_MODULE_3__.default));
 
 /***/ }),
 

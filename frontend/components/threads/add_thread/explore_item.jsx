@@ -10,7 +10,18 @@ class ExploreItem extends React.Component{
   joinChannel(){
     const {thread, receiveMessage, receiveMessages, removeMessage} = this.props
     createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
-    this.props.selectThread(this.props.thread.id)
+
+    let subscriptions = App.cable.subscriptions.subscriptions
+    let index;
+    for (let i = 0; i < subscriptions.length; i++){
+      let identifier = JSON.parse(subscriptions[i].identifier)
+      if (identifier.channel === "ThreadChannel"){
+        index = i
+        break
+      }
+    }
+    subscriptions[index].load()
+    // this.props.selectThread(this.props.thread.id)
   }
 
   render(){

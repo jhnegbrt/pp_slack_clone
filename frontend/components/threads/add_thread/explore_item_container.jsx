@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
-import {receiveMessage, removeMessage, receiveMessages} from '../../actions/message_actions'
+import { receiveCurrentThread } from '../../../actions/thread_actions'
+import {receiveMessage, removeMessage, receiveMessages} from '../../../actions/message_actions'
 import ExploreItem from './explore_item'
 
 
