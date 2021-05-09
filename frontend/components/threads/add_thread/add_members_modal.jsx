@@ -25,6 +25,28 @@ class AddMembersModal extends React.Component{
   componentDidMount(){
     this.props.fetchAllUsers()
   }
+
+  handleSubmit(e){
+    e.preventDefault()
+    let subscriptions = App.cable.subscriptions.subscriptions
+    let index;
+    for (let i = 0; i < subscriptions.length; i++){
+      let identifier = JSON.parse(subscriptions[i].identifier)
+      if (identifier.channel === "ThreadChannel"){
+        index = i
+        break
+      }
+    }
+    
+    subscriptions[index].speak({ 
+      thread: thread.threadId,
+      users: this.state.selectedUsers,
+      channel: this.props.thread.channel,
+      private: this.props.thread.private,
+      creator_id: this.props.creatorId,
+      title: this.state.title
+    })
+  }
 }
 
 export default AddMembersModal
