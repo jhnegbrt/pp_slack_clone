@@ -2242,6 +2242,12 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       });
       this.props.selectThread(this.props.thread.threadId);
     }
+  }, {
+    key: "render",
+    value: function render() {
+      var users = this.props.users;
+      var selectedUsers = this.state.selectedUsers;
+    }
   }]);
 
   return AddMembersModal;
@@ -2260,7 +2266,15 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_members_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add_members_modal */ "./frontend/components/threads/add_thread/add_members_modal.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
+
+
+var mSTP = function mSTP(state) {
+  return {
+    users: state.entities.workspace.users
+  };
+};
 
 /***/ }),
 
@@ -2802,8 +2816,7 @@ var mSTP = function mSTP(state) {
       channel: true,
       "private": false
     },
-    creatorId: state.session.id,
-    users: state.entities.workspace.users
+    creatorId: state.session.id
   };
 };
 

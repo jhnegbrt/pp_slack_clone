@@ -14,7 +14,6 @@ const mSTP = state => ({
     private: false
   },
   creatorId: state.session.id,
-  users: state.entities.workspace.users
 })
 
 const mDTP = (dispatch) => ({

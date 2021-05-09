@@ -49,6 +49,11 @@ class AddMembersModal extends React.Component{
     this.props.selectThread(this.props.thread.threadId)
 
   }
+
+  render(){
+    const {users} = this.props
+    const selectedUsers = this.state.selectedUsers
+  }
 }
 
 export default AddMembersModal
