@@ -3,7 +3,7 @@ import Explore from './explore'
 import {fetchPublicChannels} from '../../../actions/thread_actions'
 
 const mSTP = state => ({
-  publicChannels: Object.keys(state.entities.workspace.publicChannels)
+  publicChannels: Object.values(state.entities.workspace.publicChannels)
 })
 
 const mDTP = dispatch => ({

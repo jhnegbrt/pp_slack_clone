@@ -1,4 +1,4 @@
-export default function createMessagesConnection(currentThreadId, receive, receiveCurrentMessages, remove, currentUserId){
+export default function createMessagesConnection(currentThreadId, receive, receiveMessages, remove, currentUserId){
   
   App.cable.subscriptions.create(
     
@@ -10,7 +10,7 @@ export default function createMessagesConnection(currentThreadId, receive, recei
             receive(data)
             break
           case "messages":
-            receiveCurrentMessages(data)
+            receiveMessages(data)
             break
           case "delete":
             remove(data['message_id'])

@@ -1,5 +1,5 @@
 import React from 'react'
-import createMessagesConnection from '../../../util/create_messages_connection'
+import ExploreItemContainer from './explore_item_container'
 
 class Explore extends React.Component{
   constructor(props){
@@ -11,8 +11,7 @@ class Explore extends React.Component{
   }
 
   mapThread(thread){
-    return <li>{thread}</li>
-    // return <PublicThreadsItem />
+    return <ExploreItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>
   }
 
   render(){

@@ -15,6 +15,7 @@ class ThreadIndex extends React.Component{
     
   }
 
+  //I Believe that I do not need to pass in "threadId"
   mapThread(thread){
     if (typeof thread === "number" || thread.title == undefined || thread.title == ""){
       return
