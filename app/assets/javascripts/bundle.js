@@ -2240,6 +2240,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         creator_id: this.props.creatorId,
         title: this.state.title
       });
+      this.props.selectThread(this.props.thread.threadId);
     }
   }]);
 
@@ -2689,7 +2690,7 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props); //I am pretty sure that I can remove line 11 and just set creator_id in state
     //would require changing the way state is passed in from the container
 
-    _this.state = _this.props.thread;
+    _this.state = _this.props.channel;
     _this.state.creator_id = _this.props.creatorId;
     return _this;
   }
@@ -2702,35 +2703,17 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "helperFunction",
-    value: function helperFunction(thread) {
-      var subscriptions = App.cable.subscriptions.subscriptions;
-      var index;
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ThreadChannel") {
-          index = i;
-          break;
-        }
-      }
-
-      subscriptions[index].speak({
-        thread: thread.threadId,
-        users: this.state.selectedUsers,
-        channel: this.props.thread.channel,
-        "private": this.props.thread["private"],
-        creator_id: this.props.creatorId,
-        title: this.state.title
-      });
-      this.props.selectThread(this.props.thread.threadId);
-    }
-  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
-      this.props.toggleModal("addMembers", this.state);
+      this.props.toggleModal("addMembers", this.state).then(function () {
+        return _this2.setState({
+          title: "",
+          selectedUsers: []
+        });
+      });
     }
   }, {
     key: "render",
@@ -2813,9 +2796,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    thread: {
+    channel: {
       title: "",
-      selectedUsers: [],
+      selectedUsers: [state.session.id],
       channel: true,
       "private": false
     },

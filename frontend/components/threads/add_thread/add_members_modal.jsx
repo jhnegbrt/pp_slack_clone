@@ -46,6 +46,8 @@ class AddMembersModal extends React.Component{
       creator_id: this.props.creatorId,
       title: this.state.title
     })
+    this.props.selectThread(this.props.thread.threadId)
+
   }
 }
 

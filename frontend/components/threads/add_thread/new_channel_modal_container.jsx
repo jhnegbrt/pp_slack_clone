@@ -7,9 +7,9 @@ import {fetchAllUsers} from '../../../actions/user_actions'
 
 
 const mSTP = state => ({
-  thread: {
+  channel: {
     title: "",
-    selectedUsers: [],
+    selectedUsers: [state.session.id],
     channel: true,
     private: false
   },

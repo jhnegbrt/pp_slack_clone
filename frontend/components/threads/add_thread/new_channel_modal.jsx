@@ -8,7 +8,7 @@ class NewChannelModal extends React.Component{
     super(props)
     //I am pretty sure that I can remove line 11 and just set creator_id in state
     //would require changing the way state is passed in from the container
-    this.state = this.props.thread
+    this.state = this.props.channel
     this.state.creator_id = this.props.creatorId
   }
 
@@ -18,46 +18,14 @@ class NewChannelModal extends React.Component{
     })
   }
 
-  helperFunction(thread){
-
-
-    
-    let subscriptions = App.cable.subscriptions.subscriptions
-    let index;
-    for (let i = 0; i < subscriptions.length; i++){
-      let identifier = JSON.parse(subscriptions[i].identifier)
-      if (identifier.channel === "ThreadChannel"){
-        index = i
-        break
-      }
-    }
-    
-    subscriptions[index].speak({ 
-      thread: thread.threadId,
-      users: this.state.selectedUsers,
-      channel: this.props.thread.channel,
-      private: this.props.thread.private,
-      creator_id: this.props.creatorId,
-      title: this.state.title
-    })
-
-    this.props.selectThread(this.props.thread.threadId)
-  }
-
-  handleSubmit(e){
-    
-    e.preventDefault()
-      this.helperFunction(this.state)
-      .then(() => this.setState({
-        title: "",
-        selectedUsers: [],
-      }))
-      .then(() => this.props.toggleModal("addMembers"))
-  }
 
   handleSubmit(e){
     e.preventDefault()
     this.props.toggleModal("addMembers", this.state)
+    .then(() => this.setState({
+      title: "",
+      selectedUsers: [],
+    }))
   }
 
 
