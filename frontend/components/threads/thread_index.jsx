@@ -46,7 +46,7 @@ class ThreadIndex extends React.Component{
           {
             threads.map(this.mapDirectMessages)
           }
-          <li className="create-channel-button"><Link to='/client/addDM'>New Conversation</Link></li>
+          <li className="create-channel-button"><Link to='/client/add'>New Conversation</Link></li>
         </ul>
       </div>
     )

@@ -2612,6 +2612,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../threads/thread_display_container */ "./frontend/components/threads/thread_display_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2641,12 +2653,124 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(AddDirectMessage);
 
   function AddDirectMessage(props) {
+    var _this;
+
     _classCallCheck(this, AddDirectMessage);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      //add current user into selectedUsers
+      selectedUsers: [],
+      newMember: "",
+      currentDm: null
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    debugger;
+    return _this;
   }
 
   _createClass(AddDirectMessage, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({
+        newMember: e.target.value
+      });
+    }
+  }, {
+    key: "removeUser",
+    value: function removeUser(userId) {
+      var users = this.state.selectedUsers.filter(function (id) {
+        return id !== userId;
+      });
+      this.setState({
+        selectedUsers: users
+      });
+    }
+  }, {
+    key: "handleKeyDown",
+    value: function handleKeyDown(e) {
+      if (["Enter", "Tab", ","].includes(e.key)) {
+        e.preventDefault();
+        var newMember = this.state.newMember.trim();
+        var users = this.props.users;
+
+        for (var key in users) {
+          if (users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id)) this.setState({
+            selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
+            newMember: ""
+          });
+        }
+      }
+    }
+  }, {
+    key: "sameUsers",
+    value: function sameUsers(threadUsers, stateUsers) {
+      var dictionary = {};
+      threadUsers.forEach(function (id) {
+        return dictionary[id] = 1;
+      });
+
+      for (var i = 0; i < stateUsers.length; i++) {
+        if (dictionary[stateUsers[i]] === undefined) {
+          return false;
+        } else {
+          dictionary[stateUsers[i]]--;
+        }
+      }
+
+      if (Object.values(dictionary).every(function (el) {
+        return el === 0;
+      })) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var threads = this.props.threads;
+
+      for (var i = 0; i < threads.length; i++) {
+        var users = threads[i].users;
+        var sameUsers = this.sameUsers(users, this.state.selectedUsers);
+
+        if (sameUsers) {
+          if (threads[i].id != this.state.currentDm) {
+            this.setState({
+              currentDm: threads[i].id
+            });
+            break;
+          }
+        }
+      }
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ThreadChannel") {
+          index = i;
+          break;
+        }
+      }
+
+      subscriptions[index].speak({
+        users: this.state.selectedUsers,
+        channel: this.props.newChannel.channel,
+        "private": this.props.newChannel["private"],
+        creator_id: this.props.newChannel.creator_id,
+        title: this.state.title
+      });
+      this.props.closeModal(); // this.props.selectThread(this.props.thread.threadId)
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Add Direct Message");
@@ -2677,7 +2801,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state) {
-  return {};
+  return {
+    threads: Object.values(state.entities.threads)
+  };
 };
 
 var mDTP = function mDTP(dispatch) {
@@ -3137,7 +3263,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(this.mapDirectMessages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "create-channel-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        to: "/client/addDM"
+        to: "/client/add"
       }, "New Conversation"))));
     }
   }]);
