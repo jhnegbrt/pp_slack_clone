@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from "react-router-dom"; 
 
 class SearchMessageForm extends React.Component{
   constructor(props){
@@ -51,25 +52,7 @@ class SearchMessageForm extends React.Component{
 
   }
 
-  let subscriptions = App.cable.subscriptions.subscriptions
-  let index;
-  for (let i = 0; i < subscriptions.length; i++){
-    let identifier = JSON.parse(subscriptions[i].identifier)
-    if (identifier.channel === "ThreadChannel"){
-      index = i
-      break
-    }
-  }
-  debugger
-  subscriptions[index].speak({
-    // add id
-    users: this.props.selectedUsers,
-    channel: false,
-    private: true,
-    creator_id: this.state.creatorId,
-    title: "replace this with users names",
-    first_message: "xx"
-  })
+
 
   //this message creates a new DM if the user sends a message to a group or individual 
   //that they do not yet have a dm with
@@ -83,10 +66,31 @@ class SearchMessageForm extends React.Component{
       title: "replace this with users names",
       first_message: "xx"
     }
-
+    let id;
     this.props.createDirectMessage(newDirectMessage)
-    .then((res) => console.log(res))
-
+    .then((res) => {
+      id = res;
+      let subscriptions = App.cable.subscriptions.subscriptions
+      let index;
+      for (let i = 0; i < subscriptions.length; i++){
+        let identifier = JSON.parse(subscriptions[i].identifier)
+        if (identifier.channel === "ThreadChannel"){
+          index = i
+          break
+        }
+      }
+      subscriptions[index].speak({
+        id: res.threadId,
+        users: this.props.selectedUsers,
+        channel: false,
+        private: true,
+        creator_id: this.state.creatorId,
+        title: "replace this with users names",
+        first_message: "xx"
+      })
+    })
+    debugger
+    this.props.history.push(`/client/thread/${id}`)
   }
 
   //creatorId and users are still undefined
