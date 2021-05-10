@@ -63,6 +63,12 @@ class AddDirectMessage extends React.Component{
     }
   }
 
+  //implement function to set State when we change users and there is no longer 
+  //a matching thread
+  checkUsers(threadUsers, stateUsers){
+
+  }
+
   componentDidUpdate(){
     let {threads} = this.props
     let dms = threads.filter((el) => { return el.channel === false})
@@ -106,6 +112,7 @@ class AddDirectMessage extends React.Component{
   render(){
     return(
       <div>Add Direct Message</div>
+      //add send message form here
     )
   }
 }

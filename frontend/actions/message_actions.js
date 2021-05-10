@@ -63,6 +63,8 @@ export const deleteMessage = (messageId) => dispatch => (
     .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
 )
 
+
+//I believe I can get rid of this code, test later
 export const createMessage = formMessage => dispatch => {
   return(
     APIUtil.createMessage(formMessage)

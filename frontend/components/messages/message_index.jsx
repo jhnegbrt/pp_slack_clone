@@ -1,6 +1,7 @@
 import React from 'react'
 import MessageIndexItemContainer from './message_index_item_container'
 import CreateMessageFormContainer from './create_message_form_container'
+import SearchMessageFormContainer from './search_message_form_container'
 
 
 
@@ -35,7 +36,10 @@ class MessageIndex extends React.Component{
           <div ref={this.bottom} />
         </div>
         <div className="message-input">
-          <CreateMessageFormContainer currentThreadId={this.props.currentThreadId}/>
+          {this.props.type === "thread" ? 
+          <CreateMessageFormContainer currentThreadId={this.props.currentThreadId}/> :
+          <SearchMessageFormContainer />
+          }
         </div>
       </div>
 
