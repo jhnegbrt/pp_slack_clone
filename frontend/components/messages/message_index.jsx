@@ -16,8 +16,17 @@ class MessageIndex extends React.Component{
     this.bottom.current.scrollIntoView();
   }
 
+  filterMessages(){
+    let {messages} = this.props
+    if (this.props.currentThreadId){
+      return messages.filter(el => el.channel_dms_id === parseInt(this.props.currentThreadId))
+    } else {
+      return messages.filter(el => el.channel_dms_id === parseInt(this.props.searchDmId))
+    }
+  }
+
   render(){ 
-    const { messages } = this.props
+    const messages = filterMessages()
     return(
       <div className="messages-display">
         <div className = "messages-container">

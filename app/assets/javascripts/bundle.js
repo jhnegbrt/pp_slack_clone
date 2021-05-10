@@ -981,11 +981,28 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       this.bottom.current.scrollIntoView();
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "filterMessages",
+    value: function filterMessages() {
       var _this2 = this;
 
       var messages = this.props.messages;
+
+      if (this.props.currentThreadId) {
+        return messages.filter(function (el) {
+          return el.channel_dms_id === parseInt(_this2.props.currentThreadId);
+        });
+      } else {
+        return messages.filter(function (el) {
+          return el.channel_dms_id === parseInt(_this2.props.searchDmId);
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var messages = filterMessages();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "messages-display"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -997,7 +1014,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           previous: messages[idx - 1],
           message: message,
           key: message.id,
-          currentThreadId: _this2.props.currentThreadId
+          currentThreadId: _this3.props.currentThreadId
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         ref: this.bottom
@@ -1034,9 +1051,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    messages: Object.values(state.entities.messages).filter(function (el) {
-      return el.channel_dms_id === parseInt(ownProps.currentThreadId);
-    }),
+    messages: Object.values(state.entities.messages),
     currentThreadId: ownProps.currentThreadId
   };
 };
@@ -2910,7 +2925,9 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         value: this.state.newMember,
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null)) //add send message form here
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        searchDmId: this.state.currentDm
+      })) //add send message form here
       ;
     }
   }]);

@@ -147,7 +147,7 @@ class AddDirectMessage extends React.Component{
           </ul>
         </div>
 
-        <MessageIndexContainer  />
+        <MessageIndexContainer searchDmId={this.state.currentDm} />
 
       </div>
       //add send message form here
