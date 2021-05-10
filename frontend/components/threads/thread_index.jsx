@@ -32,6 +32,7 @@ class ThreadIndex extends React.Component{
     const { threads } = this.props
     return(
       <div className="thread-index">
+        <h3>Channels</h3>
         <ul className="channel-index">
           {
             threads.map(this.mapChannels)
@@ -40,6 +41,7 @@ class ThreadIndex extends React.Component{
           <AddChannelButton toggleModal={this.props.toggleModal} />
 
         </ul>
+        <h3>Messages</h3>
         <ul>
           {
             threads.map(this.mapDirectMessages)
