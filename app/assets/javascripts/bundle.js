@@ -2702,7 +2702,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../threads/thread_display_container */ "./frontend/components/threads/thread_display_container.jsx");
+/* harmony import */ var _messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../messages/message_index_container */ "./frontend/components/messages/message_index_container.jsx");
 /* harmony import */ var _app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../app/assets/images/close.svg */ "./app/assets/images/close.svg");
 /* harmony import */ var _app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2887,7 +2887,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-dm"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "recipients-list"
@@ -2910,7 +2910,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         value: this.state.newMember,
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      }))) //add send message form here
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, null)) //add send message form here
       ;
     }
   }]);

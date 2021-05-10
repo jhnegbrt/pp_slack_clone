@@ -1,5 +1,5 @@
 import React from 'react'
-import ThreadDisplayContainer from '../../../threads/thread_display_container'
+import MessageIndexContainer from '../../../messages/message_index_container'
 import Close from '../../../../../app/assets/images/close.svg'
 
 class AddDirectMessage extends React.Component{
@@ -121,31 +121,35 @@ class AddDirectMessage extends React.Component{
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
     return(
-      <div className="add-dm">
-        <h2>To:</h2>
-        <ul className="recipients-list">
-          {this.state.newMember === "" && this.state.selectedUsers.length === 1 ?
-          <li>Enter Username to add Member!</li> : ""
-          }
-          {selectedUsers.map(id =>{
-            if( id !== this.props.currentUser){
-              return <li key={id}>
-                {users[id].username}
-              <a onClick={()=>this.removeUser(id)}><img className="remove-new-member-button" 
-              src={Close}></img></a></li>
+      <div>
+      
+        <div className="add-dm">
+          <h2>To:</h2>
+          <ul className="recipients-list">
+            {this.state.newMember === "" && this.state.selectedUsers.length === 1 ?
+            <li>Enter Username to add Member!</li> : ""
             }
-          })}
-          <input
-          autoFocus
-          className="new-member-input"
-          value={this.state.newMember}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-          />
-        </ul>
+            {selectedUsers.map(id =>{
+              if( id !== this.props.currentUser){
+                return <li key={id}>
+                  {users[id].username}
+                <a onClick={()=>this.removeUser(id)}><img className="remove-new-member-button" 
+                src={Close}></img></a></li>
+              }
+            })}
+            <input
+            autoFocus
+            className="new-member-input"
+            value={this.state.newMember}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+            />
+          </ul>
+        </div>
+
+        <MessageIndexContainer  />
+
       </div>
-
-
       //add send message form here
     )
   }
