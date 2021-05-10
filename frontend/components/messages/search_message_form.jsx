@@ -62,7 +62,7 @@ class SearchMessageForm extends React.Component{
   }
   debugger
   subscriptions[index].speak({
-    
+    // add id
     users: this.props.selectedUsers,
     channel: false,
     private: true,

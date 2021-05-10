@@ -45,8 +45,11 @@ class ThreadChannel < ApplicationCable::Channel
       )
     else
       channel_dm = {
-        type: "thread",
-        id: 
+        id: data["id"],
+        title: data["title"],
+        creator_id: data["creator_id"],
+        private: data["private"],
+        channel: data["channel"]
       }
     end
 
