@@ -10,6 +10,7 @@ class ThreadDisplay extends React.Component{
 
   render(){ 
 
+    let threadId = this.props.currentThreadId || this.props.currethreadSearch
     return(
       <MessageIndexContainer currentThreadId={this.props.currentThreadId} />
     )

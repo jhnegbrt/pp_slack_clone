@@ -1,8 +1,8 @@
-import NewChannelModal from './new_channel_modal'
+import NewChannelModal from '../new_channel_modal'
 import {connect} from 'react-redux'
-import {createThread, receiveCurrentThread} from '../../../actions/thread_actions'
-import {receiveMessage, receiveMessages} from '../../../actions/message_actions'
-import {fetchAllUsers} from '../../../actions/user_actions'
+import {createThread, receiveCurrentThread} from '../../../../actions/thread_actions'
+import {receiveMessage, receiveMessages} from '../../../../actions/message_actions'
+import {fetchAllUsers} from '../../../../actions/user_actions'
 
 
 
