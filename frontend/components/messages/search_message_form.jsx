@@ -88,9 +88,10 @@ class SearchMessageForm extends React.Component{
         title: "replace this with users names",
         first_message: "xx"
       })
+      debugger
+      this.props.history.push(`/client/thread/${res.threadId}`)
     })
-    debugger
-    this.props.history.push(`/client/thread/${id}`)
+    
   }
 
   //creatorId and users are still undefined

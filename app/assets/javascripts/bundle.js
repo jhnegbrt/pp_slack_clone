@@ -1395,9 +1395,10 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
           title: "replace this with users names",
           first_message: "xx"
         });
+        debugger;
+
+        _this2.props.history.push("/client/thread/".concat(res.threadId));
       });
-      debugger;
-      this.props.history.push("/client/thread/".concat(id));
     } //creatorId and users are still undefined
 
   }, {
