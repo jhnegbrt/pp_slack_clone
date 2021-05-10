@@ -1002,7 +1002,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      var messages = filterMessages();
+      var messages = this.filterMessages();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "messages-display"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1298,15 +1298,114 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(SearchMessageForm);
 
   function SearchMessageForm(props) {
+    var _this;
+
     _classCallCheck(this, SearchMessageForm);
 
-    return _super.call(this, props);
-  }
+    _this = _super.call(this, props);
+    _this.state = {
+      content: "",
+      "private": true,
+      channel: false,
+      selectedUsers: _this.props.selectedUsers,
+      creatorId: _this.props.currentUserId
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
+    return _this;
+  } //not sure if i need this method, coming from message_form
+  //this method is making sure that the wildcard in the URL matches the currentTHread
+  // in state. If I do end up needing it, I can change currentThreadId to searchThread
+  // componentDidUpdate(){
+  //   if (this.props.formType === "Edit Message"){
+  //     return
+  //   } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
+  //     this.setState({
+  //       channel_dms_id: parseInt(this.props.currentThreadId)
+  //     })
+  //   } 
+  // };
+
 
   _createClass(SearchMessageForm, [{
+    key: "sendMessage",
+    value: function sendMessage() {
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ChatChannel") {
+          index = i;
+          break;
+        }
+      }
+
+      App.cable.subscriptions.subscriptions[index].speak({
+        message: this.state
+      });
+      this.setState({
+        content: ""
+      });
+    }
+  }, {
+    key: "createNewDirectMessage",
+    value: function createNewDirectMessage() {
+      e.preventDefault();
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ThreadChannel") {
+          index = i;
+          break;
+        }
+      }
+
+      subscriptions[index].speak({
+        users: this.state.selectedUsers,
+        channel: this.props.newChannel.channel,
+        "private": this.props.newChannel["private"],
+        creator_id: this.props.newChannel.creator_id,
+        title: this.state.title
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+
+      if (this.props.searchDmId === null) {
+        createNewDirectMessage(); // this.props.selectThread(this.props.thread.threadId)
+      } else {
+        sendMessage(); // this.props.selectThread(this.props.thread.threadId)
+      }
+    }
+  }, {
+    key: "updateContent",
+    value: function updateContent(e) {
+      this.setState({
+        content: e.target.value
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Search  Message Form");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "message-form",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        onChange: this.updateContent,
+        type: "text",
+        placeholder: "New Message Here!",
+        value: this.state.content
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: "Send"
+      }));
     }
   }]);
 
@@ -1334,7 +1433,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state) {
-  return {};
+  return {
+    currentUserId: state.session.id
+  };
 };
 
 var mDTP = function mDTP(dispatch) {
@@ -2868,31 +2969,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
           }
         }
       }
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var subscriptions = App.cable.subscriptions.subscriptions;
-      var index;
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ThreadChannel") {
-          index = i;
-          break;
-        }
-      }
-
-      subscriptions[index].speak({
-        users: this.state.selectedUsers,
-        channel: this.props.newChannel.channel,
-        "private": this.props.newChannel["private"],
-        creator_id: this.props.newChannel.creator_id,
-        title: this.state.title
-      });
-      this.props.closeModal(); // this.props.selectThread(this.props.thread.threadId)
     } //add autocomplete for users
 
   }, {
@@ -2926,9 +3002,9 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-        searchDmId: this.state.currentDm
-      })) //add send message form here
-      ;
+        searchDmId: this.state.currentDm,
+        selectedUsers: this.state.selectedUsers
+      }));
     }
   }]);
 

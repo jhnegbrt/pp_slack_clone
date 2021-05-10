@@ -92,29 +92,6 @@ class AddDirectMessage extends React.Component{
     }
   }
 
-  handleSubmit(e){
-    e.preventDefault()
-    let subscriptions = App.cable.subscriptions.subscriptions
-    let index;
-    for (let i = 0; i < subscriptions.length; i++){
-      let identifier = JSON.parse(subscriptions[i].identifier)
-      if (identifier.channel === "ThreadChannel"){
-        index = i
-        break
-      }
-    }
-    subscriptions[index].speak({ 
-      users: this.state.selectedUsers,
-      channel: this.props.newChannel.channel,
-      private: this.props.newChannel.private,
-      creator_id: this.props.newChannel.creator_id,
-      title: this.state.title
-    })
-    this.props.closeModal()
-    // this.props.selectThread(this.props.thread.threadId)
-
-  }
-
   //add autocomplete for users
 
   render(){
@@ -146,11 +123,13 @@ class AddDirectMessage extends React.Component{
             />
           </ul>
         </div>
-
-        <MessageIndexContainer searchDmId={this.state.currentDm} />
+        
+        {/* //only render if we have a user selected */}
+        <MessageIndexContainer 
+        searchDmId={this.state.currentDm}
+        selectedUsers={this.state.selectedUsers} />
 
       </div>
-      //add send message form here
     )
   }
 }

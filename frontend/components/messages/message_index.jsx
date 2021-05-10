@@ -26,7 +26,7 @@ class MessageIndex extends React.Component{
   }
 
   render(){ 
-    const messages = filterMessages()
+    const messages = this.filterMessages()
     return(
       <div className="messages-display">
         <div className = "messages-container">
