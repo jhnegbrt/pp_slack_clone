@@ -6,8 +6,7 @@ class AddDirectMessage extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      //add current user into selectedUsers
-      selectedUsers: [],
+      selectedUsers: [props.currentUser],
       newMember: "",
       currentDm: null
     }

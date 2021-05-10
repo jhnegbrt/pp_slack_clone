@@ -2755,8 +2755,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      //add current user into selectedUsers
-      selectedUsers: [],
+      selectedUsers: [props.currentUser],
       newMember: "",
       currentDm: null
     };
