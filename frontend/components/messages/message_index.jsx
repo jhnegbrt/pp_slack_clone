@@ -47,7 +47,9 @@ class MessageIndex extends React.Component{
         <div className="message-input">
           {this.props.type === "thread" ? 
           <CreateMessageFormContainer currentThreadId={this.props.currentThreadId}/> :
-          <SearchMessageFormContainer />
+          <SearchMessageFormContainer 
+          searchDmId={this.props.searchDmId}
+          selectedUsers={this.props.selectedUsers}/>
           }
         </div>
       </div>

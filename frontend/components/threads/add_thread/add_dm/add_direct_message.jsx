@@ -6,7 +6,7 @@ class AddDirectMessage extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      selectedUsers: [props.currentUserId],
+      selectedUsers: [props.currentUser],
       newMember: "",
       currentDm: null
     }
@@ -94,7 +94,6 @@ class AddDirectMessage extends React.Component{
   //add autocomplete for users
 
   render(){
-    debugger
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
     return(

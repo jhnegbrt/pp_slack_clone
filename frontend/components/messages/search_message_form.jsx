@@ -7,7 +7,6 @@ class SearchMessageForm extends React.Component{
       content: "",
       private: true,
       channel: false,
-      selectedUsers: this.props.selectedUsers,
       creatorId: this.props.currentUserId
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -67,7 +66,7 @@ class SearchMessageForm extends React.Component{
     }
     debugger
     subscriptions[index].speak({ 
-      users: this.state.selectedUsers,
+      users: this.props.selectedUsers,
       channel: false,
       private: true,
       creator_id: this.state.creatorId,
@@ -76,11 +75,13 @@ class SearchMessageForm extends React.Component{
     })
   }
 
+  //creatorId and users are still undefined
+
 
   handleSubmit(e){
     debugger
     e.preventDefault()
-    if (this.props.searchDmId === undefined){
+    if (this.props.searchDmId === null){
       this.createNewDirectMessage(e)
     // this.props.selectThread(this.props.thread.threadId)
     } else {

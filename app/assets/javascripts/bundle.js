@@ -1022,7 +1022,10 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         className: "message-input"
       }, this.props.type === "thread" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_form_container__WEBPACK_IMPORTED_MODULE_2__.default, {
         currentThreadId: this.props.currentThreadId
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_message_form_container__WEBPACK_IMPORTED_MODULE_3__.default, null)));
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_message_form_container__WEBPACK_IMPORTED_MODULE_3__.default, {
+        searchDmId: this.props.searchDmId,
+        selectedUsers: this.props.selectedUsers
+      })));
     }
   }]);
 
@@ -1307,7 +1310,6 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       content: "",
       "private": true,
       channel: false,
-      selectedUsers: _this.props.selectedUsers,
       creatorId: _this.props.currentUserId
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -1372,21 +1374,22 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
 
       debugger;
       subscriptions[index].speak({
-        users: this.state.selectedUsers,
+        users: this.props.selectedUsers,
         channel: false,
         "private": true,
         creator_id: this.state.creatorId,
         title: "replace this with users names",
         firstMessage: "xx"
       });
-    }
+    } //creatorId and users are still undefined
+
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       debugger;
       e.preventDefault();
 
-      if (this.props.searchDmId === undefined) {
+      if (this.props.searchDmId === null) {
         this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
       } else {
         sendMessage(); // this.props.selectThread(this.props.thread.threadId)
@@ -2877,7 +2880,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      selectedUsers: [props.currentUserId],
+      selectedUsers: [props.currentUser],
       newMember: "",
       currentDm: null
     };
@@ -2981,7 +2984,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      debugger;
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3043,7 +3045,7 @@ var mSTP = function mSTP(state) {
   return {
     threads: Object.values(state.entities.threads),
     users: state.entities.workspace.users,
-    currentUserId: state.session.id
+    currentUser: state.session.id
   };
 };
 
