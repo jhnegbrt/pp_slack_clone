@@ -1312,6 +1312,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
+    _this.createNewDirectMessage = _this.createNewDirectMessage.bind(_assertThisInitialized(_this));
     return _this;
   } //not sure if i need this method, coming from message_form
   //this method is making sure that the wildcard in the URL matches the currentTHread
@@ -1325,6 +1326,8 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   //     })
   //   } 
   // };
+  //this message sends a new message to a thread that already exists if the user is 
+  //sending a message to users who they are already in a dm with
 
 
   _createClass(SearchMessageForm, [{
@@ -1348,10 +1351,12 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       this.setState({
         content: ""
       });
-    }
+    } //this message creates a new DM if the user sends a message to a group or individual 
+    //that they do not yet have a dm with
+
   }, {
     key: "createNewDirectMessage",
-    value: function createNewDirectMessage() {
+    value: function createNewDirectMessage(e) {
       e.preventDefault();
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
@@ -1365,21 +1370,24 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         }
       }
 
+      debugger;
       subscriptions[index].speak({
         users: this.state.selectedUsers,
-        channel: this.props.newChannel.channel,
-        "private": this.props.newChannel["private"],
-        creator_id: this.props.newChannel.creator_id,
-        title: this.state.title
+        channel: false,
+        "private": true,
+        creator_id: this.state.creatorId,
+        title: "replace this with users names",
+        firstMessage: "xx"
       });
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      debugger;
       e.preventDefault();
 
-      if (this.props.searchDmId === null) {
-        createNewDirectMessage(); // this.props.selectThread(this.props.thread.threadId)
+      if (this.props.searchDmId === undefined) {
+        this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
       } else {
         sendMessage(); // this.props.selectThread(this.props.thread.threadId)
       }
@@ -1433,9 +1441,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state) {
-  return {
-    currentUserId: state.session.id
-  };
+  return {};
 };
 
 var mDTP = function mDTP(dispatch) {
@@ -2871,13 +2877,12 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      selectedUsers: [props.currentUser],
+      selectedUsers: [props.currentUserId],
       newMember: "",
       currentDm: null
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
-    debugger;
     return _this;
   }
 
@@ -2976,6 +2981,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      debugger;
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3036,7 +3042,8 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     threads: Object.values(state.entities.threads),
-    users: state.entities.workspace.users
+    users: state.entities.workspace.users,
+    currentUserId: state.session.id
   };
 };
 

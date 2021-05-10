@@ -12,6 +12,7 @@ class SearchMessageForm extends React.Component{
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.updateContent = this.updateContent.bind(this)
+    this.createNewDirectMessage = this.createNewDirectMessage.bind(this)
   }
 
   //not sure if i need this method, coming from message_form
@@ -28,6 +29,9 @@ class SearchMessageForm extends React.Component{
   //     })
   //   } 
   // };
+
+  //this message sends a new message to a thread that already exists if the user is 
+  //sending a message to users who they are already in a dm with
 
   sendMessage(){
 
@@ -48,7 +52,9 @@ class SearchMessageForm extends React.Component{
 
   }
 
-  createNewDirectMessage(){
+  //this message creates a new DM if the user sends a message to a group or individual 
+  //that they do not yet have a dm with
+  createNewDirectMessage(e){
     e.preventDefault()
     let subscriptions = App.cable.subscriptions.subscriptions
     let index;
@@ -59,20 +65,23 @@ class SearchMessageForm extends React.Component{
         break
       }
     }
+    debugger
     subscriptions[index].speak({ 
       users: this.state.selectedUsers,
-      channel: this.props.newChannel.channel,
-      private: this.props.newChannel.private,
-      creator_id: this.props.newChannel.creator_id,
-      title: this.state.title
+      channel: false,
+      private: true,
+      creator_id: this.state.creatorId,
+      title: "replace this with users names",
+      firstMessage: "xx"
     })
   }
 
 
   handleSubmit(e){
+    debugger
     e.preventDefault()
-    if (this.props.searchDmId === null){
-      createNewDirectMessage()
+    if (this.props.searchDmId === undefined){
+      this.createNewDirectMessage(e)
     // this.props.selectThread(this.props.thread.threadId)
     } else {
       sendMessage()

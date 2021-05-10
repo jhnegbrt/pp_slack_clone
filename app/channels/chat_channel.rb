@@ -29,7 +29,6 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    
     channel_dms_id = data['message']['channel_dms_id']
 
     new_message = Message.create(

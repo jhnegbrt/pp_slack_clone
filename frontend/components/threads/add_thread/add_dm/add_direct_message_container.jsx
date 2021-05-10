@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 const mSTP = state => ({
   threads: Object.values(state.entities.threads),
   users: state.entities.workspace.users,
+  currentUserId: state.session.id
 })
 
 const mDTP = dispatch => ({

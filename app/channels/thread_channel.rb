@@ -30,6 +30,7 @@ class ThreadChannel < ApplicationCable::Channel
     }
 
     ThreadChannel.broadcast_to("thread_channel_#{params['user_id']}", socket)
+    
   end
 
   def speak(data)
@@ -55,7 +56,29 @@ class ThreadChannel < ApplicationCable::Channel
       ThreadChannel.broadcast_to("thread_channel_#{user}", socket)
       i += 1
     end
+    
+    if data['first_message'] != undefined
+      channel_dms_id = channel_dm.id
 
+      new_message = Message.create(
+        content: data['first_message'], 
+        sender_id: channel_dm.creator_id,
+        channel_dms_id: channel_dms_id
+      )
+      
+      sender = Message.find_by(id: new_message.id).sender
+      time = new_message["updated_at"]
+      socket = {
+        type: "message",
+        id: new_message.id, 
+        content: new_message.content,
+        sender_id: new_message.sender_id,
+        channel_dms_id: new_message.channel_dms_id,
+        sender: sender["username"],
+        time: time
+      }
+      ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
+    end
   end
 
   def unsubscribed
