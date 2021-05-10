@@ -2730,15 +2730,18 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var threads = this.props.threads;
+      var dms = threads.filter(function (el) {
+        return el.channel === false;
+      });
 
-      for (var i = 0; i < threads.length; i++) {
-        var users = threads[i].users;
+      for (var i = 0; i < dms.length; i++) {
+        var users = dms[i].users;
         var sameUsers = this.sameUsers(users, this.state.selectedUsers);
 
         if (sameUsers) {
-          if (threads[i].id != this.state.currentDm) {
+          if (dms[i].id != this.state.currentDm) {
             this.setState({
-              currentDm: threads[i].id
+              currentDm: dms[i].id
             });
             break;
           }

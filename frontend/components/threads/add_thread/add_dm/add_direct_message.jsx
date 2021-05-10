@@ -65,13 +65,14 @@ class AddDirectMessage extends React.Component{
 
   componentDidUpdate(){
     let {threads} = this.props
-    for (let i = 0; i < threads.length; i++){
-      let users = threads[i].users
+    let dms = threads.filter((el) => { return el.channel === false})
+    for (let i = 0; i < dms.length; i++){
+      let users = dms[i].users
       let sameUsers = this.sameUsers(users, this.state.selectedUsers)
       if ( sameUsers ){
-        if(threads[i].id != this.state.currentDm){
+        if(dms[i].id != this.state.currentDm){
           this.setState({
-            currentDm: threads[i].id
+            currentDm: dms[i].id
           })
           break
         }
