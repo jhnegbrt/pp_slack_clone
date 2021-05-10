@@ -1444,7 +1444,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state) {
-  return {};
+  return {
+    currentUserId: state.session.id
+  };
 };
 
 var mDTP = function mDTP(dispatch) {
