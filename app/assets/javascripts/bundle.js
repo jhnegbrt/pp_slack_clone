@@ -1263,167 +1263,9 @@ var mSTP = function mSTP(state, ownProps) {
 /*!**************************************************************!*\
   !*** ./frontend/components/messages/search_message_form.jsx ***!
   \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
-  _inherits(SearchMessageForm, _React$Component);
-
-  var _super = _createSuper(SearchMessageForm);
-
-  function SearchMessageForm(props) {
-    var _this;
-
-    _classCallCheck(this, SearchMessageForm);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      content: "",
-      "private": true,
-      channel: false,
-      creatorId: _this.props.currentUserId
-    };
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
-    _this.createNewDirectMessage = _this.createNewDirectMessage.bind(_assertThisInitialized(_this));
-    return _this;
-  } //not sure if i need this method, coming from message_form
-  //this method is making sure that the wildcard in the URL matches the currentTHread
-  // in state. If I do end up needing it, I can change currentThreadId to searchThread
-  // componentDidUpdate(){
-  //   if (this.props.formType === "Edit Message"){
-  //     return
-  //   } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
-  //     this.setState({
-  //       channel_dms_id: parseInt(this.props.currentThreadId)
-  //     })
-  //   } 
-  // };
-  //this message sends a new message to a thread that already exists if the user is 
-  //sending a message to users who they are already in a dm with
-
-
-  _createClass(SearchMessageForm, [{
-    key: "sendMessage",
-    value: function sendMessage() {
-      var subscriptions = App.cable.subscriptions.subscriptions;
-      var index;
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ChatChannel") {
-          index = i;
-          break;
-        }
-      }
-
-      App.cable.subscriptions.subscriptions[index].speak({
-        message: this.state
-      });
-      this.setState({
-        content: ""
-      });
-    } //this message creates a new DM if the user sends a message to a group or individual 
-    //that they do not yet have a dm with
-
-  }, {
-    key: "createNewDirectMessage",
-    value: function createNewDirectMessage(e) {
-      e.preventDefault();
-      var subscriptions = App.cable.subscriptions.subscriptions;
-      var index;
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ThreadChannel") {
-          index = i;
-          break;
-        }
-      }
-
-      debugger;
-      subscriptions[index].speak({
-        users: this.props.selectedUsers,
-        channel: false,
-        "private": true,
-        creator_id: this.state.creatorId,
-        title: "replace this with users names",
-        firstMessage: "xx"
-      });
-    } //creatorId and users are still undefined
-
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      debugger;
-      e.preventDefault();
-
-      if (this.props.searchDmId === null) {
-        this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
-      } else {
-        sendMessage(); // this.props.selectThread(this.props.thread.threadId)
-      }
-    }
-  }, {
-    key: "updateContent",
-    value: function updateContent(e) {
-      this.setState({
-        content: e.target.value
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: "message-form",
-        onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        onChange: this.updateContent,
-        type: "text",
-        placeholder: "New Message Here!",
-        value: this.state.content
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "submit",
-        value: "Send"
-      }));
-    }
-  }]);
-
-  return SearchMessageForm;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchMessageForm);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jhnegbrt/appacademy/slack_clone/frontend/components/messages/search_message_form.jsx: Unexpected token (54:6)\n\n\u001b[0m \u001b[90m 52 |\u001b[39m   }\u001b[0m\n\u001b[0m \u001b[90m 53 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 54 |\u001b[39m   \u001b[36mlet\u001b[39m subscriptions \u001b[33m=\u001b[39m \u001b[33mApp\u001b[39m\u001b[33m.\u001b[39mcable\u001b[33m.\u001b[39msubscriptions\u001b[33m.\u001b[39msubscriptions\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 55 |\u001b[39m   \u001b[36mlet\u001b[39m index\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 56 |\u001b[39m   \u001b[36mfor\u001b[39m (\u001b[36mlet\u001b[39m i \u001b[33m=\u001b[39m \u001b[35m0\u001b[39m\u001b[33m;\u001b[39m i \u001b[33m<\u001b[39m subscriptions\u001b[33m.\u001b[39mlength\u001b[33m;\u001b[39m i\u001b[33m++\u001b[39m){\u001b[0m\n\u001b[0m \u001b[90m 57 |\u001b[39m     \u001b[36mlet\u001b[39m identifier \u001b[33m=\u001b[39m \u001b[33mJSON\u001b[39m\u001b[33m.\u001b[39mparse(subscriptions[i]\u001b[33m.\u001b[39midentifier)\u001b[0m\n    at Object._raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:775:17)\n    at Object.raiseWithData (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:768:17)\n    at Object.raise (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:736:17)\n    at Object.unexpected (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:9716:16)\n    at Object.parseClassMemberWithIsStatic (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:13196:12)\n    at Object.parseClassMember (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:13089:10)\n    at withTopicForbiddingContext (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:13034:14)\n    at Object.withTopicForbiddingContext (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:12054:14)\n    at Object.parseClassBody (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:13011:10)\n    at Object.parseClass (/home/jhnegbrt/appacademy/slack_clone/node_modules/@babel/parser/lib/index.js:12985:22)");
 
 /***/ }),
 
@@ -1440,6 +1282,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _search_message_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search_message_form */ "./frontend/components/messages/search_message_form.jsx");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
 
 
 
@@ -1450,7 +1294,11 @@ var mSTP = function mSTP(state) {
 };
 
 var mDTP = function mDTP(dispatch) {
-  return {};
+  return {
+    createDirectMessage: function createDirectMessage(directMessage) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage));
+    }
+  };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_search_message_form__WEBPACK_IMPORTED_MODULE_1__.default));

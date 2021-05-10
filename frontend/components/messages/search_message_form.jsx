@@ -51,28 +51,42 @@ class SearchMessageForm extends React.Component{
 
   }
 
+  let subscriptions = App.cable.subscriptions.subscriptions
+  let index;
+  for (let i = 0; i < subscriptions.length; i++){
+    let identifier = JSON.parse(subscriptions[i].identifier)
+    if (identifier.channel === "ThreadChannel"){
+      index = i
+      break
+    }
+  }
+  debugger
+  subscriptions[index].speak({
+    
+    users: this.props.selectedUsers,
+    channel: false,
+    private: true,
+    creator_id: this.state.creatorId,
+    title: "replace this with users names",
+    first_message: "xx"
+  })
+
   //this message creates a new DM if the user sends a message to a group or individual 
   //that they do not yet have a dm with
   createNewDirectMessage(e){
     e.preventDefault()
-    let subscriptions = App.cable.subscriptions.subscriptions
-    let index;
-    for (let i = 0; i < subscriptions.length; i++){
-      let identifier = JSON.parse(subscriptions[i].identifier)
-      if (identifier.channel === "ThreadChannel"){
-        index = i
-        break
-      }
-    }
-    debugger
-    subscriptions[index].speak({ 
+    let newDirectMessage = { 
       users: this.props.selectedUsers,
       channel: false,
       private: true,
       creator_id: this.state.creatorId,
       title: "replace this with users names",
-      firstMessage: "xx"
-    })
+      first_message: "xx"
+    }
+
+    this.props.createDirectMessage(newDirectMessage)
+    .then((res) => console.log(res))
+
   }
 
   //creatorId and users are still undefined
