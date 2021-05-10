@@ -2703,6 +2703,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../threads/thread_display_container */ "./frontend/components/threads/thread_display_container.jsx");
+/* harmony import */ var _app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../app/assets/images/close.svg */ "./app/assets/images/close.svg");
+/* harmony import */ var _app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -2740,6 +2742,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
   _inherits(AddDirectMessage, _React$Component);
 
@@ -2758,11 +2761,17 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       currentDm: null
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
     debugger;
     return _this;
   }
 
   _createClass(AddDirectMessage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchAllUsers();
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(e) {
       this.setState({
@@ -2870,11 +2879,39 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         title: this.state.title
       });
       this.props.closeModal(); // this.props.selectThread(this.props.thread.threadId)
-    }
+    } //add autocomplete for users
+
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Add Direct Message") //add send message form here
+      var _this2 = this;
+
+      var users = this.props.users;
+      var selectedUsers = this.state.selectedUsers;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "add-dm"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "recipients-list"
+      }, this.state.newMember === "" && this.state.selectedUsers.length === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Enter Username to add Member!") : "", selectedUsers.map(function (id) {
+        if (id !== _this2.props.currentUser) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+            key: id
+          }, users[id].username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            onClick: function onClick() {
+              return _this2.removeUser(id);
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+            className: "remove-new-member-button",
+            src: (_app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_2___default())
+          })));
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        autoFocus: true,
+        className: "new-member-input",
+        value: this.state.newMember,
+        onChange: this.handleChange,
+        onKeyDown: this.handleKeyDown
+      }))) //add send message form here
       ;
     }
   }]);
@@ -2898,21 +2935,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _add_direct_message__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add_direct_message */ "./frontend/components/threads/add_thread/add_dm/add_direct_message.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 
 
 
 var mSTP = function mSTP(state) {
   return {
-    threads: Object.values(state.entities.threads)
+    threads: Object.values(state.entities.threads),
+    users: state.entities.workspace.users
   };
 };
 
 var mDTP = function mDTP(dispatch) {
-  return {};
+  return {
+    fetchAllUsers: function fetchAllUsers() {
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__.fetchAllUsers)());
+    }
+  };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_add_direct_message__WEBPACK_IMPORTED_MODULE_0__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mSTP, mDTP)(_add_direct_message__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 

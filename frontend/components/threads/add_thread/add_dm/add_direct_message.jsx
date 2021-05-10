@@ -1,5 +1,6 @@
 import React from 'react'
 import ThreadDisplayContainer from '../../../threads/thread_display_container'
+import Close from '../../../../../app/assets/images/close.svg'
 
 class AddDirectMessage extends React.Component{
   constructor(props){
@@ -11,7 +12,12 @@ class AddDirectMessage extends React.Component{
       currentDm: null
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
     debugger
+  }
+
+  componentDidMount(){
+    this.props.fetchAllUsers()
   }
 
   handleChange(e){
@@ -30,6 +36,7 @@ class AddDirectMessage extends React.Component{
   }
 
   handleKeyDown(e){
+    
     if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
       let newMember = this.state.newMember.trim()
@@ -109,9 +116,37 @@ class AddDirectMessage extends React.Component{
 
   }
 
+  //add autocomplete for users
+
   render(){
+    const {users} = this.props
+    const selectedUsers = this.state.selectedUsers
     return(
-      <div>Add Direct Message</div>
+      <div className="add-dm">
+        <h2>To:</h2>
+        <ul className="recipients-list">
+          {this.state.newMember === "" && this.state.selectedUsers.length === 1 ?
+          <li>Enter Username to add Member!</li> : ""
+          }
+          {selectedUsers.map(id =>{
+            if( id !== this.props.currentUser){
+              return <li key={id}>
+                {users[id].username}
+              <a onClick={()=>this.removeUser(id)}><img className="remove-new-member-button" 
+              src={Close}></img></a></li>
+            }
+          })}
+          <input
+          autoFocus
+          className="new-member-input"
+          value={this.state.newMember}
+          onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
+          />
+        </ul>
+      </div>
+
+
       //add send message form here
     )
   }
