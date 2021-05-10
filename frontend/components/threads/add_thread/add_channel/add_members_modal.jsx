@@ -1,5 +1,5 @@
 import React from 'react'
-import Close from '../../../../app/assets/images/close.svg'
+import Close from '../../../../../app/assets/images/close.svg'
 
 
 class AddMembersModal extends React.Component{
@@ -17,7 +17,6 @@ class AddMembersModal extends React.Component{
   }
 
   handleChange(e){
-    debugger
     this.setState({
       newMember: e.target.value
     })
@@ -59,7 +58,6 @@ class AddMembersModal extends React.Component{
         break
       }
     }
-    debugger
     subscriptions[index].speak({ 
       users: this.state.selectedUsers,
       channel: this.props.newChannel.channel,
@@ -75,7 +73,6 @@ class AddMembersModal extends React.Component{
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
-    debugger
     return(
       <div className="thread-modal-container">
         <div className="thread-modal">

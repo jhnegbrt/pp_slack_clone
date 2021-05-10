@@ -1,4 +1,3 @@
-import createMessagesConnection from '../../../util/create_messages_connection'
 import React from 'react'
 
 
@@ -14,7 +13,6 @@ class NewChannelModal extends React.Component{
   }
 
   componentDidMount(){
-    debugger
     this.props.fetchAllUsers()
   }
 

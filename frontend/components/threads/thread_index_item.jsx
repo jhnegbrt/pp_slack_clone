@@ -20,7 +20,6 @@ class ThreadIndexItem extends React.Component{
   }
 
   render(){
-    debugger
     return(
       <li className={this.props.currentThreadId === this.props.thread.id ? "thread-select" : null}>
         <NavLink onClick={this.selectThread} activeClassName={"active-thread"} to={`/client/thread/${this.props.thread.id}`}>

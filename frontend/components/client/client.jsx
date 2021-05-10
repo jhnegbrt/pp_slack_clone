@@ -1,7 +1,7 @@
 import ThreadDisplayContainer from '../threads/thread_display_container'
 import ThreadIndexContainer from '../threads/thread_index_container'
 import React from 'react'
-import AddDirectMessage from '../threads/add_thread/add_dm/add_direct_message'
+import AddDirectMessageContainer from '../threads/add_thread/add_dm/add_direct_message_container'
 import ExploreContainer from '../threads/add_thread/explore/explore_container'
 import CreateChannelModal from '../threads/add_thread/add_channel/create_channel_modal'
 
@@ -46,7 +46,7 @@ class Client extends React.Component{
       <div className="client">
         <Route path='/client' render={(props) => <ThreadIndexContainer {...props} toggleModal={this.toggleModal}/>} />
         <Route path='/client/thread/:threadId' component={ThreadDisplayContainer} />
-        <Route path='/client/add' component={AddDirectMessage}/>
+        <Route path='/client/add' component={AddDirectMessageContainer}/>
         <Route path='/client/explore' component={ExploreContainer} />
         {this.state.modal === true ? <CreateChannelModal
           newChannel={this.state.newChannel}
