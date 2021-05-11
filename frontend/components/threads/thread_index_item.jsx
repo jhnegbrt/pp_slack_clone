@@ -16,7 +16,7 @@ class ThreadIndexItem extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchAllUsers()
+    
     const {thread, receiveMessage, receiveMessages, removeMessage} = this.props
     createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
   }
