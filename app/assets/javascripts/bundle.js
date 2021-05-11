@@ -1354,7 +1354,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       this.setState({
         content: ""
       });
-    } //this message creates a new DM if the user sends a message to a group or individual 
+    } //this method creates a new DM if the user sends a message to a group or individual 
     //that they do not yet have a dm with
 
   }, {
@@ -1423,7 +1423,6 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      debugger;
       e.preventDefault(); // if (this.props.searchDmId === null){
 
       this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
@@ -3004,6 +3003,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "checkUsers",
     value: function checkUsers(threadUsers, stateUsers) {} // componentDidUpdate(){
+    //   debugger
     //   let {threads} = this.props
     //   let dms = threads.filter((el) => { return el.channel === false})
     //   for (let i = 0; i < dms.length; i++){
@@ -3028,6 +3028,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-dm"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {

@@ -54,7 +54,7 @@ class SearchMessageForm extends React.Component{
 
 
 
-  //this message creates a new DM if the user sends a message to a group or individual 
+  //this method creates a new DM if the user sends a message to a group or individual 
   //that they do not yet have a dm with
   createNewDirectMessage(e){
     e.preventDefault()
@@ -113,7 +113,6 @@ class SearchMessageForm extends React.Component{
 
 
   handleSubmit(e){
-    debugger
     e.preventDefault()
     // if (this.props.searchDmId === null){
     this.createNewDirectMessage(e)

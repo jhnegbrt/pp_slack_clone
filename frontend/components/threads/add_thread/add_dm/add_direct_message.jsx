@@ -75,6 +75,7 @@ class AddDirectMessage extends React.Component{
   }
 
   // componentDidUpdate(){
+  //   debugger
   //   let {threads} = this.props
   //   let dms = threads.filter((el) => { return el.channel === false})
   //   for (let i = 0; i < dms.length; i++){
@@ -96,6 +97,7 @@ class AddDirectMessage extends React.Component{
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
+    debugger
     return(
       <div>
       

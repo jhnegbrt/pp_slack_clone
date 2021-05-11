@@ -34,6 +34,7 @@ class ThreadChannel < ApplicationCable::Channel
   end
 
   def speak(data)
+    # debugger
     if data["created"] != true
       channel_dm = ChannelDm.create(
         channel: data['channel'],
@@ -52,6 +53,8 @@ class ThreadChannel < ApplicationCable::Channel
           private: channel_dm.private
         }
         user = data["users"][i]
+        # might need to add check to see if already exists
+        UserChannelDm.create(channel_dm_id: channel_dm.id, user_id: user)
         ThreadChannel.broadcast_to("thread_channel_#{user}", socket)
         i += 1
       end
@@ -74,6 +77,7 @@ class ThreadChannel < ApplicationCable::Channel
           private: channel_dm[:private]
         }
         user = data["users"][i]
+        UserChannelDm.create(channel_dm_id: channel_dm[:id], user_id: user )
         ThreadChannel.broadcast_to("thread_channel_#{user}", socket)
         i += 1
       end
