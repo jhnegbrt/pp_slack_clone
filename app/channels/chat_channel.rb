@@ -2,9 +2,9 @@ class ChatChannel < ApplicationCable::Channel
 
   def subscribed
     
-    if (UserChannelDm.where(user_id: params['user_id']).where(channel_dm_id: params['thread_id']).length == 0)
-      UserChannelDm.create(channel_dm_id: params['thread_id'], user_id: params['user_id'] )
-    end
+    # if (UserChannelDm.where(user_id: params['user_id']).where(channel_dm_id: params['thread_id']).length == 0)
+    #   UserChannelDm.create(channel_dm_id: params['thread_id'], user_id: params['user_id'] )
+    # end
     
     stream_for "chat_channel_#{params['thread_id']}"
     self.load
