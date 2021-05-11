@@ -34,7 +34,6 @@ class ThreadChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    debugger
     if data["created"] != true
       channel_dm = ChannelDm.create(
         channel: data['channel'],

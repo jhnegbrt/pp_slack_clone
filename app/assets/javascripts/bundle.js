@@ -1424,13 +1424,13 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       debugger;
-      e.preventDefault();
+      e.preventDefault(); // if (this.props.searchDmId === null){
 
-      if (this.props.searchDmId === null) {
-        this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
-      } else {
-        sendMessage(); // this.props.selectThread(this.props.thread.threadId)
-      }
+      this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
+      // } else {
+      //   sendMessage()
+      // // this.props.selectThread(this.props.thread.threadId)
+      // }
     }
   }, {
     key: "updateContent",
@@ -3003,29 +3003,23 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
   }, {
     key: "checkUsers",
-    value: function checkUsers(threadUsers, stateUsers) {}
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      var threads = this.props.threads;
-      var dms = threads.filter(function (el) {
-        return el.channel === false;
-      });
-
-      for (var i = 0; i < dms.length; i++) {
-        var users = dms[i].users;
-        var sameUsers = this.sameUsers(users, this.state.selectedUsers);
-
-        if (sameUsers) {
-          if (dms[i].id != this.state.currentDm) {
-            this.setState({
-              currentDm: dms[i].id
-            });
-            break;
-          }
-        }
-      }
-    } //add autocomplete for users
+    value: function checkUsers(threadUsers, stateUsers) {} // componentDidUpdate(){
+    //   let {threads} = this.props
+    //   let dms = threads.filter((el) => { return el.channel === false})
+    //   for (let i = 0; i < dms.length; i++){
+    //     let users = dms[i].users
+    //     let sameUsers = this.sameUsers(users, this.state.selectedUsers)
+    //     if ( sameUsers ){
+    //       if(dms[i].id != this.state.currentDm){
+    //         this.setState({
+    //           currentDm: dms[i].id
+    //         })
+    //         break
+    //       }
+    //     }
+    //   }
+    // }
+    //add autocomplete for users
 
   }, {
     key: "render",

@@ -115,13 +115,13 @@ class SearchMessageForm extends React.Component{
   handleSubmit(e){
     debugger
     e.preventDefault()
-    if (this.props.searchDmId === null){
-      this.createNewDirectMessage(e)
+    // if (this.props.searchDmId === null){
+    this.createNewDirectMessage(e)
     // this.props.selectThread(this.props.thread.threadId)
-    } else {
-      sendMessage()
-    // this.props.selectThread(this.props.thread.threadId)
-    }
+    // } else {
+    //   sendMessage()
+    // // this.props.selectThread(this.props.thread.threadId)
+    // }
   }
 
   updateContent(e){
