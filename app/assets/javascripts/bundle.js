@@ -3758,7 +3758,13 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       channelUsers.forEach(function (id) {
         return userNames.push(allUsers[id].username);
       });
-      return userNames.join(", ");
+      var title = userNames.join(", ");
+
+      if (title.length > 36) {
+        return title.slice(0, 36).concat("...");
+      } else {
+        return title.slice(0, title.length);
+      }
     }
   }, {
     key: "render",
