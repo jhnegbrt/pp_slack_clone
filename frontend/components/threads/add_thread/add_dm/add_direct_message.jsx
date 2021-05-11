@@ -106,7 +106,7 @@ class AddDirectMessage extends React.Component{
         </div>
         <div className="add-dm">
           <h2>To:</h2>
-          <ul className="recipients-list">
+          <ul className="dm-recipients-list">
             {selectedUsers.map(id =>{
               if( id !== this.props.currentUser){
                 return <li key={id}>

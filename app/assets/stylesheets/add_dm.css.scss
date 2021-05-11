@@ -1,6 +1,8 @@
 .add-dm-container{
   height: 100vh;
   background-color: #f1eee8;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-dm-header{
@@ -19,8 +21,33 @@
   width: 80vw;
   height: 5vh;
   display: flex;
+  align-items: center;
   font-family: 'Comfortaa', serif;
-  position:absolute;
   background-color: #f1eee8;
-  z-index: 5
+  z-index: 5;
+
+  .dm-recipients-list{
+    background-color:#f1eee8;
+    // display:flex;
+  }
+
+  .dm-recipients-list li{
+    display: inline;
+    margin-left: .8vw;
+  }
+  h2{
+    margin-left: 1.5vw;
+    font-size: 1.2vw;
+  }
+  ul{
+    input{
+      background-color:#f1eee8;
+      width: 15vw;
+    }
+  }
+  .new-member-input{
+    font-family: 'Comfortaa', serif;
+    font-size: 1.2vw;
+    margin-left: 1vw;
+  }
 }
