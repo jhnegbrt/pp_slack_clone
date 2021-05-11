@@ -3,6 +3,24 @@
   background-color: #f1eee8;
 }
 
-.add-dm{
+.add-dm-header{
+  box-sizing: border-box;
+  font-family: 'Comfortaa', serif;
+  font-size: 1.5vw;
+  height: 10vh;
+  padding: 2vh;
+  padding-left: 1.5vw;
+  border-bottom: 1px solid gray;
   display: flex;
+  align-items: center;
+}
+
+.add-dm{
+  width: 80vw;
+  height: 5vh;
+  display: flex;
+  font-family: 'Comfortaa', serif;
+  position:absolute;
+  background-color: #f1eee8;
+  z-index: 5
 }

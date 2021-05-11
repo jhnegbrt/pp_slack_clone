@@ -101,12 +101,12 @@ class AddDirectMessage extends React.Component{
     const selectedUsers = this.state.selectedUsers
     return(
       <div className="add-dm-container">
+        <div className="add-dm-header">
+          <h2>New Direct Message</h2>
+        </div>
         <div className="add-dm">
           <h2>To:</h2>
           <ul className="recipients-list">
-            {this.state.newMember === "" && this.state.selectedUsers.length === 1 ?
-            <li>Enter Username to add Member!</li> : ""
-            }
             {selectedUsers.map(id =>{
               if( id !== this.props.currentUser){
                 return <li key={id}>
@@ -119,6 +119,7 @@ class AddDirectMessage extends React.Component{
             autoFocus
             className="new-member-input"
             value={this.state.newMember}
+            placeholder= {this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" :""}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
             />

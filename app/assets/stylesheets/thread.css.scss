@@ -91,6 +91,8 @@
 .thread-display{
   height: 100vh;
   background-color: #f1eee8;
+  display: flex;
+  flex-direction: column;
 }
 
 
