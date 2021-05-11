@@ -68,8 +68,6 @@ class AddDirectMessage extends React.Component{
     }
   }
 
-  //implement function to set State when we change users and there is no longer 
-  //a matching thread
   checkUsers(dms, stateUsers){
 
     let match = null;
@@ -86,7 +84,6 @@ class AddDirectMessage extends React.Component{
   componentDidUpdate(){
 
     let {threads} = this.props
-    //write function to return match if there is one
     let dms = threads.filter((el) => { return el.channel === false})
     let match = this.checkUsers(dms, this.state.selectedUsers)
     
@@ -129,7 +126,6 @@ class AddDirectMessage extends React.Component{
           </ul>
         </div>
         
-        {/* //only render if we have a user selected */}
         <MessageIndexContainer 
         searchDmId={this.state.currentDm}
         selectedUsers={this.state.selectedUsers} />

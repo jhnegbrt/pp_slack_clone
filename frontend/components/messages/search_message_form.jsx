@@ -44,12 +44,19 @@ class SearchMessageForm extends React.Component{
         break
       }
     }
+
+    let message = {
+      channel_dms_id: this.props.searchDmId,
+      content: this.state.content,
+      sender_id: this.state.creatorId,
+      created: true
+    }
     
-    App.cable.subscriptions.subscriptions[index].speak({ message: this.state})
+    App.cable.subscriptions.subscriptions[index].speak({ message: message})
     this.setState({
         content: ""
     })
-
+    this.props.history.push(`/client/thread/${this.props.searchDmId}`)
   }
 
 
@@ -113,13 +120,13 @@ class SearchMessageForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
-    // if (this.props.searchDmId === null){
-    this.createNewDirectMessage(e)
+    if (this.props.searchDmId === null){
+      this.createNewDirectMessage(e)
     // this.props.selectThread(this.props.thread.threadId)
-    // } else {
-    //   sendMessage()
+    } else {
+      this. sendMessage()
     // // this.props.selectThread(this.props.thread.threadId)
-    // }
+    }
   }
 
   updateContent(e){

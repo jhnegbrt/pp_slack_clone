@@ -1348,12 +1348,19 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         }
       }
 
+      var message = {
+        channel_dms_id: this.props.searchDmId,
+        content: this.state.content,
+        sender_id: this.state.creatorId,
+        created: true
+      };
       App.cable.subscriptions.subscriptions[index].speak({
-        message: this.state
+        message: message
       });
       this.setState({
         content: ""
       });
+      this.props.history.push("/client/thread/".concat(this.props.searchDmId));
     } //this method creates a new DM if the user sends a message to a group or individual 
     //that they do not yet have a dm with
 
@@ -1422,13 +1429,13 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault(); // if (this.props.searchDmId === null){
+      e.preventDefault();
 
-      this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
-      // } else {
-      //   sendMessage()
-      // // this.props.selectThread(this.props.thread.threadId)
-      // }
+      if (this.props.searchDmId === null) {
+        this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
+      } else {
+        this.sendMessage(); // // this.props.selectThread(this.props.thread.threadId)
+      }
     }
   }, {
     key: "updateContent",
@@ -2996,9 +3003,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       } else {
         return false;
       }
-    } //implement function to set State when we change users and there is no longer 
-    //a matching thread
-
+    }
   }, {
     key: "checkUsers",
     value: function checkUsers(dms, stateUsers) {
@@ -3018,8 +3023,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      var threads = this.props.threads; //write function to return match if there is one
-
+      var threads = this.props.threads;
       var dms = threads.filter(function (el) {
         return el.channel === false;
       });
