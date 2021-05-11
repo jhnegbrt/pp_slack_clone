@@ -80,9 +80,6 @@ class AddMembersModal extends React.Component{
             <div className="users-label">
               Add Users:
                 <ul className="recipients-list">
-                  {this.state.newMember === "" && this.state.selectedUsers.length === 1 ?
-                  <li>Enter Username to add Member!</li> : ""
-                  }
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){
                       return <li key={id}>
@@ -95,6 +92,7 @@ class AddMembersModal extends React.Component{
                   autoFocus
                   className="new-member-input"
                   value={this.state.newMember}
+                  placeholder= {this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" :""}
                   onChange={this.handleChange}
                   onKeyDown={this.handleKeyDown}
                   />

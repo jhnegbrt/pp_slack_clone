@@ -2563,7 +2563,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         className: "users-label"
       }, "Add Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "recipients-list"
-      }, this.state.newMember === "" && this.state.selectedUsers.length === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Enter Username to add Member!") : "", selectedUsers.map(function (id) {
+      }, selectedUsers.map(function (id) {
         if (id !== _this2.props.currentUser) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: id
@@ -2580,6 +2580,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         autoFocus: true,
         className: "new-member-input",
         value: this.state.newMember,
+        placeholder: this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
