@@ -33,8 +33,8 @@ class ThreadTitle extends React.Component{
   render(){
     const title = this.createTitle()
     return(
-      <div>
-        {title}
+      <div className="thread-title">
+        <h2>{title}</h2>
       </div>
     )
   }

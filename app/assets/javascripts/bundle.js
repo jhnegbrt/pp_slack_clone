@@ -3472,7 +3472,9 @@ var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var threadId = this.props.currentThreadId || this.props.currentThreadSearch;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_title_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "thread-display"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_title_container__WEBPACK_IMPORTED_MODULE_2__.default, {
         currentThreadId: threadId
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         type: "thread",
@@ -3931,7 +3933,9 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var title = this.createTitle();
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, title);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "thread-title"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, title));
     }
   }]);
 

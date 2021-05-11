@@ -74,6 +74,23 @@
   background-color: rgb(44, 44, 83)
 }
 
-//thread-modal
+.thread-title{
+  box-sizing:border-box;
+  padding: 2vh;
+  padding-left: 2vh;
+  background-color: #f1eee8;
+  height: 10vh;
+  font-family: 'Comfortaa', serif;
+  font-size: 1.5vw;
+  border-bottom: 1px solid gray;
+  display: flex;
+  align-items: center;
+
+}
+
+.thread-display{
+  height: 100vh;
+  background-color: #f1eee8;
+}
 
 
