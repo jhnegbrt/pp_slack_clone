@@ -1373,7 +1373,6 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       };
       var id;
       this.props.createDirectMessage(newDirectMessage).then(function (res) {
-        debugger;
         id = res;
         var subscriptions = App.cable.subscriptions.subscriptions;
         var index;
@@ -1441,7 +1440,6 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "message-form",
         onSubmit: this.handleSubmit
@@ -3011,7 +3009,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         var sameUsers = this.sameUsers(users, stateUsers);
 
         if (sameUsers) {
-          return match = i;
+          return match = dms[i].id;
         }
       }
 

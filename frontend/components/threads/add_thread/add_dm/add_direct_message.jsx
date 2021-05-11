@@ -77,7 +77,7 @@ class AddDirectMessage extends React.Component{
       let users = dms[i].users
       let sameUsers = this.sameUsers(users, stateUsers)
       if ( sameUsers ){
-        return match = i
+        return match = dms[i].id
       }
     }
     return match
@@ -89,6 +89,7 @@ class AddDirectMessage extends React.Component{
     //write function to return match if there is one
     let dms = threads.filter((el) => { return el.channel === false})
     let match = this.checkUsers(dms, this.state.selectedUsers)
+    
     if (this.state.currentDm !== match){
       this.setState({
         currentDm: match

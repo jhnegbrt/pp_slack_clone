@@ -69,7 +69,6 @@ class SearchMessageForm extends React.Component{
     let id;
     this.props.createDirectMessage(newDirectMessage)
     .then((res) => {
-      debugger
       id = res;
       let subscriptions = App.cable.subscriptions.subscriptions
       let index;
@@ -131,7 +130,6 @@ class SearchMessageForm extends React.Component{
 
 
   render(){
-    debugger
     return(
       <form className="message-form" onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} 
