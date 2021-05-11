@@ -3472,7 +3472,9 @@ var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var threadId = this.props.currentThreadId || this.props.currentThreadSearch;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_title_container__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_title_container__WEBPACK_IMPORTED_MODULE_2__.default, {
+        currentThreadId: threadId
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         type: "thread",
         currentThreadId: threadId
       }));
@@ -3883,15 +3885,47 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(ThreadTitle);
 
   function ThreadTitle(props) {
+    var _this;
+
     _classCallCheck(this, ThreadTitle);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.createTitle = _this.createTitle.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ThreadTitle, [{
+    key: "createTitle",
+    value: function createTitle() {
+      var _this2 = this;
+
+      debugger;
+      var channelUsers = this.props.threads[this.props.currentThreadId].users.filter(function (id) {
+        return id !== _this2.props.currentUserId;
+      });
+
+      if (Object.keys(this.props.users).length === 0) {
+        return;
+      }
+
+      var allUsers = this.props.users;
+      var userNames = [];
+      channelUsers.forEach(function (id) {
+        return userNames.push(allUsers[id].username);
+      });
+      var title = userNames.join(", ");
+
+      if (title.length > 55) {
+        return title.slice(0, 55).concat("...");
+      } else {
+        return title.slice(0, title.length);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+      var title = this.createTitle();
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, title);
     }
   }]);
 
@@ -3920,7 +3954,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    users: state.entities.users
+    currentUserId: state.session.id,
+    users: state.entities.workspace.users,
+    threads: state.entities.threads
   };
 };
 
