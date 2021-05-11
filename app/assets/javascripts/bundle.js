@@ -3301,10 +3301,33 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.joinChannel = _this.joinChannel.bind(_assertThisInitialized(_this));
+    _this.state = {
+      hover: false
+    };
+    _this.hovering = _this.hovering.bind(_assertThisInitialized(_this));
+    _this.notHovering = _this.notHovering.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ExploreItem, [{
+    key: "hovering",
+    value: function hovering() {
+      if (this.state.hover === false) {
+        this.setState({
+          hover: true
+        });
+      }
+    }
+  }, {
+    key: "notHovering",
+    value: function notHovering() {
+      if (this.state.hover === true) {
+        this.setState({
+          hover: false
+        });
+      }
+    }
+  }, {
     key: "joinChannel",
     value: function joinChannel() {
       var _this$props = this.props,
@@ -3331,10 +3354,12 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "explore-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.thread.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "explore-item",
+        onMouseEnter: this.hovering,
+        onMouseLeave: this.notHovering
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.thread.title), this.state.hover === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.joinChannel
-      }, "Join"));
+      }, "Join") : null);
     }
   }]);
 

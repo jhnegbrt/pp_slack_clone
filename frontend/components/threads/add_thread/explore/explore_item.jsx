@@ -5,6 +5,27 @@ class ExploreItem extends React.Component{
   constructor(props){
     super(props)
     this.joinChannel = this.joinChannel.bind(this)
+    this.state = ({
+      hover: false
+    })
+    this.hovering = this.hovering.bind(this)
+    this.notHovering = this.notHovering.bind(this)
+  }
+
+  hovering(){
+    if(this.state.hover === false){
+      this.setState({
+        hover: true
+      })
+    }
+  }
+
+  notHovering(){
+    if(this.state.hover === true){
+      this.setState({
+        hover: false
+      })
+    }
   }
 
   joinChannel(){
@@ -26,9 +47,12 @@ class ExploreItem extends React.Component{
 
   render(){
     return(
-      <div className="explore-item">
+      <div className="explore-item"
+      onMouseEnter={this.hovering}
+      onMouseLeave={this.notHovering}>
         <h4>{this.props.thread.title}</h4>
-        <button onClick={this.joinChannel}>Join</button>
+        {this.state.hover === true ? 
+        <button onClick={this.joinChannel}>Join</button>: null}
       </div>
     )
   }
