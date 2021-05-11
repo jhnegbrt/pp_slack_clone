@@ -7,6 +7,11 @@ import {Link} from 'react-router-dom'
 class ThreadIndex extends React.Component{
   constructor(props){
     super(props)
+    this.state = ({
+      showChannels: true,
+      showDms: true
+    })
+    this.toggleDropDown = this.toggleDropDown.bind(this)
   }
 
   componentDidMount(){
@@ -29,26 +34,41 @@ class ThreadIndex extends React.Component{
     }
   }
 
+  toggleDropDown(thread){
+    debugger
+    this.setState({
+      [thread]: !this.state[thread]
+    })
+  }
+
   render(){
+
+
     const { threads } = this.props
+    const dmIndex = (
+      <ul className="dm-index">
+      {
+        threads.map(this.mapDirectMessages)
+      }
+      <li className="create-channel-button"><Link to='/client/add'>New Conversation</Link></li>
+    </ul>
+    )
+    const channelIndex = (
+      <ul className="channel-index">
+      {
+        threads.map(this.mapChannels)
+      }
+
+      <AddChannelButton toggleModal={this.props.toggleModal} />
+
+    </ul>
+    )
     return(
       <div className="thread-index">
-        <h3 className="thread-header">Channels</h3>
-        <ul className="channel-index">
-          {
-            threads.map(this.mapChannels)
-          }
-
-          <AddChannelButton toggleModal={this.props.toggleModal} />
-
-        </ul>
-        <h3 className="thread-header">Messages</h3>
-        <ul>
-          {
-            threads.map(this.mapDirectMessages)
-          }
-          <li className="create-channel-button"><Link to='/client/add'>New Conversation</Link></li>
-        </ul>
+        <h3 onClick={()=>this.toggleDropDown("showChannels")} className="thread-header">Channels</h3>
+        {this.state.showChannels ? channelIndex : ""}
+        <h3 onClick={()=>this.toggleDropDown("showDms")} className="thread-header">Messages</h3>
+        {this.state.showDms ? dmIndex : ""}
       </div>
     )
   }

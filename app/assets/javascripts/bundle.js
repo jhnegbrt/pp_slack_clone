@@ -3542,6 +3542,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3574,9 +3576,17 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(ThreadIndex);
 
   function ThreadIndex(props) {
+    var _this;
+
     _classCallCheck(this, ThreadIndex);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      showChannels: true,
+      showDms: true
+    };
+    _this.toggleDropDown = _this.toggleDropDown.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(ThreadIndex, [{
@@ -3613,24 +3623,42 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "toggleDropDown",
+    value: function toggleDropDown(thread) {
+      debugger;
+      this.setState(_defineProperty({}, thread, !this.state[thread]));
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var threads = this.props.threads;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "thread-index"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
-        className: "thread-header"
-      }, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "channel-index"
-      }, threads.map(this.mapChannels), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_channel_button__WEBPACK_IMPORTED_MODULE_3__.default, {
-        toggleModal: this.props.toggleModal
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
-        className: "thread-header"
-      }, "Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, threads.map(this.mapDirectMessages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      var dmIndex = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "dm-index"
+      }, threads.map(this.mapDirectMessages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "create-channel-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
         to: "/client/add"
-      }, "New Conversation"))));
+      }, "New Conversation")));
+      var channelIndex = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "channel-index"
+      }, threads.map(this.mapChannels), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_channel_button__WEBPACK_IMPORTED_MODULE_3__.default, {
+        toggleModal: this.props.toggleModal
+      }));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "thread-index"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        onClick: function onClick() {
+          return _this2.toggleDropDown("showChannels");
+        },
+        className: "thread-header"
+      }, "Channels"), this.state.showChannels ? channelIndex : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        onClick: function onClick() {
+          return _this2.toggleDropDown("showDms");
+        },
+        className: "thread-header"
+      }, "Messages"), this.state.showDms ? dmIndex : "");
     }
   }]);
 

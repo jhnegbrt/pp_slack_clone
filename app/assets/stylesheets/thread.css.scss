@@ -25,6 +25,7 @@
   margin-bottom: 1vh;
 }
 
+.thread-header:hover,
 .thread-index li:hover{
   background-color: rgb(44, 44, 83);
   border-radius: 5px;
@@ -33,11 +34,15 @@
 
 .thread-header{
   color: white;
+  height: 5vh;
+  display:flex;
+  align-items: center;
 }
 
 
 .channel-index{
   position:relative;
+
 }
 
 .channel-button-container{
