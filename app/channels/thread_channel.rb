@@ -50,7 +50,8 @@ class ThreadChannel < ApplicationCable::Channel
           title: channel_dm.title,
           creator_id: channel_dm.creator_id,
           channel: channel_dm.channel,
-          private: channel_dm.private
+          private: channel_dm.private,
+          users: data["users"]
         }
         user = data["users"][i]
         # might need to add check to see if already exists
@@ -74,7 +75,8 @@ class ThreadChannel < ApplicationCable::Channel
           title: channel_dm[:title],
           creator_id: channel_dm[:creator_id],
           channel: channel_dm[:channel],
-          private: channel_dm[:private]
+          private: channel_dm[:private],
+          users: data["users"]
         }
         user = data["users"][i]
         UserChannelDm.create(channel_dm_id: channel_dm[:id], user_id: user )

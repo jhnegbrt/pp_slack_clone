@@ -1399,7 +1399,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
           channel: false,
           "private": true,
           creator_id: _this2.state.creatorId,
-          title: "replace this with users names"
+          title: "placeholder"
         });
 
         for (var _i = 0; _i < subscriptions.length; _i++) {
@@ -3758,8 +3758,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       channelUsers.forEach(function (id) {
         return userNames.push(allUsers[id].username);
       });
-      var title = userNames.concat(", ");
-      return title.slice(0, title.length - 1);
+      return userNames.join(", ");
     }
   }, {
     key: "render",

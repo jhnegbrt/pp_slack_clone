@@ -33,8 +33,7 @@ class ThreadIndexItem extends React.Component{
     channelUsers.forEach((id)=>{
       return userNames.push(allUsers[id].username)
     })
-    let title = userNames.concat(", ")
-    return title.slice(0, (title.length-1))
+    return userNames.join(", ")
   }
 
   render(){

@@ -92,7 +92,7 @@ class SearchMessageForm extends React.Component{
         channel: false,
         private: true,
         creator_id: this.state.creatorId,
-        title: "replace this with users names"
+        title: "placeholder"
       })
 
       for (let i = 0; i < subscriptions.length; i++){
