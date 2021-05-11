@@ -8,11 +8,10 @@ class ThreadTitle extends React.Component{
 
   createTitle(){
     debugger
-
-    let channelUsers = this.props.threads[this.props.currentThreadId].users.filter((id)=>{return id !== this.props.currentUserId})
-    if(Object.keys(this.props.users).length === 0){
+    if(Object.keys(this.props.users).length === 0 || Object.keys(this.props.threads).length === 0){
       return
     }
+    let channelUsers = this.props.threads[this.props.currentThreadId].users.filter((id)=>{return id !== this.props.currentUserId})
     let allUsers = this.props.users
     let userNames = []
     channelUsers.forEach((id)=>{

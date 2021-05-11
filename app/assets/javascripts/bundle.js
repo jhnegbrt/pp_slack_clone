@@ -3900,14 +3900,14 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       debugger;
-      var channelUsers = this.props.threads[this.props.currentThreadId].users.filter(function (id) {
-        return id !== _this2.props.currentUserId;
-      });
 
-      if (Object.keys(this.props.users).length === 0) {
+      if (Object.keys(this.props.users).length === 0 || Object.keys(this.props.threads).length === 0) {
         return;
       }
 
+      var channelUsers = this.props.threads[this.props.currentThreadId].users.filter(function (id) {
+        return id !== _this2.props.currentUserId;
+      });
       var allUsers = this.props.users;
       var userNames = [];
       channelUsers.forEach(function (id) {
