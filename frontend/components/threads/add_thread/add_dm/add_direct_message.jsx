@@ -100,8 +100,7 @@ class AddDirectMessage extends React.Component{
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
     return(
-      <div>
-      
+      <div className="add-dm-container">
         <div className="add-dm">
           <h2>To:</h2>
           <ul className="recipients-list">
