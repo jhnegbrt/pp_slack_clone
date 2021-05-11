@@ -13,13 +13,14 @@
   flex: 1;
   overflow-y: scroll;
   width: 80vw;
-  margin: auto auto;
-  margin-bottom: 2vh;
-  padding: 1vh 1vh;
+  margin: 0 auto;
+  // margin-bottom: 2vh;
+  // padding: 1vh 1vh;
   border-radius: 4px;
   scrollbar-color: rgb(159, 240, 243) white;
   scrollbar-width: thin;
   background-color: rgb(241, 238, 232);
+  max-height: 80vh;
 }
 
 .message-input{
@@ -29,11 +30,17 @@
 
 
 .message-form input[type=text]{
-  width: 100%
+  width: 100%;
+  border:1px solid gray;
+  border-radius: 3px;
 }
 
 .message-form{
-  display: flex
+  display: flex;
+  margin: 1%;
+  margin-top: 0;
+  height: 8vh;
+  
 }
 
 
@@ -61,23 +68,33 @@ div::-webkit-scrollbar{
   display: flex
 }
 
+.messages{
+  margin-top:auto;
+}
+
+.messages div:last-child{
+  margin-bottom: 1%;
+}
+
 .message{
   line-height: 3vh;
-  border: 1px solid rgba(40, 41, 95, 0.856);
-  margin-bottom: 1vh;
+  margin-top: 1vh;
   background-color: rgb(255, 255, 255);
   border-radius: 2px;
   padding: 2vh;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 .message-current{
   text-align: right;
   line-height: 3vh;
-  border: 1px solid rgba(40, 41, 95, 0.856);
-  margin-bottom: 1vh;
+  margin-top: 1vh;
   background-color: rgb(207, 226, 233);
   border-radius: 2px;
   padding: 2vh;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 
 .message-current a,
