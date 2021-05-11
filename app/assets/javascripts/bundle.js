@@ -3003,28 +3003,34 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
   }, {
     key: "checkUsers",
-    value: function checkUsers(threadUsers, stateUsers) {}
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      debugger;
-      var threads = this.props.threads;
-      var dms = threads.filter(function (el) {
-        return el.channel === false;
-      });
+    value: function checkUsers(dms, stateUsers) {
+      var match = null;
 
       for (var i = 0; i < dms.length; i++) {
         var users = dms[i].users;
-        var sameUsers = this.sameUsers(users, this.state.selectedUsers);
+        var sameUsers = this.sameUsers(users, stateUsers);
 
         if (sameUsers) {
-          if (dms[i].id != this.state.currentDm) {
-            this.setState({
-              currentDm: dms[i].id
-            });
-            break;
-          }
+          return match = i;
         }
+      }
+
+      return match;
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var threads = this.props.threads; //write function to return match if there is one
+
+      var dms = threads.filter(function (el) {
+        return el.channel === false;
+      });
+      var match = this.checkUsers(dms, this.state.selectedUsers);
+
+      if (this.state.currentDm !== match) {
+        this.setState({
+          currentDm: match
+        });
       }
     } //add autocomplete for users
 

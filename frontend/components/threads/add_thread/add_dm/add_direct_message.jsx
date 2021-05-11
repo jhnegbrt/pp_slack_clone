@@ -70,25 +70,29 @@ class AddDirectMessage extends React.Component{
 
   //implement function to set State when we change users and there is no longer 
   //a matching thread
-  checkUsers(threadUsers, stateUsers){
+  checkUsers(dms, stateUsers){
 
+    let match = null;
+    for (let i = 0; i < dms.length; i++){
+      let users = dms[i].users
+      let sameUsers = this.sameUsers(users, stateUsers)
+      if ( sameUsers ){
+        return match = i
+      }
+    }
+    return match
   }
 
   componentDidUpdate(){
-    debugger
+
     let {threads} = this.props
+    //write function to return match if there is one
     let dms = threads.filter((el) => { return el.channel === false})
-    for (let i = 0; i < dms.length; i++){
-      let users = dms[i].users
-      let sameUsers = this.sameUsers(users, this.state.selectedUsers)
-      if ( sameUsers ){
-        if(dms[i].id != this.state.currentDm){
-          this.setState({
-            currentDm: dms[i].id
-          })
-          break
-        }
-      }
+    let match = this.checkUsers(dms, this.state.selectedUsers)
+    if (this.state.currentDm !== match){
+      this.setState({
+        currentDm: match
+      })
     }
   }
 
