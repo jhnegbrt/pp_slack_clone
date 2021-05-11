@@ -1441,6 +1441,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "message-form",
         onSubmit: this.handleSubmit
@@ -3002,24 +3003,30 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
   }, {
     key: "checkUsers",
-    value: function checkUsers(threadUsers, stateUsers) {} // componentDidUpdate(){
-    //   debugger
-    //   let {threads} = this.props
-    //   let dms = threads.filter((el) => { return el.channel === false})
-    //   for (let i = 0; i < dms.length; i++){
-    //     let users = dms[i].users
-    //     let sameUsers = this.sameUsers(users, this.state.selectedUsers)
-    //     if ( sameUsers ){
-    //       if(dms[i].id != this.state.currentDm){
-    //         this.setState({
-    //           currentDm: dms[i].id
-    //         })
-    //         break
-    //       }
-    //     }
-    //   }
-    // }
-    //add autocomplete for users
+    value: function checkUsers(threadUsers, stateUsers) {}
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      debugger;
+      var threads = this.props.threads;
+      var dms = threads.filter(function (el) {
+        return el.channel === false;
+      });
+
+      for (var i = 0; i < dms.length; i++) {
+        var users = dms[i].users;
+        var sameUsers = this.sameUsers(users, this.state.selectedUsers);
+
+        if (sameUsers) {
+          if (dms[i].id != this.state.currentDm) {
+            this.setState({
+              currentDm: dms[i].id
+            });
+            break;
+          }
+        }
+      }
+    } //add autocomplete for users
 
   }, {
     key: "render",
@@ -3028,7 +3035,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-dm"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {

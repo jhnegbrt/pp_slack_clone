@@ -131,6 +131,7 @@ class SearchMessageForm extends React.Component{
 
 
   render(){
+    debugger
     return(
       <form className="message-form" onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} 

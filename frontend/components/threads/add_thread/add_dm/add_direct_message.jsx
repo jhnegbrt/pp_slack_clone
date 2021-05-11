@@ -74,30 +74,29 @@ class AddDirectMessage extends React.Component{
 
   }
 
-  // componentDidUpdate(){
-  //   debugger
-  //   let {threads} = this.props
-  //   let dms = threads.filter((el) => { return el.channel === false})
-  //   for (let i = 0; i < dms.length; i++){
-  //     let users = dms[i].users
-  //     let sameUsers = this.sameUsers(users, this.state.selectedUsers)
-  //     if ( sameUsers ){
-  //       if(dms[i].id != this.state.currentDm){
-  //         this.setState({
-  //           currentDm: dms[i].id
-  //         })
-  //         break
-  //       }
-  //     }
-  //   }
-  // }
+  componentDidUpdate(){
+    debugger
+    let {threads} = this.props
+    let dms = threads.filter((el) => { return el.channel === false})
+    for (let i = 0; i < dms.length; i++){
+      let users = dms[i].users
+      let sameUsers = this.sameUsers(users, this.state.selectedUsers)
+      if ( sameUsers ){
+        if(dms[i].id != this.state.currentDm){
+          this.setState({
+            currentDm: dms[i].id
+          })
+          break
+        }
+      }
+    }
+  }
 
   //add autocomplete for users
 
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
-    debugger
     return(
       <div>
       
