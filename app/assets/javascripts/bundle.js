@@ -1373,6 +1373,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       };
       var id;
       this.props.createDirectMessage(newDirectMessage).then(function (res) {
+        debugger;
         id = res;
         var subscriptions = App.cable.subscriptions.subscriptions;
         var index;
@@ -1387,15 +1388,33 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         }
 
         subscriptions[index].speak({
+          created: true,
           id: res.threadId,
           users: _this2.props.selectedUsers,
           channel: false,
           "private": true,
           creator_id: _this2.state.creatorId,
-          title: "replace this with users names",
-          first_message: "xx"
+          title: "replace this with users names"
         });
-        debugger;
+
+        for (var _i = 0; _i < subscriptions.length; _i++) {
+          var _identifier = JSON.parse(subscriptions[_i].identifier);
+
+          if (_identifier.channel === "ChatChannel") {
+            index = _i;
+            break;
+          }
+        }
+
+        var message = {
+          channel_dms_id: res.threadId,
+          content: _this2.state.content,
+          sender_id: _this2.state.creatorId,
+          created: true
+        };
+        subscriptions[index].speak({
+          message: message
+        });
 
         _this2.props.history.push("/client/thread/".concat(res.threadId));
       });
