@@ -15,13 +15,15 @@ class Explore extends React.Component{
   }
 
   render(){
-
     const { publicChannels } = this.props
+    const channelCount = publicChannels.length
+
     return(
       <div className="explore">
         <div className="explore-header">
-          <h2>Channel Browser</h2>
+          <h2>Channel browser</h2>
         </div>
+        <div className="channel-count">{channelCount} channels</div>
         <div className="explore-item-container">
           <ul className='public-channels'>
             {publicChannels.map(this.mapThread)}
