@@ -18,9 +18,17 @@ class Explore extends React.Component{
 
     const { publicChannels } = this.props
     return(
-      <ul className='publicChannels'>
-        {publicChannels.map(this.mapThread)}
-      </ul>
+      <div className="explore">
+        <div className="explore-header">
+          <h2>Channel Browser</h2>
+        </div>
+        <div className="explore-item-container">
+          <ul className='public-channels'>
+            {publicChannels.map(this.mapThread)}
+          </ul>
+        </div>
+      </div>
+
     )
   }
 

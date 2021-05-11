@@ -3193,9 +3193,15 @@ var Explore = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var publicChannels = this.props.publicChannels;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "publicChannels"
-      }, publicChannels.map(this.mapThread));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "explore"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "explore-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Channel Browser")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "explore-item-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "public-channels"
+      }, publicChannels.map(this.mapThread))));
     }
   }]);
 

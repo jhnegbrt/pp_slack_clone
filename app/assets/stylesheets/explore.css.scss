@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+.explore{
+  background-color: #f1eee8;
+  width: 80%;
+}
+
+.explore-header{
+  font-family: 'Comfortaa', serif;
+}
+
+.explore-item-container{
+  margin: 5%;
+  border: 1px solid black;
+  height: 90vh;
+}
+
+.explore-item{
+  display: flex
+}
