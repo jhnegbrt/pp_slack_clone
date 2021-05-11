@@ -1375,8 +1375,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         channel: false,
         "private": true,
         creator_id: this.state.creatorId,
-        title: "replace this with users names",
-        first_message: "xx"
+        title: "placeholder"
       };
       var id;
       this.props.createDirectMessage(newDirectMessage).then(function (res) {
@@ -3720,6 +3719,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.selectThread = _this.selectThread.bind(_assertThisInitialized(_this));
+    _this.createTitle = _this.createTitle.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3731,6 +3731,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.fetchAllUsers();
       var _this$props = this.props,
           thread = _this$props.thread,
           receiveMessage = _this$props.receiveMessage,
@@ -3739,15 +3740,38 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId);
     }
   }, {
+    key: "createTitle",
+    value: function createTitle() {
+      var _this2 = this;
+
+      var channelUsers = this.props.thread.users.filter(function (id) {
+        return id !== _this2.props.currentUserId;
+      });
+
+      if (Object.keys(this.props.users).length === 0) {
+        return;
+      }
+
+      debugger;
+      var allUsers = this.props.users;
+      var userNames = [];
+      channelUsers.forEach(function (id) {
+        return userNames.push(allUsers[id].username);
+      });
+      var title = userNames.concat(", ");
+      return title.slice(0, title.length - 1);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var title = this.createTitle();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.props.currentThreadId === this.props.thread.id ? "thread-select" : null
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
         onClick: this.selectThread,
         activeClassName: "active-thread",
         to: "/client/thread/".concat(this.props.thread.id)
-      }, this.props.thread.title));
+      }, this.props.thread.channel === true ? this.props.thread.title : title));
     }
   }]);
 
@@ -3771,8 +3795,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _thread_index_item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./thread_index_item */ "./frontend/components/threads/thread_index_item.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+
 
 
 
@@ -3780,23 +3806,27 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    currentUserId: state.session.id
+    currentUserId: state.session.id,
+    users: state.entities.workspace.users
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
     selectThread: function selectThread(threadId) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(threadId));
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.receiveCurrentThread)(threadId));
     },
     receiveMessage: function receiveMessage(message) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.receiveMessage)(message));
     },
     receiveMessages: function receiveMessages(messages) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessages)(messages));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.receiveMessages)(messages));
     },
     removeMessage: function removeMessage(messageId) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.removeMessage)(messageId));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.removeMessage)(messageId));
+    },
+    fetchAllUsers: function fetchAllUsers() {
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers)());
     }
   };
 };

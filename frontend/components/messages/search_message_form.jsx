@@ -70,8 +70,7 @@ class SearchMessageForm extends React.Component{
       channel: false,
       private: true,
       creator_id: this.state.creatorId,
-      title: "replace this with users names",
-      first_message: "xx"
+      title: "placeholder",
     }
     let id;
     this.props.createDirectMessage(newDirectMessage)
