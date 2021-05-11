@@ -49,15 +49,18 @@ class AddChannelButton extends React.Component{
   render(){
     
     const channelButtons = (
-      <div className={"channel-buttons"}>
-        {/* <div className={"triangle"}></div> */}
+      <div>
+        <div className={"channel-buttons"}>
         <a onClick={()=>this.props.toggleModal("createChannel")}>Create Channel</a>
         <Link to="/client/explore">Browse Channels</Link>
+        </div>
+        <div className="little-triangle"></div>
       </div>
+
     )
     return(
 
-      <div ref={this.wrapperRef}>
+      <div className="channel-button-container" ref={this.wrapperRef}>
         {this.state.channelButtons ? channelButtons : null} 
         <b onClick={this.toggleChannelButtons.bind(this)}>Add Channel</b>
       </div>

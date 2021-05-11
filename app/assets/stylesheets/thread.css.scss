@@ -3,7 +3,7 @@
 
 .thread-index{
   width: 20%;
-  padding: 3% 0% 3% 3%;
+  padding: 3% 0% 3% 1.5%;
   background-color: rgb(2, 2, 59);
   font-family: 'Comfortaa', serif;
   position: relative;
@@ -21,7 +21,6 @@
 }
 
 .thread-index li{
-  margin-left: 1vh;
   margin-top: 1vh;
   margin-bottom: 1vh;
 }
@@ -32,26 +31,32 @@
   box-shadow: rgba(150, 151, 216, 0.3) 0px 1vh 1vh, rgba(160, 148, 231, 0.22) 0px 1vh 1vh;
 }
 
+.thread-header{
+  color: white;
+}
+
 
 .channel-index{
   position:relative;
 }
+
+.channel-button-container{
+  position:relative
+}
+
 .channel-buttons{
   position:absolute;
-  background-color: antiquewhite;
+  background-color: #f1eee8;
   padding: 5%;
   top: 50px;
   width: 100%;
+  border-radius: 5px;
 
   a{
     display: block;
     padding: 1%;
   }
 
-  .triangle{
-    content: "";
-    border: 10px solid yellow
-  }
 }
 
 
@@ -68,6 +73,15 @@
 .create-channel-button:hover{
   cursor:pointer;
   color:white;
+}
+
+.little-triangle{
+  content: "";
+  height: 0;
+  width: 0;
+  border: 10px solid;
+  border-color:transparent;
+  border-bottom-color: #f1eee8;
 }
 
 .active-thread{
