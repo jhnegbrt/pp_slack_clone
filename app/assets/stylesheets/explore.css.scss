@@ -42,6 +42,20 @@
   padding: 2%;
 }
 
+.join-button{
+  background-color: rgb(60, 139, 96);
+  margin-left: 3vw;
+  border: 1px solid white;;
+  border-radius: 5px;
+  width: 5vw;
+  color: white;
+  &:hover{
+    cursor: pointer
+  }
+}
+
+
+
 .explore-item:last-child{
   border-bottom: 1px solid gray;
 }

@@ -52,7 +52,7 @@ class ExploreItem extends React.Component{
       onMouseLeave={this.notHovering}>
         <h4>{this.props.thread.title}</h4>
         {this.state.hover === true ? 
-        <button onClick={this.joinChannel}>Join</button>: null}
+        <button className="join-button" onClick={this.joinChannel}>Join</button>: null}
       </div>
     )
   }

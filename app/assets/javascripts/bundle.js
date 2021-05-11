@@ -3358,6 +3358,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
         onMouseEnter: this.hovering,
         onMouseLeave: this.notHovering
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.thread.title), this.state.hover === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "join-button",
         onClick: this.joinChannel
       }, "Join") : null);
     }
