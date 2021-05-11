@@ -3905,7 +3905,13 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
         return;
       }
 
-      var channelUsers = this.props.threads[this.props.currentThreadId].users.filter(function (id) {
+      var currentThread = this.props.threads[this.props.currentThreadId];
+
+      if (currentThread.channel === true) {
+        return currentThread.title;
+      }
+
+      var channelUsers = currentThread.users.filter(function (id) {
         return id !== _this2.props.currentUserId;
       });
       var allUsers = this.props.users;
