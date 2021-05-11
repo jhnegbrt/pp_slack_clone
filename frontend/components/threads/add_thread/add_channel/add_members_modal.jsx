@@ -76,9 +76,12 @@ class AddMembersModal extends React.Component{
     return(
       <div className="thread-modal-container">
         <div className="thread-modal">
+          <div className="thread-close">
+            <button onClick={this.props.closeModal}>Cancel</button>
+          </div>
           <div className="modal-select-users">
             <div className="users-label">
-              Add Users:
+              <h3>Add Users:</h3>
                 <ul className="recipients-list">
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){
@@ -98,6 +101,8 @@ class AddMembersModal extends React.Component{
                   />
                 </ul>
                 <button onClick={this.handleSubmit}>Add Members!</button>
+                <h3>Add Users later:</h3>
+                <button onClick={this.handleSubmit}>Create Channel</button>
             </div>
           </div>
         </div>

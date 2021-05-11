@@ -11,6 +11,7 @@ class CreateChannelModal extends React.Component{
 
     let modal = this.props.modalType === "createChannel" ? 
     <NewChannelModalContainer 
+    closeModal={this.props.closeModal}
     toggleModal={this.props.toggleModal}/> : 
     <AddMembersModalContainer 
     newChannel={this.props.newChannel} 

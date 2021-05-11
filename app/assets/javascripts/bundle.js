@@ -2558,10 +2558,14 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-modal"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "thread-close"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.props.closeModal
+      }, "Cancel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-select-users"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "users-label"
-      }, "Add Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add Users:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "recipients-list"
       }, selectedUsers.map(function (id) {
         if (id !== _this2.props.currentUser) {
@@ -2585,7 +2589,9 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         onKeyDown: this.handleKeyDown
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleSubmit
-      }, "Add Members!")))));
+      }, "Add Members!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add Users later:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleSubmit
+      }, "Create Channel")))));
     }
   }]);
 
@@ -2678,6 +2684,7 @@ var CreateChannelModal = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var modal = this.props.modalType === "createChannel" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_new_channel_modal_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        closeModal: this.props.closeModal,
         toggleModal: this.props.toggleModal
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_members_modal_container__WEBPACK_IMPORTED_MODULE_2__.default, {
         newChannel: this.props.newChannel,
@@ -2783,7 +2790,7 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
         className: "thread-close"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.props.closeModal
-      }, "Close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "Cancel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "modal-header"
       }, "Create Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "create-thread"

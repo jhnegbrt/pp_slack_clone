@@ -37,7 +37,7 @@ class NewChannelModal extends React.Component{
       <div className="thread-modal-container">
         <div className="thread-modal">
           <div className="thread-close">
-            <button onClick={this.props.closeModal}>Close</button>
+            <button onClick={this.props.closeModal}>Cancel</button>
           </div>
           <div className="modal-header">Create Channel</div>
             <div className="create-thread">
