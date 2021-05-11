@@ -3430,6 +3430,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../messages/message_index_container */ "./frontend/components/messages/message_index_container.jsx");
+/* harmony import */ var _thread_title_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./thread_title_container */ "./frontend/components/threads/thread_title_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3455,6 +3456,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
   _inherits(ThreadDisplay, _React$Component);
 
@@ -3470,10 +3472,10 @@ var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var threadId = this.props.currentThreadId || this.props.currentThreadSearch;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_title_container__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         type: "thread",
         currentThreadId: threadId
-      });
+      }));
     }
   }]);
 
@@ -3752,7 +3754,6 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
         return;
       }
 
-      debugger;
       var allUsers = this.props.users;
       var userNames = [];
       channelUsers.forEach(function (id) {
@@ -3761,7 +3762,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       var title = userNames.join(", ");
 
       if (title.length > 36) {
-        return title.slice(0, 36).concat("...");
+        return title.slice(0, 55).concat("...");
       } else {
         return title.slice(0, title.length);
       }
@@ -3800,10 +3801,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _thread_index_item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./thread_index_item */ "./frontend/components/threads/thread_index_item.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
-
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
 
 
 
@@ -3819,24 +3818,57 @@ var mSTP = function mSTP(state, ownProps) {
 var mDTP = function mDTP(dispatch) {
   return {
     selectThread: function selectThread(threadId) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.receiveCurrentThread)(threadId));
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(threadId));
     },
     receiveMessage: function receiveMessage(message) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.receiveMessage)(message));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));
     },
     receiveMessages: function receiveMessages(messages) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.receiveMessages)(messages));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessages)(messages));
     },
     removeMessage: function removeMessage(messageId) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_4__.removeMessage)(messageId));
-    },
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.removeMessage)(messageId));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_thread_index_item__WEBPACK_IMPORTED_MODULE_0__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/threads/thread_title_container.jsx":
+/*!****************************************************************!*\
+  !*** ./frontend/components/threads/thread_title_container.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_title'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
+
+
+
+var mSTP = function mSTP(state) {
+  return {
+    users: state.entities.users
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
     fetchAllUsers: function fetchAllUsers() {
       return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_thread_index_item__WEBPACK_IMPORTED_MODULE_0__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(Object(function webpackMissingModule() { var e = new Error("Cannot find module './thread_title'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 
 /***/ }),
 

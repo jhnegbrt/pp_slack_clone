@@ -1,5 +1,6 @@
 import React from 'react'
 import MessageIndexContainer from '../messages/message_index_container'
+import ThreadTitleContainer from './thread_title_container'
 
 
 class ThreadDisplay extends React.Component{
@@ -12,7 +13,10 @@ class ThreadDisplay extends React.Component{
 
     let threadId = this.props.currentThreadId || this.props.currentThreadSearch
     return(
-      <MessageIndexContainer type={"thread"} currentThreadId={threadId} />
+      <div>
+        <ThreadTitleContainer />
+        <MessageIndexContainer type={"thread"} currentThreadId={threadId} />
+      </div>
     )
   }
 }

@@ -27,7 +27,6 @@ class ThreadIndexItem extends React.Component{
     if(Object.keys(this.props.users).length === 0){
       return
     }
-    debugger
     let allUsers = this.props.users
     let userNames = []
     channelUsers.forEach((id)=>{
@@ -35,7 +34,7 @@ class ThreadIndexItem extends React.Component{
     })
     let title = userNames.join(", ")
     if (title.length > 36){
-      return title.slice(0, 36).concat("...")
+      return title.slice(0, 55).concat("...")
     } else {
       return title.slice(0, title.length)
     }
