@@ -53,8 +53,8 @@
   position:absolute;
   background-color: #f1eee8;
   padding: 5%;
-  top: 50px;
-  width: 100%;
+  top: 5vh;
+  width: 70%;
   border-radius: 5px;
 
   a{
@@ -82,11 +82,11 @@
 
 .little-triangle{
   content: "";
-  height: 0;
-  width: 0;
-  border: 10px solid;
+  left: 30%;
+  border: 20px solid;
   border-color:transparent;
   border-bottom-color: #f1eee8;
+  position: absolute;
 }
 
 .active-thread{
