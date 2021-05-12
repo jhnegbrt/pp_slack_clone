@@ -76,12 +76,13 @@ class AddMembersModal extends React.Component{
     return(
       <div className="thread-modal-container">
         <div className="thread-modal">
-          <div className="thread-close">
-            <button onClick={this.props.closeModal}>Cancel</button>
-          </div>
           <div className="modal-select-users">
             <div className="users-label">
-              <h3>Add Users:</h3>
+              <h3>Add People</h3>
+                <h4>{this.state.title}</h4>
+                <a onClick={this.props.closeModal}>
+                  <img className="close-modal-button" src={Close}></img>
+                </a>
                 <ul className="recipients-list">
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){

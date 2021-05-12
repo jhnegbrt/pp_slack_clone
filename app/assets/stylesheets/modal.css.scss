@@ -8,7 +8,7 @@
 .thread-modal{
   height: 40vh;
   width: 34vw;
-  background-color: rgba(44, 44, 83, 0.753);
+  background-color: #f1eee8;
   position: fixed;
   margin-top: 30vh;
   margin-left: 33vw;
@@ -20,7 +20,7 @@
 .modal-header{
   text-align: center;
   font-family: 'Comfortaa', serif;
-  color: whitesmoke;
+  color: rgb(44, 44, 83);
   font-size: 4vh;
   margin-top: 10vh;
 }
@@ -43,7 +43,7 @@
 }
 
 .modal-select-users{
-  padding: 8%;
+  padding: 1%;
 }
 
 .users-label{
@@ -97,6 +97,12 @@
 
 .remove-new-member-button{
   width: 1vw;
+}
+
+.close-modal-button{
+  width: 2vw;
+  color: rgb(158, 158, 158)
+  
 }
 
 .create-thread{
