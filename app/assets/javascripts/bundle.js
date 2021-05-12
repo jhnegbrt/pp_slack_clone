@@ -12962,6 +12962,13 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
           currentDm: match
         });
       }
+    }
+  }, {
+    key: "matchedUser",
+    value: function matchedUser(user) {
+      if (user.username.startsWith(this.state.newMember) && !this.state.selectedUsers.includes(user.id)) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, user.username);
+      }
     } //add autocomplete for users
 
   }, {
@@ -12971,6 +12978,10 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
+      var suggestedUsers = Object.values(users).map(function (user) {
+        return _this2.matchedUser(user);
+      });
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-dm-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -12999,7 +13010,9 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         placeholder: this.state.selectedUsers.length === 1 ? "Enter a username" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "suggested-users-list"
+      }, suggestedUsers)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         searchDmId: this.state.currentDm,
         selectedUsers: this.state.selectedUsers
       }));

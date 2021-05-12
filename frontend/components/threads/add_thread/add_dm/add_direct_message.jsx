@@ -94,11 +94,20 @@ class AddDirectMessage extends React.Component{
     }
   }
 
+  matchedUser(user){
+    if(user.username.startsWith(this.state.newMember) && !this.state.selectedUsers.includes(user.id)){
+      return <li>{user.username}</li>
+    }
+
+  }
+
   //add autocomplete for users
 
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
+    const suggestedUsers = Object.values(users).map(user=>{return this.matchedUser(user)})
+    debugger
     return(
       <div className="add-dm-container">
         <div className="add-dm-header">
@@ -123,6 +132,9 @@ class AddDirectMessage extends React.Component{
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
             />
+          </ul>
+          <ul className="suggested-users-list">
+            {suggestedUsers}
           </ul>
         </div>
         
