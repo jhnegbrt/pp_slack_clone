@@ -45,9 +45,9 @@
 
 }
 
-.channel-button-container{
-  position:relative
-}
+// .channel-button-container{
+//   position:relative;
+// }
 
 .channel-buttons{
   position:absolute;
@@ -65,15 +65,15 @@
 }
 
 
-.create-channel-button{
-  color: rgb(44, 44, 83);
-  font-size: 3vh;
-  background-color: rgb(207, 226, 233);
-  border-radius: 2px;
-  padding: 2%;
-  margin-right: 3vw;
+// .create-channel-button{
+//   color: rgb(44, 44, 83);
+//   font-size: 3vh;
+//   background-color: rgb(207, 226, 233);
+//   border-radius: 2px;
+//   padding: 2%;
+//   margin-right: 3vw;
   
-}
+// }
 
 .create-channel-button:hover{
   cursor:pointer;

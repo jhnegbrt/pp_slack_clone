@@ -60,9 +60,9 @@ class AddChannelButton extends React.Component{
     )
     return(
 
-      <div className="channel-button-container" ref={this.wrapperRef}>
+      <div onClick={this.toggleChannelButtons.bind(this)}className="create-channel-button" ref={this.wrapperRef}>
         {this.state.channelButtons ? channelButtons : null} 
-        <b onClick={this.toggleChannelButtons.bind(this)}>Add Channel</b>
+        <b>Add Channel</b>
       </div>
 
     )

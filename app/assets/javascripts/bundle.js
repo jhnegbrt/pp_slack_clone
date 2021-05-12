@@ -2401,11 +2401,10 @@ var AddChannelButton = /*#__PURE__*/function (_React$Component) {
         className: "little-triangle"
       }));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "channel-button-container",
+        onClick: this.toggleChannelButtons.bind(this),
+        className: "create-channel-button",
         ref: this.wrapperRef
-      }, this.state.channelButtons ? channelButtons : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", {
-        onClick: this.toggleChannelButtons.bind(this)
-      }, "Add Channel"));
+      }, this.state.channelButtons ? channelButtons : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Add Channel"));
     }
   }]);
 
