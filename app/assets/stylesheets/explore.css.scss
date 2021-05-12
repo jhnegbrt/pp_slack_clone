@@ -2,7 +2,8 @@
 
 .explore{
   background-color: #f1eee8;
-  width: 80%;
+  width: 80vw;
+  overflow-x:hidden;
 }
 
 .explore-header{
@@ -30,6 +31,7 @@
   margin-right: 3vw;
   margin-top: 0;
   height: 90vh;
+  width: 80vw
 }
 
 .explore-item{

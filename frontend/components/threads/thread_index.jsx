@@ -39,7 +39,6 @@ class ThreadIndex extends React.Component{
   }
 
   toggleDropDown(thread){
-    debugger
     this.setState({
       [thread]: !this.state[thread]
     })

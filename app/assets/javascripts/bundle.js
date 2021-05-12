@@ -13544,7 +13544,6 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "toggleDropDown",
     value: function toggleDropDown(thread) {
-      debugger;
       this.setState(_defineProperty({}, thread, !this.state[thread]));
     }
   }, {
@@ -13875,8 +13874,6 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
     key: "createTitle",
     value: function createTitle() {
       var _this2 = this;
-
-      debugger;
 
       if (Object.keys(this.props.users).length === 0 || Object.keys(this.props.threads).length === 0) {
         return;

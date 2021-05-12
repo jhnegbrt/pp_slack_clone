@@ -2,12 +2,12 @@
 
 
 .thread-index{
-  width: 20%;
+  width: 20vw;
   padding: 3% 0% 3% 1.5%;
   background-color: rgb(2, 2, 59);
   font-family: 'Comfortaa', serif;
   position: relative;
-  
+  box-sizing: border-box
 }
 
 .thread-index li a{
