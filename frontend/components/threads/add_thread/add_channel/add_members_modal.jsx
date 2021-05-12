@@ -105,6 +105,9 @@ class AddMembersModal extends React.Component{
                   onKeyDown={this.handleKeyDown}
                   />
                 </ul>
+                <button onClick={this.handleSubmit}>
+                  {this.state.selectedUsers.length === 1 ? 'Skip for now' : 'Add'}
+                </button>
             </div>
           </div>
         </div>
