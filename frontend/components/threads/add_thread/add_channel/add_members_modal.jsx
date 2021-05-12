@@ -89,7 +89,7 @@ class AddMembersModal extends React.Component{
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){
                       return <li key={id}>
-                        {users[id].username}
+                        <p>{users[id].username}</p>
                       <a onClick={()=>this.removeUser(id)}><img className="remove-new-member-button" 
                       src={Close}></img></a></li>
                     }

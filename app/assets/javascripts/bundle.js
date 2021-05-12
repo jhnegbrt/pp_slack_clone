@@ -12477,7 +12477,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         if (id !== _this2.props.currentUser) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: id
-          }, users[id].username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, users[id].username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             onClick: function onClick() {
               return _this2.removeUser(id);
             }

@@ -119,6 +119,10 @@
   li{
     display: flex;
     align-items: center;
+    p{
+      color:rgb(44, 44, 83);
+      // width: 1.
+    }
   }
   &:focus-within{
     border: 1px solid rgb(44, 44, 83);
