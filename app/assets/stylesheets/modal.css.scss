@@ -107,6 +107,7 @@
 
 .channel-recipients-list{
   display: flex;
+  flex-wrap: wrap;
   font-family: 'Comfortaa', serif;
   color: rgb(44, 44, 83);
   background-color: white;
