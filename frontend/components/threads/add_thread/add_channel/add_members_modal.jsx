@@ -103,9 +103,6 @@ class AddMembersModal extends React.Component{
                   onKeyDown={this.handleKeyDown}
                   />
                 </ul>
-                <button onClick={this.handleSubmit}>Add Members!</button>
-                <h3>Add Users later:</h3>
-                <button onClick={this.handleSubmit}>Create Channel</button>
             </div>
           </div>
         </div>

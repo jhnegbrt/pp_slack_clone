@@ -80,12 +80,13 @@
   width: 95%;
   height: 3vh;
   font-family: 'Noto Sans', sans-serif;
-  background-color: #f1eee8;
+  background-color: white;
   border: none;
-
   &:focus{
-    outline:rosybrown
+    outline: none;
+    border: none;
   }
+
 }
 
 .modal-select{
@@ -106,13 +107,21 @@
   display: flex;
   font-family: 'Comfortaa', serif;
   color: rgb(44, 44, 83);
-  background-color: #f1eee8;
+  background-color: white;
+  align-items: center;
+  h2{
+    height: 3vh;
+    padding: 2%
+  }
+  li{
+    display: flex;
+    align-items: center;
+  }
+  &:focus-within{
+    border: 2px solid red
+  }
 }
 
-.channel-recipients-list h2{
-  height: 3vh;
-  padding: 2%
-}
 
 .new-member-input{
   display: inline;
@@ -125,12 +134,6 @@
   outline: none;
 }
 
-.channel-recipients-list li{
-  height: 2vh;
-  padding-top: 2%;
-  padding-left: 2%;
-  display: inline;
-}
 
 .remove-new-member-button{
   width: 1vw;

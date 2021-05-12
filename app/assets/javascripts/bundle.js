@@ -12493,11 +12493,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         placeholder: this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: this.handleSubmit
-      }, "Add Members!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add Users later:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: this.handleSubmit
-      }, "Create Channel")))));
+      }))))));
     }
   }]);
 
