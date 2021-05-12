@@ -7,11 +7,18 @@ class ThreadTitle extends React.Component{
   }
 
   createTitle(){
+    debugger
     if(Object.keys(this.props.users).length === 0 || Object.keys(this.props.threads).length === 0){
       return
     }
+    
     let currentThread = this.props.threads[this.props.currentThreadId]
-    if (currentThread.channel === true){
+
+    if(currentThread === undefined){
+      return ""
+    }
+
+    if (currentThread.channel === true ){
       return currentThread.title
     }
     let channelUsers = currentThread.users.filter((id)=>{return id !== this.props.currentUserId})

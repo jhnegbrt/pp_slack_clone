@@ -11401,6 +11401,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     createDirectMessage: function createDirectMessage(directMessage) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage));
+    },
+    fetchThreads: function fetchThreads() {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchThreads)());
     }
   };
 };
@@ -13875,11 +13878,17 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
     value: function createTitle() {
       var _this2 = this;
 
+      debugger;
+
       if (Object.keys(this.props.users).length === 0 || Object.keys(this.props.threads).length === 0) {
         return;
       }
 
       var currentThread = this.props.threads[this.props.currentThreadId];
+
+      if (currentThread === undefined) {
+        return "";
+      }
 
       if (currentThread.channel === true) {
         return currentThread.title;
