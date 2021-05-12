@@ -32,17 +32,13 @@ class NewChannelModal extends React.Component{
     })
   }
 
-  // const closeIcon = (porps) => (
-
-  // )
-
   render(){
     return(
       <div className="thread-modal-container">
         <div className="thread-modal">
-          <a className="new-channel-close" onClick={this.props.closeModal}>
+          <div className="new-channel-close" onClick={this.props.closeModal}>
             <img className="close-modal-button" fill="red" stroke="green"src={Close}></img>
-          </a>  
+          </div>  
           <div className="modal-header">Create Channel</div>
             <div className="create-thread">
               <form onSubmit = {this.handleSubmit}>

@@ -79,10 +79,12 @@ class AddMembersModal extends React.Component{
           <div className="modal-select-users">
             <div className="users-label">
               <h3>Add People</h3>
-                <h4>{this.state.title}</h4>
-                <a onClick={this.props.closeModal}>
-                  <img className="close-modal-button" src={Close}></img>
-                </a>
+                <div className="channel-title-container">
+                  <h4>#{this.state.title}</h4>
+                  <a onClick={this.props.closeModal}>
+                    <img className="close-modal-button" src={Close}></img>
+                  </a>
+                </div>
                 <ul className="recipients-list">
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){
@@ -94,7 +96,7 @@ class AddMembersModal extends React.Component{
                   })}
                   <input
                   autoFocus
-                  className="new-member-input"
+                  className="new-channel-member-input"
                   value={this.state.newMember}
                   placeholder= {this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" :""}
                   onChange={this.handleChange}

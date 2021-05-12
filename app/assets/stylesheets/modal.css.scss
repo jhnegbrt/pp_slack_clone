@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
 .thread-modal-container{
   height: 100vh;
   width: 100vw;
@@ -22,7 +24,7 @@
   font-family: 'Comfortaa', serif;
   color: rgb(44, 44, 83);
   font-size: 4vh;
-  margin-top: 10vh;
+  margin-top: 8vh;
 }
 
 .thread-close{
@@ -48,8 +50,42 @@
 
 .users-label{
   font-family: 'Comfortaa', serif;
-  color: whitesmoke;
+  color: rgb(44, 44, 83);
   margin: 2%;
+  h3{
+    font-size: 3vh;
+  }
+}
+
+.channel-title-container{
+  color:#708090;
+  width: 100%;
+  display: flex;
+  h4{
+    color: 	#708090;
+    padding-top: 1vh;
+  }
+  a{
+    margin-left: auto;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  ul{
+    border: 1px solid rgb(44, 44, 83);
+  }
+}
+
+.new-channel-member-input{
+  width: 95%;
+  height: 3vh;
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #f1eee8;
+  border: none;
+
+  &:focus{
+    outline:rosybrown
+  }
 }
 
 .modal-select{
@@ -101,8 +137,9 @@
 
 .close-modal-button{
   width: 2vw;
-  color: rgb(158, 158, 158)
-  
+  color: rgb(158, 158, 158);
+  margin-left: auto;
+  display:block
 }
 
 .create-thread{
