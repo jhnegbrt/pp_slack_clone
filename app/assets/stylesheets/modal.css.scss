@@ -6,12 +6,12 @@
 }
 
 .thread-modal{
-  height: 80vh;
-  width: 50vw;
+  height: 40vh;
+  width: 34vw;
   background-color: rgba(44, 44, 83, 0.753);
   position: fixed;
-  margin-top: 10vh;
-  margin-left: 25vw;
+  margin-top: 30vh;
+  margin-left: 33vw;
   border-radius: 25px;
   position: relative;
   padding: 1%;
@@ -21,15 +21,25 @@
   text-align: center;
   font-family: 'Comfortaa', serif;
   color: whitesmoke;
-  font-size: 5vh;
-  margin-top: 3vh;
+  font-size: 4vh;
+  margin-top: 10vh;
 }
 
 .thread-close{
   position: absolute;
   left: auto;
-  right: 2%;
+  right: 5%;
   margin-top: 1vh;
+  button{
+    color:rgb(44, 44, 83);
+    border-radius: 2px;
+    border: 1px solid white;
+    &:hover{
+      cursor: pointer
+    }
+
+  }
+
 }
 
 .modal-select-users{
@@ -90,6 +100,7 @@
 }
 
 .create-thread{
+  margin-top: 2vh;
   text-align: center;
   position: relative
 }
@@ -97,22 +108,28 @@
 .create-thread input[type=text]{
   border-radius: 5px;
   height: 4vh;
-  margin-bottom: 2%
+  margin-bottom: 2%;
+  font-family: 'Comfortaa', serif;
+
 }
 
 .create-thread input[type=submit]{
-  margin: 0 auto;
+  margin: 2vh auto;
   display: block;
   border-radius: 5px;
   height: 6vh;
   width: 7vw;
   background-color: rgb(207, 226, 233);
+  color: rgb(44, 44, 83);
+  font-family: 'Comfortaa', serif;
+
 }
 
 .create-thread input[type=submit]:hover{
   color:white;
   cursor: pointer;
   background-color: rgb(44, 44, 83);
+  font-size: 2vh;
 }
 
 

@@ -38,6 +38,10 @@
   height: 5vh;
   display:flex;
   align-items: center;
+  &:hover{
+    background-color:rgb(44, 44, 83);
+    cursor: pointer
+  }
 }
 
 .header-caret-container{
@@ -53,11 +57,12 @@
   border-radius: 1px;
   padding-left:1%;
   padding-right:1%;
+  &:hover{
+    background-color:rgb(44, 44, 83);
+    cursor: pointer;
+  }
 }
 
-.caret:hover{
-  background-color:rgb(44, 44, 83)
-}
 
 .close-caret{
   transform: rotate(270deg);
