@@ -214,3 +214,38 @@
   color:white;
 }
 
+.skip-for-now,
+.add-members-button{
+  background-color: #f1eee8;
+  border: 1px solid gray;
+  border-radius: 3px;
+  font-size: 1.8vh;
+  font-weight: 500;
+  color:rgb(44, 44, 83);
+  position: absolute;
+  left: 25vw;
+  top: 35vh;
+}
+
+.add-members-button{
+  width: 8vw;
+  height: 4vh;
+  &:hover{
+    background-color: rgb(60, 139, 96);
+    color:white;
+  }
+}
+
+.skip-for-now{
+  width: 8vw;
+  height: 4vh;
+  &:hover{
+    background-color: #efc12a;
+    color:rgb(44, 44, 83)
+  }
+}
+
+
+
+
+
