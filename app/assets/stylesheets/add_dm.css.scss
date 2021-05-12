@@ -18,6 +18,7 @@
 }
 
 .add-dm{
+  border-bottom: 1px solid gray;
   width: 80vw;
   height: 5vh;
   display: flex;
@@ -46,4 +47,19 @@
     font-size: 1.2vw;
     margin-left: 1vw;
   }
+}
+
+.suggested-users-list{
+  background-color: white;
+  overflow-y: scroll;
+  max-height: 15vh;
+  width: 40vw;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 2%;
+  padding-bottom: .4%;
+  padding-top: 1%;
+  margin-left: 5vw;
+  position: absolute;
+  top: 14vh;
 }

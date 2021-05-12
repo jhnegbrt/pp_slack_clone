@@ -107,7 +107,6 @@ class AddDirectMessage extends React.Component{
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
     const suggestedUsers = Object.values(users).map(user=>{return this.matchedUser(user)})
-    debugger
     return(
       <div className="add-dm-container">
         <div className="add-dm-header">
@@ -133,11 +132,10 @@ class AddDirectMessage extends React.Component{
             onKeyDown={this.handleKeyDown}
             />
           </ul>
-          <ul className="suggested-users-list">
-            {suggestedUsers}
-          </ul>
         </div>
-        
+        <ul className="suggested-users-list">
+            {suggestedUsers}
+        </ul>
         <MessageIndexContainer 
         searchDmId={this.state.currentDm}
         selectedUsers={this.state.selectedUsers} />
