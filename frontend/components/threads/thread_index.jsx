@@ -70,12 +70,12 @@ class ThreadIndex extends React.Component{
     return(
       <div className="thread-index">
         <div className="header-caret-container" >
-          <FontAwesomeIcon className="caret" icon={faCaretDown}/>
+          <FontAwesomeIcon className={this.state.showChannels ? "caret" : "caret close-caret"} icon={faCaretDown}/>
           <h3 onClick={()=>this.toggleDropDown("showChannels")} className="thread-header">Channels</h3>
         </div>
         {this.state.showChannels ? channelIndex : ""}
         <div className="header-caret-container" >
-          <FontAwesomeIcon className="caret" icon={faCaretDown}/>
+          <FontAwesomeIcon className={this.state.showChannels ? "caret" : "caret close-caret"} icon={faCaretDown}/>
           <h3 onClick={()=>this.toggleDropDown("showDms")} className="thread-header">Messages</h3>
         </div>
         {this.state.showDms ? dmIndex : ""}
