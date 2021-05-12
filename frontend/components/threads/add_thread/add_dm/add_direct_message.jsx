@@ -119,7 +119,7 @@ class AddDirectMessage extends React.Component{
             autoFocus
             className="new-member-input"
             value={this.state.newMember}
-            placeholder= {this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" :""}
+            placeholder= {this.state.selectedUsers.length === 1 ? "Enter a username" :""}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
             />

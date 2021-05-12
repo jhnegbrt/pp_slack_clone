@@ -12477,7 +12477,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         if (id !== _this2.props.currentUser) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: id
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, users[id].username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          }, users[id].username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             onClick: function onClick() {
               return _this2.removeUser(id);
             }
@@ -12490,7 +12490,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         autoFocus: true,
         className: "new-channel-member-input",
         value: this.state.newMember,
-        placeholder: this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" : "",
+        placeholder: this.state.selectedUsers.length === 1 ? "Enter a username" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
       }))))));
@@ -12985,7 +12985,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         autoFocus: true,
         className: "new-member-input",
         value: this.state.newMember,
-        placeholder: this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" : "",
+        placeholder: this.state.selectedUsers.length === 1 ? "Enter a username" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {

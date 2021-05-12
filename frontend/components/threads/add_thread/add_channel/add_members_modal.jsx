@@ -88,17 +88,19 @@ class AddMembersModal extends React.Component{
                 <ul className="channel-recipients-list">
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){
-                      return <li key={id}>
-                        <p>{users[id].username}</p>
+                      return(
+                      <li key={id}>
+                      {users[id].username}
                       <a onClick={()=>this.removeUser(id)}><img className="remove-new-member-button" 
                       src={Close}></img></a></li>
+                      )
                     }
                   })}
                   <input
                   autoFocus
                   className="new-channel-member-input"
                   value={this.state.newMember}
-                  placeholder= {this.state.selectedUsers.length === 1 ? "Enter Username to add Member!" :""}
+                  placeholder= {this.state.selectedUsers.length === 1 ? "Enter a username" :""}
                   onChange={this.handleChange}
                   onKeyDown={this.handleKeyDown}
                   />

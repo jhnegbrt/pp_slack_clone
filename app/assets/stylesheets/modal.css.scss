@@ -77,7 +77,8 @@
 }
 
 .new-channel-member-input{
-  width: 95%;
+  display: inline;
+  width: 10vw;
   height: 3vh;
   font-family: 'Noto Sans', sans-serif;
   background-color: white;
@@ -117,7 +118,6 @@
     padding: 2%
   }
   li{
-    display: flex;
     align-items: center;
     p{
       color:rgb(44, 44, 83);
