@@ -12456,6 +12456,14 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
 
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
+      var addMembers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "add-members-button",
+        onClick: this.handleSubmit
+      }, "Add Members");
+      var skipForNow = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "skip-for-now",
+        onClick: this.handleSubmit
+      }, "Skip for now");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-modal-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -12493,9 +12501,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         placeholder: this.state.selectedUsers.length === 1 ? "Enter a username" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        onClick: this.handleSubmit
-      }, this.state.selectedUsers.length === 1 ? 'Skip for now' : 'Add')))));
+      })), this.state.selectedUsers.length === 1 ? skipForNow : addMembers))));
     }
   }]);
 

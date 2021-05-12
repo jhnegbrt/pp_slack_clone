@@ -73,6 +73,10 @@ class AddMembersModal extends React.Component{
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
+
+    let addMembers = <button className="add-members-button" onClick={this.handleSubmit}>Add Members</button>
+    let skipForNow = <button className="skip-for-now" onClick={this.handleSubmit}>Skip for now</button>
+    
     return(
       <div className="thread-modal-container">
         <div className="thread-modal">
@@ -105,9 +109,7 @@ class AddMembersModal extends React.Component{
                   onKeyDown={this.handleKeyDown}
                   />
                 </ul>
-                <button onClick={this.handleSubmit}>
-                  {this.state.selectedUsers.length === 1 ? 'Skip for now' : 'Add'}
-                </button>
+                  {this.state.selectedUsers.length === 1 ? skipForNow : addMembers}
             </div>
           </div>
         </div>
