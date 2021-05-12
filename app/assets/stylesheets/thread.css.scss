@@ -33,10 +33,15 @@
 }
 
 .thread-header{
+  margin-left: 1vh;
   color: white;
   height: 5vh;
   display:flex;
   align-items: center;
+}
+
+.header-caret-container{
+  display: flex;
 }
 
 

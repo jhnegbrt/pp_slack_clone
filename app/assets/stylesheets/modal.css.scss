@@ -117,17 +117,32 @@
 
 
 .create-channel-button{
-  color: rgb(44, 44, 83);
+  color:white;
   font-size: 3vh;
-  background-color: rgb(207, 226, 233);
+  background-color: rgb(61, 61, 105);
   border-radius: 2px;
-  padding: 2%;
+  padding: 1%;
   margin-right: 3vw;
   position: relative;
   text-align: center;
 }
 
+.create-channel-button a{
+  text-decoration: none;
+  color: white;
+  &:hover{
+    color:white;
+    cursor:pointer;
+  }
+}
+
 .create-channel-button:hover{
   cursor:pointer;
   color:white;
+}
+
+.caret{
+  color: white;
+  font-size: 3vh;
+  display: inline;
 }

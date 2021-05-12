@@ -3,6 +3,10 @@ import ThreadIndexItemContainer from './thread_index_item_container'
 import createThreadsConnection from '../../util/create_threads_connection'
 import AddChannelButton from './add_channel_button'
 import {Link} from 'react-router-dom'
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 
 class ThreadIndex extends React.Component{
   constructor(props){
@@ -50,7 +54,7 @@ class ThreadIndex extends React.Component{
       {
         threads.map(this.mapDirectMessages)
       }
-      <li className="create-channel-button"><Link to='/client/add'>New Conversation</Link></li>
+      <div className="create-channel-button"><Link to='/client/add'>New Conversation</Link></div>
     </ul>
     )
     const channelIndex = (
@@ -65,9 +69,15 @@ class ThreadIndex extends React.Component{
     )
     return(
       <div className="thread-index">
-        <h3 onClick={()=>this.toggleDropDown("showChannels")} className="thread-header">Channels</h3>
+        <div className="header-caret-container" >
+          <FontAwesomeIcon className="caret" icon={faCaretDown}/>
+          <h3 onClick={()=>this.toggleDropDown("showChannels")} className="thread-header">Channels</h3>
+        </div>
         {this.state.showChannels ? channelIndex : ""}
-        <h3 onClick={()=>this.toggleDropDown("showDms")} className="thread-header">Messages</h3>
+        <div className="header-caret-container" >
+          <FontAwesomeIcon className="caret" icon={faCaretDown}/>
+          <h3 onClick={()=>this.toggleDropDown("showDms")} className="thread-header">Messages</h3>
+        </div>
         {this.state.showDms ? dmIndex : ""}
       </div>
     )
