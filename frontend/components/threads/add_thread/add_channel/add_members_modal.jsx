@@ -85,7 +85,7 @@ class AddMembersModal extends React.Component{
                     <img className="close-modal-button" src={Close}></img>
                   </a>
                 </div>
-                <ul className="recipients-list">
+                <ul className="channel-recipients-list">
                   {selectedUsers.map(id =>{
                     if( id !== this.props.currentUser){
                       return <li key={id}>

@@ -12472,7 +12472,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         className: "close-modal-button",
         src: (_app_assets_images_close_svg__WEBPACK_IMPORTED_MODULE_1___default())
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "recipients-list"
+        className: "channel-recipients-list"
       }, selectedUsers.map(function (id) {
         if (id !== _this2.props.currentUser) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {

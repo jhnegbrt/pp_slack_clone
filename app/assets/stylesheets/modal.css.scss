@@ -102,13 +102,14 @@
   font-size: 3vh;
 }
 
-.recipients-list{
+.channel-recipients-list{
+  display: flex;
   font-family: 'Comfortaa', serif;
   color: rgb(44, 44, 83);
   background-color: #f1eee8;
 }
 
-.recipients-list h2{
+.channel-recipients-list h2{
   height: 3vh;
   padding: 2%
 }
@@ -124,7 +125,7 @@
   outline: none;
 }
 
-.recipients-list li{
+.channel-recipients-list li{
   height: 2vh;
   padding-top: 2%;
   padding-left: 2%;
