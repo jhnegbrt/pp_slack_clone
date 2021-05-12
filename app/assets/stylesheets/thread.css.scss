@@ -42,6 +42,9 @@
 
 .header-caret-container{
   display: flex;
+  h3{
+    flex: 1
+  }
 }
 
 .caret{
@@ -78,16 +81,6 @@
 
 }
 
-
-// .create-channel-button{
-//   color: rgb(44, 44, 83);
-//   font-size: 3vh;
-//   background-color: rgb(207, 226, 233);
-//   border-radius: 2px;
-//   padding: 2%;
-//   margin-right: 3vw;
-  
-// }
 
 .create-channel-button:hover{
   cursor:pointer;

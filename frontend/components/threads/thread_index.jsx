@@ -75,7 +75,7 @@ class ThreadIndex extends React.Component{
         </div>
         {this.state.showChannels ? channelIndex : ""}
         <div className="header-caret-container" >
-          <FontAwesomeIcon className={this.state.showChannels ? "caret" : "caret close-caret"} icon={faCaretDown}/>
+          <FontAwesomeIcon className={this.state.showDms ? "caret" : "caret close-caret"} icon={faCaretDown}/>
           <h3 onClick={()=>this.toggleDropDown("showDms")} className="thread-header">Messages</h3>
         </div>
         {this.state.showDms ? dmIndex : ""}
