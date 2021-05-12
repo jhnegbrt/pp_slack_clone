@@ -50,6 +50,13 @@
 .caret{
   color: white;
   font-size: 3vh;
+  border-radius: 1px;
+  padding-left:1%;
+  padding-right:1%;
+}
+
+.caret:hover{
+  background-color:rgb(44, 44, 83)
 }
 
 .close-caret{
@@ -62,21 +69,23 @@
 
 }
 
-// .channel-button-container{
-//   position:relative;
-// }
-
 .channel-buttons{
   position:absolute;
   background-color: #f1eee8;
   padding: 5%;
   top: 5vh;
+  left:2vw;
   width: 70%;
   border-radius: 5px;
 
   a{
     display: block;
     padding: 1%;
+    color:rgb(2, 2, 59);
+    &:hover{
+      text-decoration: underline;
+      color: rgb(2, 2, 59)
+    }
   }
 
 }
@@ -84,12 +93,12 @@
 
 .create-channel-button:hover{
   cursor:pointer;
-  color:white;
+
 }
 
 .little-triangle{
   content: "";
-  left: 30%;
+  left: 45%;
   border: 20px solid;
   border-color:transparent;
   border-bottom-color: #f1eee8;

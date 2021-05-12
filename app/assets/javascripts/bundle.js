@@ -13556,6 +13556,9 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "header-caret-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
+        onClick: function onClick() {
+          return _this2.toggleDropDown("showChannels");
+        },
         className: this.state.showChannels ? "caret" : "caret close-caret",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faCaretDown
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
@@ -13566,6 +13569,9 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       }, "Channels")), this.state.showChannels ? channelIndex : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "header-caret-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
+        onClick: function onClick() {
+          return _this2.toggleDropDown("showDms");
+        },
         className: this.state.showDms ? "caret" : "caret close-caret",
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faCaretDown
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
