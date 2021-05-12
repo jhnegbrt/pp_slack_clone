@@ -82,6 +82,7 @@
   font-family: 'Noto Sans', sans-serif;
   background-color: white;
   border: none;
+  border-radius:5px;
   &:focus{
     outline: none;
     border: none;
@@ -109,6 +110,8 @@
   color: rgb(44, 44, 83);
   background-color: white;
   align-items: center;
+  border-radius: 5px;
+  width: 100%;
   h2{
     height: 3vh;
     padding: 2%
@@ -118,7 +121,8 @@
     align-items: center;
   }
   &:focus-within{
-    border: 2px solid red
+    border: 1px solid rgb(44, 44, 83);
+    box-shadow: 0 0 0 2px rgb(167, 88, 167)
   }
 }
 
