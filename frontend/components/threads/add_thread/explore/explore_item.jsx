@@ -29,8 +29,9 @@ class ExploreItem extends React.Component{
   }
 
   joinChannel(){
-    const {thread, receiveMessage, receiveMessages, removeMessage} = this.props
-    createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
+    debugger
+    const {thread, currentUserId, receiveMessage, receiveMessages, removeMessage} = this.props
+    // createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
 
     let subscriptions = App.cable.subscriptions.subscriptions
     let index;
@@ -41,7 +42,15 @@ class ExploreItem extends React.Component{
         break
       }
     }
-    subscriptions[index].load()
+    subscriptions[index].speak({
+      created: true,
+      id: thread.id,
+      users: [currentUserId],
+      channel: true,
+      private: false,
+      title: thread.title,
+      creator_id: thread.creator_id
+    })
     // this.props.selectThread(this.props.thread.id)
   }
 

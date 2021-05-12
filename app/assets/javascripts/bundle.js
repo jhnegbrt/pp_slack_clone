@@ -13255,12 +13255,14 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "joinChannel",
     value: function joinChannel() {
+      debugger;
       var _this$props = this.props,
           thread = _this$props.thread,
+          currentUserId = _this$props.currentUserId,
           receiveMessage = _this$props.receiveMessage,
           receiveMessages = _this$props.receiveMessages,
-          removeMessage = _this$props.removeMessage;
-      (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId);
+          removeMessage = _this$props.removeMessage; // createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
+
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -13273,7 +13275,15 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
         }
       }
 
-      subscriptions[index].load(); // this.props.selectThread(this.props.thread.id)
+      subscriptions[index].speak({
+        created: true,
+        id: thread.id,
+        users: [currentUserId],
+        channel: true,
+        "private": false,
+        title: thread.title,
+        creator_id: thread.creator_id
+      }); // this.props.selectThread(this.props.thread.id)
     }
   }, {
     key: "render",
