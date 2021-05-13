@@ -8,7 +8,8 @@ class AddDirectMessage extends React.Component{
     this.state = {
       selectedUsers: [props.currentUser],
       newMember: "",
-      currentDm: null
+      currentDm: null,
+      selectedUser: 0
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -98,9 +99,8 @@ class AddDirectMessage extends React.Component{
     return user.username.startsWith(this.state.newMember) && !this.state.selectedUsers.includes(user.id)
   }
 
-  mapUser(user){
-    debugger
-    return <li>{user.username}</li>
+  mapUser(user, i){
+    return <li id={this.state.selectedUser === i ? "selected-suggested" : null}>{user.username}</li>
   }
 
   //add autocomplete for users
@@ -108,7 +108,12 @@ class AddDirectMessage extends React.Component{
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
-    const suggestedUsers = Object.values(users).filter(user=>{return this.matchedUser(user)}).map(suggestedUser=>{return this.mapUser(suggestedUser)})
+    const suggestedUsers = Object.values(users).filter(user=>{return this.matchedUser(user)}).map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
+    const suggestedUsersList = (
+      <ul className="suggested-users-list">
+        {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
+      </ul>
+    )
     return(
       <div className="add-dm-container">
         <div className="add-dm-header">
@@ -135,9 +140,7 @@ class AddDirectMessage extends React.Component{
             />
           </ul>
         </div>
-        <ul className="suggested-users-list">
-            {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
-        </ul>
+        {this.state.newMember.length > 0 ? suggestedUsersList : ""}
         <MessageIndexContainer 
         searchDmId={this.state.currentDm}
         selectedUsers={this.state.selectedUsers} />

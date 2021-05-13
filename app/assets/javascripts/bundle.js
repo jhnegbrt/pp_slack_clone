@@ -12863,7 +12863,8 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       selectedUsers: [props.currentUser],
       newMember: "",
-      currentDm: null
+      currentDm: null,
+      selectedUser: 0
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
@@ -12970,9 +12971,10 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "mapUser",
-    value: function mapUser(user) {
-      debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, user.username);
+    value: function mapUser(user, i) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        id: this.state.selectedUser === i ? "selected-suggested" : null
+      }, user.username);
     } //add autocomplete for users
 
   }, {
@@ -12984,9 +12986,12 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       var selectedUsers = this.state.selectedUsers;
       var suggestedUsers = Object.values(users).filter(function (user) {
         return _this2.matchedUser(user);
-      }).map(function (suggestedUser) {
-        return _this2.mapUser(suggestedUser);
+      }).map(function (suggestedUser, i) {
+        return _this2.mapUser(suggestedUser, i);
       });
+      var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "suggested-users-list"
+      }, suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions"));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-dm-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -13015,9 +13020,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         placeholder: this.state.selectedUsers.length === 1 ? "Enter a username" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "suggested-users-list"
-      }, suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+      }))), this.state.newMember.length > 0 ? suggestedUsersList : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         searchDmId: this.state.currentDm,
         selectedUsers: this.state.selectedUsers
       }));
