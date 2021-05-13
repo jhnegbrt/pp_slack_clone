@@ -27,10 +27,13 @@ class AddDirectMessage extends React.Component{
 
   handleChange(e){
     let {users} = this.props
-    let suggestedUsers = Object.values(users).filter(user=>{return this.matchedUser(user)})
     this.setState({
       newMember: e.target.value,
-      suggestedUsers: suggestedUsers
+    }, ()=>{
+      let suggestedUsers = Object.values(users).filter(user=>{return this.matchedUser(user)})
+      this.setState({
+        suggestedUsers: suggestedUsers
+      })
     })
   }
 
@@ -44,7 +47,6 @@ class AddDirectMessage extends React.Component{
   }
 
   handleKeyDown(e){
-    debugger
     if (e.key === "ArrowUp"){
       e.preventDefault()
       if(this.state.selectedUser === null){
@@ -75,7 +77,7 @@ class AddDirectMessage extends React.Component{
       let newMember = this.state.newMember.trim()
       const {users} = this.props
       for (const key in users){
-        if(users[key].username === newMember  && !this.state.selectedUsers.includes(users[key].id))
+        if(users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id))
         this.setState({
           selectedUsers: [...this.state.selectedUsers, users[key].id],
           newMember: ""

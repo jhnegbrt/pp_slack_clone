@@ -12888,12 +12888,16 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var users = this.props.users;
-      var suggestedUsers = Object.values(users).filter(function (user) {
-        return _this2.matchedUser(user);
-      });
       this.setState({
-        newMember: e.target.value,
-        suggestedUsers: suggestedUsers
+        newMember: e.target.value
+      }, function () {
+        var suggestedUsers = Object.values(users).filter(function (user) {
+          return _this2.matchedUser(user);
+        });
+
+        _this2.setState({
+          suggestedUsers: suggestedUsers
+        });
       });
     }
   }, {
@@ -12909,8 +12913,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleKeyDown",
     value: function handleKeyDown(e) {
-      debugger;
-
       if (e.key === "ArrowUp") {
         e.preventDefault();
 
