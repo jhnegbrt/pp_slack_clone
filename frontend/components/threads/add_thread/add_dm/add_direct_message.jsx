@@ -9,7 +9,8 @@ class AddDirectMessage extends React.Component{
       selectedUsers: [props.currentUser],
       newMember: "",
       currentDm: null,
-      selectedUser: 0
+      selectedUser: 0,
+      suggestedUsers: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -19,9 +20,16 @@ class AddDirectMessage extends React.Component{
     this.props.fetchAllUsers()
   }
 
+  matchedUser(user){
+    return user.username.startsWith(this.state.newMember) && !this.state.selectedUsers.includes(user.id)
+  }
+
   handleChange(e){
+    let {users} = this.props
+    let suggestedUsers = Object.values(users).filter(user=>{return this.matchedUser(user)})
     this.setState({
-      newMember: e.target.value
+      newMember: e.target.value,
+      suggestedUsers: suggestedUsers
     })
   }
 
@@ -107,10 +115,6 @@ class AddDirectMessage extends React.Component{
     }
   }
 
-  matchedUser(user){
-    return user.username.startsWith(this.state.newMember) && !this.state.selectedUsers.includes(user.id)
-  }
-
   mapUser(user, i){
     return <li id={this.state.selectedUser === i ? "selected-suggested" : null}>{user.username}</li>
   }
@@ -120,7 +124,7 @@ class AddDirectMessage extends React.Component{
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
-    const suggestedUsers = Object.values(users).filter(user=>{return this.matchedUser(user)}).map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
+    const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
     const suggestedUsersList = (
       <ul className="suggested-users-list">
         {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
