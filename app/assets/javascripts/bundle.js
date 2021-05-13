@@ -12919,7 +12919,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
             selectedUser: 0
           });
         } else {
-          var index = (this.state.selectedUser - 1) % this.state.suggestedUsers.length;
+          var index = this.state.selectedUser === 0 ? this.state.suggestedUsers.length - 1 : (this.state.selectedUser - 1) % this.state.suggestedUsers.length;
           this.setState({
             selectedUser: index
           });

@@ -52,7 +52,7 @@ class AddDirectMessage extends React.Component{
           selectedUser: 0
         })
       } else {
-        let index = (this.state.selectedUser-1) % this.state.suggestedUsers.length
+        let index = this.state.selectedUser === 0 ? this.state.suggestedUsers.length -1 : (this.state.selectedUser-1) % this.state.suggestedUsers.length
         this.setState({
           selectedUser: index
         })
