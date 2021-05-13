@@ -36,6 +36,18 @@ class AddDirectMessage extends React.Component{
 
   handleKeyDown(e){
     
+    if (e.key === 40){
+      e.preventDefault()
+      if(this.state.selectedUser === null){
+        this.setState({
+          selectedUser: 0
+        })
+      } else {
+        this.setState({
+          selectedUser: this.state.selectedUser++ % 
+        })
+      }
+    }
     if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
       let newMember = this.state.newMember.trim()
