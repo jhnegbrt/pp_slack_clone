@@ -12919,8 +12919,9 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
             selectedUser: 0
           });
         } else {
+          var index = (this.state.selectedUser - 1) % this.state.suggestedUsers.length;
           this.setState({
-            selectedUser: this.state.selectedUser - 1 % this.state.suggestedUsers.length
+            selectedUser: index
           });
         }
       } else if (e.key === "ArrowDown") {
@@ -12931,8 +12932,10 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
             selectedUser: 0
           });
         } else {
+          var _index = (this.state.selectedUser + 1) % this.state.suggestedUsers.length;
+
           this.setState({
-            selectedUser: this.state.selectedUser + 1 % this.state.suggestedUsers.length
+            selectedUser: _index
           });
         }
       }

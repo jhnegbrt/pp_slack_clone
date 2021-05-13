@@ -52,8 +52,9 @@ class AddDirectMessage extends React.Component{
           selectedUser: 0
         })
       } else {
+        let index = (this.state.selectedUser-1) % this.state.suggestedUsers.length
         this.setState({
-          selectedUser: this.state.selectedUser-1 % this.state.suggestedUsers.length
+          selectedUser: index
         })
       }
     } else if (e.key === "ArrowDown"){
@@ -63,8 +64,9 @@ class AddDirectMessage extends React.Component{
           selectedUser: 0
         })
       } else {
+        let index = (this.state.selectedUser+1) % this.state.suggestedUsers.length
         this.setState({
-          selectedUser: this.state.selectedUser+1 % this.state.suggestedUsers.length
+          selectedUser: index
         })
       }
     }
