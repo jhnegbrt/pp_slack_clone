@@ -18,6 +18,7 @@ class AddDirectMessage extends React.Component{
 
   componentDidMount(){
     this.props.fetchAllUsers()
+    // document.addEventListener("keydown", this.handle)
   }
 
   matchedUser(user){
@@ -43,8 +44,8 @@ class AddDirectMessage extends React.Component{
   }
 
   handleKeyDown(e){
-    
-    if (e.key === 40){
+    debugger
+    if (e.key === "ArrowUp"){
       e.preventDefault()
       if(this.state.selectedUser === null){
         this.setState({
@@ -52,7 +53,18 @@ class AddDirectMessage extends React.Component{
         })
       } else {
         this.setState({
-          selectedUser: this.state.selectedUser++ % 
+          selectedUser: this.state.selectedUser-1 % this.state.suggestedUsers.length
+        })
+      }
+    } else if (e.key === "ArrowDown"){
+      e.preventDefault()
+      if(this.state.selectedUser === null){
+        this.setState({
+          selectedUser: 0
+        })
+      } else {
+        this.setState({
+          selectedUser: this.state.selectedUser+1 % this.state.suggestedUsers.length
         })
       }
     }
@@ -116,12 +128,13 @@ class AddDirectMessage extends React.Component{
   }
 
   mapUser(user, i){
-    return <li id={this.state.selectedUser === i ? "selected-suggested" : null}>{user.username}</li>
+    return <li key={user.username} id={this.state.selectedUser === i ? "selected-suggested" : null}>{user.username}</li>
   }
 
   //add autocomplete for users
 
   render(){
+    debugger
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
     const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
