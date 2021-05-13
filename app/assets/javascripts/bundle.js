@@ -12943,8 +12943,16 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       }
 
       if (["Enter", "Tab", ","].includes(e.key)) {
+        debugger;
         e.preventDefault();
-        var newMember = this.state.newMember.trim();
+        var newMember;
+
+        if (this.state.selectedUser === null) {
+          newMember = this.state.newMember.trim();
+        } else {
+          newMember = this.state.suggestedUsers[this.state.selectedUser].username;
+        }
+
         var users = this.props.users;
 
         for (var key in users) {
@@ -13024,7 +13032,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      debugger;
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
       var suggestedUsers = this.state.suggestedUsers.map(function (suggestedUser, i) {

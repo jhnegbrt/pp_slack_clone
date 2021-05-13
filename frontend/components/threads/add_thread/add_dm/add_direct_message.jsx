@@ -73,8 +73,14 @@ class AddDirectMessage extends React.Component{
       }
     }
     if (["Enter", "Tab", ","].includes(e.key)){
+      debugger
       e.preventDefault()
-      let newMember = this.state.newMember.trim()
+      let newMember
+      if (this.state.selectedUser === null){
+        newMember = this.state.newMember.trim()
+      } else {
+        newMember = this.state.suggestedUsers[this.state.selectedUser].username
+      }
       const {users} = this.props
       for (const key in users){
         if(users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id))
@@ -138,7 +144,6 @@ class AddDirectMessage extends React.Component{
   //add autocomplete for users
 
   render(){
-    debugger
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
     const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
