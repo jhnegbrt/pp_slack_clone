@@ -14,6 +14,8 @@ class AddDirectMessage extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
   }
 
   componentDidMount(){
@@ -137,8 +139,28 @@ class AddDirectMessage extends React.Component{
     }
   }
 
+  handleMouseEnter(i){
+    this.setState({
+      selectedUser: i
+    })
+  }
+
+  handleMouseLeave(){
+    this.setState({
+      selectedUser: null
+    })
+  }
+
   mapUser(user, i){
-    return <li key={user.username} id={this.state.selectedUser === i ? "selected-suggested" : null}>{user.username}</li>
+    return (
+      <li 
+        key={user.username} 
+        id={this.state.selectedUser === i ? "selected-suggested" : null}
+        onMouseEnter={()=>this.handleMouseEnter(i)}
+        onMouseLeave={this.handleMouseLeave}>
+          {user.username}
+      </li>
+    )
   }
 
   //add autocomplete for users

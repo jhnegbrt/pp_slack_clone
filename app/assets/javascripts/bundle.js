@@ -12869,6 +12869,8 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
+    _this.handleMouseEnter = _this.handleMouseEnter.bind(_assertThisInitialized(_this));
+    _this.handleMouseLeave = _this.handleMouseLeave.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -13019,23 +13021,43 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "handleMouseEnter",
+    value: function handleMouseEnter(i) {
+      this.setState({
+        selectedUser: i
+      });
+    }
+  }, {
+    key: "handleMouseLeave",
+    value: function handleMouseLeave() {
+      this.setState({
+        selectedUser: null
+      });
+    }
+  }, {
     key: "mapUser",
     value: function mapUser(user, i) {
+      var _this3 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         key: user.username,
-        id: this.state.selectedUser === i ? "selected-suggested" : null
+        id: this.state.selectedUser === i ? "selected-suggested" : null,
+        onMouseEnter: function onMouseEnter() {
+          return _this3.handleMouseEnter(i);
+        },
+        onMouseLeave: this.handleMouseLeave
       }, user.username);
     } //add autocomplete for users
 
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
       var suggestedUsers = this.state.suggestedUsers.map(function (suggestedUser, i) {
-        return _this3.mapUser(suggestedUser, i);
+        return _this4.mapUser(suggestedUser, i);
       });
       var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "suggested-users-list"
@@ -13049,12 +13071,12 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "To:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "dm-recipients-list"
       }, selectedUsers.map(function (id) {
-        if (id !== _this3.props.currentUser) {
+        if (id !== _this4.props.currentUser) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: id
           }, users[id].username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             onClick: function onClick() {
-              return _this3.removeUser(id);
+              return _this4.removeUser(id);
             }
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
             className: "remove-new-member-button",
