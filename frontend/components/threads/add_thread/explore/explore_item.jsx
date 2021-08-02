@@ -29,7 +29,6 @@ class ExploreItem extends React.Component{
   }
 
   joinChannel(){
-    debugger
     const {thread, currentUserId, receiveMessage, receiveMessages, removeMessage} = this.props
     // createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
 

@@ -75,7 +75,6 @@ class AddDirectMessage extends React.Component{
       }
     }
     if (["Enter", "Tab", ","].includes(e.key)){
-      debugger
       e.preventDefault()
       let newMember
       if (this.state.selectedUser === null){

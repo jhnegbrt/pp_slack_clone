@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux'
-import usersReducer from './users_reducer'
 import messagesReducer from './messages_reducer'
 import threadsReducer from './threads_reducer'
-import workspaceReducer from './workspace_reducer'
+import workspaceUsersReducer from './workspace_users_reducer'
+import publicChannelsReducer from './public_channels_reducer'
 
 const entitiesReducer = combineReducers({
-  users: usersReducer,
   messages: messagesReducer,
   threads: threadsReducer,
-  workspace: workspaceReducer
+  users: workspaceUsersReducer,
+  publicChannels: publicChannelsReducer
 });
 
 export default entitiesReducer
