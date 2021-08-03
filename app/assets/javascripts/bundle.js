@@ -12431,6 +12431,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      debugger;
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -12945,7 +12946,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       }
 
       if (["Enter", "Tab", ","].includes(e.key)) {
-        debugger;
         e.preventDefault();
         var newMember;
 

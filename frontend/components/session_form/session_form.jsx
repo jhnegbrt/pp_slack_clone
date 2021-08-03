@@ -73,12 +73,9 @@ class SessionForm extends React.Component {
     if (this.props.formType === "signin"){
       sleuthDemo = (
         <div className="sleuth-form">
-  
             <button onClick={this.enterSleuthMode}>Enter as Sleuth!</button>
             <h3>Enter With Sleuth Mode to chat Anonymously. Read more <a>here</a></h3>
-  
         </div>
-
       )
     }
 
