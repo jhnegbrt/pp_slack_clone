@@ -4,10 +4,9 @@ import {receiveMessage, removeMessage, receiveMessages} from '../../../../action
 import ExploreItem from './explore_item'
 
 
-const mSTP = (state, ownProps) => {
-  return{
+const mSTP = (state, ownProps) => ({
   currentUserId: state.session.id
-}}
+})
 
 const mDTP = dispatch => ({
   selectThread: (threadId) => dispatch(receiveCurrentThread(threadId)),

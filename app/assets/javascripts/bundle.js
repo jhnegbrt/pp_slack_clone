@@ -10119,77 +10119,9 @@ var createMessage = function createMessage(formMessage) {
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RECEIVE_CURRENT_USER": () => (/* binding */ RECEIVE_CURRENT_USER),
-/* harmony export */   "LOGOUT_CURRENT_USER": () => (/* binding */ LOGOUT_CURRENT_USER),
-/* harmony export */   "RECEIVE_SESSION_ERRORS": () => (/* binding */ RECEIVE_SESSION_ERRORS),
-/* harmony export */   "CLEAR_SESSION_ERRORS": () => (/* binding */ CLEAR_SESSION_ERRORS),
-/* harmony export */   "clearSessionErrors": () => (/* binding */ clearSessionErrors),
-/* harmony export */   "signup": () => (/* binding */ signup),
-/* harmony export */   "login": () => (/* binding */ login),
-/* harmony export */   "logout": () => (/* binding */ logout)
-/* harmony export */ });
-/* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
-
-var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
-var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
-var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
-var CLEAR_SESSION_ERRORS = 'CLEAR_ERRORS';
-
-var receiveCurrentUser = function receiveCurrentUser(currentUser) {
-  return {
-    type: RECEIVE_CURRENT_USER,
-    currentUser: currentUser
-  };
-};
-
-var logoutCurrentUser = function logoutCurrentUser() {
-  return {
-    type: LOGOUT_CURRENT_USER
-  };
-};
-
-var receiveErrors = function receiveErrors(errors) {
-  return {
-    type: RECEIVE_SESSION_ERRORS,
-    errors: errors
-  };
-};
-
-var clearSessionErrors = function clearSessionErrors() {
-  return {
-    type: CLEAR_SESSION_ERRORS
-  };
-};
-var signup = function signup(formUser) {
-  return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.signup(formUser).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
-    }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
-  };
-};
-var login = function login(formUser) {
-  return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(formUser).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
-    }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
-  };
-};
-var logout = function logout() {
-  return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.logout().then(function () {
-      return dispatch(logoutCurrentUser());
-    });
-  };
-}; // .fail((errors) => dispatch(receiveErrors(errors.responseJSON)))
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/jhnegbrt/projects/slack_clone/frontend/actions/session_actions.js: Identifier 'signup' has already been declared (47:13)\n\n\u001b[0m \u001b[90m 45 |\u001b[39m )\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 46 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 47 |\u001b[39m \u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m signup \u001b[33m=\u001b[39m formUser \u001b[33m=>\u001b[39m dispatch \u001b[33m=>\u001b[39m (\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 48 |\u001b[39m   \u001b[33mAPIUtil\u001b[39m\u001b[33m.\u001b[39msignup(formUser)\u001b[33m.\u001b[39mthen(user \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 49 |\u001b[39m     \u001b[36mdebugger\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 50 |\u001b[39m     dispatch(receiveCurrentUser(user))\u001b[0m\n    at Object._raise (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:775:17)\n    at Object.raiseWithData (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:768:17)\n    at Object.raise (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:736:17)\n    at ScopeHandler.checkRedeclarationInScope (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:1452:12)\n    at ScopeHandler.declareName (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:1418:12)\n    at Object.checkLVal (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:10241:24)\n    at Object.parseVarId (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:12919:10)\n    at Object.parseVar (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:12894:12)\n    at Object.parseVarStatement (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:12711:10)\n    at Object.parseStatementContent (/home/jhnegbrt/projects/slack_clone/node_modules/@babel/parser/lib/index.js:12303:21)");
 
 /***/ }),
 
@@ -13198,7 +13130,9 @@ var Explore = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "mapThread",
     value: function mapThread(thread) {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_explore_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+        joined: joined,
         thread: thread,
         key: thread.id,
         threadId: thread.channel_dms_id
@@ -13250,6 +13184,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
+    usersThreads: state.threads,
     publicChannels: Object.values(state.entities.publicChannels)
   };
 };

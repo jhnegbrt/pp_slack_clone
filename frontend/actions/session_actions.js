@@ -34,8 +34,7 @@ export const signup = formUser => dispatch => {
   ), errors => (
     dispatch(receiveErrors(errors.responseJSON))
   ))
-)
-};
+)};
 
 export const login = formUser => dispatch => (
   APIUtil.login(formUser).then(user => (
@@ -44,6 +43,18 @@ export const login = formUser => dispatch => (
     dispatch(receiveErrors(errors.responseJSON))
   ))
 );
+
+export const signup = formUser => dispatch => {
+  return(
+    APIUtil.signup(formUser).then(user => {
+      debugger
+      dispatch(receiveCurrentUser(user))
+    }, errors => {
+      debugger
+      dispatch(receiveErrors(errors.responseJSON))
+    })
+  )
+}
 
 export const logout = () => dispatch => APIUtil.logout()
   .then(()=> dispatch(logoutCurrentUser()))

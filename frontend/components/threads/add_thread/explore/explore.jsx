@@ -11,7 +11,13 @@ class Explore extends React.Component{
   }
 
   mapThread(thread){
-    return <ExploreItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>
+    debugger
+    return <ExploreItemContainer
+     joined={joined}
+     thread={thread} 
+     key={thread.id} 
+     threadId={thread.channel_dms_id}
+    />
   }
 
   render(){

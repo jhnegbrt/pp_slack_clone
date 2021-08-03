@@ -5,9 +5,9 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :index]
     resource :session, only: [:create, :destroy]
     resources :channel_dms, except: [:new, :edit]
-
   end
 
   root to: "static_pages#root"
   mount ActionCable.server, at: '/cable'
+  
 end
