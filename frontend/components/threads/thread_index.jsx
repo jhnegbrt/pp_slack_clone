@@ -20,8 +20,8 @@ class ThreadIndex extends React.Component{
 
   componentDidMount(){
     this.props.fetchAllUsers()
-    const {currentUserId, receiveThread, receiveThreads} = this.props
-    createThreadsConnection(currentUserId, receiveThread, receiveThreads)
+    const {currentUserId, receiveThread, receiveThreads, removeThread} = this.props
+    createThreadsConnection(currentUserId, receiveThread, receiveThreads, removeThread)
 
   }
 

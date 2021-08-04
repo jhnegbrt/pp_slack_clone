@@ -10206,8 +10206,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_ALL_THREADS": () => (/* binding */ RECEIVE_ALL_THREADS),
 /* harmony export */   "RECEIVE_THREAD": () => (/* binding */ RECEIVE_THREAD),
 /* harmony export */   "RECEIVE_PUBLIC_CHANNELS": () => (/* binding */ RECEIVE_PUBLIC_CHANNELS),
+/* harmony export */   "REMOVE_THREAD": () => (/* binding */ REMOVE_THREAD),
 /* harmony export */   "receiveCurrentThread": () => (/* binding */ receiveCurrentThread),
 /* harmony export */   "receiveThread": () => (/* binding */ receiveThread),
+/* harmony export */   "removeThread": () => (/* binding */ removeThread),
 /* harmony export */   "receiveAllThreads": () => (/* binding */ receiveAllThreads),
 /* harmony export */   "createThread": () => (/* binding */ createThread),
 /* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads),
@@ -10219,6 +10221,7 @@ var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
 var RECEIVE_THREAD = "RECEIVE_THREAD";
 var RECEIVE_PUBLIC_CHANNELS = "RECEIVE_PUBLIC_THREADS";
+var REMOVE_THREAD = "REMOVE_THREAD";
 var receiveCurrentThread = function receiveCurrentThread(threadId) {
   return {
     type: RECEIVE_CURRENT_THREAD,
@@ -10229,6 +10232,12 @@ var receiveThread = function receiveThread(thread) {
   return {
     type: RECEIVE_THREAD,
     thread: thread
+  };
+};
+var removeThread = function removeThread(threadId) {
+  return {
+    type: REMOVE_THREAD,
+    threadId: threadId
   };
 };
 var receiveAllThreads = function receiveAllThreads(threads) {
@@ -13619,8 +13628,9 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           currentUserId = _this$props.currentUserId,
           receiveThread = _this$props.receiveThread,
-          receiveThreads = _this$props.receiveThreads;
-      (0,_util_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__.default)(currentUserId, receiveThread, receiveThreads);
+          receiveThreads = _this$props.receiveThreads,
+          removeThread = _this$props.removeThread;
+      (0,_util_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__.default)(currentUserId, receiveThread, receiveThreads, removeThread);
     } //I Believe that I do not need to pass in "threadId"
 
   }, {

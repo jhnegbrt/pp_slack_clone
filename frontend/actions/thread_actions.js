@@ -4,6 +4,7 @@ export const RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD"
 export const RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS"
 export const RECEIVE_THREAD = "RECEIVE_THREAD"
 export const RECEIVE_PUBLIC_CHANNELS = "RECEIVE_PUBLIC_THREADS"
+export const REMOVE_THREAD = "REMOVE_THREAD"
 
 export const receiveCurrentThread = (threadId) => {
   return({
@@ -18,6 +19,11 @@ export const receiveThread = (thread) =>{
     thread
   })
 }
+
+export const removeThread = threadId => ({
+  type: REMOVE_THREAD,
+  threadId
+})
 
 export const receiveAllThreads = (threads) => {
   return({
