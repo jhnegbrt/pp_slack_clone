@@ -14401,6 +14401,12 @@ var threadsReducer = function threadsReducer() {
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
       return Object.assign({}, state, action.threads);
 
+    case REMOVE_THREAD:
+      var nextState = Object.assign({}, state);
+      var threadId = action.threadId;
+      delete nextState[threadId];
+      return nextState;
+
     default:
       return state;
   }

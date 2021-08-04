@@ -8,6 +8,11 @@ const threadsReducer = (state = {}, action) =>{
         return Object.assign({}, state, {[action.thread.id]: action.thread})
       case RECEIVE_ALL_THREADS:
         return Object.assign({}, state, action.threads)
+      case REMOVE_THREAD:
+        let nextState = Object.assign({}, state)
+        let threadId = action.threadId
+        delete nextState[threadId]
+        return nextState
       default:
         return state
   }
