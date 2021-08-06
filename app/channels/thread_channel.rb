@@ -85,11 +85,16 @@ class ThreadChannel < ApplicationCable::Channel
     end
   end
 
-  # def leave_thread(data)
-  #   ucd = UserChannelDm.where(user_id: ).where(channel_dm_id: )
-  #   ucd.delete
-
-  # end
+  def leave_thread(data)
+    debugger
+    ucd = UserChannelDm.where(user_id: ).where(channel_dm_id: )
+    ucd.delete
+    socket = {
+      type: "leave",
+      thread: data["thread"]
+    }
+    ThreadChannel.broadcast_to("thread_channel_#{data["user"]}", socket)
+  end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed

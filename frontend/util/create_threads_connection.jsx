@@ -17,8 +17,8 @@ export default function createThreadsConnection(currentUserId, receiveThread, re
         }
       },
       load: function() { return this.perform("load")},
-      speak: function(thread) {
-        return this.perform("speak", thread);
+      speak: function(data) {
+        return this.perform("speak", data);
       },
       leaveThread: function(data){
         return this.perform("leave_thread", data)
