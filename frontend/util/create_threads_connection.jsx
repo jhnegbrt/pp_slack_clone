@@ -1,4 +1,4 @@
-export default function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads){
+export default function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads, removeThread){
   
   App.cable.subscriptions.create(
     
@@ -11,14 +11,18 @@ export default function createThreadsConnection(currentUserId, receiveThread, re
             break
           case "threads":
             receiveAllThreads(data.threads)
+          case "leave":
+            removeThread(data.thread)
             break
         }
       },
       load: function() { return this.perform("load")},
       speak: function(thread) {
         return this.perform("speak", thread);
+      },
+      leaveThread: function(data){
+        return this.perform("leave_thread", data)
       }
     }
   )
-
 }

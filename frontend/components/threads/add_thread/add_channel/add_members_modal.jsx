@@ -49,7 +49,6 @@ class AddMembersModal extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
-    debugger
     let subscriptions = App.cable.subscriptions.subscriptions
     let index;
     for (let i = 0; i < subscriptions.length; i++){

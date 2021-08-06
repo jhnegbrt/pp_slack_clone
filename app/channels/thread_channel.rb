@@ -1,4 +1,5 @@
 class ThreadChannel < ApplicationCable::Channel
+
   def subscribed
     stream_for "thread_channel_#{params['user_id']}"
     self.load
@@ -23,7 +24,6 @@ class ThreadChannel < ApplicationCable::Channel
       end
       channel_dms_hash[thread.id][:users] = users
     end
-
     socket = {
       type: "threads",
       threads: channel_dms_hash
@@ -83,8 +83,13 @@ class ThreadChannel < ApplicationCable::Channel
         i += 1
       end
     end
-
   end
+
+  # def leave_thread(data)
+  #   ucd = UserChannelDm.where(user_id: ).where(channel_dm_id: )
+  #   ucd.delete
+
+  # end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed

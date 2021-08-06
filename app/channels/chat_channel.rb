@@ -53,7 +53,6 @@ class ChatChannel < ApplicationCable::Channel
 
   def update_message(data)
     
-
     channel_dms_id = data['message']['channel_dms_id']
 
     message = Message.find_by(id: data['message']['id'])
@@ -83,5 +82,7 @@ class ChatChannel < ApplicationCable::Channel
     ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
   end
 
-  def unsubscribed; end
+  def unsubscribed
+    stop_stream_from "chat_channel_#{params['thread_id']}"
+  end
 end

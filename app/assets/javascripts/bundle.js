@@ -12440,7 +12440,6 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
       var subscriptions = App.cable.subscriptions.subscriptions;
       var index;
 
@@ -13355,7 +13354,6 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "joinChannel",
     value: function joinChannel() {
-      debugger;
       var _this$props = this.props,
           thread = _this$props.thread,
           currentUserId = _this$props.currentUserId,
@@ -13989,8 +13987,6 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
     value: function createTitle() {
       var _this2 = this;
 
-      debugger;
-
       if (Object.keys(this.props.users).length === 0 || Object.keys(this.props.threads).length === 0) {
         return;
       }
@@ -14401,7 +14397,7 @@ var threadsReducer = function threadsReducer() {
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
       return Object.assign({}, state, action.threads);
 
-    case REMOVE_THREAD:
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_THREAD:
       var nextState = Object.assign({}, state);
       var threadId = action.threadId;
       delete nextState[threadId];
@@ -14640,6 +14636,9 @@ function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads
     },
     speak: function speak(thread) {
       return this.perform("speak", thread);
+    },
+    leaveThread: function leaveThread(data) {
+      return this.perform("leave_thread", data);
     }
   });
 }

@@ -15,8 +15,8 @@ export default function createMessagesConnection(currentThreadId, receive, recei
           case "delete":
             remove(data['message_id'])
             break
-        }
-      },
+          }
+        },
       load: function() { return this.perform("load")},
       speak: function(message) {
         return this.perform("speak", message);

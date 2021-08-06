@@ -7,7 +7,6 @@ class ThreadTitle extends React.Component{
   }
 
   createTitle(){
-    debugger
     if(Object.keys(this.props.users).length === 0 || Object.keys(this.props.threads).length === 0){
       return
     }
