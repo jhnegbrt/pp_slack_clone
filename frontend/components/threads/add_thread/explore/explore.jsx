@@ -11,7 +11,6 @@ class Explore extends React.Component{
   }
 
   mapThread(thread){
-    console.log(this.props.usersChannels[thread.id])
     return (
     <ExploreItemContainer 
       thread={thread} 

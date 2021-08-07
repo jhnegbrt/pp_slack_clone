@@ -4,12 +4,14 @@ import createMessagesConnection from '../../../../util/create_messages_connectio
 class ExploreItem extends React.Component{
   constructor(props){
     super(props)
-    this.joinChannel = this.joinChannel.bind(this)
     this.state = ({
       hover: false
     })
     this.hovering = this.hovering.bind(this)
     this.notHovering = this.notHovering.bind(this)
+
+    this.joinChannel = this.joinChannel.bind(this)
+    this.leaveChannel = this.leaveChannel.bind(this)
   }
 
   hovering(){
@@ -28,12 +30,9 @@ class ExploreItem extends React.Component{
     }
   }
 
-  joinChannel(){
-    const {thread, currentUserId, receiveMessage, receiveMessages, removeMessage} = this.props
-    // createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
-
-    let subscriptions = App.cable.subscriptions.subscriptions
+  findThreadChannel(){
     let index;
+    let subscriptions = App.cable.subscriptions.subscriptions
     for (let i = 0; i < subscriptions.length; i++){
       let identifier = JSON.parse(subscriptions[i].identifier)
       if (identifier.channel === "ThreadChannel"){
@@ -41,6 +40,13 @@ class ExploreItem extends React.Component{
         break
       }
     }
+    return index
+  }
+
+  joinChannel(){
+    const {thread, currentUserId } = this.props
+    let subscriptions = App.cable.subscriptions.subscriptions
+    let index = this.findThreadChannel()
     subscriptions[index].speak({
       created: true,
       id: thread.id,
@@ -50,7 +56,17 @@ class ExploreItem extends React.Component{
       title: thread.title,
       creator_id: thread.creator_id
     })
-    // this.props.selectThread(this.props.thread.id)
+  }
+
+  leaveChannel(){
+    const { thread, currentUserId } = this.props
+    let index = this.findThreadChannel()
+    let subscriptions = App.cable.subscriptions.subscriptions
+    subscriptions[index].leaveThread({
+      thread: thread.id,
+      user: currentUserId
+    })
+
   }
 
   render(){

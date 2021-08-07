@@ -13207,7 +13207,6 @@ var Explore = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "mapThread",
     value: function mapThread(thread) {
-      console.log(this.props.usersChannels[thread.id]);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_explore_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         thread: thread,
         key: thread.id,
@@ -13327,12 +13326,13 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ExploreItem);
 
     _this = _super.call(this, props);
-    _this.joinChannel = _this.joinChannel.bind(_assertThisInitialized(_this));
     _this.state = {
       hover: false
     };
     _this.hovering = _this.hovering.bind(_assertThisInitialized(_this));
     _this.notHovering = _this.notHovering.bind(_assertThisInitialized(_this));
+    _this.joinChannel = _this.joinChannel.bind(_assertThisInitialized(_this));
+    _this.leaveChannel = _this.leaveChannel.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -13355,17 +13355,10 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
-    key: "joinChannel",
-    value: function joinChannel() {
-      var _this$props = this.props,
-          thread = _this$props.thread,
-          currentUserId = _this$props.currentUserId,
-          receiveMessage = _this$props.receiveMessage,
-          receiveMessages = _this$props.receiveMessages,
-          removeMessage = _this$props.removeMessage; // createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
-
-      var subscriptions = App.cable.subscriptions.subscriptions;
+    key: "findThreadChannel",
+    value: function findThreadChannel() {
       var index;
+      var subscriptions = App.cable.subscriptions.subscriptions;
 
       for (var i = 0; i < subscriptions.length; i++) {
         var identifier = JSON.parse(subscriptions[i].identifier);
@@ -13376,6 +13369,16 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
         }
       }
 
+      return index;
+    }
+  }, {
+    key: "joinChannel",
+    value: function joinChannel() {
+      var _this$props = this.props,
+          thread = _this$props.thread,
+          currentUserId = _this$props.currentUserId;
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      var index = this.findThreadChannel();
       subscriptions[index].speak({
         created: true,
         id: thread.id,
@@ -13384,7 +13387,20 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
         "private": false,
         title: thread.title,
         creator_id: thread.creator_id
-      }); // this.props.selectThread(this.props.thread.id)
+      });
+    }
+  }, {
+    key: "leaveChannel",
+    value: function leaveChannel() {
+      var _this$props2 = this.props,
+          thread = _this$props2.thread,
+          currentUserId = _this$props2.currentUserId;
+      var index = this.findThreadChannel();
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      subscriptions[index].leaveThread({
+        thread: thread.id,
+        user: currentUserId
+      });
     }
   }, {
     key: "render",
