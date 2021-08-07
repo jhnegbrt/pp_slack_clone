@@ -20,7 +20,6 @@ class AddDirectMessage extends React.Component{
 
   componentDidMount(){
     this.props.fetchAllUsers()
-    // document.addEventListener("keydown", this.handle)
   }
 
   matchedUser(user){
@@ -29,6 +28,11 @@ class AddDirectMessage extends React.Component{
 
   handleChange(e){
     let {users} = this.props
+    if (this.state.selectedUser === null){
+      this.setState({
+        selectedUser: 0
+      })
+    }
     this.setState({
       newMember: e.target.value,
     }, ()=>{
@@ -162,7 +166,6 @@ class AddDirectMessage extends React.Component{
     )
   }
 
-  //add autocomplete for users
 
   render(){
     const {users} = this.props

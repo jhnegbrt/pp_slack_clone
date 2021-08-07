@@ -9,16 +9,34 @@ class AddMembersModal extends React.Component{
       creatorId: props.newChannel.creatorId,
       title: props.newChannel.title,
       selectedUsers: props.newChannel.selectedUsers,
-      newMember: ""
+      newMember: "",
+      suggestedUsers: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
+  }
+
+  matchedUser(user){
+    return user.username.startsWith(this.state.newMember) && !this.state.selectedUsers.includes(user.id)
   }
 
   handleChange(e){
+    let {users} = this.props
+    if (this.state.selectedUser === null){
+      this.setState({
+        selectedUser: 0
+      })
+    }
     this.setState({
-      newMember: e.target.value
+      newMember: e.target.value,
+    }, ()=>{
+      let suggestedUsers = Object.values(users).filter(user=>{return this.matchedUser(user)})
+      this.setState({
+        suggestedUsers: suggestedUsers
+      })
     })
   }
 
@@ -32,18 +50,105 @@ class AddMembersModal extends React.Component{
   }
 
   handleKeyDown(e){
-    if (["Enter", "Tab", ","].includes(e.key)){
+    if (e.key === "ArrowUp"){
       e.preventDefault()
-      let newMember = this.state.newMember.trim()
+      if(this.state.selectedUser === null){
+        this.setState({
+          selectedUser: 0
+        })
+      } else {
+        let index = this.state.selectedUser === 0 ? this.state.suggestedUsers.length -1 : (this.state.selectedUser-1) % this.state.suggestedUsers.length
+        this.setState({
+          selectedUser: index
+        })
+      }
+    } else if (e.key === "ArrowDown"){
+      e.preventDefault()
+      if(this.state.selectedUser === null){
+        this.setState({
+          selectedUser: 0
+        })
+      } else {
+        let index = (this.state.selectedUser+1) % this.state.suggestedUsers.length
+        this.setState({
+          selectedUser: index
+        })
+      }
+    }
+    if (["Enter", "Tab", ","].includes(e.key)){
+      debugger
+      e.preventDefault()
+      let newMember
+      if (this.state.selectedUser === null){
+        newMember = this.state.newMember.trim()
+      } else {
+        newMember = this.state.suggestedUsers[this.state.selectedUser].username
+      }
       const {users} = this.props
       for (const key in users){
-        if(users[key].username === newMember  && !this.state.selectedUsers.includes(users[key].id))
+        if(users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id))
         this.setState({
           selectedUsers: [...this.state.selectedUsers, users[key].id],
           newMember: ""
         })
       }
     }
+  }
+
+  sameUsers(threadUsers, stateUsers){
+    let dictionary = {}
+    threadUsers.forEach((id) =>{
+      return dictionary[id] = 1
+    })
+    for (let i = 0; i < stateUsers.length; i++){
+      if (dictionary[stateUsers[i]] === undefined){
+        return false
+      } else {
+        dictionary[stateUsers[i]]--
+      }
+    }
+    if (Object.values(dictionary).every((el)=> el === 0)){
+      return true
+    } else{
+      return false
+    }
+  }
+
+  checkUsers(dms, stateUsers){
+
+    let match = null;
+    for (let i = 0; i < dms.length; i++){
+      let users = dms[i].users
+      let sameUsers = this.sameUsers(users, stateUsers)
+      if ( sameUsers ){
+        return match = dms[i].id
+      }
+    }
+    return match
+  }
+
+  handleMouseEnter(i){
+    this.setState({
+      selectedUser: i
+    })
+  }
+
+  handleMouseLeave(){
+    this.setState({
+      selectedUser: null
+    })
+  }
+
+  mapUser(user, i){
+    return (
+      <li 
+        key={user.username} 
+        id={this.state.selectedUser === i ? "selected-suggested" : null}
+        onMouseEnter={()=>this.handleMouseEnter(i)}
+        onMouseLeave={this.handleMouseLeave}>
+          {user.username}
+      </li>
+    )
   }
 
 
@@ -66,13 +171,18 @@ class AddMembersModal extends React.Component{
       title: this.state.title
     })
     this.props.closeModal()
-    // this.props.selectThread(this.props.thread.threadId)
-
   }
 
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
+
+    const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
+    const suggestedUsersList = (
+      <ul className="suggested-users-list">
+        {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
+      </ul>
+    )
 
     let addMembers = <button className="add-members-button" onClick={this.handleSubmit}>Add Members</button>
     let skipForNow = <button className="skip-for-now" onClick={this.handleSubmit}>Skip for now</button>
@@ -109,7 +219,8 @@ class AddMembersModal extends React.Component{
                   onKeyDown={this.handleKeyDown}
                   />
                 </ul>
-                  {this.state.selectedUsers.length === 1 ? skipForNow : addMembers}
+                {suggestedUsersList}
+                {this.state.selectedUsers.length === 1 ? skipForNow : addMembers}
             </div>
           </div>
         </div>

@@ -10573,8 +10573,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
-
 
 
 
@@ -10589,16 +10587,7 @@ var mSTP = function mSTP(state, ownProps) {
   };
 };
 
-var mDTP = function mDTP(dispatch) {
-  return {
-    //I believe I can get rid of this code -- test later
-    submit: function submit(message) {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.createMessage)(message));
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_message_form__WEBPACK_IMPORTED_MODULE_0__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, null)(_message_form__WEBPACK_IMPORTED_MODULE_0__.default));
 
 /***/ }),
 
@@ -12395,19 +12384,45 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       creatorId: props.newChannel.creatorId,
       title: props.newChannel.title,
       selectedUsers: props.newChannel.selectedUsers,
-      newMember: ""
+      newMember: "",
+      suggestedUsers: []
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleMouseEnter = _this.handleMouseEnter.bind(_assertThisInitialized(_this));
+    _this.handleMouseLeave = _this.handleMouseLeave.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(AddMembersModal, [{
+    key: "matchedUser",
+    value: function matchedUser(user) {
+      return user.username.startsWith(this.state.newMember) && !this.state.selectedUsers.includes(user.id);
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(e) {
+      var _this2 = this;
+
+      var users = this.props.users;
+
+      if (this.state.selectedUser === null) {
+        this.setState({
+          selectedUser: 0
+        });
+      }
+
       this.setState({
         newMember: e.target.value
+      }, function () {
+        var suggestedUsers = Object.values(users).filter(function (user) {
+          return _this2.matchedUser(user);
+        });
+
+        _this2.setState({
+          suggestedUsers: suggestedUsers
+        });
       });
     }
   }, {
@@ -12423,9 +12438,46 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleKeyDown",
     value: function handleKeyDown(e) {
-      if (["Enter", "Tab", ","].includes(e.key)) {
+      if (e.key === "ArrowUp") {
         e.preventDefault();
-        var newMember = this.state.newMember.trim();
+
+        if (this.state.selectedUser === null) {
+          this.setState({
+            selectedUser: 0
+          });
+        } else {
+          var index = this.state.selectedUser === 0 ? this.state.suggestedUsers.length - 1 : (this.state.selectedUser - 1) % this.state.suggestedUsers.length;
+          this.setState({
+            selectedUser: index
+          });
+        }
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+
+        if (this.state.selectedUser === null) {
+          this.setState({
+            selectedUser: 0
+          });
+        } else {
+          var _index = (this.state.selectedUser + 1) % this.state.suggestedUsers.length;
+
+          this.setState({
+            selectedUser: _index
+          });
+        }
+      }
+
+      if (["Enter", "Tab", ","].includes(e.key)) {
+        debugger;
+        e.preventDefault();
+        var newMember;
+
+        if (this.state.selectedUser === null) {
+          newMember = this.state.newMember.trim();
+        } else {
+          newMember = this.state.suggestedUsers[this.state.selectedUser].username;
+        }
+
         var users = this.props.users;
 
         for (var key in users) {
@@ -12435,6 +12487,74 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
           });
         }
       }
+    }
+  }, {
+    key: "sameUsers",
+    value: function sameUsers(threadUsers, stateUsers) {
+      var dictionary = {};
+      threadUsers.forEach(function (id) {
+        return dictionary[id] = 1;
+      });
+
+      for (var i = 0; i < stateUsers.length; i++) {
+        if (dictionary[stateUsers[i]] === undefined) {
+          return false;
+        } else {
+          dictionary[stateUsers[i]]--;
+        }
+      }
+
+      if (Object.values(dictionary).every(function (el) {
+        return el === 0;
+      })) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }, {
+    key: "checkUsers",
+    value: function checkUsers(dms, stateUsers) {
+      var match = null;
+
+      for (var i = 0; i < dms.length; i++) {
+        var users = dms[i].users;
+        var sameUsers = this.sameUsers(users, stateUsers);
+
+        if (sameUsers) {
+          return match = dms[i].id;
+        }
+      }
+
+      return match;
+    }
+  }, {
+    key: "handleMouseEnter",
+    value: function handleMouseEnter(i) {
+      this.setState({
+        selectedUser: i
+      });
+    }
+  }, {
+    key: "handleMouseLeave",
+    value: function handleMouseLeave() {
+      this.setState({
+        selectedUser: null
+      });
+    }
+  }, {
+    key: "mapUser",
+    value: function mapUser(user, i) {
+      var _this3 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        key: user.username,
+        id: this.state.selectedUser === i ? "selected-suggested" : null,
+        onMouseEnter: function onMouseEnter() {
+          return _this3.handleMouseEnter(i);
+        },
+        onMouseLeave: this.handleMouseLeave
+      }, user.username);
     }
   }, {
     key: "handleSubmit",
@@ -12459,15 +12579,21 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         creator_id: this.props.newChannel.creator_id,
         title: this.state.title
       });
-      this.props.closeModal(); // this.props.selectThread(this.props.thread.threadId)
+      this.props.closeModal();
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
 
       var users = this.props.users;
       var selectedUsers = this.state.selectedUsers;
+      var suggestedUsers = this.state.suggestedUsers.map(function (suggestedUser, i) {
+        return _this4.mapUser(suggestedUser, i);
+      });
+      var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "suggested-users-list"
+      }, suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions"));
       var addMembers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "add-members-button",
         onClick: this.handleSubmit
@@ -12494,12 +12620,12 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "channel-recipients-list"
       }, selectedUsers.map(function (id) {
-        if (id !== _this2.props.currentUser) {
+        if (id !== _this4.props.currentUser) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
             key: id
           }, users[id].username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             onClick: function onClick() {
-              return _this2.removeUser(id);
+              return _this4.removeUser(id);
             }
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
             className: "remove-new-member-button",
@@ -12513,7 +12639,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         placeholder: this.state.selectedUsers.length === 1 ? "Enter a username" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      })), this.state.selectedUsers.length === 1 ? skipForNow : addMembers))));
+      })), suggestedUsersList, this.state.selectedUsers.length === 1 ? skipForNow : addMembers))));
     }
   }]);
 
@@ -12886,7 +13012,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
   _createClass(AddDirectMessage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchAllUsers(); // document.addEventListener("keydown", this.handle)
+      this.props.fetchAllUsers();
     }
   }, {
     key: "matchedUser",
@@ -12899,6 +13025,13 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var users = this.props.users;
+
+      if (this.state.selectedUser === null) {
+        this.setState({
+          selectedUser: 0
+        });
+      }
+
       this.setState({
         newMember: e.target.value
       }, function () {
@@ -13055,8 +13188,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         },
         onMouseLeave: this.handleMouseLeave
       }, user.username);
-    } //add autocomplete for users
-
+    }
   }, {
     key: "render",
     value: function render() {
