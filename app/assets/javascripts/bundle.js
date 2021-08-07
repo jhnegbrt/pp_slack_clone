@@ -10499,16 +10499,16 @@ var Client = /*#__PURE__*/function (_React$Component) {
             toggleModal: _this2.toggleModal
           }));
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
-        path: "/client/:threadId",
-        component: _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__.default
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/client/add",
         component: _threads_add_thread_add_dm_add_direct_message_container__WEBPACK_IMPORTED_MODULE_3__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/client/explore",
         component: _threads_add_thread_explore_explore_container__WEBPACK_IMPORTED_MODULE_4__.default
-      }), this.state.modal === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_threads_add_thread_add_channel_create_channel_modal__WEBPACK_IMPORTED_MODULE_5__.default, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+        path: "/client/:threadId",
+        component: _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__.default
+      })), this.state.modal === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_threads_add_thread_add_channel_create_channel_modal__WEBPACK_IMPORTED_MODULE_5__.default, {
         newChannel: this.state.newChannel,
         toggleModal: this.toggleModal,
         closeModal: this.closeModal,
