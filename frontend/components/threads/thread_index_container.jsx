@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import {fetchThreads } from '../../actions/thread_actions'
 import ThreadIndex from './thread_index'
 import {fetchAllUsers} from '../../actions/user_actions'
 import {receiveAllThreads, receiveThread, removeThread } from '../../actions/thread_actions'

@@ -9,6 +9,7 @@ const threadsReducer = (state = {}, action) =>{
       case RECEIVE_ALL_THREADS:
         return Object.assign({}, state, action.threads)
       case REMOVE_THREAD:
+        debugger
         let nextState = Object.assign({}, state)
         let thread = action.thread
         delete nextState[thread]

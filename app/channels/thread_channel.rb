@@ -86,7 +86,6 @@ class ThreadChannel < ApplicationCable::Channel
   end
 
   def leave_thread(data)
-    debugger
     ucd = UserChannelDm.where(user_id: data["user"]).where(channel_dm_id: data["thread"])
     ucd.delete_all
     socket = {

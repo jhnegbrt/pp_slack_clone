@@ -10235,6 +10235,7 @@ var receiveThread = function receiveThread(thread) {
   };
 };
 var removeThread = function removeThread(thread) {
+  debugger;
   return {
     type: REMOVE_THREAD,
     thread: thread
@@ -13749,10 +13750,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-/* harmony import */ var _thread_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./thread_index */ "./frontend/components/threads/thread_index.jsx");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
-
+/* harmony import */ var _thread_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_index */ "./frontend/components/threads/thread_index.jsx");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 
 
 
@@ -13769,21 +13769,21 @@ var mSTP = function mSTP(state, ownProps) {
 var mDTP = function mDTP(dispatch) {
   return {
     receiveThreads: function receiveThreads(threads) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveAllThreads)(threads));
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.receiveAllThreads)(threads));
     },
     receiveThread: function receiveThread(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveThread)(thread));
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.receiveThread)(thread));
     },
     fetchAllUsers: function fetchAllUsers() {
-      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__.fetchAllUsers)());
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers)());
     },
     removeThread: function removeThread(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.removeThread)(thread));
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.removeThread)(thread));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_thread_index__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_thread_index__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -14420,6 +14420,7 @@ var threadsReducer = function threadsReducer() {
       return Object.assign({}, state, action.threads);
 
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_THREAD:
+      debugger;
       var nextState = Object.assign({}, state);
       var thread = action.thread;
       delete nextState[thread];
