@@ -10502,7 +10502,7 @@ var Client = /*#__PURE__*/function (_React$Component) {
           }));
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
-        path: "/client/thread/:threadId",
+        path: "/client/:threadId",
         component: _threads_thread_display_container__WEBPACK_IMPORTED_MODULE_0__.default
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
         path: "/client/add",
@@ -11272,7 +11272,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       this.setState({
         content: ""
       });
-      this.props.history.push("/client/thread/".concat(this.props.searchDmId));
+      this.props.history.push("/client/".concat(this.props.searchDmId));
     } //this method creates a new DM if the user sends a message to a group or individual 
     //that they do not yet have a dm with
 
@@ -11333,7 +11333,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
           message: message
         });
 
-        _this2.props.history.push("/client/thread/".concat(res.threadId));
+        _this2.props.history.push("/client/".concat(res.threadId));
       });
     } //creatorId and users are still undefined
 
@@ -13893,7 +13893,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
         onClick: this.selectThread,
         activeClassName: "active-thread",
-        to: "/client/thread/".concat(this.props.thread.id)
+        to: "/client/".concat(this.props.thread.id)
       }, this.props.thread.channel === true ? this.props.thread.title : title));
     }
   }]);

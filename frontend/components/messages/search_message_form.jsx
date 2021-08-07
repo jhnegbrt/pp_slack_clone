@@ -56,7 +56,7 @@ class SearchMessageForm extends React.Component{
     this.setState({
         content: ""
     })
-    this.props.history.push(`/client/thread/${this.props.searchDmId}`)
+    this.props.history.push(`/client/${this.props.searchDmId}`)
   }
 
 
@@ -109,7 +109,7 @@ class SearchMessageForm extends React.Component{
         created: true
       }
       subscriptions[index].speak({ message: message})
-      this.props.history.push(`/client/thread/${res.threadId}`)
+      this.props.history.push(`/client/${res.threadId}`)
     })
     
   }
