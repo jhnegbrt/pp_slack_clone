@@ -13,16 +13,14 @@ export const receiveCurrentThread = (threadId) => {
   })
 }
 
-export const receiveThread = (thread) =>{
-  return({
-    type: RECEIVE_THREAD,
-    thread
-  })
-}
+export const receiveThread = (thread) =>({
+  type: RECEIVE_THREAD,
+  thread
+})
 
-export const removeThread = threadId => ({
+export const removeThread = thread => ({
   type: REMOVE_THREAD,
-  threadId
+  thread
 })
 
 export const receiveAllThreads = (threads) => {

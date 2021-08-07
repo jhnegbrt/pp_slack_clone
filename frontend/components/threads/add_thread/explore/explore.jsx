@@ -11,7 +11,14 @@ class Explore extends React.Component{
   }
 
   mapThread(thread){
-    return <ExploreItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>
+    console.log(this.props.usersChannels[thread.id])
+    return (
+    <ExploreItemContainer 
+      thread={thread} 
+      key={thread.id} 
+      threadId={thread.channel_dms_id}
+      member={this.props.usersChannels[thread.id] === undefined ? false : true}
+    />)
   }
 
   render(){
@@ -26,7 +33,7 @@ class Explore extends React.Component{
         <div className="channel-count">{channelCount} channels</div>
         <div className="explore-item-container">
           <ul className='public-channels'>
-            {publicChannels.map(this.mapThread)}
+            {publicChannels.map(this.mapThread, this)}
           </ul>
         </div>
       </div>

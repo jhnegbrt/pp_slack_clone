@@ -10234,10 +10234,10 @@ var receiveThread = function receiveThread(thread) {
     thread: thread
   };
 };
-var removeThread = function removeThread(threadId) {
+var removeThread = function removeThread(thread) {
   return {
     type: REMOVE_THREAD,
-    threadId: threadId
+    thread: thread
   };
 };
 var receiveAllThreads = function receiveAllThreads(threads) {
@@ -13207,10 +13207,12 @@ var Explore = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "mapThread",
     value: function mapThread(thread) {
+      console.log(this.props.usersChannels[thread.id]);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_explore_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         thread: thread,
         key: thread.id,
-        threadId: thread.channel_dms_id
+        threadId: thread.channel_dms_id,
+        member: this.props.usersChannels[thread.id] === undefined ? false : true
       });
     }
   }, {
@@ -13228,7 +13230,7 @@ var Explore = /*#__PURE__*/function (_React$Component) {
         className: "explore-item-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "public-channels"
-      }, publicChannels.map(this.mapThread))));
+      }, publicChannels.map(this.mapThread, this))));
     }
   }]);
 
@@ -13259,7 +13261,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    publicChannels: Object.values(state.entities.workspace.publicChannels)
+    publicChannels: Object.values(state.entities.workspace.publicChannels),
+    usersChannels: state.entities.threads
   };
 };
 
@@ -13390,7 +13393,10 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
         className: "explore-item",
         onMouseEnter: this.hovering,
         onMouseLeave: this.notHovering
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.thread.title), this.state.hover === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.thread.title), this.state.hover === true ? this.props.member ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "leave-button",
+        onClick: this.leaveChannel
+      }, "Leave") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "join-button",
         onClick: this.joinChannel
       }, "Join") : null);
@@ -13746,9 +13752,6 @@ var mSTP = function mSTP(state, ownProps) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    fetchThreads: function fetchThreads() {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.fetchThreads)());
-    },
     receiveThreads: function receiveThreads(threads) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.receiveAllThreads)(threads));
     },
@@ -13757,6 +13760,9 @@ var mDTP = function mDTP(dispatch) {
     },
     fetchAllUsers: function fetchAllUsers() {
       return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__.fetchAllUsers)());
+    },
+    removeThread: function removeThread(thread) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.removeThread)(thread));
     }
   };
 };
@@ -14399,8 +14405,8 @@ var threadsReducer = function threadsReducer() {
 
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_THREAD:
       var nextState = Object.assign({}, state);
-      var threadId = action.threadId;
-      delete nextState[threadId];
+      var thread = action.thread;
+      delete nextState[thread];
       return nextState;
 
     default:
@@ -14615,7 +14621,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createThreadsConnection)
 /* harmony export */ });
-function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads) {
+function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads, removeThread) {
   App.cable.subscriptions.create({
     channel: "ThreadChannel",
     user_id: currentUserId
@@ -14629,13 +14635,17 @@ function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads
         case "threads":
           receiveAllThreads(data.threads);
           break;
+
+        case "leave":
+          removeThread(data.thread);
+          break;
       }
     },
     load: function load() {
       return this.perform("load");
     },
-    speak: function speak(thread) {
-      return this.perform("speak", thread);
+    speak: function speak(data) {
+      return this.perform("speak", data);
     },
     leaveThread: function leaveThread(data) {
       return this.perform("leave_thread", data);

@@ -54,13 +54,19 @@ class ExploreItem extends React.Component{
   }
 
   render(){
+
+    
     return(
       <div className="explore-item"
       onMouseEnter={this.hovering}
       onMouseLeave={this.notHovering}>
         <h4>{this.props.thread.title}</h4>
-        {this.state.hover === true ? 
-        <button className="join-button" onClick={this.joinChannel}>Join</button>: null}
+        {
+          this.state.hover === true ? 
+          this.props.member ? 
+          <button className="leave-button" onClick={this.leaveChannel}>Leave</button> :
+          <button className="join-button" onClick={this.joinChannel}>Join</button>: null
+        }
       </div>
     )
   }

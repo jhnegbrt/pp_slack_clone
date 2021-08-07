@@ -7,7 +7,6 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-
 class ThreadIndex extends React.Component{
   constructor(props){
     super(props)

@@ -11,6 +11,7 @@ export default function createThreadsConnection(currentUserId, receiveThread, re
             break
           case "threads":
             receiveAllThreads(data.threads)
+            break
           case "leave":
             removeThread(data.thread)
             break

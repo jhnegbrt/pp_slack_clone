@@ -42,8 +42,8 @@
   padding: 2%;
 }
 
-.join-button{
-  background-color: rgb(60, 139, 96);
+.join-button,
+.leave-button{
   margin-left: 3vw;
   border: 1px solid white;;
   border-radius: 5px;
@@ -52,6 +52,16 @@
   &:hover{
     cursor: pointer
   }
+}
+
+
+.join-button{
+  background-color: rgb(60, 139, 96);
+}
+
+.leave-button{
+  background-color: rgb(202, 49, 49);
+
 }
 
 
