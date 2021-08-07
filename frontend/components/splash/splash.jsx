@@ -32,23 +32,15 @@ class Splash extends React.Component{
   }
 
   render(){
-    let signUpLink;
-    let demoLink
+    let link1;
+    let link2;
     let width = window.innerWidth
     if(this.props.currentUser){
-      signUpLink = (
-        <li><span onClick={this.props.logout}>Logout</span></li>
-      )
+      link1 = <li><span onClick={this.props.logout}>Logout</span></li>
+      link2 = <li><Link id="app-link" to='/client'>App</Link></li>
     } else {
-      signUpLink = (
-        <li className="blink-me"><Link to='/signup'>Sign Up</Link></li>
-      )
-    }
-    if(this.props.currentUser){
-    } else {
-      demoLink = (
-        <li><Link to='/login'>Sign In/Demo</Link></li>
-      )
+      link1 = <li className="blink-me"><Link to='/signup'>Sign Up</Link></li>
+      link2 = <li><Link to='/login'>Sign In/Demo</Link></li>
     }
 
     let desktopNav = (
@@ -59,8 +51,8 @@ class Splash extends React.Component{
         <li><a href="#intro" >Introduction</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#technologies">Technologies</a></li>
-        {signUpLink}
-        {demoLink}
+        {link2}
+        {link1}
 
       </ul>
     </div>
@@ -77,8 +69,8 @@ class Splash extends React.Component{
               <li onClick={this.handleDropdown}><a href="#technologies">Technologies</a></li>
               <li onClick={this.handleDropdown}>Close Menu</li>
             </ul>
-          {signUpLink}
-          {demoLink}
+            {link1}
+            {link2}
 
         </ul>
 
