@@ -13006,6 +13006,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
     _this.handleMouseEnter = _this.handleMouseEnter.bind(_assertThisInitialized(_this));
     _this.handleMouseLeave = _this.handleMouseLeave.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -13089,6 +13090,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       if (["Enter", "Tab", ","].includes(e.key)) {
         e.preventDefault();
         var newMember;
+        debugger;
 
         if (this.state.selectedUser === null) {
           newMember = this.state.newMember.trim();
@@ -13099,7 +13101,25 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         var users = this.props.users;
 
         for (var key in users) {
-          if (users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id)) this.setState({
+          if (users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id)) {
+            this.setState({
+              selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
+              newMember: ""
+            });
+          }
+        }
+      }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      debugger;
+      var userName = e.target.innerText;
+      var users = this.props.users;
+
+      for (var key in users) {
+        if (users[key].username === userName && !this.state.selectedUsers.includes(users[key].id)) {
+          this.setState({
             selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
             newMember: ""
           });
@@ -13200,7 +13220,8 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         return _this4.mapUser(suggestedUser, i);
       });
       var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "suggested-users-list"
+        className: "suggested-users-list",
+        onClick: this.handleClick
       }, suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions"));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-dm-container"

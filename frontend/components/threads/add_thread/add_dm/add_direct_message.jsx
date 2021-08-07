@@ -16,6 +16,7 @@ class AddDirectMessage extends React.Component{
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount(){
@@ -81,6 +82,7 @@ class AddDirectMessage extends React.Component{
     if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
       let newMember
+      debugger
       if (this.state.selectedUser === null){
         newMember = this.state.newMember.trim()
       } else {
@@ -88,7 +90,22 @@ class AddDirectMessage extends React.Component{
       }
       const {users} = this.props
       for (const key in users){
-        if(users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id))
+        if(users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id)){
+          this.setState({
+            selectedUsers: [...this.state.selectedUsers, users[key].id],
+            newMember: ""
+          })
+        }
+      }
+    }
+  }
+
+  handleClick(e){
+    debugger
+    let userName = e.target.innerText
+    const {users} = this.props
+    for (const key in users){
+      if(users[key].username === userName && !this.state.selectedUsers.includes(users[key].id)){
         this.setState({
           selectedUsers: [...this.state.selectedUsers, users[key].id],
           newMember: ""
@@ -172,7 +189,7 @@ class AddDirectMessage extends React.Component{
     const selectedUsers = this.state.selectedUsers
     const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
     const suggestedUsersList = (
-      <ul className="suggested-users-list">
+      <ul className="suggested-users-list" onClick={this.handleClick}>
         {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
       </ul>
     )
