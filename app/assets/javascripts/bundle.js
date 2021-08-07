@@ -11790,7 +11790,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         }, "Logout"));
         link2 = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
           id: "app-link",
-          to: "/client"
+          to: "/client/explore"
         }, "App"));
       } else {
         link1 = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {

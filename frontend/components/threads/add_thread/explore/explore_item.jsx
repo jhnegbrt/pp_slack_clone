@@ -69,9 +69,7 @@ class ExploreItem extends React.Component{
 
   }
 
-  render(){
-
-    
+  render(){   
     return(
       <div className="explore-item"
       onMouseEnter={this.hovering}

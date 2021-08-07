@@ -37,7 +37,7 @@ class Splash extends React.Component{
     let width = window.innerWidth
     if(this.props.currentUser){
       link1 = <li><span onClick={this.props.logout}>Logout</span></li>
-      link2 = <li><Link id="app-link" to='/client'>App</Link></li>
+      link2 = <li><Link id="app-link" to='/client/explore'>App</Link></li>
     } else {
       link1 = <li className="blink-me"><Link to='/signup'>Sign Up</Link></li>
       link2 = <li><Link to='/login'>Sign In/Demo</Link></li>
