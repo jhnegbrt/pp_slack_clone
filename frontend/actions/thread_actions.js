@@ -18,15 +18,10 @@ export const receiveThread = (thread) =>({
   thread
 })
 
-export const removeThread = thread => {
-  debugger
-  return(
-    {  
-      type: REMOVE_THREAD,
-      thread
-    }
-  )
-}
+export const removeThread = thread => ({  
+  type: REMOVE_THREAD,
+  thread
+})
 
 
 export const receiveAllThreads = (threads) => {

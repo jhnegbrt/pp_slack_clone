@@ -10235,7 +10235,6 @@ var receiveThread = function receiveThread(thread) {
   };
 };
 var removeThread = function removeThread(thread) {
-  debugger;
   return {
     type: REMOVE_THREAD,
     thread: thread
@@ -10903,6 +10902,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
 
       var messages = this.filterMessages();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        style: {
+          maxHeight: this.props.type === "thread" ? '90vh' : '85vh'
+        },
         className: "messages-display"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "messages-container"
@@ -11216,19 +11218,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
     _this.updateContent = _this.updateContent.bind(_assertThisInitialized(_this));
     _this.createNewDirectMessage = _this.createNewDirectMessage.bind(_assertThisInitialized(_this));
     return _this;
-  } //not sure if i need this method, coming from message_form
-  //this method is making sure that the wildcard in the URL matches the currentTHread
-  // in state. If I do end up needing it, I can change currentThreadId to searchThread
-  // componentDidUpdate(){
-  //   if (this.props.formType === "Edit Message"){
-  //     return
-  //   } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
-  //     this.setState({
-  //       channel_dms_id: parseInt(this.props.currentThreadId)
-  //     })
-  //   } 
-  // };
-  //this message sends a new message to a thread that already exists if the user is 
+  } //this message sends a new message to a thread that already exists if the user is 
   //sending a message to users who they are already in a dm with
 
 
@@ -11330,9 +11320,9 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
 
       if (this.props.searchDmId === null) {
-        this.createNewDirectMessage(e); // this.props.selectThread(this.props.thread.threadId)
+        this.createNewDirectMessage(e);
       } else {
-        this.sendMessage(); // // this.props.selectThread(this.props.thread.threadId)
+        this.sendMessage();
       }
     }
   }, {
@@ -12392,6 +12382,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleMouseEnter = _this.handleMouseEnter.bind(_assertThisInitialized(_this));
     _this.handleMouseLeave = _this.handleMouseLeave.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -12468,7 +12459,6 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       }
 
       if (["Enter", "Tab", ","].includes(e.key)) {
-        debugger;
         e.preventDefault();
         var newMember;
 
@@ -12582,6 +12572,21 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       this.props.closeModal();
     }
   }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      var userName = e.target.innerText;
+      var users = this.props.users;
+
+      for (var key in users) {
+        if (users[key].username === userName && !this.state.selectedUsers.includes(users[key].id)) {
+          this.setState({
+            selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
+            newMember: ""
+          });
+        }
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
@@ -12592,7 +12597,8 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         return _this4.mapUser(suggestedUser, i);
       });
       var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "suggested-users-list"
+        className: "suggested-users-list",
+        onClick: this.handleClick
       }, suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions"));
       var addMembers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "add-members-button",
@@ -12639,7 +12645,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         placeholder: this.state.selectedUsers.length === 1 ? "Enter a username" : "",
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
-      })), suggestedUsersList, this.state.selectedUsers.length === 1 ? skipForNow : addMembers))));
+      })), this.state.newMember.length > 0 ? suggestedUsersList : "", this.state.selectedUsers.length === 1 ? skipForNow : addMembers))));
     }
   }]);
 
@@ -13090,7 +13096,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       if (["Enter", "Tab", ","].includes(e.key)) {
         e.preventDefault();
         var newMember;
-        debugger;
 
         if (this.state.selectedUser === null) {
           newMember = this.state.newMember.trim();
@@ -13113,7 +13118,6 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleClick",
     value: function handleClick(e) {
-      debugger;
       var userName = e.target.innerText;
       var users = this.props.users;
 
@@ -14572,7 +14576,6 @@ var threadsReducer = function threadsReducer() {
       return Object.assign({}, state, action.threads);
 
     case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_THREAD:
-      debugger;
       var nextState = Object.assign({}, state);
       var thread = action.thread;
       delete nextState[thread];

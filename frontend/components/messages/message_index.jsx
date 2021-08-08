@@ -28,7 +28,7 @@ class MessageIndex extends React.Component{
   render(){ 
     const messages = this.filterMessages()
     return(
-      <div className="messages-display">
+      <div style={{maxHeight: this.props.type === "thread" ? '90vh' : '85vh'}} className="messages-display">
         <div className = "messages-container">
           <ul className="messages">
             {

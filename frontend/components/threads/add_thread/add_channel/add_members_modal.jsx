@@ -17,6 +17,7 @@ class AddMembersModal extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   matchedUser(user){
@@ -76,7 +77,6 @@ class AddMembersModal extends React.Component{
       }
     }
     if (["Enter", "Tab", ","].includes(e.key)){
-      debugger
       e.preventDefault()
       let newMember
       if (this.state.selectedUser === null){
@@ -115,7 +115,6 @@ class AddMembersModal extends React.Component{
   }
 
   checkUsers(dms, stateUsers){
-
     let match = null;
     for (let i = 0; i < dms.length; i++){
       let users = dms[i].users
@@ -173,13 +172,26 @@ class AddMembersModal extends React.Component{
     this.props.closeModal()
   }
 
+  handleClick(e){
+    let userName = e.target.innerText
+    const {users} = this.props
+    for (const key in users){
+      if(users[key].username === userName && !this.state.selectedUsers.includes(users[key].id)){
+        this.setState({
+          selectedUsers: [...this.state.selectedUsers, users[key].id],
+          newMember: ""
+        })
+      }
+    }
+  }
+
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
 
     const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
     const suggestedUsersList = (
-      <ul className="suggested-users-list">
+      <ul className="suggested-users-list" onClick={this.handleClick}>
         {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
       </ul>
     )
@@ -219,7 +231,7 @@ class AddMembersModal extends React.Component{
                   onKeyDown={this.handleKeyDown}
                   />
                 </ul>
-                {suggestedUsersList}
+                {this.state.newMember.length > 0 ? suggestedUsersList : ""}
                 {this.state.selectedUsers.length === 1 ? skipForNow : addMembers}
             </div>
           </div>

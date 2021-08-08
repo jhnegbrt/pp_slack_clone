@@ -15,21 +15,6 @@ class SearchMessageForm extends React.Component{
     this.createNewDirectMessage = this.createNewDirectMessage.bind(this)
   }
 
-  //not sure if i need this method, coming from message_form
-  //this method is making sure that the wildcard in the URL matches the currentTHread
-  // in state. If I do end up needing it, I can change currentThreadId to searchThread
-
-
-  // componentDidUpdate(){
-  //   if (this.props.formType === "Edit Message"){
-  //     return
-  //   } else if (this.state.channel_dms_id !== parseInt(this.props.currentThreadId)){
-  //     this.setState({
-  //       channel_dms_id: parseInt(this.props.currentThreadId)
-  //     })
-  //   } 
-  // };
-
   //this message sends a new message to a thread that already exists if the user is 
   //sending a message to users who they are already in a dm with
 
@@ -121,10 +106,8 @@ class SearchMessageForm extends React.Component{
     e.preventDefault()
     if (this.props.searchDmId === null){
       this.createNewDirectMessage(e)
-    // this.props.selectThread(this.props.thread.threadId)
     } else {
-      this. sendMessage()
-    // // this.props.selectThread(this.props.thread.threadId)
+      this.sendMessage()
     }
   }
 

@@ -82,7 +82,6 @@ class AddDirectMessage extends React.Component{
     if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
       let newMember
-      debugger
       if (this.state.selectedUser === null){
         newMember = this.state.newMember.trim()
       } else {
@@ -101,7 +100,6 @@ class AddDirectMessage extends React.Component{
   }
 
   handleClick(e){
-    debugger
     let userName = e.target.innerText
     const {users} = this.props
     for (const key in users){
@@ -223,7 +221,6 @@ class AddDirectMessage extends React.Component{
         <MessageIndexContainer 
         searchDmId={this.state.currentDm}
         selectedUsers={this.state.selectedUsers} />
-
       </div>
     )
   }
