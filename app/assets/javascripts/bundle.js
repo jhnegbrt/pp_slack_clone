@@ -13223,10 +13223,11 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       var suggestedUsers = this.state.suggestedUsers.map(function (suggestedUser, i) {
         return _this4.mapUser(suggestedUser, i);
       });
+      var reachedMaxUsers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Only 8 people can be in a Direct Message");
       var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "suggested-users-list",
+        className: this.state.selectedUsers.length < 8 ? "suggested-users-list" : "suggested-users-list max-users",
         onClick: this.handleClick
-      }, suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions"));
+      }, this.state.selectedUsers.length < 8 ? suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions") : reachedMaxUsers);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "add-dm-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

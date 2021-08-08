@@ -181,14 +181,18 @@ class AddDirectMessage extends React.Component{
     )
   }
 
-
   render(){
     const {users} = this.props
     const selectedUsers = this.state.selectedUsers
     const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
+    const reachedMaxUsers = <li>Only 8 people can be in a Direct Message</li>
     const suggestedUsersList = (
-      <ul className="suggested-users-list" onClick={this.handleClick}>
-        {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
+      <ul className={this.state.selectedUsers.length < 8 ? "suggested-users-list" : "suggested-users-list max-users"} onClick={this.handleClick}>
+        {
+          this.state.selectedUsers.length < 8 ? 
+          suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>:
+          reachedMaxUsers
+        }
       </ul>
     )
     return(
