@@ -13095,38 +13095,36 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
 
       if (["Enter", "Tab", ","].includes(e.key)) {
         e.preventDefault();
-        var newMember;
+        var username;
 
         if (this.state.selectedUser === null) {
-          newMember = this.state.newMember.trim();
+          username = this.state.newMember.trim();
         } else {
-          newMember = this.state.suggestedUsers[this.state.selectedUser].username;
+          username = this.state.suggestedUsers[this.state.selectedUser].username;
         }
 
-        var users = this.props.users;
-
-        for (var key in users) {
-          if (users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id)) {
-            this.setState({
-              selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
-              newMember: ""
-            });
-          }
-        }
+        this.addUser(username);
       }
     }
   }, {
     key: "handleClick",
     value: function handleClick(e) {
-      var userName = e.target.innerText;
-      var users = this.props.users;
+      var username = e.target.innerText;
+      this.addUser(username);
+    }
+  }, {
+    key: "addUser",
+    value: function addUser(username) {
+      if (this.state.selectedUsers.length < 8) {
+        var users = this.props.users;
 
-      for (var key in users) {
-        if (users[key].username === userName && !this.state.selectedUsers.includes(users[key].id)) {
-          this.setState({
-            selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
-            newMember: ""
-          });
+        for (var key in users) {
+          if (users[key].username === username && !this.state.selectedUsers.includes(users[key].id)) {
+            this.setState({
+              selectedUsers: [].concat(_toConsumableArray(this.state.selectedUsers), [users[key].id]),
+              newMember: ""
+            });
+          }
         }
       }
     }

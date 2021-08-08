@@ -81,33 +81,31 @@ class AddDirectMessage extends React.Component{
     }
     if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
-      let newMember
+      let username
       if (this.state.selectedUser === null){
-        newMember = this.state.newMember.trim()
+        username = this.state.newMember.trim()
       } else {
-        newMember = this.state.suggestedUsers[this.state.selectedUser].username
+        username = this.state.suggestedUsers[this.state.selectedUser].username
       }
+      this.addUser(username)
+    }
+  }
+
+  handleClick(e){
+    let username = e.target.innerText
+    this.addUser(username)
+  }
+
+  addUser(username){
+    if (this.state.selectedUsers.length < 8){
       const {users} = this.props
       for (const key in users){
-        if(users[key].username === newMember && !this.state.selectedUsers.includes(users[key].id)){
+        if(users[key].username === username && !this.state.selectedUsers.includes(users[key].id)){
           this.setState({
             selectedUsers: [...this.state.selectedUsers, users[key].id],
             newMember: ""
           })
         }
-      }
-    }
-  }
-
-  handleClick(e){
-    let userName = e.target.innerText
-    const {users} = this.props
-    for (const key in users){
-      if(users[key].username === userName && !this.state.selectedUsers.includes(users[key].id)){
-        this.setState({
-          selectedUsers: [...this.state.selectedUsers, users[key].id],
-          newMember: ""
-        })
       }
     }
   }
