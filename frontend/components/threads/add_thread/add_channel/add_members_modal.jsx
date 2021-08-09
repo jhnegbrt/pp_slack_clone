@@ -10,7 +10,8 @@ class AddMembersModal extends React.Component{
       title: props.newChannel.title,
       selectedUsers: props.newChannel.selectedUsers,
       newMember: "",
-      suggestedUsers: []
+      suggestedUsers: [],
+      selectedUser: 0
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)

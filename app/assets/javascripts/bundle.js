@@ -12375,7 +12375,8 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
       title: props.newChannel.title,
       selectedUsers: props.newChannel.selectedUsers,
       newMember: "",
-      suggestedUsers: []
+      suggestedUsers: [],
+      selectedUser: 0
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleKeyDown = _this.handleKeyDown.bind(_assertThisInitialized(_this));
