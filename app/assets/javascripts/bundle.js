@@ -11596,7 +11596,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
           className: "sleuth-form"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           onClick: this.enterSleuthMode
-        }, "Enter as Sleuth!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter With Sleuth Mode to chat Anonymously. Read more ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", null, "here")));
+        }, "Enter as Sleuth!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter With Sleuth Mode to chat Anonymously."));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
