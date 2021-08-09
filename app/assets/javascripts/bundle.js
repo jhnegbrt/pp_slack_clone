@@ -12597,7 +12597,7 @@ var AddMembersModal = /*#__PURE__*/function (_React$Component) {
         return _this4.mapUser(suggestedUser, i);
       });
       var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-        className: "suggested-users-list",
+        className: "suggested-users-list-channel",
         onClick: this.handleClick
       }, suggestedUsers.length > 0 ? suggestedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "No suggestions"));
       var addMembers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {

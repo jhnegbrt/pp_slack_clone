@@ -191,7 +191,7 @@ class AddMembersModal extends React.Component{
 
     const suggestedUsers = this.state.suggestedUsers.map((suggestedUser, i)=>{return this.mapUser(suggestedUser, i)})
     const suggestedUsersList = (
-      <ul className="suggested-users-list" onClick={this.handleClick}>
+      <ul className="suggested-users-list-channel" onClick={this.handleClick}>
         {suggestedUsers.length > 0 ? suggestedUsers : <li>No suggestions</li>}
       </ul>
     )
