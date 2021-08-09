@@ -10976,7 +10976,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _edit_message_form_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit_message_form_container */ "./frontend/components/messages/edit_message_form_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -11117,9 +11116,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "message-name"
       }, this.props.message.sender) : null, time_diff > 18000 || new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-time"
-      }, time) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-        to: "/messages/".concat(this.props.message.id)
-      }, this.props.message.content)), this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null);
+      }, time) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.message.content), this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null);
       return this.state.editting ? edit : display;
     }
   }]);
