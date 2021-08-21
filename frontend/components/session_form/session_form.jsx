@@ -6,7 +6,9 @@ class SessionForm extends React.Component {
     super(props)
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      passwordConfirmation: "",
+      errors: []
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -14,10 +16,21 @@ class SessionForm extends React.Component {
     this.enterSleuthMode = this.enterSleuthMode.bind(this)
   }
 
+  passwordsMatch(){
+    return this.state.password === this.state.passwordConfirmation
+  }
+
   handleSubmit(e){
     e.preventDefault();
-    const user = Object.assign({}, this.state)
-    this.props.processForm(user);
+    debugger
+    if (this.props.formType === "signup" && this.passwordsMatch() === false){
+      this.setState({
+        errors: ["Passwords must match!"]
+      })
+    } else {
+      const user = Object.assign({}, {password: this.state.password, username: this.state.username})
+      this.props.processForm(user);
+    }
   }
 
   enterSleuthMode(e){
@@ -35,7 +48,12 @@ class SessionForm extends React.Component {
     return(
       <ul className="session-errors">
         {this.props.errors.map((error, i) =>(
-          <li key={`error-${i}`}>
+          <li key={`error-props-${i}`}>
+            {error}
+          </li>
+        ))}
+        {this.state.errors.map((error, i)=>(
+          <li key={`error-state-${i}`}>
             {error}
           </li>
         ))}
@@ -60,27 +78,22 @@ class SessionForm extends React.Component {
   }
 
   render(){
-    let formType;
-    let sleuthDemo;
-
-    if (this.props.formType === "signin"){
-      formType = "Sign In"
-    } else {
-      formType = "Sign Up"
-    }
-
-
-    if (this.props.formType === "signin"){
-      sleuthDemo = (
+    let {formType} = this.props
+    let sleuthDemo = (
         <div className="sleuth-form">
             <button onClick={this.enterSleuthMode}>Enter as Sleuth!</button>
             <h3>Enter With Sleuth Mode to chat Anonymously.</h3>
         </div>
-      )
-    }
+    )
+
+    let passwordConfirmation = (
+      <label>
+        <input type="password" placeholder="CONFIRM PASSWORD" value={this.state.passwordConfirmation} name="passwordConfirmation" onChange={this.handleChange}></input>
+      </label>
+    )
 
     return(
-      <div className = "sign-form-container">
+      <div className="sign-form-container">
       <div className="sign-form">
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -89,14 +102,13 @@ class SessionForm extends React.Component {
           <label>
             <input type="password" placeholder="PASSWORD" value={this.state.password} name="password"  onChange={this.handleChange}></input>
           </label>
-          <input type="submit" value={formType}></input>
+          {formType === "signup" ? passwordConfirmation : ""}
+          <input type="submit" value={formType === "signin" ? "Sign In" : "Sign Up"}></input>
         </form>
         {this.renderSwitchButton()}
         {this.renderErrors()}
       </div>
-
-        {sleuthDemo}
- 
+        {formType === "signin" ? sleuthDemo : ""}
       </div>
 
     )

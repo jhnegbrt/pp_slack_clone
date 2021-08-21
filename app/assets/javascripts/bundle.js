@@ -11520,7 +11520,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       username: "",
-      password: ""
+      password: "",
+      passwordConfirmation: "",
+      errors: []
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -11529,11 +11531,27 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SessionForm, [{
+    key: "passwordsMatch",
+    value: function passwordsMatch() {
+      return this.state.password === this.state.passwordConfirmation;
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var user = Object.assign({}, this.state);
-      this.props.processForm(user);
+      debugger;
+
+      if (this.props.formType === "signup" && this.passwordsMatch() === false) {
+        this.setState({
+          errors: ["Passwords must match!"]
+        });
+      } else {
+        var user = Object.assign({}, {
+          password: this.state.password,
+          username: this.state.username
+        });
+        this.props.processForm(user);
+      }
     }
   }, {
     key: "enterSleuthMode",
@@ -11556,7 +11574,11 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         className: "session-errors"
       }, this.props.errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          key: "error-".concat(i)
+          key: "error-props-".concat(i)
+        }, error);
+      }), this.state.errors.map(function (error, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: "error-state-".concat(i)
         }, error);
       }));
     }
@@ -11581,23 +11603,19 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var formType;
-      var sleuthDemo;
-
-      if (this.props.formType === "signin") {
-        formType = "Sign In";
-      } else {
-        formType = "Sign Up";
-      }
-
-      if (this.props.formType === "signin") {
-        sleuthDemo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "sleuth-form"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-          onClick: this.enterSleuthMode
-        }, "Enter as Sleuth!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter With Sleuth Mode to chat Anonymously."));
-      }
-
+      var formType = this.props.formType;
+      var sleuthDemo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "sleuth-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.enterSleuthMode
+      }, "Enter as Sleuth!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Enter With Sleuth Mode to chat Anonymously."));
+      var passwordConfirmation = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "password",
+        placeholder: "CONFIRM PASSWORD",
+        value: this.state.passwordConfirmation,
+        name: "passwordConfirmation",
+        onChange: this.handleChange
+      }));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "sign-form-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -11616,10 +11634,10 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         value: this.state.password,
         name: "password",
         onChange: this.handleChange
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      })), formType === "signup" ? passwordConfirmation : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
-        value: formType
-      })), this.renderSwitchButton(), this.renderErrors()), sleuthDemo);
+        value: formType === "signin" ? "Sign In" : "Sign Up"
+      })), this.renderSwitchButton(), this.renderErrors()), formType === "signin" ? sleuthDemo : "");
     }
   }]);
 
@@ -11645,7 +11663,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _session_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session_form */ "./frontend/components/session_form/session_form.jsx");
-
 
 
 
