@@ -18,29 +18,31 @@
 }
 
 .thread-index li a{
-  padding: 1vh;
+  padding: .6vh;
 }
 
 .thread-index li{
-  margin-top: 1vh;
-  margin-bottom: 1vh;
+  margin-left: 1vw;
 }
 
 .create-channel a:hover,
 .create-channel .plus-sign:hover,
-.thread-header:hover,
 .thread-index li:hover{
   background-color: rgb(44, 44, 83);
   border-radius: 5px;
+  cursor: pointer
 }
 
 .thread-header{
-  margin-left: 1vh;
+  padding-top: 1%;
+  margin-left: .5vw;
+  padding-left: .5vw;
   color: white;
-  height: 5vh;
+  height: 3vh;
   display:flex;
   align-items: center;
   &:hover{
+    border-radius: 5px;
     background-color:rgb(44, 44, 83);
     cursor: pointer
   }

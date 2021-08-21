@@ -210,26 +210,27 @@
 
 .create-channel{
   color:white;
-  font-size: 2vh;
   border-radius: 2px;
-  padding: 1%;
-  margin-right: 3vw;
   position: relative;
-  text-align: center;
+  display: flex;
+  margin-left: 1vw;
+  padding-left: 1vh;
+  align-items: center;
 }
 
 .create-channel a{
+  padding-top: .6vh;
+  padding-bottom: .6vh;
   text-decoration: none;
   color: white;
+  width: 100%;
+  margin-left: .5vw;
+  padding-left: .5vw;
   &:hover{
     color:white;
     cursor:pointer;
   }
 }
-
-// .create-channel:hover{
-//   color:white;
-// }
 
 .skip-for-now,
 .add-members-button{
