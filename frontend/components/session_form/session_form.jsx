@@ -22,7 +22,6 @@ class SessionForm extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    debugger
     if (this.props.formType === "signup" && this.passwordsMatch() === false){
       this.setState({
         errors: ["Passwords must match!"]
