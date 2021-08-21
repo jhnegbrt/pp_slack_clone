@@ -1,5 +1,5 @@
-import ThreadDisplayContainer from '../threads/thread_display_container'
-import ThreadIndexContainer from '../threads/thread_index_container'
+import ThreadDisplayContainer from '../threads/thread_display/thread_display_container'
+import ThreadIndexContainer from '../threads/thread_index/thread_index_container'
 import React from 'react'
 import AddDirectMessageContainer from '../threads/add_thread/add_dm/add_direct_message_container'
 import ExploreContainer from '../threads/add_thread/explore/explore_container'

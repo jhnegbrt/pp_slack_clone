@@ -1,6 +1,6 @@
 import React from 'react'
-import MessageIndexContainer from '../messages/message_index_container'
-import ThreadTitleContainer from './thread_title_container'
+import MessageIndexContainer from '../../messages/message_index_container'
+import ThreadTitleContainer from '../thread_title/thread_title_container'
 
 
 class ThreadDisplay extends React.Component{

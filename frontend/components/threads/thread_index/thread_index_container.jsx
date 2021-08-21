@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ThreadIndex from './thread_index'
-import {fetchAllUsers} from '../../actions/user_actions'
-import {receiveAllThreads, receiveThread, removeThread } from '../../actions/thread_actions'
+import {fetchAllUsers} from '../../../actions/user_actions'
+import {receiveAllThreads, receiveThread, removeThread } from '../../../actions/thread_actions'
 
 const mSTP = (state, ownProps) =>({
     threads: Object.values(state.entities.threads),
