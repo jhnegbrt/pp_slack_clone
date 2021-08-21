@@ -11968,7 +11968,7 @@ __webpack_require__.r(__webpack_exports__);
 function SplashIntro() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "intro"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Modeled after 'Slack', Sleuth is a workspace based chat application with a custom theme and functionality"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Sign Up or Sign-In with a personal account, or enter with Sleuth Mode to chat anonymously or demo Sleuth."));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Modeled after 'Slack', ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), " is a workspace based chat application with a custom theme and functionality"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Sign Up or Sign-In with a personal account, or enter with as the Sleuth to chat anonymously or demo ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), "."));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SplashIntro);
