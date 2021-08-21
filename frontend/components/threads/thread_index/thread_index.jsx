@@ -3,7 +3,7 @@ import ThreadIndexItemContainer from './thread_index_item_container'
 import createThreadsConnection from '../../../util/create_threads_connection'
 import AddChannelButton from './add_channel_button'
 import {Link} from 'react-router-dom'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -15,6 +15,7 @@ class ThreadIndex extends React.Component{
       showDms: true
     })
     this.toggleDropDown = this.toggleDropDown.bind(this)
+    this.addConversation = this.addConversation.bind(this)
   }
 
   componentDidMount(){
@@ -43,27 +44,37 @@ class ThreadIndex extends React.Component{
     })
   }
 
+  addConversation(e){
+    e.stopPropagation()
+    this.props.history.push('/client/add')
+  }
+
   render(){
-
-
     const { threads } = this.props
     const dmIndex = (
-      <ul className="dm-index">
-      {
-        threads.map(this.mapDirectMessages)
-      }
-      <div className="create-channel-button"><Link to='/client/add'>New Conversation</Link></div>
-    </ul>
+      <div>
+        <ul className="dm-index">
+          {
+            threads.map(this.mapDirectMessages)
+          }
+        </ul>
+        <div onClick={this.addConversation} className="create-channel">
+          <FontAwesomeIcon className="plus-sign" icon={faPlusSquare} />
+          <a>New Conversation</a>
+        </div>
+      </div>
     )
     const channelIndex = (
-      <ul className="channel-index">
-      {
-        threads.map(this.mapChannels)
-      }
-
-      <AddChannelButton toggleModal={this.props.toggleModal} />
-
-    </ul>
+      <div>
+        <ul className="channel-index">
+          {
+            threads.map(this.mapChannels)
+          }
+        </ul>
+        <div>
+          <AddChannelButton toggleModal={this.props.toggleModal} />
+        </div>
+      </div>
     )
     return(
       <div className="thread-index">

@@ -208,7 +208,7 @@
 }
 
 
-.create-channel-button{
+.create-channel{
   color:white;
   font-size: 2vh;
   border-radius: 2px;
@@ -218,7 +218,7 @@
   text-align: center;
 }
 
-.create-channel-button a{
+.create-channel a{
   text-decoration: none;
   color: white;
   &:hover{
@@ -227,10 +227,9 @@
   }
 }
 
-.create-channel-button:hover{
-  cursor:pointer;
-  color:white;
-}
+// .create-channel:hover{
+//   color:white;
+// }
 
 .skip-for-now,
 .add-members-button{

@@ -26,7 +26,8 @@
   margin-bottom: 1vh;
 }
 
-.create-channel-button:hover,
+.create-channel a:hover,
+.create-channel .plus-sign:hover,
 .thread-header:hover,
 .thread-index li:hover{
   background-color: rgb(44, 44, 83);
@@ -57,8 +58,10 @@
   color: white;
   font-size: 3vh;
   border-radius: 1px;
-  padding-left:1%;
-  padding-right:1%;
+  padding-left:1.5%;
+  padding-right:1.5%;
+  border-radius: 5px;
+
   &:hover{
     background-color:rgb(44, 44, 83);
     cursor: pointer;
@@ -97,11 +100,6 @@
 
 }
 
-
-.create-channel-button:hover{
-  cursor:pointer;
-
-}
 
 .little-triangle{
   content: "";

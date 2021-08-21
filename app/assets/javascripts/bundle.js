@@ -13759,8 +13759,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_index_item_container */ "./frontend/components/threads/thread_index/thread_index_item_container.jsx");
 /* harmony import */ var _util_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../util/create_threads_connection */ "./frontend/util/create_threads_connection.jsx");
 /* harmony import */ var _add_channel_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./add_channel_button */ "./frontend/components/threads/thread_index/add_channel_button.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -13810,6 +13809,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       showDms: true
     };
     _this.toggleDropDown = _this.toggleDropDown.bind(_assertThisInitialized(_this));
+    _this.addConversation = _this.addConversation.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -13853,23 +13853,31 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       this.setState(_defineProperty({}, thread, !this.state[thread]));
     }
   }, {
+    key: "addConversation",
+    value: function addConversation(e) {
+      e.stopPropagation();
+      this.props.history.push('/client/add');
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
       var threads = this.props.threads;
-      var dmIndex = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      var dmIndex = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "dm-index"
-      }, threads.map(this.mapDirectMessages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "create-channel-button"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        to: "/client/add"
-      }, "New Conversation")));
-      var channelIndex = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, threads.map(this.mapDirectMessages)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        onClick: this.addConversation,
+        className: "create-channel"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_4__.FontAwesomeIcon, {
+        className: "plus-sign",
+        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faPlusSquare
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", null, "New Conversation")));
+      var channelIndex = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "channel-index"
-      }, threads.map(this.mapChannels), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_channel_button__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, threads.map(this.mapChannels)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_add_channel_button__WEBPACK_IMPORTED_MODULE_3__.default, {
         toggleModal: this.props.toggleModal
-      }));
+      })));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-index"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -13879,7 +13887,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
           return _this2.toggleDropDown("showChannels");
         },
         className: this.state.showChannels ? "caret" : "caret close-caret",
-        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faCaretDown
+        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faCaretDown
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
         onClick: function onClick() {
           return _this2.toggleDropDown("showChannels");
@@ -13892,7 +13900,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
           return _this2.toggleDropDown("showDms");
         },
         className: this.state.showDms ? "caret" : "caret close-caret",
-        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faCaretDown
+        icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__.faCaretDown
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
         onClick: function onClick() {
           return _this2.toggleDropDown("showDms");
