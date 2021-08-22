@@ -10019,9 +10019,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_MESSAGE_ERRORS": () => (/* binding */ RECEIVE_MESSAGE_ERRORS),
 /* harmony export */   "RECEIVE_MESSAGES": () => (/* binding */ RECEIVE_MESSAGES),
 /* harmony export */   "CLEAR_MESSAGE_ERRORS": () => (/* binding */ CLEAR_MESSAGE_ERRORS),
-/* harmony export */   "CLEAR_MESSAGES": () => (/* binding */ CLEAR_MESSAGES),
 /* harmony export */   "receiveMessages": () => (/* binding */ receiveMessages),
-/* harmony export */   "clearMessages": () => (/* binding */ clearMessages),
 /* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
 /* harmony export */   "removeMessage": () => (/* binding */ removeMessage),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
@@ -10035,7 +10033,6 @@ var REMOVE_MESSAGE = "REMOVE_MESSAGE";
 var RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS";
 var RECEIVE_MESSAGES = "RECEIVE_MESSAGES";
 var CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS";
-var CLEAR_MESSAGES = "CLEAR_MESSAGES";
 
 var receiveErrors = function receiveErrors(errors) {
   return {
@@ -10054,11 +10051,6 @@ var receiveMessages = function receiveMessages(data) {
   return {
     type: RECEIVE_MESSAGES,
     messages: data.messages
-  };
-};
-var clearMessages = function clearMessages() {
-  return {
-    type: CLEAR_MESSAGES
   };
 };
 var receiveMessage = function receiveMessage(message) {
@@ -10888,13 +10880,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.fetchMessages();
-    } // componentWillUpdate(){
-    //   debugger
-    // }
-    // componentWillUnmount(){
-    //   this.props.clearMessages()
-    // }
-
+    }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
@@ -10908,28 +10894,11 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       this.bottom.current.scrollIntoView();
     }
   }, {
-    key: "filterMessages",
-    value: function filterMessages() {
+    key: "render",
+    value: function render() {
       var _this2 = this;
 
       var messages = this.props.messages;
-
-      if (this.props.currentThreadId) {
-        return messages.filter(function (el) {
-          return el.channel_dms_id === parseInt(_this2.props.currentThreadId);
-        });
-      } else {
-        return messages.filter(function (el) {
-          return el.channel_dms_id === parseInt(_this2.props.searchDmId);
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var messages = this.filterMessages();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {
           maxHeight: this.props.type === "thread" ? '90vh' : '85vh'
@@ -10944,7 +10913,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           previous: messages[idx - 1],
           message: message,
           key: message.id,
-          currentThreadId: _this3.props.currentThreadId
+          currentThreadId: _this2.props.currentThreadId
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         ref: this.bottom
@@ -14591,13 +14560,6 @@ var MessagesReducer = function MessagesReducer() {
       var nextState = Object.assign({}, state);
       delete nextState[action.message.id];
       return nextState;
-    // case CLEAR_MESSAGES:
-    //   if (Object.values(state).length === 0){
-    //     return state
-    //   }else {
-    //     let clearedMessages = Object.assign({})
-    //     return clearedMessages
-    //   }
 
     default:
       return state;

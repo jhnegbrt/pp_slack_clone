@@ -5,7 +5,6 @@ export const REMOVE_MESSAGE = "REMOVE_MESSAGE"
 export const RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS"
 export const RECEIVE_MESSAGES = "RECEIVE_MESSAGES"
 export const CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS"
-export const CLEAR_MESSAGES = "CLEAR_MESSAGES"
 
 
 const receiveErrors = (errors) => {
@@ -26,9 +25,6 @@ export const receiveMessages = (data) => ({
   messages: data.messages
 })
 
-export const clearMessages = () => ({
-  type: CLEAR_MESSAGES
-})
 
 export const receiveMessage = (message) => {
   return({  

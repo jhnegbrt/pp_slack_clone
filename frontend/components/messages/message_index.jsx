@@ -28,14 +28,6 @@ class MessageIndex extends React.Component{
     this.fetchMessages()
   }
 
-  // componentWillUpdate(){
-  //   debugger
-  // }
-
-  // componentWillUnmount(){
-  //   this.props.clearMessages()
-  // }
-
   componentDidUpdate() {
     if (this.state.threadId != this.props.currentThreadId){
       this.setState({
@@ -46,17 +38,8 @@ class MessageIndex extends React.Component{
     this.bottom.current.scrollIntoView();
   }
 
-  filterMessages(){
-    let {messages} = this.props
-    if (this.props.currentThreadId){
-      return messages.filter(el => el.channel_dms_id === parseInt(this.props.currentThreadId))
-    } else {
-      return messages.filter(el => el.channel_dms_id === parseInt(this.props.searchDmId))
-    }
-  }
-
   render(){ 
-    const messages = this.filterMessages()
+    const {messages} = this.props
     return(
       <div style={{maxHeight: this.props.type === "thread" ? '90vh' : '85vh'}} className="messages-display">
         <div className = "messages-container">
