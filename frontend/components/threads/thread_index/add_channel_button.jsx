@@ -44,7 +44,7 @@ class AddChannelButton extends React.Component{
   render(){
     
     const channelButtons = (
-      <div>
+      <div className="channel-buttons-container">
         <div className={"channel-buttons"}>
         <a onClick={()=>this.props.toggleModal("createChannel")}>Create Channel</a>
         <Link to="/client/explore">Browse Channels</Link>

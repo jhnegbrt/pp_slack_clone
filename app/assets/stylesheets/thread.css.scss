@@ -81,15 +81,19 @@
 
 }
 
+.channel-buttons-container{
+  position: relative
+}
+
 .channel-buttons{
   position:absolute;
   background-color: #f1eee8;
   padding: 5%;
   top: 4vh;
   left:2vw;
-  width: 70%;
   border-radius: 5px;
   z-index:5;
+  white-space:nowrap;
   a{
     display: block;
     padding: 1%;
@@ -105,8 +109,9 @@
 
 
 .little-triangle{
+  z-index:100;
   content: "";
-  left: 45%;
+  left: 22%;
   border: 20px solid;
   border-color:transparent;
   border-bottom-color: #f1eee8;
