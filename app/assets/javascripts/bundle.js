@@ -10462,6 +10462,11 @@ var Client = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Client, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchPublicChannels();
+    }
+  }, {
     key: "toggleModal",
     value: function toggleModal(modalType, newChannel) {
       if (modalType === "addMembers") {
@@ -10540,6 +10545,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     fetchThreads: function fetchThreads() {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.fetchThreads)());
+    },
+    fetchPublicChannels: function fetchPublicChannels() {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.fetchPublicChannels)());
     }
   };
 };
@@ -11469,6 +11477,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
+  var publicChannels = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.workspace.publicChannels;
+  });
+  var users = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.workspace.users;
+  });
+  var threads = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.workspace.threads;
+  });
+  debugger;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "search-bar"
   }, "Our Search Bar");
@@ -13300,11 +13318,6 @@ var Explore = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Explore, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchPublicChannels();
-    }
-  }, {
     key: "mapThread",
     value: function mapThread(thread) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_explore_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -13353,8 +13366,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _explore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./explore */ "./frontend/components/threads/add_thread/explore/explore.jsx");
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-
 
 
 
@@ -13365,15 +13376,7 @@ var mSTP = function mSTP(state) {
   };
 };
 
-var mDTP = function mDTP(dispatch) {
-  return {
-    fetchPublicChannels: function fetchPublicChannels() {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPublicChannels)());
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore__WEBPACK_IMPORTED_MODULE_1__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, null)(_explore__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 

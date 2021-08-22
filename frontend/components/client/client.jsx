@@ -20,6 +20,10 @@ class Client extends React.Component{
     this.closeModal = this.closeModal.bind(this)
   }
 
+  componentDidMount(){
+    this.props.fetchPublicChannels()
+  }
+
   toggleModal(modalType, newChannel){
     if (modalType === "addMembers"){
       this.setState({
@@ -40,7 +44,6 @@ class Client extends React.Component{
       modal: false
     })
   }
-
 
   render(){
     return(

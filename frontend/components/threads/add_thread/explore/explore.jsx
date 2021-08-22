@@ -6,10 +6,6 @@ class Explore extends React.Component{
     super(props)
   }
 
-  componentDidMount(){
-    this.props.fetchPublicChannels()
-  }
-
   mapThread(thread){
     return (
     <ExploreItemContainer 
