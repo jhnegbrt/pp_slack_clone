@@ -14,6 +14,9 @@ const MessagesReducer = (state = {}, action) => {
       let nextState = Object.assign({}, state)
       delete nextState[action.message.id]
       return nextState;
+    case CLEAR_MESSAGES:
+      let emptyState = Object.assign({})
+      return emptyState
     default:
       return state;
   }

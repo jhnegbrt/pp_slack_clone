@@ -9,15 +9,16 @@ class MessageIndex extends React.Component{
     super(props)
     this.bottom = React.createRef();
     this.state = {
-      threadId: null
+      threadId: null,
+      searchDmId: null
     }
   }
 
-  fetchMessages(){
+  fetchMessages(threadId){
     let subscriptions = App.cable.subscriptions.subscriptions
     for (let i = 0; i < subscriptions.length; i++){
       let identifier = JSON.parse(subscriptions[i].identifier)
-      if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(this.props.currentThreadId)){
+      if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)){
         subscriptions[i].load()
         break
       }
@@ -25,20 +26,31 @@ class MessageIndex extends React.Component{
   }
 
   componentDidMount(){
-    this.fetchMessages()
+    this.fetchMessages(parseInt(this.props.currentThreadId))
   }
 
   componentDidUpdate() {
-    if (this.state.threadId != this.props.currentThreadId){
+    let {messages, currentThreadId, searchDmId} = this.props
+    if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0){
+      this.props.clearMessages()
+    } else if (this.props.searchDmId != this.state.searchDmId){
       this.setState({
-        threadId: this.props.currentThreadId
+        searchDmId,
+        threadId: null
       })
-      this.fetchMessages()
+      this.fetchMessages(searchDmId)
+    } else if (this.state.threadId != currentThreadId){
+      this.setState({
+        threadId: currentThreadId,
+        searchDmId: null
+      })
+      this.fetchMessages(currentThreadId)
     }
     this.bottom.current.scrollIntoView();
   }
 
-  render(){ 
+  render(){
+    console.log(this.props)
     const {messages} = this.props
     return(
       <div style={{maxHeight: this.props.type === "thread" ? '90vh' : '85vh'}} className="messages-display">

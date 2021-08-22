@@ -10019,6 +10019,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_MESSAGE_ERRORS": () => (/* binding */ RECEIVE_MESSAGE_ERRORS),
 /* harmony export */   "RECEIVE_MESSAGES": () => (/* binding */ RECEIVE_MESSAGES),
 /* harmony export */   "CLEAR_MESSAGE_ERRORS": () => (/* binding */ CLEAR_MESSAGE_ERRORS),
+/* harmony export */   "CLEAR_MESSAGES": () => (/* binding */ CLEAR_MESSAGES),
+/* harmony export */   "clearMessages": () => (/* binding */ clearMessages),
 /* harmony export */   "receiveMessages": () => (/* binding */ receiveMessages),
 /* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
 /* harmony export */   "removeMessage": () => (/* binding */ removeMessage),
@@ -10033,6 +10035,7 @@ var REMOVE_MESSAGE = "REMOVE_MESSAGE";
 var RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS";
 var RECEIVE_MESSAGES = "RECEIVE_MESSAGES";
 var CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS";
+var CLEAR_MESSAGES = "CLEAR_MESSAGES";
 
 var receiveErrors = function receiveErrors(errors) {
   return {
@@ -10047,6 +10050,11 @@ var clearMessageErrors = function clearMessageErrors() {
   };
 };
 
+var clearMessages = function clearMessages() {
+  return {
+    type: CLEAR_MESSAGES
+  };
+};
 var receiveMessages = function receiveMessages(data) {
   return {
     type: RECEIVE_MESSAGES,
@@ -10857,20 +10865,21 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
     _this.state = {
-      threadId: null
+      threadId: null,
+      searchDmId: null
     };
     return _this;
   }
 
   _createClass(MessageIndex, [{
     key: "fetchMessages",
-    value: function fetchMessages() {
+    value: function fetchMessages(threadId) {
       var subscriptions = App.cable.subscriptions.subscriptions;
 
       for (var i = 0; i < subscriptions.length; i++) {
         var identifier = JSON.parse(subscriptions[i].identifier);
 
-        if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(this.props.currentThreadId)) {
+        if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)) {
           subscriptions[i].load();
           break;
         }
@@ -10879,16 +10888,30 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetchMessages();
+      this.fetchMessages(parseInt(this.props.currentThreadId));
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      if (this.state.threadId != this.props.currentThreadId) {
+      var _this$props = this.props,
+          messages = _this$props.messages,
+          currentThreadId = _this$props.currentThreadId,
+          searchDmId = _this$props.searchDmId;
+
+      if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0) {
+        this.props.clearMessages();
+      } else if (this.props.searchDmId != this.state.searchDmId) {
         this.setState({
-          threadId: this.props.currentThreadId
+          searchDmId: searchDmId,
+          threadId: null
         });
-        this.fetchMessages();
+        this.fetchMessages(searchDmId);
+      } else if (this.state.threadId != currentThreadId) {
+        this.setState({
+          threadId: currentThreadId,
+          searchDmId: null
+        });
+        this.fetchMessages(currentThreadId);
       }
 
       this.bottom.current.scrollIntoView();
@@ -10898,6 +10921,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      console.log(this.props);
       var messages = this.props.messages;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {
@@ -14560,6 +14584,10 @@ var MessagesReducer = function MessagesReducer() {
       var nextState = Object.assign({}, state);
       delete nextState[action.message.id];
       return nextState;
+
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.CLEAR_MESSAGES:
+      var emptyState = Object.assign({});
+      return emptyState;
 
     default:
       return state;
