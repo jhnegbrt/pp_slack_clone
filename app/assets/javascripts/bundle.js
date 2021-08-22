@@ -11514,8 +11514,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       searchEntry = _useState4[0],
       setSearchEntry = _useState4[1];
 
-  console.log(publicChannels);
-
   function onClick(e) {
     setDisplaySearch(true);
   }
@@ -11536,6 +11534,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     onSubmit: onSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "text",
+    autoFocus: "true",
     placeholder: "Start typing to search!",
     value: searchEntry,
     onChange: handleChange
@@ -11599,7 +11598,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
 
-    return matchedThreads;
+    return matchedThreads.length > 0 ? matchedThreads : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "no-search-results"
+    }, "No Threads Found!");
   }
 
   function matchPublicChannels() {
@@ -11614,7 +11615,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
 
-    return matchedPublicChannels;
+    return matchedPublicChannels.length > 0 ? matchedPublicChannels : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "no-search-results"
+    }, "No Public Channels Found!");
   }
 
   function matchUsers() {
@@ -11629,7 +11632,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
 
-    return matchedUsers;
+    return matchedUsers.length > 0 ? matchedUsers : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "no-search-results"
+    }, "No Users Found!");
   }
 
   function findMatches() {

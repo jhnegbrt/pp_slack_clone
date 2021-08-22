@@ -12,7 +12,10 @@ export default ({type, entities, query}) => {
         matchedThreads.push(<div>{threads[i].title}</div>)
       }
     }
-    return matchedThreads
+    return (
+      matchedThreads.length > 0 ? matchedThreads :
+      <div className="no-search-results">No Threads Found!</div>
+    )  
   }
 
   function matchPublicChannels(){
@@ -24,7 +27,10 @@ export default ({type, entities, query}) => {
          matchedPublicChannels.push(<div>{publicChannels[i].title}</div>)
       }
     }
-    return matchedPublicChannels
+    return (
+      matchedPublicChannels.length > 0 ? matchedPublicChannels :
+      <div className="no-search-results">No Public Channels Found!</div>
+    ) 
   }
 
   function matchUsers(){
@@ -36,7 +42,10 @@ export default ({type, entities, query}) => {
         matchedUsers.push(<div>{users[i].username}</div>)
       }
     }
-    return matchedUsers
+    return (
+      matchedUsers.length > 0 ? matchedUsers :
+      <div className="no-search-results">No Users Found!</div>
+    ) 
   }
 
   function findMatches(){

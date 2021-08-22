@@ -13,8 +13,6 @@ export default () => {
   const [displaySearch, setDisplaySearch] = useState(false)
   const [searchEntry, setSearchEntry ] = useState("")
 
-  console.log(publicChannels)
-  
   function onClick(e){
     setDisplaySearch(true)
   }
@@ -31,7 +29,7 @@ export default () => {
     <div className="client-search">
       <div className="search-wrapper">
         <form onSubmit={onSubmit}>
-          <input type="text" placeholder="Start typing to search!" value={searchEntry} onChange={handleChange}></input>
+          <input type="text" autoFocus="true" placeholder="Start typing to search!" value={searchEntry} onChange={handleChange}></input>
         </form>
       </div>
       <div className="match-header">Users:
