@@ -2,6 +2,7 @@ import React from 'react'
 import ThreadIndexItemContainer from './thread_index_item_container'
 import createThreadsConnection from '../../../util/create_threads_connection'
 import AddChannelButton from './add_channel_button'
+import ThreadIndexHeader from './thread_index_header'
 import { faCaretDown, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -75,14 +76,15 @@ class ThreadIndex extends React.Component{
     )
     return(
       <div className="thread-index">
+        <ThreadIndexHeader />
         <div className="header-caret-container" >
           <FontAwesomeIcon onClick={()=>this.toggleDropDown("showChannels")}  className={this.state.showChannels ? "caret" : "caret close-caret"} icon={faCaretDown}/>
-          <h3 onClick={()=>this.toggleDropDown("showChannels")} className="thread-header">Channels</h3>
+          <h3 onClick={()=>this.toggleDropDown("showChannels")} className="channels-header">Channels</h3>
         </div>
         {this.state.showChannels ? channelIndex : ""}
         <div className="header-caret-container" >
           <FontAwesomeIcon onClick={()=>this.toggleDropDown("showDms")} className={this.state.showDms ? "caret" : "caret close-caret"} icon={faCaretDown}/>
-          <h3 onClick={()=>this.toggleDropDown("showDms")} className="thread-header">Messages</h3>
+          <h3 onClick={()=>this.toggleDropDown("showDms")} className="messages-header">Messages</h3>
         </div>
         {this.state.showDms ? dmIndex : ""}
       </div>

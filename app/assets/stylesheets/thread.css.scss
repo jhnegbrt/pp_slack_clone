@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
 
+.thread-header{
+  font-size: 3vh
+}
 
 .thread-index{
   width: 20vw;
-  padding: 3% 0% 3% 1.5%;
+  padding: .5% 0% 3% 1.5%;
   background-color: rgb(2, 2, 59);
   font-family: 'Comfortaa', serif;
   position: relative;
@@ -33,6 +36,8 @@
   cursor: pointer
 }
 
+.messages-header,
+.channels-header,
 .thread-header{
   padding-top: 1%;
   margin-left: .5vw;
@@ -41,6 +46,10 @@
   height: 3vh;
   display:flex;
   align-items: center;
+}
+
+.messages-header,
+.channels-header{
   &:hover{
     border-radius: 5px;
     background-color:rgb(44, 44, 83);
