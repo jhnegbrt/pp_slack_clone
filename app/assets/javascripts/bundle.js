@@ -11486,10 +11486,16 @@ __webpack_require__.r(__webpack_exports__);
   var threads = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.workspace.threads;
   });
-  debugger;
+
+  function onSubmit(e) {
+    e.preventDefault();
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "search-bar"
-  }, "Our Search Bar");
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "search-bar-button"
+  }, "Search for Direct Messages, Public Channels, or Joined Channels"));
 });
 
 /***/ }),

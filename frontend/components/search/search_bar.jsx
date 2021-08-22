@@ -7,9 +7,13 @@ export default () => {
   const users = useSelector(state => state.workspace.users)
   const threads = useSelector(state => state.workspace.threads)
 
-  debugger
-  
+  function onSubmit(e){
+    e.preventDefault()
+  }
+
   return(
-    <div className="search-bar">Our Search Bar</div>
+    <div className="search-bar">
+      <div className="search-bar-button">Search for Direct Messages, Public Channels, or Joined Channels</div>
+    </div>
   )
 }
