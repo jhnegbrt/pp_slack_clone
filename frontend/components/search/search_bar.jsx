@@ -4,12 +4,17 @@ import SearchMatches from './search_matches'
 
 export default () => {
 
-  const publicChannels = useSelector(state => state.workspace.publicChannels)
   const users = useSelector(state => state.workspace.users)
   const threads = useSelector(state => state.workspace.threads)
+  const publicChannels = useSelector(state => {
+    let threads = state.workspace.threads
+    return Object.values(state.workspace.publicChannels).filter(el => threads[el.id] === undefined)
+  })
   const [displaySearch, setDisplaySearch] = useState(false)
   const [searchEntry, setSearchEntry ] = useState("")
 
+  console.log(publicChannels)
+  
   function onClick(e){
     setDisplaySearch(true)
   }

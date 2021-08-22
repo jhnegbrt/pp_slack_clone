@@ -11491,14 +11491,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
-  var publicChannels = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-    return state.workspace.publicChannels;
-  });
   var users = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.workspace.users;
   });
   var threads = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.workspace.threads;
+  });
+  var publicChannels = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    var threads = state.workspace.threads;
+    return Object.values(state.workspace.publicChannels).filter(function (el) {
+      return threads[el.id] === undefined;
+    });
   });
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
@@ -11510,6 +11513,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       _useState4 = _slicedToArray(_useState3, 2),
       searchEntry = _useState4[0],
       setSearchEntry = _useState4[1];
+
+  console.log(publicChannels);
 
   function onClick(e) {
     setDisplaySearch(true);
