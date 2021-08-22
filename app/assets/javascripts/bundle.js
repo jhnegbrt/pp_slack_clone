@@ -11538,7 +11538,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "search-bar-button",
     onClick: onClick
-  }, "Search for Direct Messages, Public Channels, or Joined Channels"), displaySearch ? search : "");
+  }, displaySearch ? "" : "Search for Direct Messages, Public Channels, or Joined Channels"), displaySearch ? search : "");
 });
 
 /***/ }),

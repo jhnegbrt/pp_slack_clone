@@ -35,7 +35,7 @@ export default () => {
     <div className="search-bar">
       <div 
         className="search-bar-button" 
-        onClick={onClick}>Search for Direct Messages, Public Channels, or Joined Channels
+        onClick={onClick}>{displaySearch ? "" : "Search for Direct Messages, Public Channels, or Joined Channels"}
       </div>
       {displaySearch ? search : ""}
     </div>
