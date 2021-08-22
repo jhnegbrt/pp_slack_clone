@@ -1,6 +1,5 @@
 import React from 'react'
 import createMessagesConnection from '../../../util/create_messages_connection'
-
 import { NavLink } from 'react-router-dom'
 
 class ThreadIndexItem extends React.Component{
@@ -16,9 +15,8 @@ class ThreadIndexItem extends React.Component{
   }
 
   componentDidMount(){
-    
     const {thread, receiveMessage, receiveMessages, removeMessage} = this.props
-    createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage, this.props.currentUserId)
+    createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage)
   }
 
 

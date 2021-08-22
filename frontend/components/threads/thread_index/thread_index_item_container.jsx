@@ -8,7 +8,6 @@ const mSTP = (state, ownProps) => {
   return{
   currentUserId: state.session.id,
   users: state.workspace.users,
-
 }}
 
 const mDTP = dispatch => ({
