@@ -30,26 +30,38 @@
 }
 
 .client-search{
+  overflow-y: scroll;
   position: absolute;
   z-index: 30;
-  height: 15vh;
+  max-height: 35vh;
   width: 30vw;
   left: 35vw;
   right: 35vw;
   background-color: white;
   border-radius: 20px;
   top: 1vh;
+  padding: 0 1vh 1vh 1vh;
   input{
+    color:rgb(99, 99, 99);
     font-family: 'Comfortaa', serif;
     font-size: 2vh;
     border: none;
     &:focus-visible{
       outline: none
     }
+    &::placeholder{
+      color: rgb(99, 99, 99);
+
+    }
   }
 }
 
 .search-wrapper{
-  padding: 1vh;
+  padding: 1vh 0;
   border-bottom: 1px solid rgb(200, 200, 200)
+}
+
+.match-header{
+  color:rgb(200, 200, 200);
+  padding-top: 1vh;
 }
