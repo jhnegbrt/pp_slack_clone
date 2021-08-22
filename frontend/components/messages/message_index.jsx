@@ -39,7 +39,7 @@ class MessageIndex extends React.Component{
         threadId: null
       })
       this.fetchMessages(searchDmId)
-    } else if (this.state.threadId != currentThreadId){
+    } else if (this.state.threadId != currentThreadId && App.cable.subscriptions.subscriptions.length > 1){
       this.setState({
         threadId: currentThreadId,
         searchDmId: null

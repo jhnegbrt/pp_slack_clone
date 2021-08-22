@@ -4,7 +4,7 @@ import { receiveCurrentThread, createThread } from '../../../actions/thread_acti
 import {receiveMessage, removeMessage, receiveMessages} from '../../../actions/message_actions'
 
 
-const mSTP = (state, ownProps) => {
+const mSTP = (state) => {
   return{
   currentUserId: state.session.id,
   users: state.workspace.users,
