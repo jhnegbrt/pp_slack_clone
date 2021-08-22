@@ -53,12 +53,12 @@ class Client extends React.Component{
             <Route path='/client/explore' component={ExploreContainer} />
             <Route path='/client/:threadId' component={ThreadDisplayContainer} />
           </Switch>
-          {this.state.modal === true ? <CreateChannelModal
+        </div>
+        {this.state.modal === true ? <CreateChannelModal
             newChannel={this.state.newChannel}
             toggleModal={this.toggleModal}
             closeModal={this.closeModal}
             modalType={this.state.modalType}/> : null}
-        </div>
       </div>
     )
   }

@@ -3,6 +3,8 @@
 .search-client-container{
   overflow-y: hidden;
   height: 100vh;
+  display: flex;
+  flex-direction: column
 }
 
 .search-bar{
