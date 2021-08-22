@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import ThreadIndex from './thread_index'
 import {fetchAllUsers} from '../../../actions/user_actions'
 import {receiveAllThreads, receiveThread, removeThread } from '../../../actions/thread_actions'
+import { withRouter } from 'react-router-dom'
 
 const mSTP = (state, ownProps) =>({
     threads: Object.values(state.workspace.threads),
@@ -16,4 +17,4 @@ const mDTP = (dispatch) => ({
   removeThread: (thread) => dispatch(removeThread(thread))
 })
 
-export default connect(mSTP, mDTP)(ThreadIndex)
+export default withRouter(connect(mSTP, mDTP)(ThreadIndex))
