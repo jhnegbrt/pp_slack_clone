@@ -10019,9 +10019,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_MESSAGE_ERRORS": () => (/* binding */ RECEIVE_MESSAGE_ERRORS),
 /* harmony export */   "RECEIVE_MESSAGES": () => (/* binding */ RECEIVE_MESSAGES),
 /* harmony export */   "CLEAR_MESSAGE_ERRORS": () => (/* binding */ CLEAR_MESSAGE_ERRORS),
-/* harmony export */   "CLEAR_PREVIOUS_MESSAGES": () => (/* binding */ CLEAR_PREVIOUS_MESSAGES),
+/* harmony export */   "CLEAR_MESSAGES": () => (/* binding */ CLEAR_MESSAGES),
 /* harmony export */   "receiveMessages": () => (/* binding */ receiveMessages),
-/* harmony export */   "clearPreviousMessages": () => (/* binding */ clearPreviousMessages),
+/* harmony export */   "clearMessages": () => (/* binding */ clearMessages),
 /* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
 /* harmony export */   "removeMessage": () => (/* binding */ removeMessage),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
@@ -10035,7 +10035,7 @@ var REMOVE_MESSAGE = "REMOVE_MESSAGE";
 var RECEIVE_MESSAGE_ERRORS = "RECEIVE_MESSAGE_ERRORS";
 var RECEIVE_MESSAGES = "RECEIVE_MESSAGES";
 var CLEAR_MESSAGE_ERRORS = "CLEAR_MESSAGE_ERRORS";
-var CLEAR_PREVIOUS_MESSAGES = "CLEAR_PREVIOUS_MESSAGES";
+var CLEAR_MESSAGES = "CLEAR_MESSAGES";
 
 var receiveErrors = function receiveErrors(errors) {
   return {
@@ -10056,9 +10056,9 @@ var receiveMessages = function receiveMessages(data) {
     messages: data.messages
   };
 };
-var clearPreviousMessages = function clearPreviousMessages() {
+var clearMessages = function clearMessages() {
   return {
-    type: CLEAR_PREVIOUS_MESSAGES
+    type: CLEAR_MESSAGES
   };
 };
 var receiveMessage = function receiveMessage(message) {
@@ -10864,12 +10864,47 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+    _this.state = {
+      threadId: null
+    };
     return _this;
   }
 
   _createClass(MessageIndex, [{
+    key: "fetchMessages",
+    value: function fetchMessages() {
+      var subscriptions = App.cable.subscriptions.subscriptions;
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(this.props.currentThreadId)) {
+          subscriptions[i].load();
+          break;
+        }
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchMessages();
+    } // componentWillUpdate(){
+    //   debugger
+    // }
+    // componentWillUnmount(){
+    //   this.props.clearMessages()
+    // }
+
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      if (this.state.threadId != this.props.currentThreadId) {
+        this.setState({
+          threadId: this.props.currentThreadId
+        });
+        this.fetchMessages();
+      }
+
       this.bottom.current.scrollIntoView();
     }
   }, {
@@ -10943,7 +10978,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+
 
 
 
@@ -10954,7 +10991,15 @@ var mSTP = function mSTP(state, ownProps) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, null)(_message_index__WEBPACK_IMPORTED_MODULE_1__.default));
+var mDTP = function mDTP(dispatch) {
+  return {
+    clearMessages: function clearMessages() {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__.clearMessages)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_message_index__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 
@@ -14540,16 +14585,19 @@ var MessagesReducer = function MessagesReducer() {
       return Object.assign({}, state, _defineProperty({}, action.message.id, action.message));
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGES:
-      return Object.assign({}, state, action.messages);
+      return Object.assign({}, action.messages);
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
       var nextState = Object.assign({}, state);
       delete nextState[action.message.id];
       return nextState;
-
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.CLEAR_PREVIOUS_MESSAGES:
-      var clearedMessages = Object.assign({});
-      return clearedMessages;
+    // case CLEAR_MESSAGES:
+    //   if (Object.values(state).length === 0){
+    //     return state
+    //   }else {
+    //     let clearedMessages = Object.assign({})
+    //     return clearedMessages
+    //   }
 
     default:
       return state;

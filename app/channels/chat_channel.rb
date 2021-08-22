@@ -1,18 +1,14 @@
 class ChatChannel < ApplicationCable::Channel
 
   def subscribed
-    
     stream_for "chat_channel_#{params['thread_id']}"
-    self.load
-    
+    # self.load
   end
 
   def load
-
     messages = Message.where("channel_dms_id = #{params['thread_id']}").includes(:sender)
     messages_hash = {}
     messages.each do |m|
-  
       messages_hash[m.id] = m.as_json
       messages_hash[m.id]["sender"] = m.sender["username"]
       messages_hash[m.id]["time"] = m["updated_at"]
@@ -78,7 +74,7 @@ class ChatChannel < ApplicationCable::Channel
     ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
   end
 
-  def unsubscribed
-    stop_stream_from "chat_channel_#{params['thread_id']}"
-  end
+  # def unsubscribed
+  #   stop_stream_from "chat_channel_#{params['thread_id']}"
+  # end
 end

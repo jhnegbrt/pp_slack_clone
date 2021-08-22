@@ -3,16 +3,46 @@ import MessageIndexItemContainer from './message_index_item_container'
 import CreateMessageFormContainer from './create_message_form_container'
 import SearchMessageFormContainer from './search_message_form_container'
 
-
-
 class MessageIndex extends React.Component{
 
   constructor(props){
     super(props)
     this.bottom = React.createRef();
+    this.state = {
+      threadId: null
+    }
   }
 
+  fetchMessages(){
+    let subscriptions = App.cable.subscriptions.subscriptions
+    for (let i = 0; i < subscriptions.length; i++){
+      let identifier = JSON.parse(subscriptions[i].identifier)
+      if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(this.props.currentThreadId)){
+        subscriptions[i].load()
+        break
+      }
+    }
+  }
+
+  componentDidMount(){
+    this.fetchMessages()
+  }
+
+  // componentWillUpdate(){
+  //   debugger
+  // }
+
+  // componentWillUnmount(){
+  //   this.props.clearMessages()
+  // }
+
   componentDidUpdate() {
+    if (this.state.threadId != this.props.currentThreadId){
+      this.setState({
+        threadId: this.props.currentThreadId
+      })
+      this.fetchMessages()
+    }
     this.bottom.current.scrollIntoView();
   }
 

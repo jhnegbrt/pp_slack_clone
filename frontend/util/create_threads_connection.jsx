@@ -1,7 +1,5 @@
 export default function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads, removeThread){
-  
   App.cable.subscriptions.create(
-    
     { channel: "ThreadChannel", user_id: currentUserId },
     {
       received: data => {

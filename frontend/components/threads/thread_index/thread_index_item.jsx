@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 class ThreadIndexItem extends React.Component{
   constructor(props){
-    super(props)
+  super(props)
 
     this.selectThread = this.selectThread.bind(this)
     this.createTitle = this.createTitle.bind(this)
