@@ -1,12 +1,12 @@
-import entities from './entities_reducer'
-import errors from './errors_reducer'
+import workspace from './workspace/workspace_reducer'
+import errors from './errors/errors_reducer'
 import session from './session_reducer'
-import ui from './ui_reducer'
+import ui from './ui/ui_reducer'
 import { combineReducers } from 'redux'
 
 
 const rootReducer = combineReducers({
-  entities,
+  workspace,
   ui,
   session,
   errors

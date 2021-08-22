@@ -1,4 +1,4 @@
-import {RECEIVE_THREAD, REMOVE_THREAD, RECEIVE_ALL_THREADS } from '../actions/thread_actions'
+import {RECEIVE_THREAD, REMOVE_THREAD, RECEIVE_ALL_THREADS } from '../../actions/thread_actions'
 
 
 const threadsReducer = (state = {}, action) =>{

@@ -1,6 +1,6 @@
 import {
   RECEIVE_MESSAGE, REMOVE_MESSAGE, RECEIVE_MESSAGES, CLEAR_PREVIOUS_MESSAGES
-} from '../actions/message_actions'
+} from '../../actions/message_actions'
 
 
 const MessagesReducer = (state = {}, action) => {

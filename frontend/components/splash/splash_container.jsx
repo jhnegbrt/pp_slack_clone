@@ -4,7 +4,7 @@ import Splash from './splash'
 import { logout } from '../../actions/session_actions'
 
 
-const mSTP = ({entities: {users}, session}) => ({
+const mSTP = ({workspace: {users}, session}) => ({
   currentUser: users[session.id]
 })
 

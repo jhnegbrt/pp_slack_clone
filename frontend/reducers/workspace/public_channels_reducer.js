@@ -1,4 +1,4 @@
-import {RECEIVE_PUBLIC_CHANNELS} from '../actions/thread_actions'
+import {RECEIVE_PUBLIC_CHANNELS} from '../../actions/thread_actions'
 
 const publicChannelsReducer = (state = {}, action) => {
   Object.freeze(state)

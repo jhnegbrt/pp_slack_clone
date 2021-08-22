@@ -7,7 +7,7 @@ import {receiveMessage, removeMessage, receiveMessages} from '../../../actions/m
 const mSTP = (state, ownProps) => {
   return{
   currentUserId: state.session.id,
-  users: state.entities.workspace.users,
+  users: state.workspace.users,
 
 }}
 

@@ -20,7 +20,7 @@ class EditMessageForm extends React.Component{
 }
 
 const mSTP = (state, ownProps) => ({
-  message: state.entities.messages[ownProps.id],
+  message: state.workspace.messages[ownProps.id],
   formType: "Edit Message"
 })
 

@@ -3,7 +3,7 @@ import MessageIndex from './message_index'
 
 const mSTP = (state, ownProps) => {
   return({
-    messages: Object.values(state.entities.messages),
+    messages: Object.values(state.workspace.messages),
     currentThreadId: ownProps.currentThreadId
   })
 }

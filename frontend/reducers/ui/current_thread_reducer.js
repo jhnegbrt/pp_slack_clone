@@ -1,4 +1,4 @@
-import { RECEIVE_CURRENT_THREAD } from '../actions/thread_actions'
+import { RECEIVE_CURRENT_THREAD } from '../../actions/thread_actions'
 
 
 const threadsReducer = (state = {}, action) =>{

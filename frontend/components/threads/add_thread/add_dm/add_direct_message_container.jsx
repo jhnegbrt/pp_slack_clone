@@ -3,8 +3,8 @@ import {fetchAllUsers} from '../../../../actions/user_actions'
 import {connect} from 'react-redux'
 
 const mSTP = state => ({
-  threads: Object.values(state.entities.threads),
-  users: state.entities.workspace.users,
+  threads: Object.values(state.workspace.threads),
+  users: state.workspace.users,
   currentUser: state.session.id
 })
 

@@ -1,6 +1,6 @@
-import {RECEIVE_ALL_USERS} from '../actions/user_actions'
+import {RECEIVE_ALL_USERS} from '../../actions/user_actions'
 
-const workspaceUsersReducer = (state = {}, action) => {
+const usersReducer = (state = {}, action) => {
   Object.freeze(state)
   switch(action.type){
     case RECEIVE_ALL_USERS:
@@ -11,4 +11,4 @@ const workspaceUsersReducer = (state = {}, action) => {
 }
 
 
-export default workspaceUsersReducer;
+export default usersReducer;

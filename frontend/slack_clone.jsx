@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   let store;
   if (window.currentUser){
     const preloadedState = {
-      entities: {
+      workspace: {
         users: { [window.currentUser.id]: window.currentUser}
       },
       session: { id: window.currentUser.id}

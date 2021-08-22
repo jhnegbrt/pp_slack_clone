@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux'
-import workspaceUsersReducer from './workspace_users_reducer'
+import usersReducer from './users_reducer'
 import publicChannelsReducer from './public_channels_reducer'
+import messagesReducer from './messages_reducer'
+import threadsReducer from './threads_reducer'
 
 const workspaceReducer = combineReducers({
-  users: workspaceUsersReducer,
+  messages: messagesReducer,
+  threads: threadsReducer,
+  users: usersReducer,
   publicChannels: publicChannelsReducer
   
 })

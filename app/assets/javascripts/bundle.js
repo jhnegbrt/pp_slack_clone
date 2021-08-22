@@ -10539,13 +10539,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
- // const mSTP = (state, ownProps) =>{
-//   return({
-//     threads: Object.values(state.entities.threads),
-//     currentThreadId: state.ui.currentThread,
-//     currentUserId: state.session.id
-//   })
-// }
+
 
 var mDTP = function mDTP(dispatch) {
   return {
@@ -10670,7 +10664,7 @@ var EditMessageForm = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    message: state.entities.messages[ownProps.id],
+    message: state.workspace.messages[ownProps.id],
     formType: "Edit Message"
   };
 };
@@ -10955,7 +10949,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    messages: Object.values(state.entities.messages),
+    messages: Object.values(state.workspace.messages),
     currentThreadId: ownProps.currentThreadId
   };
 };
@@ -11896,7 +11890,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(_ref) {
-  var users = _ref.entities.users,
+  var users = _ref.workspace.users,
       session = _ref.session;
   return {
     currentUser: users[session.id]
@@ -12569,7 +12563,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    users: state.entities.workspace.users,
+    users: state.workspace.users,
     currentUser: state.session.id
   };
 };
@@ -13183,8 +13177,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    threads: Object.values(state.entities.threads),
-    users: state.entities.workspace.users,
+    threads: Object.values(state.workspace.threads),
+    users: state.workspace.users,
     currentUser: state.session.id
   };
 };
@@ -13311,8 +13305,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    publicChannels: Object.values(state.entities.workspace.publicChannels),
-    usersChannels: state.entities.threads
+    publicChannels: Object.values(state.workspace.publicChannels),
+    usersChannels: state.workspace.threads
   };
 };
 
@@ -13950,7 +13944,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    threads: Object.values(state.entities.threads),
+    threads: Object.values(state.workspace.threads),
     currentThreadId: state.ui.currentThread,
     currentUserId: state.session.id
   };
@@ -13994,7 +13988,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
   var currentUser = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-    return state.entities.users[state.session.id];
+    return state.workspace.users[state.session.id];
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "thread-header"
@@ -14144,7 +14138,7 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state, ownProps) {
   return {
     currentUserId: state.session.id,
-    users: state.entities.workspace.users
+    users: state.workspace.users
   };
 };
 
@@ -14291,8 +14285,8 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     currentUserId: state.session.id,
-    users: state.entities.workspace.users,
-    threads: state.entities.threads
+    users: state.workspace.users,
+    threads: state.workspace.threads
   };
 };
 
@@ -14300,75 +14294,10 @@ var mSTP = function mSTP(state) {
 
 /***/ }),
 
-/***/ "./frontend/reducers/current_thread_reducer.js":
-/*!*****************************************************!*\
-  !*** ./frontend/reducers/current_thread_reducer.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-
-
-var threadsReducer = function threadsReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_THREAD:
-      return Object.assign({}, state, {
-        id: action.threadId
-      });
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (threadsReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/entities_reducer.js":
-/*!***********************************************!*\
-  !*** ./frontend/reducers/entities_reducer.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
-/* harmony import */ var _messages_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages_reducer */ "./frontend/reducers/messages_reducer.js");
-/* harmony import */ var _threads_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./threads_reducer */ "./frontend/reducers/threads_reducer.js");
-/* harmony import */ var _workspace_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workspace_reducer */ "./frontend/reducers/workspace_reducer.js");
-
-
-
-
-
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  messages: _messages_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
-  threads: _threads_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
-  workspace: _workspace_reducer__WEBPACK_IMPORTED_MODULE_3__.default
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/errors_reducer.js":
-/*!*********************************************!*\
-  !*** ./frontend/reducers/errors_reducer.js ***!
-  \*********************************************/
+/***/ "./frontend/reducers/errors/errors_reducer.js":
+/*!****************************************************!*\
+  !*** ./frontend/reducers/errors/errors_reducer.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14377,8 +14306,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
-/* harmony import */ var _message_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_errors_reducer */ "./frontend/reducers/message_errors_reducer.js");
+/* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/errors/session_errors_reducer.js");
+/* harmony import */ var _message_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_errors_reducer */ "./frontend/reducers/errors/message_errors_reducer.js");
 
 
 
@@ -14390,10 +14319,10 @@ var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
 
 /***/ }),
 
-/***/ "./frontend/reducers/message_errors_reducer.js":
-/*!*****************************************************!*\
-  !*** ./frontend/reducers/message_errors_reducer.js ***!
-  \*****************************************************/
+/***/ "./frontend/reducers/errors/message_errors_reducer.js":
+/*!************************************************************!*\
+  !*** ./frontend/reducers/errors/message_errors_reducer.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14401,7 +14330,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -14422,10 +14351,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./frontend/reducers/messages_reducer.js":
-/*!***********************************************!*\
-  !*** ./frontend/reducers/messages_reducer.js ***!
-  \***********************************************/
+/***/ "./frontend/reducers/errors/session_errors_reducer.js":
+/*!************************************************************!*\
+  !*** ./frontend/reducers/errors/session_errors_reducer.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14433,116 +14362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/message_actions */ "./frontend/actions/message_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-var MessagesReducer = function MessagesReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
-      return Object.assign({}, state, _defineProperty({}, action.message.id, action.message));
-
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGES:
-      return Object.assign({}, state, action.messages);
-
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
-      var nextState = Object.assign({}, state);
-      delete nextState[action.message.id];
-      return nextState;
-
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.CLEAR_PREVIOUS_MESSAGES:
-      var clearedMessages = Object.assign({});
-      return clearedMessages;
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessagesReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/public_channels_reducer.js":
-/*!******************************************************!*\
-  !*** ./frontend/reducers/public_channels_reducer.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
-
-
-var publicChannelsReducer = function publicChannelsReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PUBLIC_CHANNELS:
-      return Object.assign({}, state, action.channels);
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (publicChannelsReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/root_reducer.js":
-/*!*******************************************!*\
-  !*** ./frontend/reducers/root_reducer.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
-/* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
-/* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
-/* harmony import */ var _ui_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui_reducer */ "./frontend/reducers/ui_reducer.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-
-
-
-
-
-var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
-  entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  ui: _ui_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
-  session: _session_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
-  errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_1__.default
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/session_errors_reducer.js":
-/*!*****************************************************!*\
-  !*** ./frontend/reducers/session_errors_reducer.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -14563,6 +14383,37 @@ __webpack_require__.r(__webpack_exports__);
       return state;
   }
 });
+
+/***/ }),
+
+/***/ "./frontend/reducers/root_reducer.js":
+/*!*******************************************!*\
+  !*** ./frontend/reducers/root_reducer.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _workspace_workspace_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./workspace/workspace_reducer */ "./frontend/reducers/workspace/workspace_reducer.js");
+/* harmony import */ var _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors/errors_reducer */ "./frontend/reducers/errors/errors_reducer.js");
+/* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
+/* harmony import */ var _ui_ui_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ui/ui_reducer */ "./frontend/reducers/ui/ui_reducer.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+
+
+
+
+
+var rootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
+  workspace: _workspace_workspace_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  ui: _ui_ui_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
+  session: _session_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
+  errors: _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_1__.default
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rootReducer);
 
 /***/ }),
 
@@ -14607,10 +14458,10 @@ var sessionReducer = function sessionReducer() {
 
 /***/ }),
 
-/***/ "./frontend/reducers/threads_reducer.js":
-/*!**********************************************!*\
-  !*** ./frontend/reducers/threads_reducer.js ***!
-  \**********************************************/
+/***/ "./frontend/reducers/ui/current_thread_reducer.js":
+/*!********************************************************!*\
+  !*** ./frontend/reducers/ui/current_thread_reducer.js ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14618,7 +14469,141 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
+
+var threadsReducer = function threadsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_THREAD:
+      return Object.assign({}, state, {
+        id: action.threadId
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (threadsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/ui/ui_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/ui/ui_reducer.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./current_thread_reducer */ "./frontend/reducers/ui/current_thread_reducer.js");
+
+
+var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
+  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/workspace/messages_reducer.js":
+/*!*********************************************************!*\
+  !*** ./frontend/reducers/workspace/messages_reducer.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var MessagesReducer = function MessagesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
+      return Object.assign({}, state, _defineProperty({}, action.message.id, action.message));
+
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGES:
+      return Object.assign({}, state, action.messages);
+
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
+      var nextState = Object.assign({}, state);
+      delete nextState[action.message.id];
+      return nextState;
+
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.CLEAR_PREVIOUS_MESSAGES:
+      var clearedMessages = Object.assign({});
+      return clearedMessages;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessagesReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/workspace/public_channels_reducer.js":
+/*!****************************************************************!*\
+  !*** ./frontend/reducers/workspace/public_channels_reducer.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
+
+var publicChannelsReducer = function publicChannelsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PUBLIC_CHANNELS:
+      return Object.assign({}, state, action.channels);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (publicChannelsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/workspace/threads_reducer.js":
+/*!********************************************************!*\
+  !*** ./frontend/reducers/workspace/threads_reducer.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -14650,90 +14635,9 @@ var threadsReducer = function threadsReducer() {
 
 /***/ }),
 
-/***/ "./frontend/reducers/ui_reducer.js":
-/*!*****************************************!*\
-  !*** ./frontend/reducers/ui_reducer.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./current_thread_reducer */ "./frontend/reducers/current_thread_reducer.js");
-
-
-var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/users_reducer.js":
-/*!********************************************!*\
-  !*** ./frontend/reducers/users_reducer.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-var usersReducer = function usersReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
-      return Object.assign({}, state, _defineProperty({}, action.currentUser.id, action.currentUser));
-
-    default:
-      return state;
-  }
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (usersReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/workspace_reducer.js":
-/*!************************************************!*\
-  !*** ./frontend/reducers/workspace_reducer.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _workspace_users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./workspace_users_reducer */ "./frontend/reducers/workspace_users_reducer.js");
-/* harmony import */ var _public_channels_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public_channels_reducer */ "./frontend/reducers/public_channels_reducer.js");
-
-
-
-var workspaceReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
-  users: _workspace_users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  publicChannels: _public_channels_reducer__WEBPACK_IMPORTED_MODULE_1__.default
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (workspaceReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/workspace_users_reducer.js":
+/***/ "./frontend/reducers/workspace/users_reducer.js":
 /*!******************************************************!*\
-  !*** ./frontend/reducers/workspace_users_reducer.js ***!
+  !*** ./frontend/reducers/workspace/users_reducer.js ***!
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -14742,10 +14646,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 
 
-var workspaceUsersReducer = function workspaceUsersReducer() {
+var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
@@ -14759,7 +14663,38 @@ var workspaceUsersReducer = function workspaceUsersReducer() {
   }
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (workspaceUsersReducer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (usersReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/workspace/workspace_reducer.js":
+/*!**********************************************************!*\
+  !*** ./frontend/reducers/workspace/workspace_reducer.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/workspace/users_reducer.js");
+/* harmony import */ var _public_channels_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public_channels_reducer */ "./frontend/reducers/workspace/public_channels_reducer.js");
+/* harmony import */ var _messages_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages_reducer */ "./frontend/reducers/workspace/messages_reducer.js");
+/* harmony import */ var _threads_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./threads_reducer */ "./frontend/reducers/workspace/threads_reducer.js");
+
+
+
+
+
+var workspaceReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
+  messages: _messages_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
+  threads: _threads_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  publicChannels: _public_channels_reducer__WEBPACK_IMPORTED_MODULE_1__.default
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (workspaceReducer);
 
 /***/ }),
 
@@ -51761,7 +51696,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (window.currentUser) {
     var preloadedState = {
-      entities: {
+      workspace: {
         users: _defineProperty({}, window.currentUser.id, window.currentUser)
       },
       session: {
