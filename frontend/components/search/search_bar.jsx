@@ -41,14 +41,9 @@ export default () => {
     setSearchEntry(e.target.value)
   }
 
-  let search = (
-    <div className="client-search" ref={searchBox}>
-      <div className="search-wrapper">
-        <form onSubmit={onSubmit}>
-          <input type="text" autoFocus={true} placeholder="Start typing to search!" value={searchEntry} onChange={handleChange}></input>
-        </form>
-      </div>
-      <div className="match-header">Users:
+  let matches = (
+    <div>
+      <div className="match-header">Users (click to chat):
         <SearchMatches 
           setSearchEntry={setSearchEntry}
           setDisplaySearch={setDisplaySearch} 
@@ -56,7 +51,7 @@ export default () => {
           type="users" 
           entities={users}/>
       </div>
-      <div className="match-header">Threads:
+      <div className="match-header">Threads (click to view):
         <SearchMatches 
           setSearchEntry={setSearchEntry}
           setDisplaySearch={setDisplaySearch} 
@@ -64,7 +59,7 @@ export default () => {
           type="threads" 
           entities={threads}/>
       </div>
-      <div className="match-header">Public Channels:
+      <div className="match-header">Public Channels (click to join):
         <SearchMatches
           setSearchEntry={setSearchEntry}
           setDisplaySearch={setDisplaySearch} 
@@ -72,6 +67,17 @@ export default () => {
           type="publicChannels" 
           entities={publicChannels}/>
       </div>
+    </div>
+  )
+
+  let search = (
+    <div className="client-search" ref={searchBox}>
+      <div className="search-wrapper">
+        <form onSubmit={onSubmit}>
+          <input type="text" autoFocus={true} placeholder="Start typing to search!" value={searchEntry} onChange={handleChange}></input>
+        </form>
+      </div>
+      {searchEntry.length > 0 ? matches : <div className="awaiting-result">waiting for query...</div>}
     </div>
   )
 

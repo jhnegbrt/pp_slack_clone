@@ -153,4 +153,20 @@
   flex-direction: column;
 }
 
+.leave-app{
+  text-decoration: none;
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding-right: 1.5vw;
+  padding-top: 1vh;
+  box-sizing: border-box;
+  color: #efc12a;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+
+
 

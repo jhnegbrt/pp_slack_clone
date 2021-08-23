@@ -5,6 +5,7 @@ import AddChannelButton from './add_channel_button'
 import ThreadIndexHeader from './thread_index_header'
 import { faCaretDown, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Link} from 'react-router-dom'
 
 
 class ThreadIndex extends React.Component{
@@ -86,6 +87,7 @@ class ThreadIndex extends React.Component{
           <h3 onClick={()=>this.toggleDropDown("showDms")} className="messages-header">Messages</h3>
         </div>
         {this.state.showDms ? dmIndex : ""}
+        <Link className="leave-app" to='/'>Leave App</Link>
       </div>
     )
   }

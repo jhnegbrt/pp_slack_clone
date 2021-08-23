@@ -59,7 +59,7 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
     for (let i = 0; i < users.length; i++){
       if (regex.test(users[i].username)){
         matchedUsers.push(
-          <ThreadSearchItem 
+          <ThreadSearchItem
             user={users[i]}
             setSearchEntry={setSearchEntry}
             setDisplaySearch={setDisplaySearch}/>

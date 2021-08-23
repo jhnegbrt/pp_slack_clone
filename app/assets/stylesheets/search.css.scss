@@ -69,3 +69,20 @@
 .no-search-results{
   color: rgb(200, 28, 28)
 }
+
+.thread-search-user{
+  display: block;
+  color: #636363;
+  margin-left: 1vw;
+  margin-top: 1vh;
+  text-decoration: none;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+.awaiting-result{
+  color: #636363;
+  text-align: center;
+  margin-top: 1vh
+}
