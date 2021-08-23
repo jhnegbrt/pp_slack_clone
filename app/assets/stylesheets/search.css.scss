@@ -70,14 +70,44 @@
   color: rgb(200, 28, 28)
 }
 
-.thread-search-user{
-  display: block;
-  color: #636363;
+// .search-thread,
+// .search-user{
+//   display: flex;
+//   justify-content: space-between;
+//   color: #636363;
+//   margin-left: 1vw;
+//   margin-top: 1vh;
+//   text-decoration: none;
+//   &:hover{
+//     text-decoration: underline;
+//   }
+// }
+
+.search-thread,
+.search-user,
+.search-public-channel{
   margin-left: 1vw;
   margin-top: 1vh;
-  text-decoration: none;
-  &:hover{
-    text-decoration: underline;
+  color: #636363;
+  display: flex;
+  justify-content: space-between;
+  a:first-child{
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  a:nth-child(2){
+    padding: .2vh .3vh .1vh .3vh;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 3vw;
+    border: 1px solid rgb(60, 139, 96);
+    color: rgb(60, 139, 96);
+    &:hover{
+      color: white;
+      border: 1px solid white;
+      background-color: rgb(60, 139, 96);
+    }
   }
 }
 

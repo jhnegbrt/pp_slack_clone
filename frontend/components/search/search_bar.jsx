@@ -43,7 +43,7 @@ export default () => {
 
   let matches = (
     <div>
-      <div className="match-header">Users (click to chat):
+      <div className="match-header">Users:
         <SearchMatches 
           setSearchEntry={setSearchEntry}
           setDisplaySearch={setDisplaySearch} 
@@ -51,7 +51,7 @@ export default () => {
           type="users" 
           entities={users}/>
       </div>
-      <div className="match-header">Threads (click to view):
+      <div className="match-header">Threads:
         <SearchMatches 
           setSearchEntry={setSearchEntry}
           setDisplaySearch={setDisplaySearch} 
@@ -59,7 +59,7 @@ export default () => {
           type="threads" 
           entities={threads}/>
       </div>
-      <div className="match-header">Public Channels (click to join):
+      <div className="match-header">Public Channels:
         <SearchMatches
           setSearchEntry={setSearchEntry}
           setDisplaySearch={setDisplaySearch} 

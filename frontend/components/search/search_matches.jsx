@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
 import PublicChannelSearchItem from './public_channel_search_item'
-import ThreadSearchItem from './thread_search_item'
+import UserSearchItem from './user_search_item'
 
 export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
 
@@ -18,11 +18,14 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
       let title = threads[i].title
       if (regex.test(title) && title != "placeholder"){
         matchedThreads.push(
-          <Link 
-            onClick={matchClick}
-            to={`${threads[i].id}`}>
-              {threads[i].title}
-          </Link>
+          <div key={threads[i].id} className="search-thread">
+            <a onClick={matchClick} >{threads[i].title}</a>
+            <Link
+              onClick={matchClick}
+              to={`${threads[i].id}`}>
+              View
+            </Link>
+          </div>
         )
       }
     }
@@ -39,7 +42,8 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
       let regex = new RegExp(`${query}`, 'i')
       if (regex.test(publicChannels[i].title)){
         matchedPublicChannels.push(
-          <PublicChannelSearchItem 
+          <PublicChannelSearchItem
+            key={publicChannels[i].id}
             thread={publicChannels[i]}
             setSearchEntry={setSearchEntry}
             setDisplaySearch={setDisplaySearch}/>
@@ -59,7 +63,8 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
     for (let i = 0; i < users.length; i++){
       if (regex.test(users[i].username)){
         matchedUsers.push(
-          <ThreadSearchItem
+          <UserSearchItem
+            key={users[i].id}
             user={users[i]}
             setSearchEntry={setSearchEntry}
             setDisplaySearch={setDisplaySearch}/>

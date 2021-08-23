@@ -38,7 +38,14 @@ export default ({user, setSearchEntry, setDisplaySearch}) =>{
 
   return(
     activeThread ? 
-    <Link className="thread-search-user" onClick={handleClick} to={`${activeThread}`}>{user.username}</Link> : 
-    <a className="thread-search-user" onClick={createDirectMessage}>{user.username}</a>
+    <div className="search-user">
+      <a onClick={handleClick}>{user.username}</a>
+      <Link onClick={handleClick} to={`${activeThread}`}>Chat</Link>
+    </div> :
+    <div className="search-user">
+      <a onClick={createDirectMessage}>{user.username}</a>
+      <a onClick={createDirectMessage}>Chat</a>
+    </div>
+    
   )
 }

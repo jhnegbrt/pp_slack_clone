@@ -11459,7 +11459,11 @@ __webpack_require__.r(__webpack_exports__);
     setDisplaySearch(false);
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, thread.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "search-public-channel"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    onClick: handleClick
+  }, thread.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     onClick: handleClick,
     to: "".concat(thread.id)
   }, "Join"));
@@ -11550,7 +11554,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
   var matches = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "match-header"
-  }, "Users (click to chat):", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
+  }, "Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
     setSearchEntry: setSearchEntry,
     setDisplaySearch: setDisplaySearch,
     query: searchEntry,
@@ -11558,7 +11562,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     entities: users
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "match-header"
-  }, "Threads (click to view):", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
+  }, "Threads:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
     setSearchEntry: setSearchEntry,
     setDisplaySearch: setDisplaySearch,
     query: searchEntry,
@@ -11566,7 +11570,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     entities: threads
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "match-header"
-  }, "Public Channels (click to join):", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
+  }, "Public Channels:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
     setSearchEntry: setSearchEntry,
     setDisplaySearch: setDisplaySearch,
     query: searchEntry,
@@ -11613,7 +11617,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _public_channel_search_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public_channel_search_item */ "./frontend/components/search/public_channel_search_item.jsx");
-/* harmony import */ var _thread_search_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./thread_search_item */ "./frontend/components/search/thread_search_item.jsx");
+/* harmony import */ var _user_search_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user_search_item */ "./frontend/components/search/user_search_item.jsx");
 
 
 
@@ -11639,10 +11643,15 @@ __webpack_require__.r(__webpack_exports__);
       var title = threads[i].title;
 
       if (regex.test(title) && title != "placeholder") {
-        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: threads[i].id,
+          className: "search-thread"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          onClick: matchClick
+        }, threads[i].title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
           onClick: matchClick,
           to: "".concat(threads[i].id)
-        }, threads[i].title));
+        }, "View")));
       }
     }
 
@@ -11660,6 +11669,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (regex.test(publicChannels[i].title)) {
         matchedPublicChannels.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_public_channel_search_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+          key: publicChannels[i].id,
           thread: publicChannels[i],
           setSearchEntry: setSearchEntry,
           setDisplaySearch: setDisplaySearch
@@ -11679,7 +11689,8 @@ __webpack_require__.r(__webpack_exports__);
 
     for (var i = 0; i < users.length; i++) {
       if (regex.test(users[i].username)) {
-        matchedUsers.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_search_item__WEBPACK_IMPORTED_MODULE_2__.default, {
+        matchedUsers.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_user_search_item__WEBPACK_IMPORTED_MODULE_2__.default, {
+          key: users[i].id,
           user: users[i],
           setSearchEntry: setSearchEntry,
           setDisplaySearch: setDisplaySearch
@@ -11714,10 +11725,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./frontend/components/search/thread_search_item.jsx":
-/*!***********************************************************!*\
-  !*** ./frontend/components/search/thread_search_item.jsx ***!
-  \***********************************************************/
+/***/ "./frontend/components/search/user_search_item.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/search/user_search_item.jsx ***!
+  \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11774,14 +11785,20 @@ __webpack_require__.r(__webpack_exports__);
     setSearchEntry("");
   }
 
-  return activeThread ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-    className: "thread-search-user",
+  return activeThread ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "search-user"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    onClick: handleClick
+  }, user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
     onClick: handleClick,
     to: "".concat(activeThread)
-  }, user.username) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    className: "thread-search-user",
+  }, "Chat")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "search-user"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     onClick: createDirectMessage
-  }, user.username);
+  }, user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    onClick: createDirectMessage
+  }, "Chat"));
 });
 
 /***/ }),

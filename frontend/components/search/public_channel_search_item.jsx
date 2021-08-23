@@ -14,13 +14,9 @@ export default ({thread, setSearchEntry, setDisplaySearch}) => {
   }
 
   return(
-    <div>
-      {thread.title}
-      <Link 
-        onClick={handleClick} 
-        to={`${thread.id}`}>
-          Join
-      </Link>
+    <div className="search-public-channel">
+      <a onClick={handleClick}>{thread.title}</a>
+      <Link onClick={handleClick} to={`${thread.id}`}>Join</Link>
     </div>
   )
 }
