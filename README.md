@@ -1,6 +1,6 @@
 # Welcome to Sleuth
 
-Live Link
+[Live Link](https://sleuth-jwe.herokuapp.com/#/)
 
 ## Table of contents:
  1. [Features](#features)
