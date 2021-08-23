@@ -99,8 +99,6 @@ class SearchMessageForm extends React.Component{
     
   }
 
-  //creatorId and users are still undefined
-
 
   handleSubmit(e){
     e.preventDefault()

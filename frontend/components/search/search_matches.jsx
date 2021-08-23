@@ -1,6 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
-import PublicChannelItem from './public_channel_item'
+import PublicChannelSearchItem from './public_channel_search_item'
+import ThreadSearchItem from './thread_search_item'
 
 export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
 
@@ -38,7 +39,7 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
       let regex = new RegExp(`${query}`, 'i')
       if (regex.test(publicChannels[i].title)){
         matchedPublicChannels.push(
-          <PublicChannelItem 
+          <PublicChannelSearchItem 
             thread={publicChannels[i]}
             setSearchEntry={setSearchEntry}
             setDisplaySearch={setDisplaySearch}/>
@@ -54,10 +55,15 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
   function matchUsers(){
     let users = Object.values(entities)
     let matchedUsers = []
+    let regex = new RegExp(`${query}`, 'i')
     for (let i = 0; i < users.length; i++){
-      let regex = new RegExp(`${query}`, 'i')
       if (regex.test(users[i].username)){
-        matchedUsers.push(<div>{users[i].username}</div>)
+        matchedUsers.push(
+          <ThreadSearchItem 
+            user={users[i]}
+            setSearchEntry={setSearchEntry}
+            setDisplaySearch={setDisplaySearch}/>
+        )
       }
     }
     return (

@@ -11342,8 +11342,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
 
         _this2.props.history.push("/client/".concat(res.threadId));
       });
-    } //creatorId and users are still undefined
-
+    }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
@@ -11460,10 +11459,10 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
-/***/ "./frontend/components/search/public_channel_item.jsx":
-/*!************************************************************!*\
-  !*** ./frontend/components/search/public_channel_item.jsx ***!
-  \************************************************************/
+/***/ "./frontend/components/search/public_channel_search_item.jsx":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/search/public_channel_search_item.jsx ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11485,34 +11484,9 @@ __webpack_require__.r(__webpack_exports__);
       setDisplaySearch = _ref.setDisplaySearch;
   var currentUserId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.session.id;
-  }); // function findThreadChannel(){
-  //   let index;
-  //   let subscriptions = App.cable.subscriptions.subscriptions
-  //   for (let i = 0; i < subscriptions.length; i++){
-  //     let identifier = JSON.parse(subscriptions[i].identifier)
-  //     if (identifier.channel === "ThreadChannel"){
-  //       index = i
-  //       break
-  //     }
-  //   }
-  //   return index
-  // }
-  // function joinChannel(){
-  //   let subscriptions = App.cable.subscriptions.subscriptions
-  //   let index = findThreadChannel()
-  //   subscriptions[index].speak({
-  //     created: true,
-  //     id: thread.id,
-  //     users: [currentUserId],
-  //     channel: true,
-  //     private: false,
-  //     title: thread.title,
-  //     creator_id: thread.creator_id
-  //   })
-  // }
+  });
 
   function handleClick() {
-    debugger;
     (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_2__.joinChannel)(thread, currentUserId);
     setSearchEntry("");
     setDisplaySearch(false);
@@ -11667,8 +11641,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _public_channel_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public_channel_item */ "./frontend/components/search/public_channel_item.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _public_channel_search_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public_channel_search_item */ "./frontend/components/search/public_channel_search_item.jsx");
+/* harmony import */ var _thread_search_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./thread_search_item */ "./frontend/components/search/thread_search_item.jsx");
+
 
 
 
@@ -11693,7 +11669,7 @@ __webpack_require__.r(__webpack_exports__);
       var title = threads[i].title;
 
       if (regex.test(title) && title != "placeholder") {
-        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
           onClick: matchClick,
           to: "".concat(threads[i].id)
         }, threads[i].title));
@@ -11713,7 +11689,7 @@ __webpack_require__.r(__webpack_exports__);
       var regex = new RegExp("".concat(query), 'i');
 
       if (regex.test(publicChannels[i].title)) {
-        matchedPublicChannels.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_public_channel_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+        matchedPublicChannels.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_public_channel_search_item__WEBPACK_IMPORTED_MODULE_1__.default, {
           thread: publicChannels[i],
           setSearchEntry: setSearchEntry,
           setDisplaySearch: setDisplaySearch
@@ -11729,12 +11705,15 @@ __webpack_require__.r(__webpack_exports__);
   function matchUsers() {
     var users = Object.values(entities);
     var matchedUsers = [];
+    var regex = new RegExp("".concat(query), 'i');
 
     for (var i = 0; i < users.length; i++) {
-      var regex = new RegExp("".concat(query), 'i');
-
       if (regex.test(users[i].username)) {
-        matchedUsers.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, users[i].username));
+        matchedUsers.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_search_item__WEBPACK_IMPORTED_MODULE_2__.default, {
+          user: users[i],
+          setSearchEntry: setSearchEntry,
+          setDisplaySearch: setDisplaySearch
+        }));
       }
     }
 
@@ -11761,6 +11740,52 @@ __webpack_require__.r(__webpack_exports__);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, findMatches());
+});
+
+/***/ }),
+
+/***/ "./frontend/components/search/thread_search_item.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/search/thread_search_item.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {
+  var user = _ref.user,
+      setSearchEntry = _ref.setSearchEntry,
+      setDisplaySearch = _ref.setDisplaySearch;
+  var threads = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return Object.values(state.workspace.threads);
+  });
+  var activeThread = false;
+
+  for (var i = 0; i < threads.length; i++) {
+    if (threads[i].users.length === 2 && threads[i].users.includes(user.id)) {
+      activeThread = threads[i].id;
+      break;
+    }
+  }
+
+  function handleClick() {
+    setDisplaySearch(false);
+    setSearchEntry("");
+  }
+
+  return activeThread ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    onClick: handleClick,
+    to: "".concat(activeThread)
+  }, user.username) : "";
 });
 
 /***/ }),
@@ -13727,33 +13752,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
           hover: false
         });
       }
-    } // findThreadChannel(){
-    //   let index;
-    //   let subscriptions = App.cable.subscriptions.subscriptions
-    //   for (let i = 0; i < subscriptions.length; i++){
-    //     let identifier = JSON.parse(subscriptions[i].identifier)
-    //     if (identifier.channel === "ThreadChannel"){
-    //       index = i
-    //       break
-    //     }
-    //   }
-    //   return index
-    // }
-    // joinChannel(){
-    //   const {thread, currentUserId } = this.props
-    //   let subscriptions = App.cable.subscriptions.subscriptions
-    //   let index = this.findThreadChannel()
-    //   subscriptions[index].speak({
-    //     created: true,
-    //     id: thread.id,
-    //     users: [currentUserId],
-    //     channel: true,
-    //     private: false,
-    //     title: thread.title,
-    //     creator_id: thread.creator_id
-    //   })
-    // }
-
+    }
   }, {
     key: "leaveChannel",
     value: function leaveChannel() {

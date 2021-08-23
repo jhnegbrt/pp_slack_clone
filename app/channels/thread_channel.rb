@@ -53,7 +53,6 @@ class ThreadChannel < ApplicationCable::Channel
           users: data["users"]
         }
         user = data["users"][i]
-        # might need to add check to see if already exists
         UserChannelDm.create(channel_dm_id: channel_dm.id, user_id: user)
         ThreadChannel.broadcast_to("thread_channel_#{user}", socket)
         i += 1

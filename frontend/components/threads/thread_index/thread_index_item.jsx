@@ -19,7 +19,6 @@ class ThreadIndexItem extends React.Component{
     createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage)
   }
 
-
   createTitle(){
     let channelUsers = this.props.thread.users.filter((id)=>{return id !== this.props.currentUserId})
     if(Object.keys(this.props.users).length === 0){
