@@ -11513,7 +11513,7 @@ __webpack_require__.r(__webpack_exports__);
 
   function handleClick() {
     debugger;
-    (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_2__.default)(thread, currentUserId);
+    (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_2__.joinChannel)(thread, currentUserId);
     setSearchEntry("");
     setDisplaySearch(false);
   }
@@ -13727,24 +13727,19 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
           hover: false
         });
       }
-    }
-  }, {
-    key: "findThreadChannel",
-    value: function findThreadChannel() {
-      var index;
-      var subscriptions = App.cable.subscriptions.subscriptions;
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ThreadChannel") {
-          index = i;
-          break;
-        }
-      }
-
-      return index;
-    } // joinChannel(){
+    } // findThreadChannel(){
+    //   let index;
+    //   let subscriptions = App.cable.subscriptions.subscriptions
+    //   for (let i = 0; i < subscriptions.length; i++){
+    //     let identifier = JSON.parse(subscriptions[i].identifier)
+    //     if (identifier.channel === "ThreadChannel"){
+    //       index = i
+    //       break
+    //     }
+    //   }
+    //   return index
+    // }
+    // joinChannel(){
     //   const {thread, currentUserId } = this.props
     //   let subscriptions = App.cable.subscriptions.subscriptions
     //   let index = this.findThreadChannel()
@@ -13765,8 +13760,8 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           thread = _this$props.thread,
           currentUserId = _this$props.currentUserId;
-      var index = this.findThreadChannel();
       var subscriptions = App.cable.subscriptions.subscriptions;
+      var index = (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.findThreadChannel)(subscriptions);
       subscriptions[index].leaveThread({
         thread: thread.id,
         user: currentUserId
@@ -13788,7 +13783,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       }, "Leave") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "join-button",
         onClick: function onClick() {
-          return (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.default)(thread, currentUserId);
+          return (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread, currentUserId);
         }
       }, "Join") : null);
     }
@@ -15169,10 +15164,10 @@ function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ joinChannel)
+/* harmony export */   "findThreadChannel": () => (/* binding */ findThreadChannel),
+/* harmony export */   "joinChannel": () => (/* binding */ joinChannel)
 /* harmony export */ });
-function joinChannel(thread, currentUserId) {
-  var subscriptions = App.cable.subscriptions.subscriptions;
+function findThreadChannel(subscriptions) {
   var index;
 
   for (var i = 0; i < subscriptions.length; i++) {
@@ -15184,6 +15179,11 @@ function joinChannel(thread, currentUserId) {
     }
   }
 
+  return index;
+}
+function joinChannel(thread, currentUserId) {
+  var subscriptions = App.cable.subscriptions.subscriptions;
+  var index = findThreadChannel(subscriptions);
   subscriptions[index].speak({
     created: true,
     id: thread.id,

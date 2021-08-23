@@ -1,6 +1,4 @@
-export default function joinChannel(thread, currentUserId){
-
-  let subscriptions = App.cable.subscriptions.subscriptions
+export function findThreadChannel(subscriptions){
 
   let index;
   for (let i = 0; i < subscriptions.length; i++){
@@ -10,7 +8,15 @@ export default function joinChannel(thread, currentUserId){
       break
     }
   }
+  return index
+}
 
+export function joinChannel(thread, currentUserId){
+
+  let subscriptions = App.cable.subscriptions.subscriptions
+
+  let index = findThreadChannel(subscriptions)
+  
   subscriptions[index].speak({
     created: true,
     id: thread.id,
@@ -20,5 +26,4 @@ export default function joinChannel(thread, currentUserId){
     title: thread.title,
     creator_id: thread.creator_id
   })
-
 }

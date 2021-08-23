@@ -1,5 +1,5 @@
 import React from 'react'
-import joinChannel from '../../../../util/action_cable_util/join_channel'
+import {joinChannel, findThreadChannel} from '../../../../util/action_cable_util/join_channel'
 
 class ExploreItem extends React.Component{
   constructor(props){
@@ -30,18 +30,18 @@ class ExploreItem extends React.Component{
     }
   }
 
-  findThreadChannel(){
-    let index;
-    let subscriptions = App.cable.subscriptions.subscriptions
-    for (let i = 0; i < subscriptions.length; i++){
-      let identifier = JSON.parse(subscriptions[i].identifier)
-      if (identifier.channel === "ThreadChannel"){
-        index = i
-        break
-      }
-    }
-    return index
-  }
+  // findThreadChannel(){
+  //   let index;
+  //   let subscriptions = App.cable.subscriptions.subscriptions
+  //   for (let i = 0; i < subscriptions.length; i++){
+  //     let identifier = JSON.parse(subscriptions[i].identifier)
+  //     if (identifier.channel === "ThreadChannel"){
+  //       index = i
+  //       break
+  //     }
+  //   }
+  //   return index
+  // }
 
   // joinChannel(){
   //   const {thread, currentUserId } = this.props
@@ -60,8 +60,8 @@ class ExploreItem extends React.Component{
 
   leaveChannel(){
     const {thread, currentUserId} = this.props
-    let index = this.findThreadChannel()
     let subscriptions = App.cable.subscriptions.subscriptions
+    let index = findThreadChannel(subscriptions)
     subscriptions[index].leaveThread({
       thread: thread.id,
       user: currentUserId
