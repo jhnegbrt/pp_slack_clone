@@ -10,7 +10,8 @@ class MessageIndex extends React.Component{
     this.bottom = React.createRef();
     this.state = {
       threadId: null,
-      searchDmId: null
+      searchDmId: null,
+      fetchedMessages: false
     }
   }
 
@@ -24,25 +25,17 @@ class MessageIndex extends React.Component{
         return
       }
     }
-    throw "Did not find channel"
   }
 
-  componentDidMount(){
-    let threadId = parseInt(this.props.currentThreadId)
-    let subscriptions = App.cable.subscriptions.subscriptions
-    console.log(subscriptions)
-    for (let i = 0; i < subscriptions.length; i++){
-      let identifier = JSON.parse(subscriptions[i].identifier)
-      if (identifier.channel === "ChatChannel" && identifier.thread_id === threadId){
-        subscriptions[i].load()
-        return
-      }
-    }
-  }
 
   componentDidUpdate() {
     let {messages, currentThreadId, searchDmId} = this.props
-    if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0){
+    if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
+      this.fetchMessages(searchDmId)
+      this.setState({
+        fetchedMessages: true
+      })
+    } else if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0){
       this.props.clearMessages()
     } else if (this.props.searchDmId != this.state.searchDmId){
       this.setState({
@@ -50,6 +43,9 @@ class MessageIndex extends React.Component{
         threadId: null
       })
       this.fetchMessages(searchDmId)
+      this.setState({
+        fetchedMessages: true
+      })
     } else if (this.state.threadId != currentThreadId && App.cable.subscriptions.subscriptions.length > 1){
       this.props.clearMessages()
       this.setState({
@@ -57,6 +53,9 @@ class MessageIndex extends React.Component{
         searchDmId: null
       })
       this.fetchMessages(currentThreadId)
+      this.setState({
+        fetchedMessages: true
+      })
     }
     this.bottom.current.scrollIntoView();
   }

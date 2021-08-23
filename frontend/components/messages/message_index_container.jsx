@@ -3,7 +3,8 @@ import {clearMessages} from '../../actions/message_actions'
 import MessageIndex from './message_index'
 
 const mSTP = (state) => ({
-  messages: Object.values(state.workspace.messages)
+  messages: Object.values(state.workspace.messages),
+  subscriptions: App.cable.subscriptions.subscriptions
 })
 
 const mDTP = (dispatch) => ({

@@ -10879,7 +10879,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     _this.bottom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
     _this.state = {
       threadId: null,
-      searchDmId: null
+      searchDmId: null,
+      fetchedMessages: false
     };
     return _this;
   }
@@ -10898,24 +10899,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           return;
         }
       }
-
-      throw "Did not find channel";
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var threadId = parseInt(this.props.currentThreadId);
-      var subscriptions = App.cable.subscriptions.subscriptions;
-      console.log(subscriptions);
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ChatChannel" && identifier.thread_id === threadId) {
-          subscriptions[i].load();
-          return;
-        }
-      }
     }
   }, {
     key: "componentDidUpdate",
@@ -10925,7 +10908,12 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           currentThreadId = _this$props.currentThreadId,
           searchDmId = _this$props.searchDmId;
 
-      if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0) {
+      if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1) {
+        this.fetchMessages(searchDmId);
+        this.setState({
+          fetchedMessages: true
+        });
+      } else if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0) {
         this.props.clearMessages();
       } else if (this.props.searchDmId != this.state.searchDmId) {
         this.setState({
@@ -10933,6 +10921,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           threadId: null
         });
         this.fetchMessages(searchDmId);
+        this.setState({
+          fetchedMessages: true
+        });
       } else if (this.state.threadId != currentThreadId && App.cable.subscriptions.subscriptions.length > 1) {
         this.props.clearMessages();
         this.setState({
@@ -10940,6 +10931,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           searchDmId: null
         });
         this.fetchMessages(currentThreadId);
+        this.setState({
+          fetchedMessages: true
+        });
       }
 
       this.bottom.current.scrollIntoView();
@@ -11007,7 +11001,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    messages: Object.values(state.workspace.messages)
+    messages: Object.values(state.workspace.messages),
+    subscriptions: App.cable.subscriptions.subscriptions
   };
 };
 
