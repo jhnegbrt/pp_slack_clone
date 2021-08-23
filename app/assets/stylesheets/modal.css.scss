@@ -90,7 +90,6 @@
     outline: none;
     border: none;
   }
-
 }
 
 .modal-select{
@@ -186,7 +185,9 @@
   margin-bottom: 2%;
   font-family: 'Comfortaa', serif;
   &:focus-visible{
-
+    outline: none;
+    border: 1px solid rgb(44, 44, 83);
+    box-shadow: 0 0 0 2px rgb(167, 88, 167)
   }
 }
 

@@ -13125,6 +13125,7 @@ var NewChannelModal = /*#__PURE__*/function (_React$Component) {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         onChange: this.updateTitle,
+        autoFocus: true,
         placeholder: "Channel Title",
         type: "text",
         value: this.state.title

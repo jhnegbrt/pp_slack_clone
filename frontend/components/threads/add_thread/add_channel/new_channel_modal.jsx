@@ -43,6 +43,7 @@ class NewChannelModal extends React.Component{
             <div className="create-thread">
               <form onSubmit = {this.handleSubmit}>
                 <input onChange = {this.updateTitle}
+                  autoFocus={true}
                   placeholder={"Channel Title"}
                   type="text"
                   value={this.state.title}></input>
