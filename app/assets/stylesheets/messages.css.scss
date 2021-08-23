@@ -114,7 +114,7 @@ div::-webkit-scrollbar{
   text-align: right;
   line-height: 3vh;
   margin-top: 1vh;
-  background-color: rgb(207, 226, 233);
+  background-color: #e6e6e6;
   border-radius: 2px;
   padding: 2vh;
   margin-left: 1%;
@@ -155,7 +155,6 @@ div::-webkit-scrollbar{
 
 .message-buttons button:hover{
   cursor:pointer;
-  background-color:rgb(192, 238, 240) 
 }
 
 .edit-message-form input[type=submit],

@@ -10352,7 +10352,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var NotFoundPage = function NotFoundPage() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "404 Page Not Found");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "page-not-found"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "spy-image"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Sorry, this page could not be found")));
 };
 
 var App = function App() {

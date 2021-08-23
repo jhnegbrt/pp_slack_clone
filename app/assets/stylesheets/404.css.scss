@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+
+
+.page-not-found{
+  height: 100vh;
+  width: 100vw;
+  padding: 17vh 17vw;
+  background-color: whitesmoke;
+  box-sizing: border-box;
+
+  .spy-image{
+    height: 66vh;
+    width: 66vw;
+    background: image-url('spy_3.jpg') no-repeat;
+    background-position-y: bottom;
+    background-position-x: center;
+    background-size:cover;
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding: 20vh 3vw;
+    h1{
+      font-family: 'Comfortaa', serif;
+      font-size:7vh;
+      color: whitesmoke;
+      text-align: center;
+    }
+  }
+}

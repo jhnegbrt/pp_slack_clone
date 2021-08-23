@@ -8,7 +8,13 @@ import ClientContainer from '../components/client/client_container'
 import { AuthRoute, ProtectedRoute } from '../util/route_util'
 
 const NotFoundPage = () => {
-  return <h1>404 Page Not Found</h1>;
+  return (
+    <div className="page-not-found">
+      <div className="spy-image">
+        <h1>Sorry, this page could not be found</h1>
+      </div>
+    </div>
+  )
 }
 
 const App = () => (
