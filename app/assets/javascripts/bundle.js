@@ -13497,7 +13497,8 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         className: "dm-recipients-list"
       }, selectedUsers.map(function (id) {
         if (id !== _this4.props.currentUser) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "dm-recipient",
             key: id
           }, users[id].username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             onClick: function onClick() {

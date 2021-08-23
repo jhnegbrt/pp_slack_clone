@@ -203,10 +203,13 @@ class AddDirectMessage extends React.Component{
           <ul className="dm-recipients-list">
             {selectedUsers.map(id =>{
               if( id !== this.props.currentUser){
-                return <li key={id}>
-                  {users[id].username}
-                <a onClick={()=>this.removeUser(id)}><img className="remove-new-member-button" 
-                src={Close}></img></a></li>
+                return (
+                  <div className="dm-recipient" key={id}>{users[id].username}
+                    <a onClick={()=>this.removeUser(id)}>
+                      <img className="remove-new-member-button" src={Close}></img>
+                    </a>
+                  </div>
+                )
               }
             })}
             <input

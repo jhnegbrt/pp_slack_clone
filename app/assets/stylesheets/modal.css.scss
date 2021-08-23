@@ -155,7 +155,8 @@
   position: absolute;
   z-index: 5;
   li{
-    margin-bottom: 1vh;
+    padding: .5vh .5vw;
+    border-radius: 5px;
     font-family: 'Noto Sans', sans-serif;
   }
   &::-webkit-scrollbar-thumb{
@@ -182,6 +183,9 @@
 
 .remove-new-member-button{
   width: 1vw;
+  &:hover{
+    cursor: pointer
+  }
 }
 
 .close-modal-button{
