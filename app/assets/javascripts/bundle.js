@@ -10216,7 +10216,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
 /* harmony export */ });
 /* harmony import */ var _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api/thread_api_util */ "./frontend/util/api/thread_api_util.js");
-/* harmony import */ var _util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/action_cable_util/join_channel */ "./frontend/util/action_cable_util/join_channel.js");
+/* harmony import */ var _util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/action_cable_util/channel_util */ "./frontend/util/action_cable_util/channel_util.js");
 
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
@@ -10256,16 +10256,18 @@ var receivePublicChannels = function receivePublicChannels(channels) {
   };
 };
 
-var createThread = function createThread(data, users) {
+var createThread = function createThread(data, users, content) {
   return function (dispatch) {
     _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
-      debugger;
-
       if (thread.channel === true) {
-        (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread);
+        (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread);
       } else {
-        (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.createNewThread)(thread, users);
+        (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.propagateThread)(thread, users, content);
       }
+
+      return thread;
+    }).then(function (thread) {
+      return dispatch(receiveCurrentThread(thread.id));
     });
   };
 };
@@ -11292,14 +11294,21 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "createNewDirectMessage",
     value: function createNewDirectMessage() {
+      var _this2 = this;
+
+      var selectedUsers = this.props.selectedUsers;
+      var content = this.state.content;
       var newDirectMessage = {
-        users: this.props.selectedUsers,
         channel: false,
         "private": true,
         creator_id: this.state.creatorId,
         title: "placeholder"
       };
-      this.props.createThread(newDirectMessage);
+      this.props.createThread(newDirectMessage, selectedUsers, content).then(function (thread) {
+        debugger;
+
+        _this2.props.history.push("/client/".concat(thread.id));
+      });
     }
   }, {
     key: "handleSubmit",
@@ -11373,8 +11382,8 @@ var mSTP = function mSTP(state, ownProps) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    createThread: function createThread(directMessage, users) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage, users));
+    createThread: function createThread(directMessage, users, content) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage, users, content));
     },
     fetchThreads: function fetchThreads() {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchThreads)());
@@ -11431,7 +11440,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/action_cable_util/join_channel */ "./frontend/util/action_cable_util/join_channel.js");
+/* harmony import */ var _util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/action_cable_util/channel_util */ "./frontend/util/action_cable_util/channel_util.js");
 
 
 
@@ -11445,7 +11454,7 @@ __webpack_require__.r(__webpack_exports__);
   });
 
   function handleClick() {
-    (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_2__.joinChannel)(thread, currentUserId);
+    (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_2__.joinChannel)(thread, currentUserId);
     setSearchEntry("");
     setDisplaySearch(false);
   }
@@ -13640,7 +13649,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../util/action_cable_util/join_channel */ "./frontend/util/action_cable_util/join_channel.js");
+/* harmony import */ var _util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../util/action_cable_util/channel_util */ "./frontend/util/action_cable_util/channel_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13712,7 +13721,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
           thread = _this$props.thread,
           currentUserId = _this$props.currentUserId;
       var subscriptions = App.cable.subscriptions.subscriptions;
-      var index = (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.findThreadChannel)(subscriptions);
+      var index = (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.findThreadChannel)(subscriptions);
       subscriptions[index].leaveThread({
         thread: thread.id,
         user: currentUserId
@@ -13734,7 +13743,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       }, "Leave") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "join-button",
         onClick: function onClick() {
-          return (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread, currentUserId);
+          return (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread, currentUserId);
         }
       }, "Join") : null);
     }
@@ -15013,6 +15022,78 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
+/***/ "./frontend/util/action_cable_util/channel_util.js":
+/*!*********************************************************!*\
+  !*** ./frontend/util/action_cable_util/channel_util.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "findThreadOrChannel": () => (/* binding */ findThreadOrChannel),
+/* harmony export */   "joinChannel": () => (/* binding */ joinChannel),
+/* harmony export */   "propagateThread": () => (/* binding */ propagateThread)
+/* harmony export */ });
+function findThreadOrChannel(type, subscriptions) {
+  var index;
+
+  for (var i = 0; i < subscriptions.length; i++) {
+    var identifier = JSON.parse(subscriptions[i].identifier);
+
+    if (identifier.channel === type) {
+      index = i;
+      break;
+    }
+  }
+
+  return index;
+}
+
+function subscriptionsSpeak(type, data, content) {
+  var subscriptions = App.cable.subscriptions.subscriptions;
+  var index = findThreadOrChannel(type, subscriptions);
+  debugger;
+
+  if (type === "ThreadChannel") {
+    subscriptions[index].speak({
+      created: true,
+      id: data.thread.id,
+      users: data.users,
+      channel: true,
+      "private": false,
+      title: data.thread.title,
+      creator_id: data.thread.creator_id
+    });
+  } else {
+    debugger;
+    var message = {
+      channel_dms_id: data.thread.id,
+      content: content,
+      sender_id: data.thread.creator_id
+    };
+    subscriptions[index].speak({
+      message: message
+    });
+  }
+}
+
+function joinChannel(thread, currentUserId) {
+  subscriptionsSpeak("ThreadChannel");
+  this.props.history.push("/client/".concat(thread.id));
+}
+function propagateThread(thread, users, content) {
+  subscriptionsSpeak("ThreadChannel", {
+    thread: thread,
+    users: users
+  });
+  subscriptionsSpeak("ChatChannel", {
+    thread: thread
+  }, content);
+}
+
+/***/ }),
+
 /***/ "./frontend/util/action_cable_util/create_messages_connection.jsx":
 /*!************************************************************************!*\
   !*** ./frontend/util/action_cable_util/create_messages_connection.jsx ***!
@@ -15102,83 +15183,6 @@ function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads
       return this.perform("leave_thread", data);
     }
   });
-}
-
-/***/ }),
-
-/***/ "./frontend/util/action_cable_util/join_channel.js":
-/*!*********************************************************!*\
-  !*** ./frontend/util/action_cable_util/join_channel.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "findThreadOrChannel": () => (/* binding */ findThreadOrChannel),
-/* harmony export */   "joinChannel": () => (/* binding */ joinChannel),
-/* harmony export */   "createNewThread": () => (/* binding */ createNewThread)
-/* harmony export */ });
-function findThreadOrChannel(type, subscriptions) {
-  var index;
-
-  for (var i = 0; i < subscriptions.length; i++) {
-    var identifier = JSON.parse(subscriptions[i].identifier);
-
-    if (identifier.channel === type) {
-      index = i;
-      break;
-    }
-  }
-
-  return index;
-}
-
-function subscriptionsSpeak(type) {
-  var subscriptions = App.cable.subscriptions.subscriptions;
-  var index = findThreadOrChannel(type, subscriptions);
-
-  if (type === "ThreadChannel") {
-    subscriptions[index].speak({
-      created: true,
-      id: thread.id,
-      users: [currentUserId],
-      channel: true,
-      "private": false,
-      title: thread.title,
-      creator_id: thread.creator_id
-    });
-  } else {
-    subscriptions[index].speak({
-      message: "message"
-    });
-  }
-
-  this.props.history.push("/client/".concat(res.id));
-}
-
-function joinChannel(thread, currentUserId) {
-  subscriptionsSpeak("ThreadChannel");
-}
-function createNewThread() {
-  subscriptionsSpeak("ThreadChannel");
-  subscriptionsSpeak("ChatChannel");
-
-  for (var i = 0; i < subscriptions.length; i++) {
-    var identifier = JSON.parse(subscriptions[i].identifier);
-
-    if (identifier.channel === "ChatChannel") {
-      index = i;
-      break;
-    }
-  }
-
-  var message = {
-    channel_dms_id: res.id,
-    content: this.state.content,
-    sender_id: this.state.creatorId,
-    created: true
-  };
 }
 
 /***/ }),

@@ -1,5 +1,5 @@
 import React from 'react'
-import {joinChannel, findThreadChannel} from '../../../../util/action_cable_util/join_channel'
+import {joinChannel, findThreadChannel} from '../../../../util/action_cable_util/channel_util'
 
 class ExploreItem extends React.Component{
   constructor(props){

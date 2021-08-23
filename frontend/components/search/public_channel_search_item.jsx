@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import {joinChannel} from "../../util/action_cable_util/join_channel"
+import {joinChannel} from "../../util/action_cable_util/channel_util"
 
 export default ({thread, setSearchEntry, setDisplaySearch}) => {
 

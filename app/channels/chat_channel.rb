@@ -29,7 +29,7 @@ class ChatChannel < ApplicationCable::Channel
       channel_dms_id: channel_dms_id
     )
     
-    sender = Message.find_by(id: new_message.id).sender
+    sender = User.find_by(id: new_message.sender_id)
     time = new_message["updated_at"]
     socket = {
       type: "message",

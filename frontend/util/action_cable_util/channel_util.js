@@ -11,54 +11,45 @@ export function findThreadOrChannel(type, subscriptions){
   return index
 }
 
-function subscriptionsSpeak(type, ){
+function subscriptionsSpeak(type, data, content){
 
   let subscriptions = App.cable.subscriptions.subscriptions
 
   let index = findThreadOrChannel(type, subscriptions)
-
+  debugger
   if (type === "ThreadChannel"){
     subscriptions[index].speak({
       created: true,
-      id: thread.id,
-      users: [currentUserId],
+      id: data.thread.id,
+      users: data.users,
       channel: true,
       private: false,
-      title: thread.title,
-      creator_id: thread.creator_id
+      title: data.thread.title,
+      creator_id: data.thread.creator_id
     })
   } else {
+    debugger
+    let message = {
+      channel_dms_id: data.thread.id,
+      content: content,
+      sender_id: data.thread.creator_id,
+    }
     subscriptions[index].speak({
-      message: "message"
+      message: message
     })
   }
-
-  this.props.history.push(`/client/${res.id}`)
 }
 
 export function joinChannel(thread, currentUserId){
 
   subscriptionsSpeak("ThreadChannel")
+  this.props.history.push(`/client/${thread.id}`)
 
 }
 
-export function createNewThread(){
+export function propagateThread(thread, users, content){
 
-  subscriptionsSpeak("ThreadChannel")
-  subscriptionsSpeak("ChatChannel")
-
-  for (let i = 0; i < subscriptions.length; i++){
-    let identifier = JSON.parse(subscriptions[i].identifier)
-    if (identifier.channel === "ChatChannel"){
-      index = i
-      break
-    }
-  }
-  let message = {
-    channel_dms_id: res.id,
-    content: this.state.content,
-    sender_id: this.state.creatorId,
-    created: true
-  }
+  subscriptionsSpeak("ThreadChannel", {thread, users})
+  subscriptionsSpeak("ChatChannel", {thread}, content)
 
 }

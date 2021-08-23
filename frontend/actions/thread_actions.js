@@ -1,5 +1,5 @@
 import * as APIUtil from '../util/api/thread_api_util'
-import { joinChannel, createNewThread } from '../util/action_cable_util/join_channel'
+import { joinChannel, propagateThread } from '../util/action_cable_util/channel_util'
 
 export const RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD"
 export const RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS"
@@ -24,7 +24,6 @@ export const removeThread = thread => ({
   thread
 })
 
-
 export const receiveAllThreads = (threads) => {
   return({
     type: RECEIVE_ALL_THREADS,
@@ -39,16 +38,17 @@ const receivePublicChannels = (channels) => {
   })
 }
 
-export const createThread = (data, users) => dispatch => {
+export const createThread = (data, users, content) => dispatch => {
   APIUtil.createThread(data)
-    .then(thread =>{
-      debugger
+    .then(thread => {
       if(thread.channel === true){
         joinChannel(thread)
       } else {
-        createNewThread(thread, users)
+        propagateThread(thread, users, content)
       }
+      return thread
     })
+    .then((thread) => dispatch(receiveCurrentThread(thread.id)))
 }
 
 export const fetchThreads = () => dispatch => (
