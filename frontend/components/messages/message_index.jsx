@@ -68,7 +68,7 @@ class MessageIndex extends React.Component{
               )
             }
           </ul>
-          <div ref={this.bottom} />
+          <div className="messages-bottom" ref={this.bottom} />
         </div>
         <div className="message-input">
           {this.props.type === "thread" ? 

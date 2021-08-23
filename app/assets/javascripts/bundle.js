@@ -10953,6 +10953,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           currentThreadId: _this2.props.currentThreadId
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "messages-bottom",
         ref: this.bottom
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "message-input"
@@ -11156,11 +11157,14 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         onMouseEnter: this.hovering,
         onMouseLeave: this.notHovering,
         className: this.props.message.sender_id === this.props.currentUserId ? "message-current" : "message"
+      }, this.props.message.sender_id === this.props.currentUserId // && this.state.hover === true ? 
+      ? buttons : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "message-content"
       }, new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-name"
       }, this.props.message.sender) : null, time_diff > 18000 || new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-time"
-      }, time) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.message.content), this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null);
+      }, time) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.message.content)));
       return this.state.editting ? edit : display;
     }
   }]);

@@ -103,12 +103,14 @@ class MessageIndexItem extends React.Component{
         onMouseLeave={this.notHovering}
         className={this.props.message.sender_id === this.props.currentUserId ?
         "message-current": "message"}>
-          {new_user === true ? <span className="message-name">{this.props.message.sender}</span> : null}
-          {time_diff > 18000 || new_user === true ? <span className="message-time">{time}</span> : null}
-          <p>{this.props.message.content}</p>
           {this.props.message.sender_id === this.props.currentUserId
-          && this.state.hover === true ? 
-          buttons : null }
+          // && this.state.hover === true ? 
+          ? buttons : <div></div> }
+          <div className="message-content">
+            {new_user === true ? <span className="message-name">{this.props.message.sender}</span> : null}
+            {time_diff > 18000 || new_user === true ? <span className="message-time">{time}</span> : null}
+            <p>{this.props.message.content}</p>
+          </div>
       </div>
     )
 
