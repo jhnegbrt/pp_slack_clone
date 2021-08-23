@@ -22,7 +22,7 @@ function subscriptionsSpeak(type, data, content){
       created: true,
       id: data.thread.id,
       users: data.users,
-      channel: true,
+      channel: data.thread.channel,
       private: false,
       title: data.thread.title,
       creator_id: data.thread.creator_id

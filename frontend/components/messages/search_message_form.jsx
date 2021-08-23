@@ -44,8 +44,6 @@ class SearchMessageForm extends React.Component{
     this.props.history.push(`/client/${this.props.searchDmId}`)
   }
 
-
-
   //this method creates a new DM if the user sends a message to a group or individual 
   //that they do not yet have a dm with
   createNewDirectMessage(){
@@ -58,10 +56,7 @@ class SearchMessageForm extends React.Component{
       title: "placeholder",
     }
     this.props.createThread(newDirectMessage, selectedUsers, content)
-      .then(thread =>{
-        debugger
-        this.props.history.push(`/client/${thread.id}`)
-      })
+      .then(action =>this.props.history.push(`/client/${action.threadId}`))
   }
 
   handleSubmit(e){

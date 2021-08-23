@@ -10258,7 +10258,7 @@ var receivePublicChannels = function receivePublicChannels(channels) {
 
 var createThread = function createThread(data, users, content) {
   return function (dispatch) {
-    _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
+    return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
       if (thread.channel === true) {
         (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread);
       } else {
@@ -11304,10 +11304,8 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         creator_id: this.state.creatorId,
         title: "placeholder"
       };
-      this.props.createThread(newDirectMessage, selectedUsers, content).then(function (thread) {
-        debugger;
-
-        _this2.props.history.push("/client/".concat(thread.id));
+      this.props.createThread(newDirectMessage, selectedUsers, content).then(function (action) {
+        return _this2.props.history.push("/client/".concat(action.threadId));
       });
     }
   }, {
@@ -15060,7 +15058,7 @@ function subscriptionsSpeak(type, data, content) {
       created: true,
       id: data.thread.id,
       users: data.users,
-      channel: true,
+      channel: data.thread.channel,
       "private": false,
       title: data.thread.title,
       creator_id: data.thread.creator_id

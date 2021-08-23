@@ -38,7 +38,7 @@ const receivePublicChannels = (channels) => {
   })
 }
 
-export const createThread = (data, users, content) => dispatch => {
+export const createThread = (data, users, content) => dispatch => (
   APIUtil.createThread(data)
     .then(thread => {
       if(thread.channel === true){
@@ -49,7 +49,7 @@ export const createThread = (data, users, content) => dispatch => {
       return thread
     })
     .then((thread) => dispatch(receiveCurrentThread(thread.id)))
-}
+)
 
 export const fetchThreads = () => dispatch => (
   APIUtil.fetchThreads()
