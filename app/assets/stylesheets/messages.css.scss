@@ -32,9 +32,21 @@
   margin: 0 auto
 }
 
+.edit-message-form{
+  margin: 1vh 0 0 1%;
+  height: 12vh;
+  input[type=text]{
+    height:5vh;
+    width: 98.5%;
+  }
+}
 
 .message-form input[type=text]{
-  width: 100%;
+  width: 100%
+}
+
+.edit-message-form input[type=text],
+.message-form input[type=text]{
   border:1px solid gray;
   border-radius: 3px;
   font-family: 'Noto Sans', sans-serif;
@@ -146,6 +158,7 @@ div::-webkit-scrollbar{
   background-color:rgb(192, 238, 240) 
 }
 
+.edit-message-form input[type=submit],
 .message-form input[type=submit]{
   font-family: 'Comfortaa', serif;
   border: none;
@@ -158,6 +171,7 @@ div::-webkit-scrollbar{
 
 }
 
+.edit-message-form input[type=submit]:hover,
 .message-form input[type=submit]:hover{
   background-color: white;
   color: rgb(2, 2, 59);

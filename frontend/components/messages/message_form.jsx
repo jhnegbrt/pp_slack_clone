@@ -49,8 +49,9 @@ class MessageForm extends React.Component{
   }
 
   render(){
+    const {formType} = this.props
     return(
-      <form className="message-form" onSubmit={this.handleSubmit}>
+      <form className={formType === "Edit Message" ? "edit-message-form" : "message-form"} onSubmit={this.handleSubmit}>
         <input onChange={this.updateContent} 
           type="text" 
           placeholder="Message"
