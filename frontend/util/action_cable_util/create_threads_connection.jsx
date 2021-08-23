@@ -21,6 +21,9 @@ export default function createThreadsConnection(currentUserId, receiveThread, re
       },
       leaveThread: function(data){
         return this.perform("leave_thread", data)
+      },
+      stopStream: function(){
+        return this.perform("stop_stream")
       }
     }
   )

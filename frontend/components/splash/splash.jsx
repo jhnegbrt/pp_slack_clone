@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {NavHashLink as NavLink } from 'react-router-hash-link'
+import { findThreadOrChannel } from '../../util/action_cable_util/channel_util'
 
 
 import Spy from '../../../app/assets/images/spy_icon.svg'
@@ -31,9 +31,11 @@ class Splash extends React.Component{
     window.addEventListener('scroll', this.handleScroll)
   }
 
+
   logout(){
     App.cable.subscriptions.subscriptions = []
     this.props.logout()
+      .then(()=>window.location.reload(false))
   }
 
   render(){
@@ -99,26 +101,3 @@ class Splash extends React.Component{
 }
 
 export default Splash
-
-
-
-{/* <div>
-<ul className="splash-header-list">
-  <li id="spy-icon"><a href="#main"><img src={Spy} ></img></a></li>
-  <li><a className={this.state.selected === 'main' ? 'selected' : ""} href="#main" id="sleuth-item">Sleuth</a></li>
-  <li><a id="selected" href="#main" id="sleuth-item">Sleuth</a></li>
-  <li><a className={this.state.selected === 'intro' ? 'selected' : ""} href="#intro">Introduction</a></li>
-  <li><a className={this.state.features ==='features' ? 'selected' : ""} href="#features">Features</a></li>
-  <li><a className={this.state.main === 'technologies' ? 'selected' : ""} href="#technologies">Technologies</a></li>
-  {ourVar}
-  {ourVariable}
-</ul>
-</div> */}
-
-
-            {/* <li><NavLink id="sleuth-item" to="#main"activeClassName="active-link">Sleuth</NavLink></li>
-            <li><NavLink to="#intro" activeClassName="active-link">Introduction</NavLink></li>
-            <li><NavLink to="#features" activeClassName="active-link">Features</NavLink></li>
-            <li><NavLink to="#technologies" activeClassName="active-link">Technologies</NavLink></li> */}
-
-

@@ -24,6 +24,9 @@ export default function createMessagesConnection(currentThreadId, receive, recei
       },
       remove_message: function(data){
         return this.perform("remove_message", data)
+      },
+      stopStream: function(){
+        return this.perform("stop_stream")
       }
     }
   )

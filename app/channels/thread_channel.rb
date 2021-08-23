@@ -6,7 +6,6 @@ class ThreadChannel < ApplicationCable::Channel
   end
 
   def load
-  
     users_channel_dms = User.find_by(id: params['user_id']).channel_dms
 
     users_channel_dms_ids = []
@@ -94,7 +93,7 @@ class ThreadChannel < ApplicationCable::Channel
     ThreadChannel.broadcast_to("thread_channel_#{data["user"]}", socket)
   end
 
-  def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+  def stop_stream
+    stop_all_streams
   end
 end

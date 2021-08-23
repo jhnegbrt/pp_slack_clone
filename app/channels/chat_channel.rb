@@ -74,7 +74,8 @@ class ChatChannel < ApplicationCable::Channel
     ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
   end
 
-  # def unsubscribed
-  #   stop_stream_from "chat_channel_#{params['thread_id']}"
-  # end
+  def stop_stream
+    stop_all_streams
+  end
+
 end

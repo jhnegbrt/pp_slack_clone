@@ -22,7 +22,6 @@ class ThreadIndex extends React.Component{
     this.props.fetchAllUsers()
     const {currentUserId, receiveThread, receiveThreads, removeThread} = this.props
     createThreadsConnection(currentUserId, receiveThread, receiveThreads, removeThread)
-
   }
 
   //I Believe that I do not need to pass in "threadId"

@@ -16,7 +16,6 @@ function subscriptionsSpeak(type, data, content){
   let subscriptions = App.cable.subscriptions.subscriptions
 
   let index = findThreadOrChannel(type, subscriptions)
-  debugger
   if (type === "ThreadChannel"){
     subscriptions[index].speak({
       created: true,
@@ -28,7 +27,6 @@ function subscriptionsSpeak(type, data, content){
       creator_id: data.thread.creator_id
     })
   } else {
-    debugger
     let message = {
       channel_dms_id: data.thread.id,
       content: content,
