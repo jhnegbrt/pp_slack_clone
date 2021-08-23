@@ -88,14 +88,19 @@
 }
 
 .splash-footer-list{
-  // position: fixed;
   left: 0;
   bottom: 0;
   width: 100vw;
   height: 8vh;
-  background-color: slateblue;
+  background-color: #F1EEE8;
   justify-content: space-around;
-  
+  li a{
+    color: #281b80;
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline
+    };
+  }
 }
 
 //main container styling

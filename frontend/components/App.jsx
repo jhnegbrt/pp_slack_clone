@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import SplashContainer from './splash/splash_container'
 import LoginFormContainer from '../components/session_form/login_form_container'
 import SignupFormContainer from '../components/session_form/signup_form_container'
