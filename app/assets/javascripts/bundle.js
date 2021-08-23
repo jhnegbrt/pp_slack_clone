@@ -11157,8 +11157,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         onMouseEnter: this.hovering,
         onMouseLeave: this.notHovering,
         className: this.props.message.sender_id === this.props.currentUserId ? "message-current" : "message"
-      }, this.props.message.sender_id === this.props.currentUserId // && this.state.hover === true ? 
-      ? buttons : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, this.props.message.sender_id === this.props.currentUserId && this.state.hover === true ? buttons : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "message-content"
       }, new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-name"

@@ -107,7 +107,7 @@ div::-webkit-scrollbar{
   padding: 2vh;
   margin-left: 1%;
   margin-right: 1%;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -127,14 +127,18 @@ div::-webkit-scrollbar{
   font-weight: lighter;
 }
 
-.message-buttons button{
-  font-family: 'Comfortaa', serif;
-  background-color: white;
-  border: none;
-  border-radius: 2px;
-  padding: 1vh;
-  margin: 0vh 1vh;
-  box-shadow: rgba(62, 85, 148, 0.774) 0px 5px 15px;
+.message-buttons{
+  right: 70vw;
+  position: absolute;
+  button{
+    font-family: 'Comfortaa', serif;
+    background-color: white;
+    border: none;
+    border-radius: 2px;
+    padding: .6vh;
+    margin: 0vh 1vh;
+    box-shadow: rgba(62, 85, 148, 0.774) 0px 5px 15px;
+  }
 }
 
 .message-buttons button:hover{
