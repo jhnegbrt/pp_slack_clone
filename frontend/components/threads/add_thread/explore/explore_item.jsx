@@ -1,5 +1,5 @@
 import React from 'react'
-import {joinChannel, findThreadChannel} from '../../../../util/action_cable_util/channel_util'
+import {joinChannel, findThreadOrChannel} from '../../../../util/action_cable_util/channel_util'
 
 class ExploreItem extends React.Component{
   constructor(props){
@@ -33,7 +33,7 @@ class ExploreItem extends React.Component{
   leaveChannel(){
     const {thread, currentUserId} = this.props
     let subscriptions = App.cable.subscriptions.subscriptions
-    let index = findThreadChannel(subscriptions)
+    let index = findThreadOrChannel("ThreadChannel", subscriptions)
     subscriptions[index].leaveThread({
       thread: thread.id,
       user: currentUserId

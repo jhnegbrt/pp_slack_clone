@@ -13760,7 +13760,7 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
           thread = _this$props.thread,
           currentUserId = _this$props.currentUserId;
       var subscriptions = App.cable.subscriptions.subscriptions;
-      var index = (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.findThreadChannel)(subscriptions);
+      var index = (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.findThreadOrChannel)("ThreadChannel", subscriptions);
       subscriptions[index].leaveThread({
         thread: thread.id,
         user: currentUserId
