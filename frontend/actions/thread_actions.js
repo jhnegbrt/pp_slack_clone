@@ -1,4 +1,4 @@
-import * as APIUtil from '../util/thread_api_util'
+import * as APIUtil from '../util/api/thread_api_util'
 
 export const RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD"
 export const RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS"

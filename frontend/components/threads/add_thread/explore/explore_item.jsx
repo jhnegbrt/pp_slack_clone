@@ -1,5 +1,4 @@
 import React from 'react'
-import createMessagesConnection from '../../../../util/create_messages_connection'
 
 class ExploreItem extends React.Component{
   constructor(props){

@@ -1,6 +1,6 @@
 import React from 'react'
 import ThreadIndexItemContainer from './thread_index_item_container'
-import createThreadsConnection from '../../../util/create_threads_connection'
+import createThreadsConnection from '../../../util/action_cable_util/create_threads_connection'
 import AddChannelButton from './add_channel_button'
 import ThreadIndexHeader from './thread_index_header'
 import { faCaretDown, faPlusSquare } from '@fortawesome/free-solid-svg-icons'

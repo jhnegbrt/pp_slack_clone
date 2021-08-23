@@ -10028,7 +10028,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "deleteMessage": () => (/* binding */ deleteMessage),
 /* harmony export */   "createMessage": () => (/* binding */ createMessage)
 /* harmony export */ });
-/* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/message_api_util */ "./frontend/util/message_api_util.js");
+/* harmony import */ var _util_api_message_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api/message_api_util */ "./frontend/util/api/message_api_util.js");
 
 var RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 var REMOVE_MESSAGE = "REMOVE_MESSAGE";
@@ -10075,7 +10075,7 @@ var removeMessage = function removeMessage(message) {
 };
 var fetchMessage = function fetchMessage(messageId) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(messageId).then(function (message) {
+    return _util_api_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(messageId).then(function (message) {
       return dispatch(receiveMessage(message));
     }).fail(function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
@@ -10089,7 +10089,7 @@ var fetchMessage = function fetchMessage(messageId) {
 
 var deleteMessage = function deleteMessage(messageId) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(messageId).then(function () {
+    return _util_api_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(messageId).then(function () {
       return dispatch(removeMessage(messageId));
     }).fail(function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
@@ -10099,7 +10099,7 @@ var deleteMessage = function deleteMessage(messageId) {
 
 var createMessage = function createMessage(formMessage) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createMessage(formMessage).then(function (message) {
+    return _util_api_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createMessage(formMessage).then(function (message) {
       return dispatch(receiveMessage(message));
     }).fail(function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
@@ -10133,7 +10133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "login": () => (/* binding */ login),
 /* harmony export */   "logout": () => (/* binding */ logout)
 /* harmony export */ });
-/* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
+/* harmony import */ var _util_api_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api/session_api_util */ "./frontend/util/api/session_api_util.js");
 
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
@@ -10167,7 +10167,7 @@ var clearSessionErrors = function clearSessionErrors() {
 };
 var signup = function signup(formUser) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.signup(formUser).then(function (user) {
+    return _util_api_session_api_util__WEBPACK_IMPORTED_MODULE_0__.signup(formUser).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
@@ -10176,7 +10176,7 @@ var signup = function signup(formUser) {
 };
 var login = function login(formUser) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(formUser).then(function (user) {
+    return _util_api_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(formUser).then(function (user) {
       return dispatch(receiveCurrentUser(user));
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
@@ -10185,7 +10185,7 @@ var login = function login(formUser) {
 };
 var logout = function logout() {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.logout().then(function () {
+    return _util_api_session_api_util__WEBPACK_IMPORTED_MODULE_0__.logout().then(function () {
       return dispatch(logoutCurrentUser());
     });
   };
@@ -10215,7 +10215,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads),
 /* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
 /* harmony export */ });
-/* harmony import */ var _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/thread_api_util */ "./frontend/util/thread_api_util.js");
+/* harmony import */ var _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api/thread_api_util */ "./frontend/util/api/thread_api_util.js");
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
@@ -10256,7 +10256,7 @@ var receivePublicChannels = function receivePublicChannels(channels) {
 
 var createThread = function createThread(data) {
   return function (dispatch) {
-    return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
+    return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
       return dispatch(receiveCurrentThread(thread.id));
     }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
     ;
@@ -10264,7 +10264,7 @@ var createThread = function createThread(data) {
 };
 var fetchThreads = function fetchThreads() {
   return function (dispatch) {
-    return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchThreads().then(function (threads) {
+    return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchThreads().then(function (threads) {
       return dispatch(receiveAllThreads(threads));
     }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
     ;
@@ -10272,7 +10272,7 @@ var fetchThreads = function fetchThreads() {
 };
 var fetchPublicChannels = function fetchPublicChannels() {
   return function (dispatch) {
-    return _util_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchPublicChannels().then(function (channels) {
+    return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchPublicChannels().then(function (channels) {
       return dispatch(receivePublicChannels(channels));
     });
   };
@@ -10292,7 +10292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_ALL_USERS": () => (/* binding */ RECEIVE_ALL_USERS),
 /* harmony export */   "fetchAllUsers": () => (/* binding */ fetchAllUsers)
 /* harmony export */ });
-/* harmony import */ var _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_api_util */ "./frontend/util/user_api_util.js");
+/* harmony import */ var _util_api_user_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api/user_api_util */ "./frontend/util/api/user_api_util.js");
 
 var RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
 
@@ -10305,10 +10305,9 @@ var receiveAllUsers = function receiveAllUsers(users) {
 
 var fetchAllUsers = function fetchAllUsers() {
   return function (dispatch) {
-    return _util_user_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchAllUsers().then(function (users) {
+    return _util_api_user_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchAllUsers().then(function (users) {
       return dispatch(receiveAllUsers(users));
-    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
-    ;
+    });
   };
 };
 
@@ -13668,7 +13667,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../util/create_messages_connection */ "./frontend/util/create_messages_connection.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13690,7 +13688,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 
@@ -14095,7 +14092,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thread_index_item_container */ "./frontend/components/threads/thread_index/thread_index_item_container.jsx");
-/* harmony import */ var _util_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../util/create_threads_connection */ "./frontend/util/create_threads_connection.jsx");
+/* harmony import */ var _util_action_cable_util_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../util/action_cable_util/create_threads_connection */ "./frontend/util/action_cable_util/create_threads_connection.jsx");
 /* harmony import */ var _add_channel_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./add_channel_button */ "./frontend/components/threads/thread_index/add_channel_button.jsx");
 /* harmony import */ var _thread_index_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./thread_index_header */ "./frontend/components/threads/thread_index/thread_index_header.jsx");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
@@ -14161,7 +14158,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
           receiveThread = _this$props.receiveThread,
           receiveThreads = _this$props.receiveThreads,
           removeThread = _this$props.removeThread;
-      (0,_util_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__.default)(currentUserId, receiveThread, receiveThreads, removeThread);
+      (0,_util_action_cable_util_create_threads_connection__WEBPACK_IMPORTED_MODULE_2__.default)(currentUserId, receiveThread, receiveThreads, removeThread);
     } //I Believe that I do not need to pass in "threadId"
 
   }, {
@@ -14345,7 +14342,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/create_messages_connection */ "./frontend/util/create_messages_connection.jsx");
+/* harmony import */ var _util_action_cable_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/action_cable_util/create_messages_connection */ "./frontend/util/action_cable_util/create_messages_connection.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -14402,7 +14399,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
           receiveMessage = _this$props.receiveMessage,
           receiveMessages = _this$props.receiveMessages,
           removeMessage = _this$props.removeMessage;
-      (0,_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage);
+      (0,_util_action_cable_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage);
     }
   }, {
     key: "createTitle",
@@ -15071,10 +15068,10 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
-/***/ "./frontend/util/create_messages_connection.jsx":
-/*!******************************************************!*\
-  !*** ./frontend/util/create_messages_connection.jsx ***!
-  \******************************************************/
+/***/ "./frontend/util/action_cable_util/create_messages_connection.jsx":
+/*!************************************************************************!*\
+  !*** ./frontend/util/action_cable_util/create_messages_connection.jsx ***!
+  \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -15119,10 +15116,10 @@ function createMessagesConnection(currentThreadId, receive, receiveMessages, rem
 
 /***/ }),
 
-/***/ "./frontend/util/create_threads_connection.jsx":
-/*!*****************************************************!*\
-  !*** ./frontend/util/create_threads_connection.jsx ***!
-  \*****************************************************/
+/***/ "./frontend/util/action_cable_util/create_threads_connection.jsx":
+/*!***********************************************************************!*\
+  !*** ./frontend/util/action_cable_util/create_threads_connection.jsx ***!
+  \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -15164,10 +15161,10 @@ function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads
 
 /***/ }),
 
-/***/ "./frontend/util/message_api_util.js":
-/*!*******************************************!*\
-  !*** ./frontend/util/message_api_util.js ***!
-  \*******************************************/
+/***/ "./frontend/util/api/message_api_util.js":
+/*!***********************************************!*\
+  !*** ./frontend/util/api/message_api_util.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -15201,6 +15198,106 @@ var fetchMessage = function fetchMessage(messageId) {
   return $.ajax({
     method: 'GET',
     url: "api/messages/".concat(messageId)
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/api/session_api_util.js":
+/*!***********************************************!*\
+  !*** ./frontend/util/api/session_api_util.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "signup": () => (/* binding */ signup),
+/* harmony export */   "login": () => (/* binding */ login),
+/* harmony export */   "logout": () => (/* binding */ logout)
+/* harmony export */ });
+var signup = function signup(user) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/users',
+    data: {
+      user: user
+    }
+  });
+};
+var login = function login(user) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/session',
+    data: {
+      user: user
+    }
+  });
+};
+var logout = function logout() {
+  return $.ajax({
+    method: 'DELETE',
+    url: '/api/session'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/api/thread_api_util.js":
+/*!**********************************************!*\
+  !*** ./frontend/util/api/thread_api_util.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createThread": () => (/* binding */ createThread),
+/* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads),
+/* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
+/* harmony export */ });
+var createThread = function createThread(thread) {
+  return $.ajax({
+    method: 'POST',
+    url: 'api/channel_dms',
+    data: {
+      channel_dm: thread
+    }
+  });
+};
+var fetchThreads = function fetchThreads() {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/channel_dms'
+  });
+};
+var fetchPublicChannels = function fetchPublicChannels() {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/channel_dms',
+    data: {
+      "private": false
+    }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/api/user_api_util.js":
+/*!********************************************!*\
+  !*** ./frontend/util/api/user_api_util.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchAllUsers": () => (/* binding */ fetchAllUsers)
+/* harmony export */ });
+var fetchAllUsers = function fetchAllUsers() {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/users'
   });
 };
 
@@ -15265,106 +15362,6 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var AuthRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps)(Auth));
 var ProtectedRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps)(Protected));
-
-/***/ }),
-
-/***/ "./frontend/util/session_api_util.js":
-/*!*******************************************!*\
-  !*** ./frontend/util/session_api_util.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "signup": () => (/* binding */ signup),
-/* harmony export */   "login": () => (/* binding */ login),
-/* harmony export */   "logout": () => (/* binding */ logout)
-/* harmony export */ });
-var signup = function signup(user) {
-  return $.ajax({
-    method: 'POST',
-    url: '/api/users',
-    data: {
-      user: user
-    }
-  });
-};
-var login = function login(user) {
-  return $.ajax({
-    method: 'POST',
-    url: '/api/session',
-    data: {
-      user: user
-    }
-  });
-};
-var logout = function logout() {
-  return $.ajax({
-    method: 'DELETE',
-    url: '/api/session'
-  });
-};
-
-/***/ }),
-
-/***/ "./frontend/util/thread_api_util.js":
-/*!******************************************!*\
-  !*** ./frontend/util/thread_api_util.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createThread": () => (/* binding */ createThread),
-/* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads),
-/* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
-/* harmony export */ });
-var createThread = function createThread(thread) {
-  return $.ajax({
-    method: 'POST',
-    url: 'api/channel_dms',
-    data: {
-      channel_dm: thread
-    }
-  });
-};
-var fetchThreads = function fetchThreads() {
-  return $.ajax({
-    method: 'GET',
-    url: 'api/channel_dms'
-  });
-};
-var fetchPublicChannels = function fetchPublicChannels() {
-  return $.ajax({
-    method: 'GET',
-    url: 'api/channel_dms',
-    data: {
-      "private": false
-    }
-  });
-};
-
-/***/ }),
-
-/***/ "./frontend/util/user_api_util.js":
-/*!****************************************!*\
-  !*** ./frontend/util/user_api_util.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchAllUsers": () => (/* binding */ fetchAllUsers)
-/* harmony export */ });
-var fetchAllUsers = function fetchAllUsers() {
-  return $.ajax({
-    method: 'GET',
-    url: 'api/users'
-  });
-};
 
 /***/ }),
 
