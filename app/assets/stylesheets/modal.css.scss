@@ -7,16 +7,27 @@
   position: absolute;
 }
 
-.thread-modal{
-  height: 40vh;
-  width: 34vw;
+.create-thread-modal,
+.add-members-modal{
   background-color: #f1eee8;
   position: fixed;
+  border-radius: 25px;
+  padding: 1%;
+  position: relative;
+}
+
+.add-members-modal{
   margin-top: 30vh;
   margin-left: 33vw;
-  border-radius: 25px;
-  position: relative;
-  padding: 1%;
+  height: 40vh;
+  width: 34vw;
+}
+
+.create-thread-modal{
+  height: 30vh;
+  width: 30vw;
+  margin-top: 35vh;
+  margin-left: 35vw;
 }
 
 .modal-header{
@@ -24,7 +35,7 @@
   font-family: 'Comfortaa', serif;
   color: rgb(44, 44, 83);
   font-size: 4vh;
-  margin-top: 8vh;
+  margin-top: 2vh;
 }
 
 .thread-close{
@@ -147,6 +158,13 @@
     margin-bottom: 1vh;
     font-family: 'Noto Sans', sans-serif;
   }
+  &::-webkit-scrollbar-thumb{
+    background-color: rgb(200, 200, 200);
+    border-radius: 25px;
+  }
+  &::-webkit-scrollbar{
+    width: 5px
+  }
 }
 
 
@@ -200,7 +218,7 @@
   background-color: rgb(207, 226, 233);
   color: rgb(44, 44, 83);
   font-family: 'Comfortaa', serif;
-
+  font-size: 2vh;
 }
 
 .create-thread input[type=submit]:hover{
@@ -208,6 +226,8 @@
   cursor: pointer;
   background-color: rgb(44, 44, 83);
   font-size: 2vh;
+  border: 1px solid rgb(44, 44, 83);
+  box-shadow: 0 0 0 2px rgb(167, 88, 167)
 }
 
 

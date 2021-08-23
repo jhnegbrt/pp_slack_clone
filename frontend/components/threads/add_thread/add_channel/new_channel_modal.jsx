@@ -35,7 +35,7 @@ class NewChannelModal extends React.Component{
   render(){
     return(
       <div className="thread-modal-container">
-        <div className="thread-modal">
+        <div className="create-thread-modal">
           <div className="new-channel-close" onClick={this.props.closeModal}>
             <img className="close-modal-button" fill="red" stroke="green"src={Close}></img>
           </div>  

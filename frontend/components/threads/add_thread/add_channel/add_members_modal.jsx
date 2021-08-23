@@ -202,7 +202,7 @@ class AddMembersModal extends React.Component{
     
     return(
       <div className="thread-modal-container">
-        <div className="thread-modal">
+        <div className="add-members-modal">
           <div className="modal-select-users">
             <div className="users-label">
               <h3>Add People</h3>
