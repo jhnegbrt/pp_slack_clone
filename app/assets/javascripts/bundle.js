@@ -11589,7 +11589,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "search-bar-button",
     onClick: onClick
-  }, displaySearch ? "" : "Search for Direct Messages, Public Channels, or Joined Channels"), displaySearch ? search : "");
+  }, displaySearch ? "" : "Search for Users, Active Threads, or Public Channels"), displaySearch ? search : "");
 });
 
 /***/ }),
@@ -12084,6 +12084,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       dropDown: false
     };
     _this.handleDropdown = _this.handleDropdown.bind(_assertThisInitialized(_this));
+    _this.logout = _this.logout.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -12100,6 +12101,12 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       window.addEventListener('scroll', this.handleScroll);
     }
   }, {
+    key: "logout",
+    value: function logout() {
+      App.cable.subscriptions.subscriptions = [];
+      this.props.logout();
+    }
+  }, {
     key: "render",
     value: function render() {
       var link1;
@@ -12108,7 +12115,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.currentUser) {
         link1 = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-          onClick: this.props.logout
+          onClick: this.logout
         }, "Logout"));
         link2 = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
           id: "app-link",

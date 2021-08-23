@@ -18,10 +18,10 @@ class Splash extends React.Component{
       dropDown: false
     })
     this.handleDropdown = this.handleDropdown.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   handleDropdown(){
-
     this.setState({
       dropDown: !this.state.dropDown
     })
@@ -31,12 +31,17 @@ class Splash extends React.Component{
     window.addEventListener('scroll', this.handleScroll)
   }
 
+  logout(){
+    App.cable.subscriptions.subscriptions = []
+    this.props.logout()
+  }
+
   render(){
     let link1;
     let link2;
     let width = window.innerWidth
     if(this.props.currentUser){
-      link1 = <li><span onClick={this.props.logout}>Logout</span></li>
+      link1 = <li><span onClick={this.logout}>Logout</span></li>
       link2 = <li><Link id="app-link" to='/client/explore'>App</Link></li>
     } else {
       link1 = <li className="blink-me"><Link to='/signup'>Sign Up</Link></li>
