@@ -40,7 +40,13 @@ Sleuth uses a back-end user authentication model. Each user entry in the databas
   end
 ```
  
-To Log in and Sign up users, Sleuth uses a combination of backend and frontend error handling.
+To Log in and Sign up users, Sleuth uses a combination of backend and frontend error handling. Specifically, client side error handling is used to confirm requirements such as matching passwords, while the backend handles username uniqueness.
+
+Errors rendered from the backend:
+![backend_errors](app/assets/images/user_auth_errors_1.PNG)
+
+Errors rendered from the frontend:
+![frontend_errors](app/assets/images/user_auth_errors_2.PNG)
 
 ## Channel Browsing
 
