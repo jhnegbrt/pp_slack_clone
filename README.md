@@ -1,24 +1,41 @@
-# README
+# Welcome to Sleuth
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Live Link](https://sleuth-jwe.herokuapp.com/#/)
 
-Things you may want to cover:
+## Table of contents:
+ 1. [Features](#features)
+    - [User-authentication](#user-auth)
+    - [Channel browsing](#channel-browsing)
+    - [Live Messaging](#live-messaging)
+    - [Live Thread Creation](#live-thread-creation)
+    - [Workspace Search](#workspace-search)
+ 2. [Tech Stack](#tech-stack])
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+ 3. [Known Bugs](#known-bugs)
+ 4. [Upcoming Features](#upcoming-features)
 
-* Ruby version
 
-* System dependencies
+# Features
 
-* Configuration
+## User Auth
 
-* Database creation
+## Channel Browsing
 
-* Database initialization
+## Live Messaging
 
-* How to run the test suite
+## Live Thread Creation
 
-* Services (job queues, cache servers, search engines, etc.)
+## Workspace Search
 
-* Deployment instructions
+# Tech Stack
 
-* ...
+## Backend
+
+## Frontend
+
+# Known Bugs
+
+# Upcoming Features
+
+
