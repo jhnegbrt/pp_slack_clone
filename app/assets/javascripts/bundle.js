@@ -13479,7 +13479,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       var suggestedUsers = this.state.suggestedUsers.map(function (suggestedUser, i) {
         return _this4.mapUser(suggestedUser, i);
       });
-      var reachedMaxUsers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Only 8 people can be in a Direct Message");
+      var reachedMaxUsers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Only 8 people can be in a Direct Message!");
       var suggestedUsersList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: this.state.selectedUsers.length < 8 ? "suggested-users-list" : "suggested-users-list max-users",
         onClick: this.handleClick
@@ -14220,8 +14220,10 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
         toggleModal: this.props.toggleModal
       }));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "thread-index"
+        className: "thread-index-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_header__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "thread-index"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "header-caret-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__.FontAwesomeIcon, {
         onClick: function onClick() {
@@ -14250,7 +14252,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
       }, "Messages")), this.state.showDms ? dmIndex : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
         className: "leave-app",
         to: "/"
-      }, "Leave App"));
+      }, "Leave App")));
     }
   }]);
 

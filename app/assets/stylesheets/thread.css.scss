@@ -1,17 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
 
 .thread-header{
-  font-size: 3vh
+  font-size: 3vh;
+  border-bottom: 1px solid #3a3a3a;
+  padding-left: 1vw;
+  color: white;
+  height: 3vh;
+  display:flex;
+  align-items: center;
+  padding-bottom: .5vh
+}
+
+.thread-index-container{
+  padding: .5% 0% 3% 0;
+  width: 20vw;
+  font-family: 'Comfortaa', serif;
+  height: 96vh;
+  background-color: rgb(2, 2, 59);
+  box-sizing: border-box;
 }
 
 .thread-index{
-  width: 20vw;
-  padding: .5% 0% 3% 1.5%;
-  background-color: rgb(2, 2, 59);
-  font-family: 'Comfortaa', serif;
+  height: 91vh;
   position: relative;
-  box-sizing: border-box;
   overflow-y: scroll;
+  box-sizing: border-box;
+  padding: 0 0 3vh 3%;
 }
 
 .thread-index li a{
@@ -37,8 +51,7 @@
 }
 
 .messages-header,
-.channels-header,
-.thread-header{
+.channels-header{
   padding-top: 1%;
   margin-left: .5vw;
   padding-left: .5vw;
@@ -60,6 +73,7 @@
 .header-caret-container{
   display: flex;
   align-items: center;
+  margin-top: 3vh;
   h3{
     flex: 1
   }
@@ -140,7 +154,7 @@
   height: 10vh;
   font-family: 'Comfortaa', serif;
   font-size: 1.5vw;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #3a3a3a;;
   display: flex;
   align-items: center;
 
