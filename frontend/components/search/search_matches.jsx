@@ -19,12 +19,8 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
       if (regex.test(title) && title != "placeholder"){
         matchedThreads.push(
           <div key={threads[i].id} className="search-thread">
-            <a onClick={matchClick} >{threads[i].title}</a>
-            <Link
-              onClick={matchClick}
-              to={`${threads[i].id}`}>
-              View
-            </Link>
+            <Link to={`${threads[i].id}`} onClick={matchClick}>{threads[i].title}</Link>
+            <Link onClick={matchClick} to={`${threads[i].id}`}>View</Link>
           </div>
         )
       }

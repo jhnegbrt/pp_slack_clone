@@ -92,8 +92,11 @@
   display: flex;
   justify-content: space-between;
   a:first-child{
+    color: #636363;
+    text-decoration: none;
     &:hover{
       text-decoration: underline;
+      cursor: pointer;
     }
   }
   a:nth-child(2){
