@@ -39,7 +39,7 @@ export default ({user, setSearchEntry, setDisplaySearch}) =>{
   return(
     activeThread ? 
     <div className="search-user">
-      <a onClick={handleClick}>{user.username}</a>
+      <Link onClick={handleClick} to={`${activeThread}`}>{user.username}</Link>
       <Link onClick={handleClick} to={`${activeThread}`}>Chat</Link>
     </div> :
     <div className="search-user">
