@@ -1,10 +1,12 @@
 import {
   RECEIVE_MESSAGE, REMOVE_MESSAGE, RECEIVE_MESSAGES, CLEAR_MESSAGES
 } from '../../actions/message_actions'
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions'
 
 
 const MessagesReducer = (state = {}, action) => {
   Object.freeze(state)
+  let emptyState = Object.assign({})
   switch (action.type){
     case RECEIVE_MESSAGE:
       return Object.assign({}, state, {[action.message.id]: action.message})
@@ -15,7 +17,8 @@ const MessagesReducer = (state = {}, action) => {
       delete nextState[action.message.id]
       return nextState;
     case CLEAR_MESSAGES:
-      let emptyState = Object.assign({})
+      return emptyState
+    case LOGOUT_CURRENT_USER:
       return emptyState
     default:
       return state;

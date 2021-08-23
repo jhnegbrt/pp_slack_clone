@@ -14811,7 +14811,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -14819,6 +14821,7 @@ var MessagesReducer = function MessagesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
+  var emptyState = Object.assign({});
 
   switch (action.type) {
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
@@ -14833,7 +14836,9 @@ var MessagesReducer = function MessagesReducer() {
       return nextState;
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.CLEAR_MESSAGES:
-      var emptyState = Object.assign({});
+      return emptyState;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.LOGOUT_CURRENT_USER:
       return emptyState;
 
     default:
@@ -14888,8 +14893,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -14899,17 +14906,21 @@ var threadsReducer = function threadsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_THREAD:
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_THREAD:
       return Object.assign({}, state, _defineProperty({}, action.thread.id, action.thread));
 
-    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALL_THREADS:
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_ALL_THREADS:
       return Object.assign({}, state, action.threads);
 
-    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_THREAD:
+    case _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__.REMOVE_THREAD:
       var nextState = Object.assign({}, state);
       var thread = action.thread;
       delete nextState[thread];
       return nextState;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.LOGOUT_CURRENT_USER:
+      var emptyState = Object.assign({});
+      return emptyState;
 
     default:
       return state;
