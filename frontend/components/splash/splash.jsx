@@ -90,10 +90,6 @@ class Splash extends React.Component{
         {width > 768 ? desktopNav : mobileNav}
         <SplashMain></SplashMain>
         <SplashIntro></SplashIntro>
-        <SplashFeatures></SplashFeatures>
-        <SplashIntro></SplashIntro>
-        <SplashTechnologies></SplashTechnologies>
-        <SplashIntro></SplashIntro>
         <SplashFooter></SplashFooter>
       </div>
     )

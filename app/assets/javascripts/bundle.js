@@ -12267,7 +12267,7 @@ var Splash = /*#__PURE__*/function (_React$Component) {
       }, "Close Menu")), link1, link2));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "splash-page"
-      }, width > 768 ? desktopNav : mobileNav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_main__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_intro__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_features__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_intro__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_technologies__WEBPACK_IMPORTED_MODULE_7__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_intro__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_footer__WEBPACK_IMPORTED_MODULE_5__.default, null));
+      }, width > 768 ? desktopNav : mobileNav, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_main__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_intro__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_splash_footer__WEBPACK_IMPORTED_MODULE_5__.default, null));
     }
   }]);
 
@@ -12393,7 +12393,10 @@ __webpack_require__.r(__webpack_exports__);
 function SplashIntro() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "intro"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Modeled after 'Slack', ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), " is a workspace based chat application with a custom theme and functionality"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Sign Up or Sign-In with a personal account, or enter with as the Sleuth to chat anonymously or demo ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), "."));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Modeled after 'Slack', ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), " is a workspace based chat application with a custom theme and functionality."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Sign Up or Sign-In with a personal account, or enter as the Sleuth to chat anonymously or demo ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Sleuth"), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Upon entering, you'll find the ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", null, "Channel Browser"), " where you can quickly join Public Channels. Use the search-bar (located top center) or left panel to navigate your workspace!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Check out the ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    target: "_blank",
+    href: "https://github.com/jhnegbrt/sleuth"
+  }, "Github repo"), " for more details on features, code snippets, and forthcoming updates!"));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SplashIntro);
