@@ -49,6 +49,9 @@ export const createThread = (data, users, content) => dispatch => (
       return thread
     })
     .then((thread) => dispatch(receiveCurrentThread(thread.id)))
+    .fail((err)=>{
+      debugger
+    })
 )
 
 export const fetchThreads = () => dispatch => (

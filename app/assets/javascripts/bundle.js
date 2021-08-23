@@ -10268,6 +10268,8 @@ var createThread = function createThread(data, users, content) {
       return thread;
     }).then(function (thread) {
       return dispatch(receiveCurrentThread(thread.id));
+    }).fail(function (err) {
+      debugger;
     });
   };
 };
@@ -11722,7 +11724,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
 
 
 
@@ -11730,9 +11735,14 @@ __webpack_require__.r(__webpack_exports__);
   var user = _ref.user,
       setSearchEntry = _ref.setSearchEntry,
       setDisplaySearch = _ref.setDisplaySearch;
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useHistory)();
   var threads = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return Object.values(state.workspace.threads);
   });
+  var currentUserId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.session.id;
+  });
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   var activeThread = false;
 
   for (var i = 0; i < threads.length; i++) {
@@ -11747,10 +11757,26 @@ __webpack_require__.r(__webpack_exports__);
     setSearchEntry("");
   }
 
-  return activeThread ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+  function createDirectMessage() {
+    var newDirectMessage = {
+      channel: false,
+      "private": true,
+      creator_id: currentUserId,
+      title: "placeholder"
+    };
+    dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(newDirectMessage, [currentUserId, user.id])).then(function (action) {
+      return history.push("/client/".concat(action.threadId));
+    });
+    setDisplaySearch(false);
+    setSearchEntry("");
+  }
+
+  return activeThread ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
     onClick: handleClick,
     to: "".concat(activeThread)
-  }, user.username) : "";
+  }, user.username) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    onClick: createDirectMessage
+  }, user.username);
 });
 
 /***/ }),
@@ -15084,9 +15110,12 @@ function propagateThread(thread, users, content) {
     thread: thread,
     users: users
   });
-  subscriptionsSpeak("ChatChannel", {
-    thread: thread
-  }, content);
+
+  if (content) {
+    subscriptionsSpeak("ChatChannel", {
+      thread: thread
+    }, content);
+  }
 }
 
 /***/ }),
@@ -15286,6 +15315,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
 /* harmony export */ });
 var createThread = function createThread(thread) {
+  debugger;
   return $.ajax({
     method: 'POST',
     url: 'api/channel_dms',

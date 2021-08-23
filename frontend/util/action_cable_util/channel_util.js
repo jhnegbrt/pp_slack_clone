@@ -48,6 +48,7 @@ export function joinChannel(thread, currentUserId){
 export function propagateThread(thread, users, content){
 
   subscriptionsSpeak("ThreadChannel", {thread, users})
-  subscriptionsSpeak("ChatChannel", {thread}, content)
-
+  if (content){
+    subscriptionsSpeak("ChatChannel", {thread}, content)
+  }
 }
