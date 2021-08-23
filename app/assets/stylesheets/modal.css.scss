@@ -185,7 +185,9 @@
   height: 4vh;
   margin-bottom: 2%;
   font-family: 'Comfortaa', serif;
+  &:focus-visible{
 
+  }
 }
 
 .create-thread input[type=submit]{
@@ -251,6 +253,7 @@
   &:hover{
     background-color: rgb(60, 139, 96);
     color:white;
+    cursor: pointer
   }
 }
 
@@ -259,7 +262,8 @@
   height: 4vh;
   &:hover{
     background-color: #efc12a;
-    color:rgb(44, 44, 83)
+    color:rgb(44, 44, 83);
+    cursor: pointer
   }
 }
 
