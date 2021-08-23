@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { useSelector } from "react-redux"
 import SearchMatches from './search_matches'
 
@@ -13,6 +13,21 @@ export default () => {
   const [displaySearch, setDisplaySearch] = useState(false)
   const [searchEntry, setSearchEntry ] = useState("")
 
+  const searchBox = React.createRef()
+
+  function handleClickOutside(e){
+    if (!searchBox.current.contains(e.target)) {
+      setDisplaySearch(false)
+    }
+  }
+
+  useEffect(()=>{
+    document.addEventListener('mousedown', handleClickOutside)
+    return function(){
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  })
+
   function onClick(e){
     setDisplaySearch(true)
   }
@@ -26,10 +41,10 @@ export default () => {
   }
 
   let search = (
-    <div className="client-search">
+    <div className="client-search" ref={searchBox}>
       <div className="search-wrapper">
         <form onSubmit={onSubmit}>
-          <input type="text" autoFocus="true" placeholder="Start typing to search!" value={searchEntry} onChange={handleChange}></input>
+          <input type="text" autoFocus={true} placeholder="Start typing to search!" value={searchEntry} onChange={handleChange}></input>
         </form>
       </div>
       <div className="match-header">Users:

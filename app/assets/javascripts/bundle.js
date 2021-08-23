@@ -11514,6 +11514,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       searchEntry = _useState4[0],
       setSearchEntry = _useState4[1];
 
+  var searchBox = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+
+  function handleClickOutside(e) {
+    if (!searchBox.current.contains(e.target)) {
+      setDisplaySearch(false);
+    }
+  }
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    document.addEventListener('mousedown', handleClickOutside);
+    return function () {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
   function onClick(e) {
     setDisplaySearch(true);
   }
@@ -11527,14 +11542,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }
 
   var search = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "client-search"
+    className: "client-search",
+    ref: searchBox
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "search-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
     onSubmit: onSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "text",
-    autoFocus: "true",
+    autoFocus: true,
     placeholder: "Start typing to search!",
     value: searchEntry,
     onChange: handleChange
