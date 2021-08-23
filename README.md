@@ -1,26 +1,41 @@
 # Welcome to Sleuth
 
-Table of contents
+Live Link
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Table of contents:
+ 1. [Features](#features)
+    - [User-authentication](#user-auth)
+    - [Channel browsing](#channel-browsing)
+    - [Live Messaging](#live-messaging)
+    - [Live Thread Creation](#live-thread-creation)
+    - [Workspace Search](#workspace-search)
+ 2. [Tech Stack](#tech-stack])
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+ 3. [Known Bugs](#known-bugs)
+ 4. [Upcoming Features](#upcoming-features)
 
-Things you may want to cover:
 
-* Ruby version
+# Features
 
-* System dependencies
+## User Auth
 
-* Configuration
+## Channel Browsing
 
-* Database creation
+## Live Messaging
 
-* Database initialization
+## Live Thread Creation
 
-* How to run the test suite
+## Workspace Search
 
-* Services (job queues, cache servers, search engines, etc.)
+# Tech Stack
 
-* Deployment instructions
+## Backend
 
-* ...
+## Frontend
+
+# Known Bugs
+
+# Upcoming Features
+
+
