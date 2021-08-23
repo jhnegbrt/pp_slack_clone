@@ -1,5 +1,4 @@
 export const createThread = (thread) =>{
-  debugger
   return(
     $.ajax({
       method: 'POST',

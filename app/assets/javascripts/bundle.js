@@ -11236,7 +11236,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
   _inherits(SearchMessageForm, _React$Component);
 
@@ -11439,7 +11438,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/action_cable_util/channel_util */ "./frontend/util/action_cable_util/channel_util.js");
 
 
@@ -11452,18 +11452,20 @@ __webpack_require__.r(__webpack_exports__);
   var currentUserId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.session.id;
   });
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useHistory)();
 
   function handleClick() {
     (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_2__.joinChannel)(thread, currentUserId);
     setSearchEntry("");
     setDisplaySearch(false);
+    history.push("/client/".concat(thread.id));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "search-public-channel"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     onClick: handleClick
-  }, thread.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+  }, thread.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
     onClick: handleClick,
     to: "".concat(thread.id)
   }, "Join"));
@@ -13727,8 +13729,8 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       hover: false
     };
     _this.hovering = _this.hovering.bind(_assertThisInitialized(_this));
-    _this.notHovering = _this.notHovering.bind(_assertThisInitialized(_this)); // this.joinChannel = this.joinChannel.bind(this)
-
+    _this.notHovering = _this.notHovering.bind(_assertThisInitialized(_this));
+    _this.handleJoinChannel = _this.handleJoinChannel.bind(_assertThisInitialized(_this));
     _this.leaveChannel = _this.leaveChannel.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -13765,23 +13767,31 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "handleJoinChannel",
+    value: function handleJoinChannel() {
       var _this$props2 = this.props,
+          history = _this$props2.history,
           thread = _this$props2.thread,
           currentUserId = _this$props2.currentUserId;
+      (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread, currentUserId);
+      history.push("/client/".concat(thread.id));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props3 = this.props,
+          thread = _this$props3.thread,
+          member = _this$props3.member;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "explore-item",
         onMouseEnter: this.hovering,
         onMouseLeave: this.notHovering
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.thread.title), this.state.hover === true ? this.props.member ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, thread.title), this.state.hover === true ? member ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "leave-button",
         onClick: this.leaveChannel
       }, "Leave") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "join-button",
-        onClick: function onClick() {
-          return (0,_util_action_cable_util_channel_util__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread, currentUserId);
-        }
+        onClick: this.handleJoinChannel
       }, "Join") : null);
     }
   }]);
@@ -13808,12 +13818,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../actions/message_actions */ "./frontend/actions/message_actions.js");
 /* harmony import */ var _explore_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./explore_item */ "./frontend/components/threads/add_thread/explore/explore_item.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 
 
 
 
 
-var mSTP = function mSTP(state, ownProps) {
+
+var mSTP = function mSTP(state) {
   return {
     currentUserId: state.session.id
   };
@@ -13836,7 +13848,7 @@ var mDTP = function mDTP(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore_item__WEBPACK_IMPORTED_MODULE_3__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, mDTP)(_explore_item__WEBPACK_IMPORTED_MODULE_3__.default)));
 
 /***/ }),
 
@@ -15130,8 +15142,10 @@ function subscriptionsSpeak(type, data, content) {
 }
 
 function joinChannel(thread, currentUserId) {
-  subscriptionsSpeak("ThreadChannel");
-  this.props.history.push("/client/".concat(thread.id));
+  subscriptionsSpeak("ThreadChannel", {
+    thread: thread,
+    users: [currentUserId]
+  }, currentUserId);
 }
 function propagateThread(thread, users, content) {
   subscriptionsSpeak("ThreadChannel", {
@@ -15343,7 +15357,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
 /* harmony export */ });
 var createThread = function createThread(thread) {
-  debugger;
   return $.ajax({
     method: 'POST',
     url: 'api/channel_dms',

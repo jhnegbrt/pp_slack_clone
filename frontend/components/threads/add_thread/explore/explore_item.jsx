@@ -10,7 +10,7 @@ class ExploreItem extends React.Component{
     this.hovering = this.hovering.bind(this)
     this.notHovering = this.notHovering.bind(this)
 
-    // this.joinChannel = this.joinChannel.bind(this)
+    this.handleJoinChannel = this.handleJoinChannel.bind(this)
     this.leaveChannel = this.leaveChannel.bind(this)
   }
 
@@ -41,18 +41,23 @@ class ExploreItem extends React.Component{
 
   }
 
+  handleJoinChannel(){
+    const {history, thread, currentUserId} = this.props
+    joinChannel(thread, currentUserId)
+    history.push(`/client/${thread.id}`)
+  }
+
   render(){  
-    const { thread, currentUserId } = this.props
+    const { thread, member } = this.props
     return(
       <div className="explore-item"
       onMouseEnter={this.hovering}
       onMouseLeave={this.notHovering}>
-        <h4>{this.props.thread.title}</h4>
+        <h4>{thread.title}</h4>
         {
-          this.state.hover === true ? 
-          this.props.member ? 
+          this.state.hover === true ? member ? 
           <button className="leave-button" onClick={this.leaveChannel}>Leave</button> :
-          <button className="join-button" onClick={()=> joinChannel(thread, currentUserId)}>Join</button>: null
+          <button className="join-button" onClick={this.handleJoinChannel}>Join</button>: null
         }
       </div>
     )

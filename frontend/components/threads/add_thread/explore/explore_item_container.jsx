@@ -2,12 +2,13 @@ import {connect} from 'react-redux'
 import { receiveCurrentThread } from '../../../../actions/thread_actions'
 import {receiveMessage, removeMessage, receiveMessages} from '../../../../actions/message_actions'
 import ExploreItem from './explore_item'
+import { withRouter } from 'react-router-dom'
 
 
-const mSTP = (state, ownProps) => {
-  return{
+const mSTP = (state ) => ({
   currentUserId: state.session.id
-}}
+})
+
 
 const mDTP = dispatch => ({
   selectThread: (threadId) => dispatch(receiveCurrentThread(threadId)),
@@ -17,5 +18,5 @@ const mDTP = dispatch => ({
 
 })
 
-export default connect(mSTP, mDTP)(ExploreItem)
+export default withRouter(connect(mSTP, mDTP)(ExploreItem))
 

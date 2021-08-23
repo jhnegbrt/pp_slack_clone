@@ -40,8 +40,7 @@ function subscriptionsSpeak(type, data, content){
 
 export function joinChannel(thread, currentUserId){
 
-  subscriptionsSpeak("ThreadChannel")
-  this.props.history.push(`/client/${thread.id}`)
+  subscriptionsSpeak("ThreadChannel", {thread, users: [currentUserId]}, currentUserId)
 
 }
 
