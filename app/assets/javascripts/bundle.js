@@ -11473,7 +11473,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/action_cable_util/join_channel */ "./frontend/util/action_cable_util/join_channel.js");
+
 
 
 
@@ -11483,46 +11485,40 @@ __webpack_require__.r(__webpack_exports__);
       setDisplaySearch = _ref.setDisplaySearch;
   var currentUserId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.session.id;
-  });
-
-  function findThreadChannel() {
-    var index;
-    var subscriptions = App.cable.subscriptions.subscriptions;
-
-    for (var i = 0; i < subscriptions.length; i++) {
-      var identifier = JSON.parse(subscriptions[i].identifier);
-
-      if (identifier.channel === "ThreadChannel") {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
-  }
-
-  function joinChannel() {
-    var subscriptions = App.cable.subscriptions.subscriptions;
-    var index = findThreadChannel();
-    subscriptions[index].speak({
-      created: true,
-      id: thread.id,
-      users: [currentUserId],
-      channel: true,
-      "private": false,
-      title: thread.title,
-      creator_id: thread.creator_id
-    });
-  }
+  }); // function findThreadChannel(){
+  //   let index;
+  //   let subscriptions = App.cable.subscriptions.subscriptions
+  //   for (let i = 0; i < subscriptions.length; i++){
+  //     let identifier = JSON.parse(subscriptions[i].identifier)
+  //     if (identifier.channel === "ThreadChannel"){
+  //       index = i
+  //       break
+  //     }
+  //   }
+  //   return index
+  // }
+  // function joinChannel(){
+  //   let subscriptions = App.cable.subscriptions.subscriptions
+  //   let index = findThreadChannel()
+  //   subscriptions[index].speak({
+  //     created: true,
+  //     id: thread.id,
+  //     users: [currentUserId],
+  //     channel: true,
+  //     private: false,
+  //     title: thread.title,
+  //     creator_id: thread.creator_id
+  //   })
+  // }
 
   function handleClick() {
     debugger;
-    joinChannel();
+    (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_2__.default)(thread, currentUserId);
     setSearchEntry("");
     setDisplaySearch(false);
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, thread.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, thread.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     onClick: handleClick,
     to: "".concat(thread.id)
   }, "Join"));
@@ -13667,6 +13663,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../util/action_cable_util/join_channel */ "./frontend/util/action_cable_util/join_channel.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13691,6 +13688,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ExploreItem = /*#__PURE__*/function (_React$Component) {
   _inherits(ExploreItem, _React$Component);
 
@@ -13706,8 +13704,8 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       hover: false
     };
     _this.hovering = _this.hovering.bind(_assertThisInitialized(_this));
-    _this.notHovering = _this.notHovering.bind(_assertThisInitialized(_this));
-    _this.joinChannel = _this.joinChannel.bind(_assertThisInitialized(_this));
+    _this.notHovering = _this.notHovering.bind(_assertThisInitialized(_this)); // this.joinChannel = this.joinChannel.bind(this)
+
     _this.leaveChannel = _this.leaveChannel.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -13746,31 +13744,27 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
       }
 
       return index;
-    }
-  }, {
-    key: "joinChannel",
-    value: function joinChannel() {
-      var _this$props = this.props,
-          thread = _this$props.thread,
-          currentUserId = _this$props.currentUserId;
-      var subscriptions = App.cable.subscriptions.subscriptions;
-      var index = this.findThreadChannel();
-      subscriptions[index].speak({
-        created: true,
-        id: thread.id,
-        users: [currentUserId],
-        channel: true,
-        "private": false,
-        title: thread.title,
-        creator_id: thread.creator_id
-      });
-    }
+    } // joinChannel(){
+    //   const {thread, currentUserId } = this.props
+    //   let subscriptions = App.cable.subscriptions.subscriptions
+    //   let index = this.findThreadChannel()
+    //   subscriptions[index].speak({
+    //     created: true,
+    //     id: thread.id,
+    //     users: [currentUserId],
+    //     channel: true,
+    //     private: false,
+    //     title: thread.title,
+    //     creator_id: thread.creator_id
+    //   })
+    // }
+
   }, {
     key: "leaveChannel",
     value: function leaveChannel() {
-      var _this$props2 = this.props,
-          thread = _this$props2.thread,
-          currentUserId = _this$props2.currentUserId;
+      var _this$props = this.props,
+          thread = _this$props.thread,
+          currentUserId = _this$props.currentUserId;
       var index = this.findThreadChannel();
       var subscriptions = App.cable.subscriptions.subscriptions;
       subscriptions[index].leaveThread({
@@ -13781,6 +13775,9 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this$props2 = this.props,
+          thread = _this$props2.thread,
+          currentUserId = _this$props2.currentUserId;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "explore-item",
         onMouseEnter: this.hovering,
@@ -13790,7 +13787,9 @@ var ExploreItem = /*#__PURE__*/function (_React$Component) {
         onClick: this.leaveChannel
       }, "Leave") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "join-button",
-        onClick: this.joinChannel
+        onClick: function onClick() {
+          return (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.default)(thread, currentUserId);
+        }
       }, "Join") : null);
     }
   }]);
@@ -15156,6 +15155,43 @@ function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads
     leaveThread: function leaveThread(data) {
       return this.perform("leave_thread", data);
     }
+  });
+}
+
+/***/ }),
+
+/***/ "./frontend/util/action_cable_util/join_channel.js":
+/*!*********************************************************!*\
+  !*** ./frontend/util/action_cable_util/join_channel.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ joinChannel)
+/* harmony export */ });
+function joinChannel(thread, currentUserId) {
+  var subscriptions = App.cable.subscriptions.subscriptions;
+  var index;
+
+  for (var i = 0; i < subscriptions.length; i++) {
+    var identifier = JSON.parse(subscriptions[i].identifier);
+
+    if (identifier.channel === "ThreadChannel") {
+      index = i;
+      break;
+    }
+  }
+
+  subscriptions[index].speak({
+    created: true,
+    id: thread.id,
+    users: [currentUserId],
+    channel: true,
+    "private": false,
+    title: thread.title,
+    creator_id: thread.creator_id
   });
 }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import joinChannel from '../../../../util/action_cable_util/join_channel'
 
 class ExploreItem extends React.Component{
   constructor(props){
@@ -9,7 +10,7 @@ class ExploreItem extends React.Component{
     this.hovering = this.hovering.bind(this)
     this.notHovering = this.notHovering.bind(this)
 
-    this.joinChannel = this.joinChannel.bind(this)
+    // this.joinChannel = this.joinChannel.bind(this)
     this.leaveChannel = this.leaveChannel.bind(this)
   }
 
@@ -42,23 +43,23 @@ class ExploreItem extends React.Component{
     return index
   }
 
-  joinChannel(){
-    const {thread, currentUserId } = this.props
-    let subscriptions = App.cable.subscriptions.subscriptions
-    let index = this.findThreadChannel()
-    subscriptions[index].speak({
-      created: true,
-      id: thread.id,
-      users: [currentUserId],
-      channel: true,
-      private: false,
-      title: thread.title,
-      creator_id: thread.creator_id
-    })
-  }
+  // joinChannel(){
+  //   const {thread, currentUserId } = this.props
+  //   let subscriptions = App.cable.subscriptions.subscriptions
+  //   let index = this.findThreadChannel()
+  //   subscriptions[index].speak({
+  //     created: true,
+  //     id: thread.id,
+  //     users: [currentUserId],
+  //     channel: true,
+  //     private: false,
+  //     title: thread.title,
+  //     creator_id: thread.creator_id
+  //   })
+  // }
 
   leaveChannel(){
-    const { thread, currentUserId } = this.props
+    const {thread, currentUserId} = this.props
     let index = this.findThreadChannel()
     let subscriptions = App.cable.subscriptions.subscriptions
     subscriptions[index].leaveThread({
@@ -68,7 +69,8 @@ class ExploreItem extends React.Component{
 
   }
 
-  render(){   
+  render(){  
+    const { thread, currentUserId } = this.props
     return(
       <div className="explore-item"
       onMouseEnter={this.hovering}
@@ -78,7 +80,7 @@ class ExploreItem extends React.Component{
           this.state.hover === true ? 
           this.props.member ? 
           <button className="leave-button" onClick={this.leaveChannel}>Leave</button> :
-          <button className="join-button" onClick={this.joinChannel}>Join</button>: null
+          <button className="join-button" onClick={()=> joinChannel(thread, currentUserId)}>Join</button>: null
         }
       </div>
     )
