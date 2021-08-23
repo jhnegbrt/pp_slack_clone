@@ -48,13 +48,28 @@ export default () => {
         </form>
       </div>
       <div className="match-header">Users:
-        <SearchMatches query={searchEntry} type="users" entities={users}/>
+        <SearchMatches 
+          setSearchEntry={setSearchEntry}
+          setDisplaySearch={setDisplaySearch} 
+          query={searchEntry} 
+          type="users" 
+          entities={users}/>
       </div>
       <div className="match-header">Threads:
-        <SearchMatches query={searchEntry} type="threads" entities={threads}/>
+        <SearchMatches 
+          setSearchEntry={setSearchEntry}
+          setDisplaySearch={setDisplaySearch} 
+          query={searchEntry} 
+          type="threads" 
+          entities={threads}/>
       </div>
       <div className="match-header">Public Channels:
-        <SearchMatches query={searchEntry} type="publicChannels" entities={publicChannels}/>
+        <SearchMatches
+          setSearchEntry={setSearchEntry}
+          setDisplaySearch={setDisplaySearch} 
+          query={searchEntry} 
+          type="publicChannels" 
+          entities={publicChannels}/>
       </div>
     </div>
   )

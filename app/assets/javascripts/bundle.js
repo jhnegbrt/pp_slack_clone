@@ -11557,18 +11557,24 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "match-header"
   }, "Users:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
+    setSearchEntry: setSearchEntry,
+    setDisplaySearch: setDisplaySearch,
     query: searchEntry,
     type: "users",
     entities: users
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "match-header"
   }, "Threads:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
+    setSearchEntry: setSearchEntry,
+    setDisplaySearch: setDisplaySearch,
     query: searchEntry,
     type: "threads",
     entities: threads
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "match-header"
   }, "Public Channels:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_matches__WEBPACK_IMPORTED_MODULE_2__.default, {
+    setSearchEntry: setSearchEntry,
+    setDisplaySearch: setDisplaySearch,
     query: searchEntry,
     type: "publicChannels",
     entities: publicChannels
@@ -11595,11 +11601,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {
   var type = _ref.type,
       entities = _ref.entities,
-      query = _ref.query;
+      query = _ref.query,
+      setDisplaySearch = _ref.setDisplaySearch,
+      setSearchEntry = _ref.setSearchEntry;
+
+  function matchClick() {
+    setSearchEntry("");
+    setDisplaySearch(false);
+  }
 
   function matchThreads() {
     var threads = Object.values(entities);
@@ -11610,7 +11625,10 @@ __webpack_require__.r(__webpack_exports__);
       var title = threads[i].title;
 
       if (regex.test(title) && title != "placeholder") {
-        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, threads[i].title));
+        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+          onClick: matchClick,
+          to: "".concat(threads[i].id)
+        }, threads[i].title));
       }
     }
 

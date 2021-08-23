@@ -1,6 +1,12 @@
 import React from "react"
+import {Link} from "react-router-dom"
 
-export default ({type, entities, query}) => {
+export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
+
+  function matchClick(){
+    setSearchEntry("")
+    setDisplaySearch(false)
+  }
 
   function matchThreads(){
     let threads = Object.values(entities)
@@ -9,7 +15,13 @@ export default ({type, entities, query}) => {
       let regex = new RegExp(`${query}`, 'i')
       let title = threads[i].title
       if (regex.test(title) && title != "placeholder"){
-        matchedThreads.push(<div>{threads[i].title}</div>)
+        matchedThreads.push(
+          <Link 
+            onClick={matchClick}
+            to={`${threads[i].id}`}>
+              {threads[i].title}
+          </Link>
+        )
       }
     }
     return (
