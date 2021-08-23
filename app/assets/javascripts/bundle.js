@@ -10888,20 +10888,34 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     key: "fetchMessages",
     value: function fetchMessages(threadId) {
       var subscriptions = App.cable.subscriptions.subscriptions;
+      console.log(subscriptions);
 
       for (var i = 0; i < subscriptions.length; i++) {
         var identifier = JSON.parse(subscriptions[i].identifier);
 
         if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)) {
           subscriptions[i].load();
-          break;
+          return;
         }
       }
+
+      throw "Did not find channel";
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetchMessages(parseInt(this.props.currentThreadId));
+      var threadId = parseInt(this.props.currentThreadId);
+      var subscriptions = App.cable.subscriptions.subscriptions;
+      console.log(subscriptions);
+
+      for (var i = 0; i < subscriptions.length; i++) {
+        var identifier = JSON.parse(subscriptions[i].identifier);
+
+        if (identifier.channel === "ChatChannel" && identifier.thread_id === threadId) {
+          subscriptions[i].load();
+          return;
+        }
+      }
     }
   }, {
     key: "componentDidUpdate",
@@ -10935,7 +10949,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log(this.props);
       var messages = this.props.messages;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {

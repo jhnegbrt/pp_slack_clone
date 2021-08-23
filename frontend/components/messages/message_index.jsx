@@ -16,17 +16,28 @@ class MessageIndex extends React.Component{
 
   fetchMessages(threadId){
     let subscriptions = App.cable.subscriptions.subscriptions
+    console.log(subscriptions)
     for (let i = 0; i < subscriptions.length; i++){
       let identifier = JSON.parse(subscriptions[i].identifier)
       if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)){
         subscriptions[i].load()
-        break
+        return
       }
     }
+    throw "Did not find channel"
   }
 
   componentDidMount(){
-    this.fetchMessages(parseInt(this.props.currentThreadId))
+    let threadId = parseInt(this.props.currentThreadId)
+    let subscriptions = App.cable.subscriptions.subscriptions
+    console.log(subscriptions)
+    for (let i = 0; i < subscriptions.length; i++){
+      let identifier = JSON.parse(subscriptions[i].identifier)
+      if (identifier.channel === "ChatChannel" && identifier.thread_id === threadId){
+        subscriptions[i].load()
+        return
+      }
+    }
   }
 
   componentDidUpdate() {
@@ -51,7 +62,6 @@ class MessageIndex extends React.Component{
   }
 
   render(){
-    console.log(this.props)
     const {messages} = this.props
     return(
       <div style={{maxHeight: this.props.type === "thread" ? '90vh' : '85vh'}} className="messages-display">
