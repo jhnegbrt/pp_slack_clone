@@ -10889,20 +10889,33 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     key: "fetchMessages",
     value: function fetchMessages(threadId) {
       var subscriptions = App.cable.subscriptions.subscriptions;
-      console.log(subscriptions);
 
       for (var i = 0; i < subscriptions.length; i++) {
         var identifier = JSON.parse(subscriptions[i].identifier);
 
         if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)) {
+          debugger;
           subscriptions[i].load();
           return;
         }
       }
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var currentThreadId = this.props.currentThreadId;
+
+      if (App.cable.subscriptions.subscriptions.length > 1) {
+        this.fetchMessages(currentThreadId);
+        this.setState({
+          fetchedMessages: true
+        });
+      }
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      debugger;
       var _this$props = this.props,
           messages = _this$props.messages,
           currentThreadId = _this$props.currentThreadId,
@@ -10915,6 +10928,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         });
       } else if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0) {
         this.props.clearMessages();
+        this.setState({
+          fetchedMessages: false
+        });
       } else if (this.props.searchDmId != this.state.searchDmId) {
         this.setState({
           searchDmId: searchDmId,
@@ -10924,10 +10940,10 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         this.setState({
           fetchedMessages: true
         });
-      } else if (this.state.threadId != currentThreadId && App.cable.subscriptions.subscriptions.length > 1) {
+      } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1) {
         this.props.clearMessages();
         this.setState({
-          threadId: currentThreadId,
+          threadId: parseInt(currentThreadId),
           searchDmId: null
         });
         this.fetchMessages(currentThreadId);
@@ -14443,7 +14459,9 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       var allUsers = this.props.users;
       var userNames = [];
       channelUsers.forEach(function (id) {
-        return userNames.push(allUsers[id].username);
+        if (allUsers[id]) {
+          return userNames.push(allUsers[id].username);
+        }
       });
       var title = userNames.join(", ");
 
@@ -14598,7 +14616,9 @@ var ThreadTitle = /*#__PURE__*/function (_React$Component) {
       var allUsers = this.props.users;
       var userNames = [];
       channelUsers.forEach(function (id) {
-        return userNames.push(allUsers[id].username);
+        if (allUsers[id]) {
+          return userNames.push(allUsers[id].username);
+        }
       });
       var title = userNames.join(", ");
 

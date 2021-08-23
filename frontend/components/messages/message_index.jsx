@@ -17,18 +17,29 @@ class MessageIndex extends React.Component{
 
   fetchMessages(threadId){
     let subscriptions = App.cable.subscriptions.subscriptions
-    console.log(subscriptions)
     for (let i = 0; i < subscriptions.length; i++){
       let identifier = JSON.parse(subscriptions[i].identifier)
       if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)){
+        debugger
         subscriptions[i].load()
         return
       }
     }
   }
 
+  componentDidMount(){
+    let { currentThreadId } = this.props
+    if (App.cable.subscriptions.subscriptions.length > 1){
+      this.fetchMessages(currentThreadId)
+      this.setState({
+        fetchedMessages: true
+      })
+    }
+  }
+
 
   componentDidUpdate() {
+    debugger
     let {messages, currentThreadId, searchDmId} = this.props
     if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
       this.fetchMessages(searchDmId)
@@ -37,6 +48,9 @@ class MessageIndex extends React.Component{
       })
     } else if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0){
       this.props.clearMessages()
+      this.setState({
+        fetchedMessages: false
+      })
     } else if (this.props.searchDmId != this.state.searchDmId){
       this.setState({
         searchDmId,
@@ -46,10 +60,10 @@ class MessageIndex extends React.Component{
       this.setState({
         fetchedMessages: true
       })
-    } else if (this.state.threadId != currentThreadId && App.cable.subscriptions.subscriptions.length > 1){
+    } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1){
       this.props.clearMessages()
       this.setState({
-        threadId: currentThreadId,
+        threadId: parseInt(currentThreadId),
         searchDmId: null
       })
       this.fetchMessages(currentThreadId)

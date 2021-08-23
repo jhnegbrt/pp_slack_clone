@@ -24,7 +24,9 @@ class ThreadTitle extends React.Component{
     let allUsers = this.props.users
     let userNames = []
     channelUsers.forEach((id)=>{
-      return userNames.push(allUsers[id].username)
+      if(allUsers[id]){
+        return userNames.push(allUsers[id].username)
+      }
     })
     let title = userNames.join(", ")
     if (title.length > 55){
