@@ -11461,6 +11461,76 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/search/public_channel_item.jsx":
+/*!************************************************************!*\
+  !*** ./frontend/components/search/public_channel_item.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {
+  var thread = _ref.thread,
+      setSearchEntry = _ref.setSearchEntry,
+      setDisplaySearch = _ref.setDisplaySearch;
+  var currentUserId = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.session.id;
+  });
+
+  function findThreadChannel() {
+    var index;
+    var subscriptions = App.cable.subscriptions.subscriptions;
+
+    for (var i = 0; i < subscriptions.length; i++) {
+      var identifier = JSON.parse(subscriptions[i].identifier);
+
+      if (identifier.channel === "ThreadChannel") {
+        index = i;
+        break;
+      }
+    }
+
+    return index;
+  }
+
+  function joinChannel() {
+    var subscriptions = App.cable.subscriptions.subscriptions;
+    var index = findThreadChannel();
+    subscriptions[index].speak({
+      created: true,
+      id: thread.id,
+      users: [currentUserId],
+      channel: true,
+      "private": false,
+      title: thread.title,
+      creator_id: thread.creator_id
+    });
+  }
+
+  function handleClick() {
+    debugger;
+    joinChannel();
+    setSearchEntry("");
+    setDisplaySearch(false);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, thread.title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    onClick: handleClick,
+    to: "".concat(thread.id)
+  }, "Join"));
+});
+
+/***/ }),
+
 /***/ "./frontend/components/search/search_bar.jsx":
 /*!***************************************************!*\
   !*** ./frontend/components/search/search_bar.jsx ***!
@@ -11517,8 +11587,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   var searchBox = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
 
   function handleClickOutside(e) {
-    if (!searchBox.current.contains(e.target)) {
+    if (searchBox.current && !searchBox.current.contains(e.target)) {
       setDisplaySearch(false);
+      setSearchEntry("");
     }
   }
 
@@ -11601,7 +11672,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _public_channel_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./public_channel_item */ "./frontend/components/search/public_channel_item.jsx");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {
@@ -11625,7 +11698,7 @@ __webpack_require__.r(__webpack_exports__);
       var title = threads[i].title;
 
       if (regex.test(title) && title != "placeholder") {
-        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        matchedThreads.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
           onClick: matchClick,
           to: "".concat(threads[i].id)
         }, threads[i].title));
@@ -11645,7 +11718,11 @@ __webpack_require__.r(__webpack_exports__);
       var regex = new RegExp("".concat(query), 'i');
 
       if (regex.test(publicChannels[i].title)) {
-        matchedPublicChannels.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, publicChannels[i].title));
+        matchedPublicChannels.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_public_channel_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+          thread: publicChannels[i],
+          setSearchEntry: setSearchEntry,
+          setDisplaySearch: setDisplaySearch
+        }));
       }
     }
 

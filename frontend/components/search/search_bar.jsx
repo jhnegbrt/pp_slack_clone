@@ -16,8 +16,9 @@ export default () => {
   const searchBox = React.createRef()
 
   function handleClickOutside(e){
-    if (!searchBox.current.contains(e.target)) {
+    if (searchBox.current && !searchBox.current.contains(e.target)) {
       setDisplaySearch(false)
+      setSearchEntry("")
     }
   }
 

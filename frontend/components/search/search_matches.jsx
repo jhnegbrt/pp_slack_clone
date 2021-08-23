@@ -1,5 +1,6 @@
 import React from "react"
 import {Link} from "react-router-dom"
+import PublicChannelItem from './public_channel_item'
 
 export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
 
@@ -36,7 +37,12 @@ export default ({type, entities, query, setDisplaySearch, setSearchEntry}) => {
     for (let i = 0; i < publicChannels.length; i++){
       let regex = new RegExp(`${query}`, 'i')
       if (regex.test(publicChannels[i].title)){
-         matchedPublicChannels.push(<div>{publicChannels[i].title}</div>)
+        matchedPublicChannels.push(
+          <PublicChannelItem 
+            thread={publicChannels[i]}
+            setSearchEntry={setSearchEntry}
+            setDisplaySearch={setDisplaySearch}/>
+        )
       }
     }
     return (
