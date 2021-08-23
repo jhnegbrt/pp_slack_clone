@@ -1,6 +1,6 @@
 import ThreadIndexItem from './thread_index_item'
 import {connect} from 'react-redux'
-import { receiveCurrentThread, createThread } from '../../../actions/thread_actions'
+import { receiveCurrentThread } from '../../../actions/thread_actions'
 import {receiveMessage, removeMessage, receiveMessages} from '../../../actions/message_actions'
 
 

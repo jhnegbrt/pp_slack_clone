@@ -10,7 +10,7 @@ const mSTP = (state, ownProps) => ({
 })
 
 const mDTP = (dispatch) => ({
-  createDirectMessage: (directMessage)=> dispatch(createThread(directMessage)),
+  createThread: (directMessage, users) => dispatch(createThread(directMessage, users)),
   fetchThreads: () => dispatch(fetchThreads())
 })
 

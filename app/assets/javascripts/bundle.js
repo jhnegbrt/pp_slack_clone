@@ -10216,6 +10216,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
 /* harmony export */ });
 /* harmony import */ var _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api/thread_api_util */ "./frontend/util/api/thread_api_util.js");
+/* harmony import */ var _util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/action_cable_util/join_channel */ "./frontend/util/action_cable_util/join_channel.js");
+
 
 var RECEIVE_CURRENT_THREAD = "RECEIVE_CURRENT_THREAD";
 var RECEIVE_ALL_THREADS = "RECEIVE_ALL_THREADS";
@@ -10254,20 +10256,24 @@ var receivePublicChannels = function receivePublicChannels(channels) {
   };
 };
 
-var createThread = function createThread(data) {
+var createThread = function createThread(data, users) {
   return function (dispatch) {
-    return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
-      return dispatch(receiveCurrentThread(thread.id));
-    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
-    ;
+    _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
+      debugger;
+
+      if (thread.channel === true) {
+        (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.joinChannel)(thread);
+      } else {
+        (0,_util_action_cable_util_join_channel__WEBPACK_IMPORTED_MODULE_1__.createNewThread)(thread, users);
+      }
+    });
   };
 };
 var fetchThreads = function fetchThreads() {
   return function (dispatch) {
     return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchThreads().then(function (threads) {
       return dispatch(receiveAllThreads(threads));
-    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
-    ;
+    });
   };
 };
 var fetchPublicChannels = function fetchPublicChannels() {
@@ -11285,10 +11291,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
 
   }, {
     key: "createNewDirectMessage",
-    value: function createNewDirectMessage(e) {
-      var _this2 = this;
-
-      e.preventDefault();
+    value: function createNewDirectMessage() {
       var newDirectMessage = {
         users: this.props.selectedUsers,
         channel: false,
@@ -11296,52 +11299,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         creator_id: this.state.creatorId,
         title: "placeholder"
       };
-      var id;
-      this.props.createDirectMessage(newDirectMessage).then(function (res) {
-        id = res;
-        var subscriptions = App.cable.subscriptions.subscriptions;
-        var index;
-
-        for (var i = 0; i < subscriptions.length; i++) {
-          var identifier = JSON.parse(subscriptions[i].identifier);
-
-          if (identifier.channel === "ThreadChannel") {
-            index = i;
-            break;
-          }
-        }
-
-        subscriptions[index].speak({
-          created: true,
-          id: res.threadId,
-          users: _this2.props.selectedUsers,
-          channel: false,
-          "private": true,
-          creator_id: _this2.state.creatorId,
-          title: "placeholder"
-        });
-
-        for (var _i = 0; _i < subscriptions.length; _i++) {
-          var _identifier = JSON.parse(subscriptions[_i].identifier);
-
-          if (_identifier.channel === "ChatChannel") {
-            index = _i;
-            break;
-          }
-        }
-
-        var message = {
-          channel_dms_id: res.threadId,
-          content: _this2.state.content,
-          sender_id: _this2.state.creatorId,
-          created: true
-        };
-        subscriptions[index].speak({
-          message: message
-        });
-
-        _this2.props.history.push("/client/".concat(res.threadId));
-      });
+      this.props.createThread(newDirectMessage);
     }
   }, {
     key: "handleSubmit",
@@ -11415,8 +11373,8 @@ var mSTP = function mSTP(state, ownProps) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    createDirectMessage: function createDirectMessage(directMessage) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage));
+    createThread: function createThread(directMessage, users) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage, users));
     },
     fetchThreads: function fetchThreads() {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.fetchThreads)());
@@ -13170,12 +13128,6 @@ var mSTP = function mSTP(state) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    submit: function submit(thread) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(thread));
-    },
-    selectThread: function selectThread(threadId) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(threadId));
-    },
     receiveMessage: function receiveMessage(message) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.receiveMessage)(message));
     },
@@ -15163,16 +15115,17 @@ function createThreadsConnection(currentUserId, receiveThread, receiveAllThreads
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "findThreadChannel": () => (/* binding */ findThreadChannel),
-/* harmony export */   "joinChannel": () => (/* binding */ joinChannel)
+/* harmony export */   "findThreadOrChannel": () => (/* binding */ findThreadOrChannel),
+/* harmony export */   "joinChannel": () => (/* binding */ joinChannel),
+/* harmony export */   "createNewThread": () => (/* binding */ createNewThread)
 /* harmony export */ });
-function findThreadChannel(subscriptions) {
+function findThreadOrChannel(type, subscriptions) {
   var index;
 
   for (var i = 0; i < subscriptions.length; i++) {
     var identifier = JSON.parse(subscriptions[i].identifier);
 
-    if (identifier.channel === "ThreadChannel") {
+    if (identifier.channel === type) {
       index = i;
       break;
     }
@@ -15180,18 +15133,52 @@ function findThreadChannel(subscriptions) {
 
   return index;
 }
-function joinChannel(thread, currentUserId) {
+
+function subscriptionsSpeak(type) {
   var subscriptions = App.cable.subscriptions.subscriptions;
-  var index = findThreadChannel(subscriptions);
-  subscriptions[index].speak({
-    created: true,
-    id: thread.id,
-    users: [currentUserId],
-    channel: true,
-    "private": false,
-    title: thread.title,
-    creator_id: thread.creator_id
-  });
+  var index = findThreadOrChannel(type, subscriptions);
+
+  if (type === "ThreadChannel") {
+    subscriptions[index].speak({
+      created: true,
+      id: thread.id,
+      users: [currentUserId],
+      channel: true,
+      "private": false,
+      title: thread.title,
+      creator_id: thread.creator_id
+    });
+  } else {
+    subscriptions[index].speak({
+      message: "message"
+    });
+  }
+
+  this.props.history.push("/client/".concat(res.id));
+}
+
+function joinChannel(thread, currentUserId) {
+  subscriptionsSpeak("ThreadChannel");
+}
+function createNewThread() {
+  subscriptionsSpeak("ThreadChannel");
+  subscriptionsSpeak("ChatChannel");
+
+  for (var i = 0; i < subscriptions.length; i++) {
+    var identifier = JSON.parse(subscriptions[i].identifier);
+
+    if (identifier.channel === "ChatChannel") {
+      index = i;
+      break;
+    }
+  }
+
+  var message = {
+    channel_dms_id: res.id,
+    content: this.state.content,
+    sender_id: this.state.creatorId,
+    created: true
+  };
 }
 
 /***/ }),
