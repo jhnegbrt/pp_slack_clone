@@ -2,6 +2,8 @@
 
 [Live Link](https://sleuth-jwe.herokuapp.com/#/)
 
+Sleuth is a web-app clone of the popular messaging app Slack, highlighting web-sockets technology and the ability to send and receive messages in real-time. This application was build for educational purposes as a part of App Academy's Software Engineering bootcamp. Please read on for details on features, code-snippets, and pictures of Sleuth live in action!
+
 ## Table of contents:
  1. [Features](#features)
     - [User-authentication](#user-auth)
@@ -88,6 +90,8 @@ Errors rendered from the frontend:
 ## Live Thread Creation
 
 ## Workspace Search
+
+Users are able to use the search function to find Public Channels (which they do not already belong to), other users, and active [threads](#note-on-threads)
 
 # Tech Stack
 
