@@ -227,6 +227,50 @@ Aside: although this project was originally built with Class based components, n
 
 Sleuth is built with a Ruby on Rails backend and utilizes web-socket technology to create live-messaging and thread-creation.
 
+For users, Sleuth uses a standard MVC framework (with the exception of using jbuilder rather than Rails Views) so the rails application may serve as an API Endpoint, rather than serving new HTML pages.
+
+Notice in the below snippet our UsersController is under the Api namespace:
+
+```ruby
+# app/controllers/api/users_controller.rb
+
+ class Api::UsersController < ApplicationController
+
+   def index
+     @users = User.all
+   end
+
+   def create
+     @user = User.new(user_params)
+     if @user.save
+       login(@user)
+       render 'api/users/show'
+     else
+       render json: @user.errors.full_messages, status: 401
+     end
+   end
+
+   def user_params
+     params.require(:user).permit(:username, :password)
+   end
+
+ end
+
+```
+
+And in our views we render json:
+
+```ruby
+# app/controllers/api/users_controller.rb
+
+ @users.each do |user|
+   json.set! user.id do
+     json.partial! 'user', user: user
+   end
+ end
+
+```
+
 ## Frontend
 
 Sleuth is built with React and Redux. Originally Sleuth was built strictly with Class based components, but newer features have been added using functional components and React Hooks.
@@ -248,7 +292,7 @@ Sleuth is styled using SASS allowing for cleaner and more adaptable styling.
      text-decoration: none;
      &:hover{
        text-decoration: underline
-     };
+     }
    }
  }
 
