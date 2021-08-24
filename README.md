@@ -93,7 +93,120 @@ Errors rendered from the frontend:
 
 Users are able to use the search function to find Public Channels (which they do not already belong to), other users, and active [threads](#note-on-threads)*
 
+As you can see in the image below, the search function has found a Public Channels match for "Chat" and provides the user the ability to join the channel immediately.
+
 ![search](app/assets/images/search.PNG)
+
+The `SearchBar` component renders a `SearchMatches` component for each category (`users`, `threads`, `publicChannels`) which receives a `type` prop and calls the appropriate function based on this prop:
+
+```javascript
+// frontend/components/search/search_matches.jsx
+
+  function findMatches(){
+    if (query.length < 1){
+      return
+    } else {
+      switch(type){
+        case "threads":
+          return matchThreads()
+        case "publicChannels":
+          return matchPublicChannels()
+        case "users":
+          return matchUsers()
+      }
+    }
+  }
+
+```
+
+Each of these functions uses a case insensitive Regular Expression to find matches (see `matchPublicChannels` below) and render a component for each match.
+
+```javascript
+
+// frontend/components/search/search_matches.jsx
+
+  function matchPublicChannels(){
+    let publicChannels = Object.values(entities)
+    let  matchedPublicChannels = []
+    for (let i = 0; i < publicChannels.length; i++){
+      let regex = new RegExp(`${query}`, 'i')
+      if (regex.test(publicChannels[i].title)){
+        matchedPublicChannels.push(
+          <PublicChannelSearchItem
+            key={publicChannels[i].id}
+            thread={publicChannels[i]}
+            setSearchEntry={setSearchEntry}
+            setDisplaySearch={setDisplaySearch}/>
+        )
+      }
+    }
+    return (
+      matchedPublicChannels.length > 0 ? matchedPublicChannels :
+      <div className="no-search-results">No Public Channels Found!</div>
+    ) 
+  }
+
+```
+
+Aside: although this project was originally built with Class based components, new additions have utilized React Hooks. See the `UserSearchItem` below which is rendered by `matchUsers` (equivalent to `matchPublicChannels` above, except for `users`)
+
+```javasript
+
+// frontend/components/search/user_search_item.jsx
+
+  imports...
+
+  export default ({user, setSearchEntry, setDisplaySearch}) =>{
+
+    const history = useHistory()
+    const threads = useSelector(state => Object.values(state.workspace.threads))
+    const currentUserId = useSelector(state => state.session.id)
+    const dispatch = useDispatch()
+    let activeThread = false
+
+    for (let i = 0; i < threads.length; i++){
+      if(threads[i].users.length === 2 && threads[i].users.includes(user.id)){
+        activeThread = threads[i].id
+        break
+      }
+    }
+
+    function handleClick(){
+      setDisplaySearch(false)
+      setSearchEntry("")
+    }
+
+    function createDirectMessage(){
+      let newDirectMessage = { 
+        channel: false,
+        private: true,
+        creator_id: currentUserId,
+        title: "placeholder",
+      }
+      dispatch(createThread(newDirectMessage, [currentUserId, user.id]))
+        .then(action => history.push(`/client/${action.threadId}`))
+      setDisplaySearch(false)
+      setSearchEntry("")
+    }
+
+    return(
+      activeThread ? 
+      <div className="search-user">
+        <Link onClick={handleClick} to={`${activeThread}`}>{user.username}</Link>
+        <Link onClick={handleClick} to={`${activeThread}`}>Chat</Link>
+      </div> :
+      <div className="search-user">
+        <a onClick={createDirectMessage}>{user.username}</a>
+        <a onClick={createDirectMessage}>Chat</a>
+      </div>
+
+    )
+  }
+
+
+```
+
+The search
 
 # Tech Stack
 
