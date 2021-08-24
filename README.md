@@ -21,8 +21,8 @@ Please read on for details on features, code-snippets, and pictures of Sleuth li
  2. [Tech Stack](#tech-stack])
     - [Backend](#backend)
     - [Frontend](#frontend)
- 3. [Known Bugs](#known-bugs)
- 4. [Upcoming Features](#upcoming-features)
+ 3. [Known Bugs](#known-bugs) (coming soon!)
+ 4. [Upcoming Features](#upcoming-features) (coming soon!)
 
 # Features
 
@@ -225,7 +225,34 @@ Aside: although this project was originally built with Class based components, n
 
 ## Backend
 
+Sleuth is built with a Ruby on Rails backend and utilizes web-socket technology to create live-messaging and thread-creation.
+
 ## Frontend
+
+Sleuth is built with React and Redux. Originally Sleuth was built strictly with Class based components, but newer features have been added using functional components and React Hooks.
+
+Sleuth is styled using SASS allowing for cleaner and more adaptable styling.
+
+```css
+// app/assets/stylesheets/splash.css.scss
+
+ .splash-footer-list{
+   left: 0;
+   bottom: 0;
+   width: 100vw;
+   height: 8vh;
+   background-color: #F1EEE8;
+   justify-content: space-around;
+   li a{
+     color: #281b80;
+     text-decoration: none;
+     &:hover{
+       text-decoration: underline
+     };
+   }
+ }
+
+```
 
 # Known Bugs
 
