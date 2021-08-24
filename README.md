@@ -60,7 +60,25 @@ Errors rendered from the backend:
 ![backend_errors](app/assets/images/user_auth_errors_1.PNG)
 
 Errors rendered from the frontend:
-<br>
+
+```javascript
+
+// frontend/components/session_form/session_form.jsx
+
+  handleSubmit(e){
+    e.preventDefault();
+    if (this.props.formType === "signup" && this.passwordsMatch() === false){
+      this.setState({
+        errors: ["Passwords must match!"]
+      })
+    } else {
+      const user = {password: this.state.password, username: this.state.username}
+      this.props.processForm(user);
+    }
+  }
+
+ 
+```
 ![frontend_errors](app/assets/images/user_auth_errors_2.PNG)
 
 ## Channel Browsing
