@@ -11958,10 +11958,10 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
           errors: ["Passwords must match!"]
         });
       } else {
-        var user = Object.assign({}, {
+        var user = {
           password: this.state.password,
           username: this.state.username
-        });
+        };
         this.props.processForm(user);
       }
     }

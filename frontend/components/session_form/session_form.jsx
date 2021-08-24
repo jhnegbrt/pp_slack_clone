@@ -27,7 +27,7 @@ class SessionForm extends React.Component {
         errors: ["Passwords must match!"]
       })
     } else {
-      const user = Object.assign({}, {password: this.state.password, username: this.state.username})
+      const user = {password: this.state.password, username: this.state.username}
       this.props.processForm(user);
     }
   }
