@@ -107,7 +107,7 @@ class MessageIndexItem extends React.Component{
           buttons : null }
           <div className="message-content">
             {new_user === true ? <span className="message-name">{this.props.message.sender}</span> : null}
-            {time_diff > 18000 || new_user === true ? <span className="message-time">{time}</span> : null}
+            {time_diff > 36000 || new_user === true ? <span className="message-time">{time}</span> : null}
             <p>{this.props.message.content}</p>
           </div>
       </div>

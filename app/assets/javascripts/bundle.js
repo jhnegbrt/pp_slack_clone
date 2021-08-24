@@ -11180,7 +11180,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "message-content"
       }, new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-name"
-      }, this.props.message.sender) : null, time_diff > 18000 || new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      }, this.props.message.sender) : null, time_diff > 36000 || new_user === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "message-time"
       }, time) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.message.content)));
       return this.state.editting ? edit : display;
