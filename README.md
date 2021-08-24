@@ -92,7 +92,7 @@ Errors rendered from the frontend:
 
 ## Channel Browsing
 
-Freindly UX feature: Users are greeted with a channel browser which allows them to join and leave channels. A relatively simple component to be used in conjunction with search and the left panel for navigation.
+Freindly UX feature: Users are greeted with a channel browser which allows them to join and leave channels (functionality on hover). A relatively simple component to be used in conjunction with search and the left panel for navigation.
 
 ![channel_browser](app/assets/images/channel_browser.PNG)
 
