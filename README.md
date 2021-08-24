@@ -150,7 +150,7 @@ Each of these functions uses a case insensitive Regular Expression to find match
 
 Aside: although this project was originally built with Class based components, new additions have utilized React Hooks. See the `UserSearchItem` below which is rendered by `matchUsers` (equivalent to `matchPublicChannels` above, except for `users`)
 
-```javasript
+```javascript
 
 // frontend/components/search/user_search_item.jsx
 
