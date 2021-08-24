@@ -111,7 +111,6 @@ class SearchMessageForm extends React.Component{
       }
       subscriptions[index].speak({ message: message})
       this.props.history.push(`/client/${res.threadId}`)
-      window.location.reload(false)
     })
     
   }

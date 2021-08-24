@@ -20,7 +20,10 @@ class MessageIndex extends React.Component{
     for (let i = 0; i < subscriptions.length; i++){
       let identifier = JSON.parse(subscriptions[i].identifier)
       if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)){
-        subscriptions[i].load()
+        subscriptions[i].load(),
+        this.setState({
+          fetchedMessages: true
+        })
         return
       }
     }
@@ -30,34 +33,30 @@ class MessageIndex extends React.Component{
     let { currentThreadId } = this.props
     if (App.cable.subscriptions.subscriptions.length > 1){
       this.fetchMessages(currentThreadId)
-      this.setState({
-        fetchedMessages: true
-      })
     }
   }
 
 
   componentDidUpdate() {
+    debugger
     let {messages, currentThreadId, searchDmId} = this.props
-    if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
-      this.fetchMessages(searchDmId)
-      this.setState({
-        fetchedMessages: true
-      })
-    } else if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0){
+    if (!this.props.searchDmId && !currentThreadId && messages.length > 0){
       this.props.clearMessages()
       this.setState({
         fetchedMessages: false
       })
+    } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
+      if(currentThreadId){
+        this.fetchMessages(parseInt(currentThreadId))
+      } else {
+        this.fetchMessages(parseInt(searchDmId))
+      }
     } else if (this.props.searchDmId != this.state.searchDmId){
       this.setState({
         searchDmId,
         threadId: null
       })
       this.fetchMessages(searchDmId)
-      this.setState({
-        fetchedMessages: true
-      })
     } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1){
       this.props.clearMessages()
       this.setState({
@@ -65,9 +64,6 @@ class MessageIndex extends React.Component{
         searchDmId: null
       })
       this.fetchMessages(currentThreadId)
-      this.setState({
-        fetchedMessages: true
-      })
     }
     this.bottom.current.scrollIntoView();
   }

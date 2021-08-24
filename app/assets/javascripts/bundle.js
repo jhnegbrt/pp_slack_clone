@@ -10905,7 +10905,9 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         var identifier = JSON.parse(subscriptions[i].identifier);
 
         if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)) {
-          subscriptions[i].load();
+          subscriptions[i].load(), this.setState({
+            fetchedMessages: true
+          });
           return;
         }
       }
@@ -10917,38 +10919,34 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
 
       if (App.cable.subscriptions.subscriptions.length > 1) {
         this.fetchMessages(currentThreadId);
-        this.setState({
-          fetchedMessages: true
-        });
       }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      debugger;
       var _this$props = this.props,
           messages = _this$props.messages,
           currentThreadId = _this$props.currentThreadId,
           searchDmId = _this$props.searchDmId;
 
-      if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1) {
-        this.fetchMessages(searchDmId);
-        this.setState({
-          fetchedMessages: true
-        });
-      } else if (this.props.searchDmId === null && currentThreadId === undefined && messages.length > 0) {
+      if (!this.props.searchDmId && !currentThreadId && messages.length > 0) {
         this.props.clearMessages();
         this.setState({
           fetchedMessages: false
         });
+      } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1) {
+        if (currentThreadId) {
+          this.fetchMessages(parseInt(currentThreadId));
+        } else {
+          this.fetchMessages(parseInt(searchDmId));
+        }
       } else if (this.props.searchDmId != this.state.searchDmId) {
         this.setState({
           searchDmId: searchDmId,
           threadId: null
         });
         this.fetchMessages(searchDmId);
-        this.setState({
-          fetchedMessages: true
-        });
       } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1) {
         this.props.clearMessages();
         this.setState({
@@ -10956,9 +10954,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           searchDmId: null
         });
         this.fetchMessages(currentThreadId);
-        this.setState({
-          fetchedMessages: true
-        });
       }
 
       this.bottom.current.scrollIntoView();
@@ -11404,8 +11399,6 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         });
 
         _this2.props.history.push("/client/".concat(res.threadId));
-
-        window.location.reload(false);
       });
     }
   }, {
@@ -15203,7 +15196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (redux_logger__WEBPACK_IMPORTED_MODULE_2___default())));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
