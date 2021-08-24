@@ -93,7 +93,7 @@ Errors rendered from the frontend:
 
 Users are able to use the search function to find Public Channels (which they do not already belong to), other users, and active [threads](#note-on-threads)*
 
-
+![search](app/assets/images/search.PNG)
 
 # Tech Stack
 
