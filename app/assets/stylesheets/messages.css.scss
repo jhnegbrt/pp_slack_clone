@@ -7,6 +7,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 86vh;
 }
 
 .messages-container{
@@ -74,7 +75,11 @@
 .message-current,
 .message{
   font-family: 'Comfortaa', serif;
-  display: flex
+  display: flex;
+  position: relative;
+  &:hover{
+    background-color: white;
+  }
 }
 
 .message p{
@@ -142,6 +147,7 @@ div::-webkit-scrollbar{
 .message-buttons{
   right: 70vw;
   position: absolute;
+  top: -1.5vh;
   button{
     font-family: 'Comfortaa', serif;
     background-color: white;

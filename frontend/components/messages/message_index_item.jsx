@@ -21,7 +21,6 @@ class MessageIndexItem extends React.Component{
     this.setState({
       editting: !this.state.editting
     })
-
   }
 
   hovering(){
