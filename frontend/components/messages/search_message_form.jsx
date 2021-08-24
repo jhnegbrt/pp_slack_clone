@@ -43,8 +43,9 @@ class SearchMessageForm extends React.Component{
     this.props.history.push(`/client/${this.props.searchDmId}`)
   }
 
-  //this method creates a new DM if the user sends a message to a group or individual 
-  //that they do not yet have a dm with
+  // this method creates a new DM if the user sends a message to a group or individual 
+  // that they do not yet have a dm with
+
   // createNewDirectMessage(){
   //   let {selectedUsers} = this.props
   //   let {content} = this.state
@@ -57,10 +58,11 @@ class SearchMessageForm extends React.Component{
   //   this.props.createThread(newDirectMessage, selectedUsers, content)
   //     .then(action => {
   //       this.props.history.push(`/client/${action.threadId}`)
+  //       window.location.reload(false)
   //     })
   // }
 
-  //Hotfix for issue of first message not rendering
+  // Hotfix for issue of first message not rendering
 
   createNewDirectMessage(e){
     e.preventDefault()
@@ -109,6 +111,7 @@ class SearchMessageForm extends React.Component{
       }
       subscriptions[index].speak({ message: message})
       this.props.history.push(`/client/${res.threadId}`)
+      window.location.reload(false)
     })
     
   }

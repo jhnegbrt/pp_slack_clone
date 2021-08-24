@@ -7,7 +7,6 @@ class Explore extends React.Component{
   }
 
   mapThread(thread){
-    console.log(thread.id)
     return (
     <ExploreItemContainer 
       thread={thread} 

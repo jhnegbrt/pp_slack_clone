@@ -11327,8 +11327,8 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         content: ""
       });
       this.props.history.push("/client/".concat(this.props.searchDmId));
-    } //this method creates a new DM if the user sends a message to a group or individual 
-    //that they do not yet have a dm with
+    } // this method creates a new DM if the user sends a message to a group or individual 
+    // that they do not yet have a dm with
     // createNewDirectMessage(){
     //   let {selectedUsers} = this.props
     //   let {content} = this.state
@@ -11341,9 +11341,10 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
     //   this.props.createThread(newDirectMessage, selectedUsers, content)
     //     .then(action => {
     //       this.props.history.push(`/client/${action.threadId}`)
+    //       window.location.reload(false)
     //     })
     // }
-    //Hotfix for issue of first message not rendering
+    // Hotfix for issue of first message not rendering
 
   }, {
     key: "createNewDirectMessage",
@@ -11403,6 +11404,8 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         });
 
         _this2.props.history.push("/client/".concat(res.threadId));
+
+        window.location.reload(false);
       });
     }
   }, {
@@ -11477,6 +11480,9 @@ var mSTP = function mSTP(state, ownProps) {
 
 var mDTP = function mDTP(dispatch) {
   return {
+    createDirectMessage: function createDirectMessage(directMessage) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThreadHotFix)(directMessage));
+    },
     createThread: function createThread(directMessage, users, content) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage, users, content));
     },
@@ -13712,7 +13718,6 @@ var Explore = /*#__PURE__*/function (_React$Component) {
   _createClass(Explore, [{
     key: "mapThread",
     value: function mapThread(thread) {
-      console.log(thread.id);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_explore_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         thread: thread,
         key: thread.id,
@@ -15198,7 +15203,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (redux_logger__WEBPACK_IMPORTED_MODULE_2___default())));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);

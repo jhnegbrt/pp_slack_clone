@@ -2,6 +2,7 @@ class ChatChannel < ApplicationCable::Channel
 
   def subscribed
     stream_for "chat_channel_#{params['thread_id']}"
+    self.load
   end
 
   def load(data)
