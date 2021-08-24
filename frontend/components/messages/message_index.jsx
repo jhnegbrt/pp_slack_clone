@@ -38,7 +38,6 @@ class MessageIndex extends React.Component{
 
 
   componentDidUpdate() {
-    debugger
     let {messages, currentThreadId, searchDmId} = this.props
     if (!this.props.searchDmId && !currentThreadId && messages.length > 0){
       this.props.clearMessages()
