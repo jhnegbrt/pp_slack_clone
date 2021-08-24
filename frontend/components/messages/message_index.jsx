@@ -20,7 +20,6 @@ class MessageIndex extends React.Component{
     for (let i = 0; i < subscriptions.length; i++){
       let identifier = JSON.parse(subscriptions[i].identifier)
       if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)){
-        debugger
         subscriptions[i].load()
         return
       }

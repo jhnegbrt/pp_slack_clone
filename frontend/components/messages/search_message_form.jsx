@@ -55,7 +55,30 @@ class SearchMessageForm extends React.Component{
       title: "placeholder",
     }
     this.props.createThread(newDirectMessage, selectedUsers, content)
-      .then(action =>this.props.history.push(`/client/${action.threadId}`))
+      .then(action => {
+        let subscriptions = App.cable.subscriptions.subscriptions
+        let index;
+        for (let i = 0; i < subscriptions.length; i++){
+          let identifier = JSON.parse(subscriptions[i].identifier)
+          if (identifier.channel === "ChatChannel"){
+            index = i
+            break
+          }
+        }
+    
+        let message = {
+          channel_dms_id: action.threadId,
+          content: this.state.content,
+          sender_id: this.state.creatorId,
+          created: true
+        }
+        
+        App.cable.subscriptions.subscriptions[index].speak({ message: message})
+        this.setState({
+            content: ""
+        })
+        this.props.history.push(`/client/${action.threadId}`)
+      })
   }
 
   handleSubmit(e){

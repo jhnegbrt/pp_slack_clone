@@ -10268,9 +10268,7 @@ var createThread = function createThread(data, users, content) {
       return thread;
     }).then(function (thread) {
       return dispatch(receiveCurrentThread(thread.id));
-    }).fail(function (err) {
-      debugger;
-    });
+    }).fail(function (err) {});
   };
 };
 var fetchThreads = function fetchThreads() {
@@ -10898,7 +10896,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         var identifier = JSON.parse(subscriptions[i].identifier);
 
         if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)) {
-          debugger;
           subscriptions[i].load();
           return;
         }
@@ -11339,7 +11336,33 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
         title: "placeholder"
       };
       this.props.createThread(newDirectMessage, selectedUsers, content).then(function (action) {
-        return _this2.props.history.push("/client/".concat(action.threadId));
+        var subscriptions = App.cable.subscriptions.subscriptions;
+        var index;
+
+        for (var i = 0; i < subscriptions.length; i++) {
+          var identifier = JSON.parse(subscriptions[i].identifier);
+
+          if (identifier.channel === "ChatChannel") {
+            index = i;
+            break;
+          }
+        }
+
+        var message = {
+          channel_dms_id: action.threadId,
+          content: _this2.state.content,
+          sender_id: _this2.state.creatorId,
+          created: true
+        };
+        App.cable.subscriptions.subscriptions[index].speak({
+          message: message
+        });
+
+        _this2.setState({
+          content: ""
+        });
+
+        _this2.props.history.push("/client/".concat(action.threadId));
       });
     }
   }, {
@@ -15207,13 +15230,7 @@ function propagateThread(thread, users, content) {
     thread: thread,
     users: users
   });
-
-  if (content) {
-    subscriptionsSpeak("ChatChannel", {
-      thread: thread
-    }, content);
-  }
-}
+} // export function sendMessage
 
 /***/ }),
 

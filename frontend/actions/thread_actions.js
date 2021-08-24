@@ -50,7 +50,6 @@ export const createThread = (data, users, content) => dispatch => (
     })
     .then((thread) => dispatch(receiveCurrentThread(thread.id)))
     .fail((err)=>{
-      debugger
     })
 )
 
