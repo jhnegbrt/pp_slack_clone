@@ -1,3 +1,4 @@
+import {fetchPublicChannels } from '../../../../actions/thread_actions'
 import {connect} from 'react-redux'
 import Explore from './explore'
 
@@ -6,4 +7,8 @@ const mSTP = state => ({
   usersChannels: state.workspace.threads
 })
 
-export default connect(mSTP, null)(Explore)
+const mDTP = (dispatch) => ({
+  fetchPublicChannels: () => dispatch(fetchPublicChannels())
+})
+
+export default connect(mSTP, mDTP)(Explore)

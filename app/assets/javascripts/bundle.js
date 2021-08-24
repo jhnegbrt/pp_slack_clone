@@ -13658,6 +13658,11 @@ var Explore = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchPublicChannels();
+    }
+  }, {
     key: "render",
     value: function render() {
       var publicChannels = this.props.publicChannels;
@@ -13694,8 +13699,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _explore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./explore */ "./frontend/components/threads/add_thread/explore/explore.jsx");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _explore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./explore */ "./frontend/components/threads/add_thread/explore/explore.jsx");
+
 
 
 
@@ -13706,7 +13713,15 @@ var mSTP = function mSTP(state) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP, null)(_explore__WEBPACK_IMPORTED_MODULE_1__.default));
+var mDTP = function mDTP(dispatch) {
+  return {
+    fetchPublicChannels: function fetchPublicChannels() {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_0__.fetchPublicChannels)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mSTP, mDTP)(_explore__WEBPACK_IMPORTED_MODULE_2__.default));
 
 /***/ }),
 

@@ -17,6 +17,10 @@ class Explore extends React.Component{
     />)
   }
 
+  componentDidMount(){
+    this.props.fetchPublicChannels()
+  }
+
   render(){
     const { publicChannels } = this.props
     const channelCount = publicChannels.length
