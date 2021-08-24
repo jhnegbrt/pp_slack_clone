@@ -4,11 +4,10 @@ import { receiveCurrentThread } from '../../../actions/thread_actions'
 import {receiveMessage, removeMessage, receiveMessages} from '../../../actions/message_actions'
 
 
-const mSTP = (state) => {
-  return{
+const mSTP = (state) => ({
   currentUserId: state.session.id,
   users: state.workspace.users,
-}}
+})
 
 const mDTP = dispatch => ({
   selectThread: (threadId) => dispatch(receiveCurrentThread(threadId)),
