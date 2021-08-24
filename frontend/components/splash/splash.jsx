@@ -56,11 +56,8 @@ class Splash extends React.Component{
         <li id="spy-icon"><a href="#main"><img src={Spy}></img></a></li>
         <li><a id="sleuth-item" href="#main">Sleuth</a></li>
         <li><a href="#intro" >Introduction</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#technologies">Technologies</a></li>
         {link2}
         {link1}
-
       </ul>
     </div>
     )
@@ -72,8 +69,6 @@ class Splash extends React.Component{
           <li onClick={this.handleDropdown}>Menu</li>
             <ul className={this.state.dropDown === true ? "mobile-nav-menu-active" :"mobile-nav-menu"}>
               <li onClick={this.handleDropdown}><a href="#intro" >Introduction</a></li>
-              <li onClick={this.handleDropdown}><a href="#features">Features</a></li>
-              <li onClick={this.handleDropdown}><a href="#technologies">Technologies</a></li>
               <li onClick={this.handleDropdown}>Close Menu</li>
             </ul>
             {link1}
