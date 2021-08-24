@@ -10916,7 +10916,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      debugger;
       var _this$props = this.props,
           messages = _this$props.messages,
           currentThreadId = _this$props.currentThreadId,
@@ -11321,50 +11320,22 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       this.props.history.push("/client/".concat(this.props.searchDmId));
     } //this method creates a new DM if the user sends a message to a group or individual 
     //that they do not yet have a dm with
+    // createNewDirectMessage(){
+    //   let {selectedUsers} = this.props
+    //   let {content} = this.state
+    //   let newDirectMessage = { 
+    //     channel: false,
+    //     private: true,
+    //     creator_id: this.state.creatorId,
+    //     title: "placeholder",
+    //   }
+    //   this.props.createThread(newDirectMessage, selectedUsers, content)
+    //     .then(action => {
+    //       this.props.history.push(`/client/${action.threadId}`)
+    //     })
+    // }
+    //Hotfix for issue of first message not rendering
 
-  }, {
-    key: "createNewDirectMessage",
-    value: function createNewDirectMessage() {
-      var _this2 = this;
-
-      var selectedUsers = this.props.selectedUsers;
-      var content = this.state.content;
-      var newDirectMessage = {
-        channel: false,
-        "private": true,
-        creator_id: this.state.creatorId,
-        title: "placeholder"
-      };
-      this.props.createThread(newDirectMessage, selectedUsers, content).then(function (action) {
-        var subscriptions = App.cable.subscriptions.subscriptions;
-        var index;
-
-        for (var i = 0; i < subscriptions.length; i++) {
-          var identifier = JSON.parse(subscriptions[i].identifier);
-
-          if (identifier.channel === "ChatChannel") {
-            index = i;
-            break;
-          }
-        }
-
-        var message = {
-          channel_dms_id: action.threadId,
-          content: _this2.state.content,
-          sender_id: _this2.state.creatorId,
-          created: true
-        };
-        App.cable.subscriptions.subscriptions[index].speak({
-          message: message
-        });
-
-        _this2.setState({
-          content: ""
-        });
-
-        _this2.props.history.push("/client/".concat(action.threadId));
-      });
-    }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {

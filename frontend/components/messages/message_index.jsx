@@ -38,7 +38,6 @@ class MessageIndex extends React.Component{
 
 
   componentDidUpdate() {
-    debugger
     let {messages, currentThreadId, searchDmId} = this.props
     if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
       this.fetchMessages(searchDmId)

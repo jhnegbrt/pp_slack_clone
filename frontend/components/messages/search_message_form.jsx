@@ -45,41 +45,24 @@ class SearchMessageForm extends React.Component{
 
   //this method creates a new DM if the user sends a message to a group or individual 
   //that they do not yet have a dm with
-  createNewDirectMessage(){
-    let {selectedUsers} = this.props
-    let {content} = this.state
-    let newDirectMessage = { 
-      channel: false,
-      private: true,
-      creator_id: this.state.creatorId,
-      title: "placeholder",
-    }
-    this.props.createThread(newDirectMessage, selectedUsers, content)
-      .then(action => {
-        let subscriptions = App.cable.subscriptions.subscriptions
-        let index;
-        for (let i = 0; i < subscriptions.length; i++){
-          let identifier = JSON.parse(subscriptions[i].identifier)
-          if (identifier.channel === "ChatChannel"){
-            index = i
-            break
-          }
-        }
-    
-        let message = {
-          channel_dms_id: action.threadId,
-          content: this.state.content,
-          sender_id: this.state.creatorId,
-          created: true
-        }
-        
-        App.cable.subscriptions.subscriptions[index].speak({ message: message})
-        this.setState({
-            content: ""
-        })
-        this.props.history.push(`/client/${action.threadId}`)
-      })
-  }
+  // createNewDirectMessage(){
+  //   let {selectedUsers} = this.props
+  //   let {content} = this.state
+  //   let newDirectMessage = { 
+  //     channel: false,
+  //     private: true,
+  //     creator_id: this.state.creatorId,
+  //     title: "placeholder",
+  //   }
+  //   this.props.createThread(newDirectMessage, selectedUsers, content)
+  //     .then(action => {
+  //       this.props.history.push(`/client/${action.threadId}`)
+  //     })
+  // }
+
+  //Hotfix for issue of first message not rendering
+
+  
 
   handleSubmit(e){
     e.preventDefault()
@@ -95,7 +78,6 @@ class SearchMessageForm extends React.Component{
       content: e.target.value
     })
   }
-
 
   render(){
     return(

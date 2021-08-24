@@ -2,10 +2,9 @@ class ChatChannel < ApplicationCable::Channel
 
   def subscribed
     stream_for "chat_channel_#{params['thread_id']}"
-    # self.load
   end
 
-  def load
+  def load(data)
     messages = Message.where("channel_dms_id = #{params['thread_id']}").includes(:sender)
     messages_hash = {}
     messages.each do |m|
