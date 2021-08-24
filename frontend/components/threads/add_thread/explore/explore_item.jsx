@@ -7,6 +7,7 @@ class ExploreItem extends React.Component{
     this.state = ({
       hover: false
     })
+
     this.hovering = this.hovering.bind(this)
     this.notHovering = this.notHovering.bind(this)
 

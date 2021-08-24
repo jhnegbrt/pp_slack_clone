@@ -13661,6 +13661,7 @@ var Explore = /*#__PURE__*/function (_React$Component) {
   _createClass(Explore, [{
     key: "mapThread",
     value: function mapThread(thread) {
+      console.log(thread.id);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_explore_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
         thread: thread,
         key: thread.id,
