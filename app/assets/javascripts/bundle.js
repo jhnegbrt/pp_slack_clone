@@ -11337,6 +11337,66 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
     //Hotfix for issue of first message not rendering
 
   }, {
+    key: "createNewDirectMessage",
+    value: function createNewDirectMessage(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var newDirectMessage = {
+        users: this.props.selectedUsers,
+        channel: false,
+        "private": true,
+        creator_id: this.state.creatorId,
+        title: "placeholder"
+      };
+      var id;
+      this.props.createDirectMessage(newDirectMessage).then(function (res) {
+        id = res;
+        var subscriptions = App.cable.subscriptions.subscriptions;
+        var index;
+
+        for (var i = 0; i < subscriptions.length; i++) {
+          var identifier = JSON.parse(subscriptions[i].identifier);
+
+          if (identifier.channel === "ThreadChannel") {
+            index = i;
+            break;
+          }
+        }
+
+        subscriptions[index].speak({
+          created: true,
+          id: res.threadId,
+          users: _this2.props.selectedUsers,
+          channel: false,
+          "private": true,
+          creator_id: _this2.state.creatorId,
+          title: "placeholder"
+        });
+
+        for (var _i = 0; _i < subscriptions.length; _i++) {
+          var _identifier = JSON.parse(subscriptions[_i].identifier);
+
+          if (_identifier.channel === "ChatChannel") {
+            index = _i;
+            break;
+          }
+        }
+
+        var message = {
+          channel_dms_id: res.threadId,
+          content: _this2.state.content,
+          sender_id: _this2.state.creatorId,
+          created: true
+        };
+        subscriptions[index].speak({
+          message: message
+        });
+
+        _this2.props.history.push("/client/".concat(res.threadId));
+      });
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
