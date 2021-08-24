@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import SearchMessageForm from './search_message_form'
-import {fetchThreads, createThread, createThreadHotFix} from '../../actions/thread_actions'
+import {fetchThreads, createThread } from '../../actions/thread_actions'
 
 
 const mSTP = (state, ownProps) => ({
@@ -10,7 +10,6 @@ const mSTP = (state, ownProps) => ({
 })
 
 const mDTP = (dispatch) => ({
-  createDirectMessage: (directMessage)=> dispatch(createThreadHotFix(directMessage)),
   createThread: (directMessage, users, content) => dispatch(createThread(directMessage, users, content)),
   fetchThreads: () => dispatch(fetchThreads())
 })

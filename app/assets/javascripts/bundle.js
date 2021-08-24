@@ -10211,7 +10211,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "receiveThread": () => (/* binding */ receiveThread),
 /* harmony export */   "removeThread": () => (/* binding */ removeThread),
 /* harmony export */   "receiveAllThreads": () => (/* binding */ receiveAllThreads),
-/* harmony export */   "createThreadHotFix": () => (/* binding */ createThreadHotFix),
 /* harmony export */   "createThread": () => (/* binding */ createThread),
 /* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads),
 /* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
@@ -10257,14 +10256,6 @@ var receivePublicChannels = function receivePublicChannels(channels) {
   };
 };
 
-var createThreadHotFix = function createThreadHotFix(data) {
-  return function (dispatch) {
-    return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
-      return dispatch(receiveCurrentThread(thread.id));
-    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
-    ;
-  };
-};
 var createThread = function createThread(data, users, content) {
   return function (dispatch) {
     return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
@@ -11324,81 +11315,22 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       this.props.history.push("/client/".concat(this.props.searchDmId));
     } // this method creates a new DM if the user sends a message to a group or individual 
     // that they do not yet have a dm with
-    // createNewDirectMessage(){
-    //   let {selectedUsers} = this.props
-    //   let {content} = this.state
-    //   let newDirectMessage = { 
-    //     channel: false,
-    //     private: true,
-    //     creator_id: this.state.creatorId,
-    //     title: "placeholder",
-    //   }
-    //   this.props.createThread(newDirectMessage, selectedUsers, content)
-    //     .then(action => {
-    //       this.props.history.push(`/client/${action.threadId}`)
-    //       window.location.reload(false)
-    //     })
-    // }
-    // Hotfix for issue of first message not rendering
 
   }, {
     key: "createNewDirectMessage",
-    value: function createNewDirectMessage(e) {
+    value: function createNewDirectMessage() {
       var _this2 = this;
 
-      e.preventDefault();
+      var selectedUsers = this.props.selectedUsers;
+      var content = this.state.content;
       var newDirectMessage = {
-        users: this.props.selectedUsers,
         channel: false,
         "private": true,
         creator_id: this.state.creatorId,
         title: "placeholder"
       };
-      var id;
-      this.props.createDirectMessage(newDirectMessage).then(function (res) {
-        id = res;
-        var subscriptions = App.cable.subscriptions.subscriptions;
-        var index;
-
-        for (var i = 0; i < subscriptions.length; i++) {
-          var identifier = JSON.parse(subscriptions[i].identifier);
-
-          if (identifier.channel === "ThreadChannel") {
-            index = i;
-            break;
-          }
-        }
-
-        subscriptions[index].speak({
-          created: true,
-          id: res.threadId,
-          users: _this2.props.selectedUsers,
-          channel: false,
-          "private": true,
-          creator_id: _this2.state.creatorId,
-          title: "placeholder"
-        });
-
-        for (var _i = 0; _i < subscriptions.length; _i++) {
-          var _identifier = JSON.parse(subscriptions[_i].identifier);
-
-          if (_identifier.channel === "ChatChannel") {
-            index = _i;
-            break;
-          }
-        }
-
-        var message = {
-          channel_dms_id: res.threadId,
-          content: _this2.state.content,
-          sender_id: _this2.state.creatorId,
-          created: true
-        };
-        subscriptions[index].speak({
-          message: message
-        });
-
-        _this2.props.history.push("/client/".concat(res.threadId));
+      this.props.createThread(newDirectMessage, selectedUsers, content).then(function (action) {
+        _this2.props.history.push("/client/".concat(action.threadId));
       });
     }
   }, {
@@ -11473,9 +11405,6 @@ var mSTP = function mSTP(state, ownProps) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    createDirectMessage: function createDirectMessage(directMessage) {
-      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThreadHotFix)(directMessage));
-    },
     createThread: function createThread(directMessage, users, content) {
       return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.createThread)(directMessage, users, content));
     },
@@ -15268,7 +15197,13 @@ function propagateThread(thread, users, content) {
     thread: thread,
     users: users
   });
-} // export function sendMessage
+
+  if (content) {
+    subscriptionsSpeak("ChatChannel", {
+      thread: thread
+    }, content);
+  }
+}
 
 /***/ }),
 

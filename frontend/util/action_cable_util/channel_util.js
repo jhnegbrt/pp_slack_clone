@@ -47,7 +47,8 @@ export function joinChannel(thread, currentUserId){
 export function propagateThread(thread, users, content){
 
   subscriptionsSpeak("ThreadChannel", {thread, users})
+  if (content){
+    subscriptionsSpeak("ChatChannel", {thread}, content )
+  }
 
 }
-
-// export function sendMessage
