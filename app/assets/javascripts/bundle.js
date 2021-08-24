@@ -10211,6 +10211,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "receiveThread": () => (/* binding */ receiveThread),
 /* harmony export */   "removeThread": () => (/* binding */ removeThread),
 /* harmony export */   "receiveAllThreads": () => (/* binding */ receiveAllThreads),
+/* harmony export */   "createThreadHotFix": () => (/* binding */ createThreadHotFix),
 /* harmony export */   "createThread": () => (/* binding */ createThread),
 /* harmony export */   "fetchThreads": () => (/* binding */ fetchThreads),
 /* harmony export */   "fetchPublicChannels": () => (/* binding */ fetchPublicChannels)
@@ -10256,6 +10257,14 @@ var receivePublicChannels = function receivePublicChannels(channels) {
   };
 };
 
+var createThreadHotFix = function createThreadHotFix(data) {
+  return function (dispatch) {
+    return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {
+      return dispatch(receiveCurrentThread(thread.id));
+    }) // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+    ;
+  };
+};
 var createThread = function createThread(data, users, content) {
   return function (dispatch) {
     return _util_api_thread_api_util__WEBPACK_IMPORTED_MODULE_0__.createThread(data).then(function (thread) {

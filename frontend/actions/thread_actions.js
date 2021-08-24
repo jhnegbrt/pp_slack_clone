@@ -38,6 +38,13 @@ const receivePublicChannels = (channels) => {
   })
 }
 
+export const createThreadHotFix = (data) => dispatch => {
+  return(APIUtil.createThread(data)
+    .then(thread => dispatch(receiveCurrentThread(thread.id)))
+    // .fail(errors => dispatch(receiveErrors(errors.responseJSON)))
+  )
+}
+
 export const createThread = (data, users, content) => dispatch => (
   APIUtil.createThread(data)
     .then(thread => {
