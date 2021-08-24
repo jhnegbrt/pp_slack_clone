@@ -10115,6 +10115,37 @@ var createMessage = function createMessage(formMessage) {
 
 /***/ }),
 
+/***/ "./frontend/actions/notification_actions.js":
+/*!**************************************************!*\
+  !*** ./frontend/actions/notification_actions.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "INCREMENT_NOTIFICATIONS": () => (/* binding */ INCREMENT_NOTIFICATIONS),
+/* harmony export */   "CLEAR_NOTIFICATIONS": () => (/* binding */ CLEAR_NOTIFICATIONS),
+/* harmony export */   "incrementNotifications": () => (/* binding */ incrementNotifications),
+/* harmony export */   "clearNotifications": () => (/* binding */ clearNotifications)
+/* harmony export */ });
+var INCREMENT_NOTIFICATIONS = "INCREMENT_NOTIFICATIONS";
+var CLEAR_NOTIFICATIONS = "CLEAR_NOTIFICATIONS";
+var incrementNotifications = function incrementNotifications(threadId) {
+  return {
+    threadId: threadId,
+    type: INCREMENT_NOTIFICATIONS
+  };
+};
+var clearNotifications = function clearNotifications(threadId) {
+  return {
+    threadId: threadId,
+    type: CLEAR_NOTIFICATIONS
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -14877,6 +14908,45 @@ var threadsReducer = function threadsReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/ui/notifications_reducer.js":
+/*!*******************************************************!*\
+  !*** ./frontend/reducers/ui/notifications_reducer.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_notification_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/notification_actions */ "./frontend/actions/notification_actions.js");
+
+
+var notificationsReducer = function notificationsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var nextState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_notification_actions__WEBPACK_IMPORTED_MODULE_0__.INCREMENT_NOTIFICATIONS:
+      var currentCount = state[action.threadId];
+      nextState[action.threadId] = currentCount + 1;
+      return nextState;
+
+    case _actions_notification_actions__WEBPACK_IMPORTED_MODULE_0__.CLEAR_NOTIFICATIONS:
+      nextState[action.threadId] = 0;
+      return nextState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (notificationsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/ui/ui_reducer.js":
 /*!********************************************!*\
   !*** ./frontend/reducers/ui/ui_reducer.js ***!
@@ -14888,12 +14958,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./current_thread_reducer */ "./frontend/reducers/ui/current_thread_reducer.js");
+/* harmony import */ var _notifications_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./notifications_reducer */ "./frontend/reducers/ui/notifications_reducer.js");
 
 
-var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+
+var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  notifications: _notifications_reducer__WEBPACK_IMPORTED_MODULE_1__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
 
@@ -15124,7 +15197,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (redux_logger__WEBPACK_IMPORTED_MODULE_2___default())));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
