@@ -300,7 +300,11 @@ Sleuth is styled using SASS allowing for cleaner and more adaptable styling.
 
 # Known Bugs
 
+### coming soon!
+
 # Upcoming Features
+
+### coming soon!
 
 ### *note on threads*
 In reviewing this code base you will see the terms `thread`, `channel`/`publicChannel`, `directMessage` and `channel_dm` in numerous places and seemingly used interchangeably. But, it is important to disambiguate each of these terms. `channel_dm` refers to the backend storage of any frontend `thread`. `channel` refers to any publicly available "chat room" whereas `directMessage` refers to any "chat room" between a specified group of users that cannot be found or joined by others. There are instances where the distinction between `publicChannel` and `directMessage` is meaninginless, and in these cases `thread` is used. e.g. `ThreadIndex`. To further clarify, an initial design decision was made such that although there is a distinction between `directMessages` and `channels` on the front end, they are stored within the same `channel_dm` table in the backend.
