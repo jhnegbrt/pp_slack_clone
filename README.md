@@ -2,7 +2,14 @@
 
 [Live Link](https://sleuth-jwe.herokuapp.com/#/)
 
-Sleuth is a web-app clone of the popular messaging app Slack, highlighting web-sockets technology and the ability to send and receive messages in real-time. This application was build for educational purposes as a part of App Academy's Software Engineering bootcamp. Please read on for details on features, code-snippets, and pictures of Sleuth live in action!
+
+## Intro
+
+Sleuth is a web-app clone of the popular messaging app Slack, highlighting web-sockets technology and the ability to send and receive messages in real-time. This application was build for educational purposes as a part of App Academy's Software Engineering bootcamp.
+
+Upon visiting the app, you will be greeted by a Channel Browser. Find public channels you would like to join using this tool. Use the search bar (top center) to search your workspace and use the left panel to navigate [threads](#note-on-threads).
+
+Please read on for details on features, code-snippets, and pictures of Sleuth live in action!
 
 ## Table of contents:
  1. [Features](#features)
@@ -84,6 +91,10 @@ Errors rendered from the frontend:
 ![frontend_errors](app/assets/images/user_auth_errors_2.PNG)
 
 ## Channel Browsing
+
+Freindly UX feature: Users are greeted with a channel browser which allows them to join and leave channels. A relatively simple component to be used in conjunction with search and the left panel for navigation.
+
+![channel_browser](app/assets/images/channel_browser.PNG)
 
 ## Live Messaging
 
@@ -205,8 +216,6 @@ Aside: although this project was originally built with Class based components, n
 
 
 ```
-
-The search
 
 # Tech Stack
 
