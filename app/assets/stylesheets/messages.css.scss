@@ -22,6 +22,7 @@
   scrollbar-color: rgb(159, 240, 243) white;
   scrollbar-width: thin;
   background-color: rgb(241, 238, 232);
+  padding-top: 2vh;
 }
 
 .messages-bottom{
@@ -148,6 +149,7 @@ div::-webkit-scrollbar{
   right: 70vw;
   position: absolute;
   top: -1.5vh;
+  z-index: 10;
   button{
     font-family: 'Comfortaa', serif;
     background-color: white;
