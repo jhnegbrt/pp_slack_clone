@@ -14240,6 +14240,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
     value: function mapChannels(thread) {
       if (thread.channel === true) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+          notifications: this.props.notifications[thread.id],
           thread: thread,
           key: thread.id,
           threadId: thread.channel_dms_id
@@ -14251,6 +14252,7 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
     value: function mapDirectMessages(thread) {
       if (thread.channel === false) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_index_item_container__WEBPACK_IMPORTED_MODULE_1__.default, {
+          notifications: this.props.notifications[thread.id],
           thread: thread,
           key: thread.id,
           threadId: thread.channel_dms_id
@@ -14358,7 +14360,8 @@ var mSTP = function mSTP(state, ownProps) {
   return {
     threads: Object.values(state.workspace.threads),
     currentThreadId: state.ui.currentThread,
-    currentUserId: state.session.id
+    currentUserId: state.session.id,
+    notifications: state.ui.notifications
   };
 };
 
