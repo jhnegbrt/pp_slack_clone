@@ -14518,6 +14518,9 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.props.currentThreadId === this.props.thread.id ? "thread-select" : null
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+        styles: this.props.notifications ? {
+          fontWeight: "bold"
+        } : "",
         onClick: this.selectThread,
         activeClassName: "active-thread",
         to: "/client/".concat(this.props.thread.id)

@@ -43,7 +43,11 @@ class ThreadIndexItem extends React.Component{
     let title = this.createTitle()
     return(
       <li className={this.props.currentThreadId === this.props.thread.id ? "thread-select" : null}>
-        <NavLink onClick={this.selectThread} activeClassName={"active-thread"} to={`/client/${this.props.thread.id}`}>
+        <NavLink
+          styles={this.props.notifications ? {fontWeight: "bold"} : ""}
+          onClick={this.selectThread} 
+          activeClassName={"active-thread"} 
+          to={`/client/${this.props.thread.id}`}>
           { this.props.thread.channel === true ? this.props.thread.title : title}
         </NavLink>
       </li>
