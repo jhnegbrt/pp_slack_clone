@@ -17,6 +17,8 @@ class ThreadIndex extends React.Component{
     })
     this.toggleDropDown = this.toggleDropDown.bind(this)
     this.addConversation = this.addConversation.bind(this)
+    this.mapChannels = this.mapChannels.bind(this)
+    this.mapDirectMessages = this.mapDirectMessages.bind(this)
   }
 
   componentDidMount(){

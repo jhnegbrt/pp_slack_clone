@@ -14220,6 +14220,8 @@ var ThreadIndex = /*#__PURE__*/function (_React$Component) {
     };
     _this.toggleDropDown = _this.toggleDropDown.bind(_assertThisInitialized(_this));
     _this.addConversation = _this.addConversation.bind(_assertThisInitialized(_this));
+    _this.mapChannels = _this.mapChannels.bind(_assertThisInitialized(_this));
+    _this.mapDirectMessages = _this.mapDirectMessages.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -14359,7 +14361,6 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state, ownProps) {
   return {
     threads: Object.values(state.workspace.threads),
-    currentThreadId: state.ui.currentThread,
     currentUserId: state.session.id,
     notifications: state.ui.notifications
   };
@@ -14425,7 +14426,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_action_cable_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/action_cable_util/create_messages_connection */ "./frontend/util/action_cable_util/create_messages_connection.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14447,6 +14449,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -14474,14 +14477,27 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       this.props.selectThread(this.props.thread.id);
     }
   }, {
+    key: "receiveMessageOrNotification",
+    value: function receiveMessageOrNotification(data) {
+      var _this$props = this.props,
+          currentThreadId = _this$props.currentThreadId,
+          receiveMessage = _this$props.receiveMessage,
+          incrementNotifications = _this$props.incrementNotifications;
+
+      if (currentThreadId === data.channel_dms_id) {
+        receiveMessage(data);
+      } else {
+        incrementNotifications(data.channel_dms_id);
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this$props = this.props,
-          thread = _this$props.thread,
-          receiveMessage = _this$props.receiveMessage,
-          receiveMessages = _this$props.receiveMessages,
-          removeMessage = _this$props.removeMessage;
-      (0,_util_action_cable_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, receiveMessage, receiveMessages, removeMessage);
+      var _this$props2 = this.props,
+          thread = _this$props2.thread,
+          receiveMessages = _this$props2.receiveMessages,
+          removeMessage = _this$props2.removeMessage;
+      (0,_util_action_cable_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__.default)(thread.id, this.receiveMessageOrNotification, receiveMessages, removeMessage);
     }
   }, {
     key: "createTitle",
@@ -14517,7 +14533,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       var title = this.createTitle();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.props.currentThreadId === this.props.thread.id ? "thread-select" : null
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
         styles: this.props.notifications ? {
           fontWeight: "bold"
         } : "",
@@ -14550,6 +14566,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_notification_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/notification_actions */ "./frontend/actions/notification_actions.js");
+
 
 
 
@@ -14558,7 +14576,8 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     currentUserId: state.session.id,
-    users: state.workspace.users
+    users: state.workspace.users,
+    currentThreadId: state.ui.currentThread
   };
 };
 
@@ -14575,6 +14594,9 @@ var mDTP = function mDTP(dispatch) {
     },
     removeMessage: function removeMessage(messageId) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.removeMessage)(messageId));
+    },
+    incrementNotifications: function incrementNotifications(threadId) {
+      return dispatch((0,_actions_notification_actions__WEBPACK_IMPORTED_MODULE_4__.incrementNotifications)(threadId));
     }
   };
 };
