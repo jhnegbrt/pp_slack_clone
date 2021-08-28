@@ -28,13 +28,27 @@ class ThreadIndex extends React.Component{
   //I Believe that I do not need to pass in "threadId"
   mapChannels(thread){
     if(thread.channel === true){
-      return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>
+      return (
+        <ThreadIndexItemContainer 
+          notifications={this.props.notifications[thread.id]}
+          thread={thread} 
+          key={thread.id} 
+          threadId={thread.channel_dms_id}/>
+
+      )
     }
   }
 
   mapDirectMessages(thread){
     if(thread.channel === false){
-      return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/> 
+      return (
+        <ThreadIndexItemContainer 
+          notifications={this.props.notifications[thread.id]}
+          thread={thread} 
+          key={thread.id} 
+          threadId={thread.channel_dms_id}/> 
+      )
+      
     }
   }
 
