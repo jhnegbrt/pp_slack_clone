@@ -1,11 +1,11 @@
 import React from 'react'
 import createMessagesConnection from '../../../util/action_cable_util/create_messages_connection'
 import { NavLink } from 'react-router-dom'
+import { receiveAllThreads } from '../../../actions/thread_actions'
 
 class ThreadIndexItem extends React.Component{
   constructor(props){
   super(props)
-
     this.selectThread = this.selectThread.bind(this)
     this.createTitle = this.createTitle.bind(this)
   }
@@ -14,9 +14,18 @@ class ThreadIndexItem extends React.Component{
     this.props.selectThread(this.props.thread.id)
   }
 
+  receiveMessageOrNotification(data){
+    const {currentThreadId, receiveMessage, incrementNotifications } = this.props
+    if (currentThreadId === data.channel_dms_id){
+      receiveMessage(data)
+    } else {
+      incrementNotifications(data.channel_dms_id)
+    }
+  }
+
   componentDidMount(){
-    const {thread, receiveMessage, receiveMessages, removeMessage} = this.props
-    createMessagesConnection(thread.id, receiveMessage, receiveMessages, removeMessage)
+    const {thread, receiveMessages, removeMessage} = this.props
+    createMessagesConnection(thread.id, this.receiveMessageOrNotification, receiveMessages, removeMessage)
   }
 
   createTitle(){

@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom'
 
 const mSTP = (state, ownProps) =>({
     threads: Object.values(state.workspace.threads),
-    currentThreadId: state.ui.currentThread,
     currentUserId: state.session.id,
     notifications: state.ui.notifications
 })
