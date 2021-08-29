@@ -10115,36 +10115,6 @@ var createMessage = function createMessage(formMessage) {
 
 /***/ }),
 
-/***/ "./frontend/actions/search_thread_actions.js":
-/*!***************************************************!*\
-  !*** ./frontend/actions/search_thread_actions.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RECEIVE_SEARCH_THREAD": () => (/* binding */ RECEIVE_SEARCH_THREAD),
-/* harmony export */   "CLEAR_SEARCH_THREAD": () => (/* binding */ CLEAR_SEARCH_THREAD),
-/* harmony export */   "receiveSearchThread": () => (/* binding */ receiveSearchThread),
-/* harmony export */   "clearSeatchThread": () => (/* binding */ clearSeatchThread)
-/* harmony export */ });
-var RECEIVE_SEARCH_THREAD = "RECEIVE_SEARCH_THREAD";
-var CLEAR_SEARCH_THREAD = "CLEAR_SEARCH_THREAD";
-var receiveSearchThread = function receiveSearchThread(id) {
-  return {
-    type: RECEIVE_SEARCH_THREAD,
-    id: id
-  };
-};
-var clearSeatchThread = function clearSeatchThread() {
-  return {
-    type: CLEAR_SEARCH_THREAD
-  };
-};
-
-/***/ }),
-
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -11041,9 +11011,8 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     messages: Object.values(state.workspace.messages).filter(function (message) {
-      return message.channel_dms_id === state.ui.currentThread.id || state.ui.searchThread.id;
-    }) // subscriptions: App.cable.subscriptions.subscriptions
-
+      return message.channel_dms_id === state.ui.currentThread.id;
+    })
   };
 };
 
@@ -13491,8 +13460,8 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       });
       var match = this.checkUsers(dms, this.state.selectedUsers);
 
-      if (this.props.searchThreadId !== match) {
-        this.props.setSearchDm(match);
+      if (this.props.currentThreadId !== match) {
+        this.props.receiveCurrentThread(match);
       }
     }
   }, {
@@ -13594,7 +13563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _add_direct_message__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add_direct_message */ "./frontend/components/threads/add_thread/add_dm/add_direct_message.jsx");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_search_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../actions/search_thread_actions */ "./frontend/actions/search_thread_actions.js");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
@@ -13606,7 +13575,7 @@ var mSTP = function mSTP(state) {
     threads: Object.values(state.workspace.threads),
     users: state.workspace.users,
     currentUser: state.session.id,
-    searchThreadId: state.ui.searchThread.id
+    currentThreadId: state.ui.currentThread.id
   };
 };
 
@@ -13614,6 +13583,9 @@ var mDTP = function mDTP(dispatch) {
   return {
     fetchAllUsers: function fetchAllUsers() {
       return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__.fetchAllUsers)());
+    },
+    receiveCurrentThread: function receiveCurrentThread(id) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__.receiveCurrentThread)(id));
     }
   };
 };
@@ -14928,8 +14900,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
-  searchThread: searchThreadReducer
+  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
 
