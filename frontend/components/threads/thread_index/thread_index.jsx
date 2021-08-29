@@ -17,8 +17,6 @@ class ThreadIndex extends React.Component{
     })
     this.toggleDropDown = this.toggleDropDown.bind(this)
     this.addConversation = this.addConversation.bind(this)
-    this.mapChannels = this.mapChannels.bind(this)
-    this.mapDirectMessages = this.mapDirectMessages.bind(this)
   }
 
   componentDidMount(){
@@ -30,27 +28,13 @@ class ThreadIndex extends React.Component{
   //I Believe that I do not need to pass in "threadId"
   mapChannels(thread){
     if(thread.channel === true){
-      return (
-        <ThreadIndexItemContainer 
-          notifications={this.props.notifications[thread.id]}
-          thread={thread} 
-          key={thread.id} 
-          threadId={thread.channel_dms_id}/>
-
-      )
+      return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/>
     }
   }
 
   mapDirectMessages(thread){
     if(thread.channel === false){
-      return (
-        <ThreadIndexItemContainer 
-          notifications={this.props.notifications[thread.id]}
-          thread={thread} 
-          key={thread.id} 
-          threadId={thread.channel_dms_id}/> 
-      )
-      
+      return <ThreadIndexItemContainer thread={thread} key={thread.id} threadId={thread.channel_dms_id}/> 
     }
   }
 
