@@ -1,5 +1,25 @@
 class ChatChannel < ApplicationCable::Channel
 
+  def self.first_message(data)
+    new_message = Message.create(
+      content: data[:message][:content], 
+      sender_id: data[:message][:sender_id],
+      channel_dms_id: data[:message][:channel_dms_id]
+    )
+    sender = User.find_by(id: new_message.sender_id)
+    time = new_message["updated_at"]
+    socket = {
+      type: "message",
+      id: new_message.id, 
+      content: new_message.content,
+      sender_id: new_message.sender_id,
+      channel_dms_id: new_message.channel_dms_id,
+      sender: sender["username"],
+      time: time
+    }
+    ChatChannel.broadcast_to("chat_channel_#{channel_dms_id}", socket)
+  end
+
   def subscribed
     stream_for "chat_channel_#{params['thread_id']}"
     self.load
