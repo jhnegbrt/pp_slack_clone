@@ -64,7 +64,7 @@ class SearchMessageForm extends React.Component{
   handleSubmit(e){
     e.preventDefault()
     if (this.props.searchDmId === null){
-      this.createNewDirectMessage(e)
+      this.createNewDirectMessage()
     } else {
       this.sendMessage()
     }

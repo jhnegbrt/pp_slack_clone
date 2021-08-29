@@ -10895,7 +10895,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           currentThreadId = _this$props.currentThreadId;
       var id = parseInt(currentThreadId);
 
-      if (stateThreadId != id) {
+      if (id && stateThreadId != id) {
+        debugger;
         this.props.receiveCurrentThread(id);
       }
 
@@ -11297,7 +11298,7 @@ var SearchMessageForm = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
 
       if (this.props.searchDmId === null) {
-        this.createNewDirectMessage(e);
+        this.createNewDirectMessage();
       } else {
         this.sendMessage();
       }
@@ -13493,7 +13494,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleChange,
         onKeyDown: this.handleKeyDown
       }))), this.state.newMember.length > 0 ? suggestedUsersList : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_message_index_container__WEBPACK_IMPORTED_MODULE_1__.default, {
-        searchDmId: this.state.currentDm,
+        searchDmId: this.props.stateThreadId,
         selectedUsers: this.state.selectedUsers
       }));
     }

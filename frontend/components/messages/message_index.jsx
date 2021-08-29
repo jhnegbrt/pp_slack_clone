@@ -19,7 +19,8 @@ class MessageIndex extends React.Component{
   componentDidUpdate() {
     const {stateThreadId, currentThreadId} = this.props
     let id = parseInt(currentThreadId)
-    if (stateThreadId != id){
+    if (id && stateThreadId != id){
+      debugger
       this.props.receiveCurrentThread(id)
     }
     this.bottom.current.scrollIntoView();

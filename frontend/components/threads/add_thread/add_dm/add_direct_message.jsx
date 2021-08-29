@@ -220,7 +220,7 @@ class AddDirectMessage extends React.Component{
         </div>
         {this.state.newMember.length > 0 ? suggestedUsersList : ""}
         <MessageIndexContainer 
-        searchDmId={this.state.currentDm}
+        searchDmId={this.props.stateThreadId}
         selectedUsers={this.state.selectedUsers} />
       </div>
     )
