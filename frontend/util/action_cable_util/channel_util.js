@@ -1,12 +1,14 @@
 export function findThreadOrChannel(type, subscriptions){
 
   let index;
+  let i = 0;
   for (let i = 0; i < subscriptions.length; i++){
     let identifier = JSON.parse(subscriptions[i].identifier)
     if (identifier.channel === type){
       index = i
       break
     }
+    i += 1
   }
   return index
 }
@@ -47,6 +49,7 @@ export function joinChannel(thread, currentUserId){
 export function propagateThread(thread, users, content){
 
   subscriptionsSpeak("ThreadChannel", {thread, users})
+
   if (content){
     subscriptionsSpeak("ChatChannel", {thread}, content )
   }

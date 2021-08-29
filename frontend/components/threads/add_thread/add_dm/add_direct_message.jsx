@@ -78,10 +78,9 @@ class AddDirectMessage extends React.Component{
           selectedUser: index
         })
       }
-    }
-    if (["Enter", "Tab", ","].includes(e.key)){
+    } else if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
-      let username
+      let username;
       if (this.state.selectedUser === null){
         username = this.state.newMember.trim()
       } else {

@@ -10907,7 +10907,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var messages = this.props.messages;
-      console.log(messages);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {
           maxHeight: this.props.type === "thread" ? '90vh' : '85vh'
@@ -13330,9 +13329,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
             selectedUser: _index
           });
         }
-      }
-
-      if (["Enter", "Tab", ","].includes(e.key)) {
+      } else if (["Enter", "Tab", ","].includes(e.key)) {
         e.preventDefault();
         var username;
 
@@ -14433,7 +14430,6 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
       });
 
       if (userNames.length === 0) {
-        debugger;
         this.props.fetchAllUsers();
       }
 
@@ -15097,7 +15093,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (redux_logger__WEBPACK_IMPORTED_MODULE_2___default())));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
@@ -15119,14 +15115,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function findThreadOrChannel(type, subscriptions) {
   var index;
+  var i = 0;
 
-  for (var i = 0; i < subscriptions.length; i++) {
-    var identifier = JSON.parse(subscriptions[i].identifier);
+  for (var _i = 0; _i < subscriptions.length; _i++) {
+    var identifier = JSON.parse(subscriptions[_i].identifier);
 
     if (identifier.channel === type) {
-      index = i;
+      index = _i;
       break;
     }
+
+    _i += 1;
   }
 
   return index;

@@ -33,7 +33,6 @@ class ThreadIndexItem extends React.Component{
       }
     })
     if (userNames.length === 0){
-      debugger
       this.props.fetchAllUsers()
     }
     let title = userNames.join(", ")
