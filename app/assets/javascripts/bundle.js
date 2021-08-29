@@ -10903,49 +10903,44 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           return;
         }
       }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var currentThreadId = this.props.currentThreadId;
+    } // componentDidMount(){
+    //   let { currentThreadId } = this.props
+    //   if (App.cable.subscriptions.subscriptions.length > 1){
+    //     this.fetchMessages(currentThreadId)
+    //   }
+    // }
 
-      if (App.cable.subscriptions.subscriptions.length > 1) {
-        this.fetchMessages(currentThreadId);
-      }
-    }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var _this$props = this.props,
           messages = _this$props.messages,
           currentThreadId = _this$props.currentThreadId,
-          searchDmId = _this$props.searchDmId;
-
-      if (!this.props.searchDmId && !currentThreadId && messages.length > 0) {
-        this.props.clearMessages();
-        this.setState({
-          fetchedMessages: false
-        });
-      } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1) {
-        if (currentThreadId) {
-          this.fetchMessages(parseInt(currentThreadId));
-        } else {
-          this.fetchMessages(parseInt(searchDmId));
-        }
-      } else if (this.props.searchDmId != this.state.searchDmId) {
-        this.setState({
-          searchDmId: searchDmId,
-          threadId: null
-        });
-        this.fetchMessages(searchDmId);
-      } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1) {
-        this.props.clearMessages();
-        this.setState({
-          threadId: parseInt(currentThreadId),
-          searchDmId: null
-        });
-        this.fetchMessages(currentThreadId);
-      }
+          searchDmId = _this$props.searchDmId; // if (!this.props.searchDmId && !currentThreadId && messages.length > 0){
+      //   this.props.clearMessages()
+      //   this.setState({
+      //     fetchedMessages: false
+      //   })
+      // } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
+      //   if(currentThreadId){
+      //     this.fetchMessages(parseInt(currentThreadId))
+      //   } else {
+      //     this.fetchMessages(parseInt(searchDmId))
+      //   }
+      // } else if (this.props.searchDmId != this.state.searchDmId){
+      //   this.setState({
+      //     searchDmId,
+      //     threadId: null
+      //   })
+      //   this.fetchMessages(searchDmId)
+      // } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1){
+      //   this.props.clearMessages()
+      //   this.setState({
+      //     threadId: parseInt(currentThreadId),
+      //     searchDmId: null
+      //   })
+      //   this.fetchMessages(currentThreadId)
+      // }
 
       this.bottom.current.scrollIntoView();
     }
@@ -11016,7 +11011,7 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state) {
   return {
     messages: Object.values(state.workspace.messages).filter(function (message) {
-      return message.channel_dms_id === state.ui.currentThread.id;
+      return message.channel_dms_id === state.ui.currentThread.id || state.ui.searchThread.id;
     }) // subscriptions: App.cable.subscriptions.subscriptions
 
   };
@@ -14902,7 +14897,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var uiReducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default
+  currentThread: _current_thread_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
+  searchThread: searchThreadReducer
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (uiReducer);
 

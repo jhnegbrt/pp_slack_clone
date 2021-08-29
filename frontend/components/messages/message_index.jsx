@@ -30,41 +30,41 @@ class MessageIndex extends React.Component{
     }
   }
 
-  componentDidMount(){
-    let { currentThreadId } = this.props
-    if (App.cable.subscriptions.subscriptions.length > 1){
-      this.fetchMessages(currentThreadId)
-    }
-  }
+  // componentDidMount(){
+  //   let { currentThreadId } = this.props
+  //   if (App.cable.subscriptions.subscriptions.length > 1){
+  //     this.fetchMessages(currentThreadId)
+  //   }
+  // }
 
 
   componentDidUpdate() {
     let {messages, currentThreadId, searchDmId} = this.props
-    if (!this.props.searchDmId && !currentThreadId && messages.length > 0){
-      this.props.clearMessages()
-      this.setState({
-        fetchedMessages: false
-      })
-    } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
-      if(currentThreadId){
-        this.fetchMessages(parseInt(currentThreadId))
-      } else {
-        this.fetchMessages(parseInt(searchDmId))
-      }
-    } else if (this.props.searchDmId != this.state.searchDmId){
-      this.setState({
-        searchDmId,
-        threadId: null
-      })
-      this.fetchMessages(searchDmId)
-    } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1){
-      this.props.clearMessages()
-      this.setState({
-        threadId: parseInt(currentThreadId),
-        searchDmId: null
-      })
-      this.fetchMessages(currentThreadId)
-    }
+    // if (!this.props.searchDmId && !currentThreadId && messages.length > 0){
+    //   this.props.clearMessages()
+    //   this.setState({
+    //     fetchedMessages: false
+    //   })
+    // } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
+    //   if(currentThreadId){
+    //     this.fetchMessages(parseInt(currentThreadId))
+    //   } else {
+    //     this.fetchMessages(parseInt(searchDmId))
+    //   }
+    // } else if (this.props.searchDmId != this.state.searchDmId){
+    //   this.setState({
+    //     searchDmId,
+    //     threadId: null
+    //   })
+    //   this.fetchMessages(searchDmId)
+    // } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1){
+    //   this.props.clearMessages()
+    //   this.setState({
+    //     threadId: parseInt(currentThreadId),
+    //     searchDmId: null
+    //   })
+    //   this.fetchMessages(currentThreadId)
+    // }
     this.bottom.current.scrollIntoView();
   }
 
@@ -73,7 +73,7 @@ class MessageIndex extends React.Component{
     console.log(messages)
     return(
       <div style={{maxHeight: this.props.type === "thread" ? '90vh' : '85vh'}} className="messages-display">
-        <div className = "messages-container">
+        <div className="messages-container">
           <ul className="messages">
             {
               messages.map((message, idx) => 
