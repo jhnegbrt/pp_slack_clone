@@ -7,7 +7,7 @@ const mSTP = state => ({
   threads: Object.values(state.workspace.threads),
   users: state.workspace.users,
   currentUser: state.session.id,
-  currentThreadId: state.ui.currentThread.id
+  stateThreadId: state.ui.currentThread.id
 })
 
 const mDTP = dispatch => ({

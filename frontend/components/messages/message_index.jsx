@@ -15,56 +15,13 @@ class MessageIndex extends React.Component{
     }
   }
 
-  fetchMessages(threadId){
-    let subscriptions = App.cable.subscriptions.subscriptions
-    for (let i = 0; i < subscriptions.length; i++){
-      let identifier = JSON.parse(subscriptions[i].identifier)
-      if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)){
-        this.props.receiveCurrentThread(parseInt(threadId))
-        subscriptions[i].load(),
-        this.setState({
-          fetchedMessages: true
-        })
-        return
-      }
-    }
-  }
-
-  // componentDidMount(){
-  //   let { currentThreadId } = this.props
-  //   if (App.cable.subscriptions.subscriptions.length > 1){
-  //     this.fetchMessages(currentThreadId)
-  //   }
-  // }
-
 
   componentDidUpdate() {
-    let {messages, currentThreadId, searchDmId} = this.props
-    // if (!this.props.searchDmId && !currentThreadId && messages.length > 0){
-    //   this.props.clearMessages()
-    //   this.setState({
-    //     fetchedMessages: false
-    //   })
-    // } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
-    //   if(currentThreadId){
-    //     this.fetchMessages(parseInt(currentThreadId))
-    //   } else {
-    //     this.fetchMessages(parseInt(searchDmId))
-    //   }
-    // } else if (this.props.searchDmId != this.state.searchDmId){
-    //   this.setState({
-    //     searchDmId,
-    //     threadId: null
-    //   })
-    //   this.fetchMessages(searchDmId)
-    // } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1){
-    //   this.props.clearMessages()
-    //   this.setState({
-    //     threadId: parseInt(currentThreadId),
-    //     searchDmId: null
-    //   })
-    //   this.fetchMessages(currentThreadId)
-    // }
+    const {stateThreadId, currentThreadId} = this.props
+    let id = parseInt(currentThreadId)
+    if (stateThreadId != id){
+      this.props.receiveCurrentThread(id)
+    }
     this.bottom.current.scrollIntoView();
   }
 

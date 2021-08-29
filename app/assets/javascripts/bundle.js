@@ -10888,59 +10888,16 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MessageIndex, [{
-    key: "fetchMessages",
-    value: function fetchMessages(threadId) {
-      var subscriptions = App.cable.subscriptions.subscriptions;
-
-      for (var i = 0; i < subscriptions.length; i++) {
-        var identifier = JSON.parse(subscriptions[i].identifier);
-
-        if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)) {
-          this.props.receiveCurrentThread(parseInt(threadId));
-          subscriptions[i].load(), this.setState({
-            fetchedMessages: true
-          });
-          return;
-        }
-      }
-    } // componentDidMount(){
-    //   let { currentThreadId } = this.props
-    //   if (App.cable.subscriptions.subscriptions.length > 1){
-    //     this.fetchMessages(currentThreadId)
-    //   }
-    // }
-
-  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       var _this$props = this.props,
-          messages = _this$props.messages,
-          currentThreadId = _this$props.currentThreadId,
-          searchDmId = _this$props.searchDmId; // if (!this.props.searchDmId && !currentThreadId && messages.length > 0){
-      //   this.props.clearMessages()
-      //   this.setState({
-      //     fetchedMessages: false
-      //   })
-      // } else if (this.state.fetchedMessages === false && App.cable.subscriptions.subscriptions.length > 1){
-      //   if(currentThreadId){
-      //     this.fetchMessages(parseInt(currentThreadId))
-      //   } else {
-      //     this.fetchMessages(parseInt(searchDmId))
-      //   }
-      // } else if (this.props.searchDmId != this.state.searchDmId){
-      //   this.setState({
-      //     searchDmId,
-      //     threadId: null
-      //   })
-      //   this.fetchMessages(searchDmId)
-      // } else if (currentThreadId && this.state.threadId != parseInt(currentThreadId) && App.cable.subscriptions.subscriptions.length > 1){
-      //   this.props.clearMessages()
-      //   this.setState({
-      //     threadId: parseInt(currentThreadId),
-      //     searchDmId: null
-      //   })
-      //   this.fetchMessages(currentThreadId)
-      // }
+          stateThreadId = _this$props.stateThreadId,
+          currentThreadId = _this$props.currentThreadId;
+      var id = parseInt(currentThreadId);
+
+      if (stateThreadId != id) {
+        this.props.receiveCurrentThread(id);
+      }
 
       this.bottom.current.scrollIntoView();
     }
@@ -11012,7 +10969,8 @@ var mSTP = function mSTP(state) {
   return {
     messages: Object.values(state.workspace.messages).filter(function (message) {
       return message.channel_dms_id === state.ui.currentThread.id;
-    })
+    }),
+    stateThreadId: state.ui.currentThread.id
   };
 };
 
@@ -11209,9 +11167,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _message_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_index_item */ "./frontend/components/messages/message_index_item.jsx");
-
+/* harmony import */ var _message_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item */ "./frontend/components/messages/message_index_item.jsx");
 
 
 
@@ -11222,7 +11178,7 @@ var mSTP = function mSTP(state, ownProps) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP)(_message_index_item__WEBPACK_IMPORTED_MODULE_2__.default));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mSTP)(_message_index_item__WEBPACK_IMPORTED_MODULE_1__.default));
 
 /***/ }),
 
@@ -13460,7 +13416,7 @@ var AddDirectMessage = /*#__PURE__*/function (_React$Component) {
       });
       var match = this.checkUsers(dms, this.state.selectedUsers);
 
-      if (this.props.currentThreadId !== match) {
+      if (this.props.stateThreadId !== match) {
         this.props.receiveCurrentThread(match);
       }
     }
@@ -13575,7 +13531,7 @@ var mSTP = function mSTP(state) {
     threads: Object.values(state.workspace.threads),
     users: state.workspace.users,
     currentUser: state.session.id,
-    currentThreadId: state.ui.currentThread.id
+    stateThreadId: state.ui.currentThread.id
   };
 };
 
@@ -13951,7 +13907,7 @@ var ThreadDisplay = /*#__PURE__*/function (_React$Component) {
   _createClass(ThreadDisplay, [{
     key: "render",
     value: function render() {
-      var threadId = this.props.currentThreadId;
+      var threadId = this.props.urlThreadId;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "thread-display"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_thread_title_thread_title_container__WEBPACK_IMPORTED_MODULE_2__.default, {
@@ -13988,7 +13944,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
-    currentThreadId: ownProps.match.params.threadId
+    urlThreadId: ownProps.match.params.threadId
   };
 };
 
@@ -14333,7 +14289,6 @@ __webpack_require__.r(__webpack_exports__);
 var mSTP = function mSTP(state, ownProps) {
   return {
     threads: Object.values(state.workspace.threads),
-    currentThreadId: state.ui.currentThread,
     currentUserId: state.session.id
   };
 };
@@ -14489,7 +14444,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var title = this.createTitle();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        className: this.props.currentThreadId === this.props.thread.id ? "thread-select" : null
+        className: this.props.urlThreadId === this.props.thread.id ? "thread-select" : null
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
         onClick: this.selectThread,
         activeClassName: "active-thread",
