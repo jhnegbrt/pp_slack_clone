@@ -32,6 +32,10 @@ class ThreadIndexItem extends React.Component{
         return userNames.push(allUsers[id].username)
       }
     })
+    if (userNames.length === 0){
+      debugger
+      this.props.fetchAllUsers()
+    }
     let title = userNames.join(", ")
     if (title.length > 36){
       return title.slice(0, 55).concat("...")
@@ -41,7 +45,7 @@ class ThreadIndexItem extends React.Component{
   }
 
   render(){
-    let title = this.createTitle()
+    let title = this.props.thread.channel ? this.props.thread.title : this.createTitle()
     return(
       <li className={this.props.urlThreadId === this.props.thread.id ? "thread-select" : null}>
         <NavLink onClick={this.selectThread} activeClassName={"active-thread"} to={`/client/${this.props.thread.id}`}>

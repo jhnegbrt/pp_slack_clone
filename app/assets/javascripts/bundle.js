@@ -10896,7 +10896,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       var id = parseInt(currentThreadId);
 
       if (id && stateThreadId != id) {
-        debugger;
         this.props.receiveCurrentThread(id);
       }
 
@@ -14432,6 +14431,12 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
           return userNames.push(allUsers[id].username);
         }
       });
+
+      if (userNames.length === 0) {
+        debugger;
+        this.props.fetchAllUsers();
+      }
+
       var title = userNames.join(", ");
 
       if (title.length > 36) {
@@ -14443,7 +14448,7 @@ var ThreadIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var title = this.createTitle();
+      var title = this.props.thread.channel ? this.props.thread.title : this.createTitle();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: this.props.urlThreadId === this.props.thread.id ? "thread-select" : null
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.NavLink, {
@@ -14476,6 +14481,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
 
 
 
@@ -14501,6 +14508,9 @@ var mDTP = function mDTP(dispatch) {
     },
     removeMessage: function removeMessage(messageId) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.removeMessage)(messageId));
+    },
+    fetchAllUsers: function fetchAllUsers() {
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__.fetchAllUsers)());
     }
   };
 };
