@@ -143,15 +143,11 @@ class AddDirectMessage extends React.Component{
   }
 
   componentDidUpdate(){
-
     let {threads} = this.props
     let dms = threads.filter((el) => { return el.channel === false})
     let match = this.checkUsers(dms, this.state.selectedUsers)
-    
-    if (this.state.currentDm !== match){
-      this.setState({
-        currentDm: match
-      })
+    if (this.props.searchThreadId !== match){
+      this.props.setSearchDm(match)
     }
   }
 
