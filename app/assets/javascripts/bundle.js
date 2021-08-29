@@ -11017,8 +11017,8 @@ var mSTP = function mSTP(state) {
   return {
     messages: Object.values(state.workspace.messages).filter(function (message) {
       return message.channel_dms_id === state.ui.currentThread.id;
-    }),
-    subscriptions: App.cable.subscriptions.subscriptions
+    }) // subscriptions: App.cable.subscriptions.subscriptions
+
   };
 };
 
@@ -14937,7 +14937,7 @@ var MessagesReducer = function MessagesReducer() {
       return Object.assign({}, state, _defineProperty({}, action.message.id, action.message));
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGES:
-      return Object.assign({}, action.messages);
+      return Object.assign({}, state, action.messages);
 
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
       var nextState = Object.assign({}, state);
