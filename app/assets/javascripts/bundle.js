@@ -10896,6 +10896,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         var identifier = JSON.parse(subscriptions[i].identifier);
 
         if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)) {
+          this.props.receiveCurrentThread(parseInt(threadId));
           subscriptions[i].load(), this.setState({
             fetchedMessages: true
           });
@@ -10954,6 +10955,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var messages = this.props.messages;
+      console.log(messages);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {
           maxHeight: this.props.type === "thread" ? '90vh' : '85vh'
@@ -11005,19 +11007,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
 /* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+/* harmony import */ var _actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/thread_actions */ "./frontend/actions/thread_actions.js");
+
 
 
 
 
 var mSTP = function mSTP(state) {
   return {
-    messages: Object.values(state.workspace.messages),
+    messages: Object.values(state.workspace.messages).filter(function (message) {
+      return message.channel_dms_id === state.ui.currentThread.id;
+    }),
     subscriptions: App.cable.subscriptions.subscriptions
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
+    receiveCurrentThread: function receiveCurrentThread(threadId) {
+      return dispatch((0,_actions_thread_actions__WEBPACK_IMPORTED_MODULE_3__.receiveCurrentThread)(threadId));
+    },
     clearMessages: function clearMessages() {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__.clearMessages)());
     }
@@ -14390,8 +14399,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _util_action_cable_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/action_cable_util/create_messages_connection */ "./frontend/util/action_cable_util/create_messages_connection.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _util_action_cable_util_create_messages_connection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/action_cable_util/create_messages_connection */ "./frontend/util/action_cable_util/create_messages_connection.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15124,7 +15133,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (redux_logger__WEBPACK_IMPORTED_MODULE_2___default())));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);

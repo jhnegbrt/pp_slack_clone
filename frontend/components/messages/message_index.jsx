@@ -20,6 +20,7 @@ class MessageIndex extends React.Component{
     for (let i = 0; i < subscriptions.length; i++){
       let identifier = JSON.parse(subscriptions[i].identifier)
       if (identifier.channel === "ChatChannel" && identifier.thread_id === parseInt(threadId)){
+        this.props.receiveCurrentThread(parseInt(threadId))
         subscriptions[i].load(),
         this.setState({
           fetchedMessages: true
@@ -69,6 +70,7 @@ class MessageIndex extends React.Component{
 
   render(){
     const {messages} = this.props
+    console.log(messages)
     return(
       <div style={{maxHeight: this.props.type === "thread" ? '90vh' : '85vh'}} className="messages-display">
         <div className = "messages-container">

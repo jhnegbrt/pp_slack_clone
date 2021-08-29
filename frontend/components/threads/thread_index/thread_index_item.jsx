@@ -1,6 +1,7 @@
 import React from 'react'
-import createMessagesConnection from '../../../util/action_cable_util/create_messages_connection'
 import { NavLink } from 'react-router-dom'
+import createMessagesConnection from '../../../util/action_cable_util/create_messages_connection'
+
 
 class ThreadIndexItem extends React.Component{
   constructor(props){
