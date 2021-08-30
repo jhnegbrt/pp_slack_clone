@@ -80,6 +80,16 @@ class ThreadChannel < ApplicationCable::Channel
         ThreadChannel.broadcast_to("thread_channel_#{user}", socket)
         i += 1
       end
+      if !data["content"].nil?
+        message_data = {
+          "message":{
+            'content': data['content'],
+            'channel_dms_id': channel_dm[:id],
+            'sender_id': channel_dm[:creator_id]
+          }
+        }
+        ChatChannel.first_message(message_data)
+      end
     end
   end
 

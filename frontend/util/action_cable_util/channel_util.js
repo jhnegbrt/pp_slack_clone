@@ -26,7 +26,8 @@ function subscriptionsSpeak(type, data, content){
       channel: data.thread.channel,
       private: false,
       title: data.thread.title,
-      creator_id: data.thread.creator_id
+      creator_id: data.thread.creator_id,
+      content: data.content
     })
   } else {
     let message = {
@@ -48,10 +49,10 @@ export function joinChannel(thread, currentUserId){
 
 export function propagateThread(thread, users, content){
 
-  subscriptionsSpeak("ThreadChannel", {thread, users})
+  subscriptionsSpeak("ThreadChannel", {thread, users, content})
 
-  if (content){
-    subscriptionsSpeak("ChatChannel", {thread}, content )
-  }
+  // if (content){
+  //   subscriptionsSpeak("ChatChannel", {thread}, content )
+  // }
 
 }

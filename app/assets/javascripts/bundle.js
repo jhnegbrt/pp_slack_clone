@@ -15093,7 +15093,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_3__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_0__.default, preloadedState, (0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (redux_logger__WEBPACK_IMPORTED_MODULE_2___default())));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (configureStore);
@@ -15143,7 +15143,8 @@ function subscriptionsSpeak(type, data, content) {
       channel: data.thread.channel,
       "private": false,
       title: data.thread.title,
-      creator_id: data.thread.creator_id
+      creator_id: data.thread.creator_id,
+      content: data.content
     });
   } else {
     var message = {
@@ -15166,14 +15167,11 @@ function joinChannel(thread, currentUserId) {
 function propagateThread(thread, users, content) {
   subscriptionsSpeak("ThreadChannel", {
     thread: thread,
-    users: users
-  });
-
-  if (content) {
-    subscriptionsSpeak("ChatChannel", {
-      thread: thread
-    }, content);
-  }
+    users: users,
+    content: content
+  }); // if (content){
+  //   subscriptionsSpeak("ChatChannel", {thread}, content )
+  // }
 }
 
 /***/ }),
