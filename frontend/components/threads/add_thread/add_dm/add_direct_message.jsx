@@ -78,10 +78,9 @@ class AddDirectMessage extends React.Component{
           selectedUser: index
         })
       }
-    }
-    if (["Enter", "Tab", ","].includes(e.key)){
+    } else if (["Enter", "Tab", ","].includes(e.key)){
       e.preventDefault()
-      let username
+      let username;
       if (this.state.selectedUser === null){
         username = this.state.newMember.trim()
       } else {
@@ -143,15 +142,11 @@ class AddDirectMessage extends React.Component{
   }
 
   componentDidUpdate(){
-
     let {threads} = this.props
     let dms = threads.filter((el) => { return el.channel === false})
     let match = this.checkUsers(dms, this.state.selectedUsers)
-    
-    if (this.state.currentDm !== match){
-      this.setState({
-        currentDm: match
-      })
+    if (this.props.stateThreadId !== match){
+      this.props.receiveCurrentThread(match)
     }
   }
 
@@ -224,7 +219,7 @@ class AddDirectMessage extends React.Component{
         </div>
         {this.state.newMember.length > 0 ? suggestedUsersList : ""}
         <MessageIndexContainer 
-        searchDmId={this.state.currentDm}
+        searchDmId={this.props.stateThreadId}
         selectedUsers={this.state.selectedUsers} />
       </div>
     )

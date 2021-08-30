@@ -9,7 +9,7 @@ class ThreadDisplay extends React.Component{
   }
 
   render(){ 
-    let threadId = this.props.currentThreadId
+    let threadId = this.props.urlThreadId
     return(
       <div className="thread-display">
         <ThreadTitleContainer currentThreadId={threadId} />

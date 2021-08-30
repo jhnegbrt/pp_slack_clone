@@ -11,7 +11,7 @@ const MessagesReducer = (state = {}, action) => {
     case RECEIVE_MESSAGE:
       return Object.assign({}, state, {[action.message.id]: action.message})
     case RECEIVE_MESSAGES:
-      return Object.assign({}, action.messages)
+      return Object.assign({}, state, action.messages)
     case REMOVE_MESSAGE:
       let nextState = Object.assign({}, state)
       delete nextState[action.message.id]
